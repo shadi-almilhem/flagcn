@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-il",
+  "title": "Illinois Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Illinois flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-il.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IllinoisFlagProps = Omit<FlagProps, \"code\">\n\nexport function IllinoisFlag({ alt = \"Illinois flag\", ...props }: IllinoisFlagProps) {\n  return <Flag code=\"us-il\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-il.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-il",
+    "country": "Illinois",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import IllinoisFlag from @/components/flags/countries/us-il.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

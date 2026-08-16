@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mk",
+  "title": "North Macedonia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed North Macedonia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorthMacedoniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorthMacedoniaFlag({ alt = \"North Macedonia flag\", ...props }: NorthMacedoniaFlagProps) {\n  return <Flag code=\"mk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mk.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mk",
+    "country": "North Macedonia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NorthMacedoniaFlag from @/components/flags/countries/mk.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

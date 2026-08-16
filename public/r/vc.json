@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "vc",
+  "title": "Saint Vincent and the Grenadines Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Saint Vincent and the Grenadines flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/vc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintVincentAndTheGrenadinesFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintVincentAndTheGrenadinesFlag({ alt = \"Saint Vincent and the Grenadines flag\", ...props }: SaintVincentAndTheGrenadinesFlagProps) {\n  return <Flag code=\"vc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/vc.tsx"
+    }
+  ],
+  "meta": {
+    "code": "vc",
+    "country": "Saint Vincent and the Grenadines",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SaintVincentAndTheGrenadinesFlag from @/components/flags/countries/vc.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

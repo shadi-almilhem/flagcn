@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pr",
+  "title": "Puerto Rico Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Puerto Rico flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/pr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PuertoRicoFlagProps = Omit<FlagProps, \"code\">\n\nexport function PuertoRicoFlag({ alt = \"Puerto Rico flag\", ...props }: PuertoRicoFlagProps) {\n  return <Flag code=\"pr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pr.tsx"
+    }
+  ],
+  "meta": {
+    "code": "pr",
+    "country": "Puerto Rico",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import PuertoRicoFlag from @/components/flags/countries/pr.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

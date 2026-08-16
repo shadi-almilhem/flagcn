@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-ga",
+  "title": "Georgia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Georgia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-ga.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GeorgiaUsStateFlagProps = Omit<FlagProps, \"code\">\n\nexport function GeorgiaUsStateFlag({ alt = \"Georgia flag\", ...props }: GeorgiaUsStateFlagProps) {\n  return <Flag code=\"us-ga\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ga.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-ga",
+    "country": "Georgia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import GeorgiaUsStateFlag from @/components/flags/countries/us-ga.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

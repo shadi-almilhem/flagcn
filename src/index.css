@@ -1,0 +1,205 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.985 0.006 155);
+  --foreground: oklch(0.18 0.018 155);
+  --card: oklch(0.997 0.003 155);
+  --card-foreground: oklch(0.18 0.018 155);
+  --popover: oklch(0.997 0.003 155);
+  --popover-foreground: oklch(0.18 0.018 155);
+  --primary: oklch(0.61 0.13 177);
+  --primary-foreground: oklch(0.16 0.035 178);
+  --secondary: oklch(0.935 0.017 151);
+  --secondary-foreground: oklch(0.27 0.025 153);
+  --muted: oklch(0.95 0.012 151);
+  --muted-foreground: oklch(0.51 0.025 154);
+  --accent: oklch(0.925 0.025 167);
+  --accent-foreground: oklch(0.25 0.035 170);
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.885 0.018 153);
+  --input: oklch(0.86 0.02 154);
+  --ring: oklch(0.61 0.13 177);
+  --code: oklch(0.155 0.018 158);
+  --code-foreground: oklch(0.9 0.02 156);
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: oklch(0.15 0.018 156);
+  --foreground: oklch(0.965 0.008 154);
+  --card: oklch(0.19 0.02 156);
+  --card-foreground: oklch(0.965 0.008 154);
+  --popover: oklch(0.19 0.02 156);
+  --popover-foreground: oklch(0.965 0.008 154);
+  --primary: oklch(0.72 0.13 174);
+  --primary-foreground: oklch(0.17 0.03 177);
+  --secondary: oklch(0.25 0.02 154);
+  --secondary-foreground: oklch(0.95 0.01 154);
+  --muted: oklch(0.24 0.018 154);
+  --muted-foreground: oklch(0.7 0.02 154);
+  --accent: oklch(0.27 0.03 167);
+  --accent-foreground: oklch(0.96 0.01 160);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.7 0.12 174);
+  --code: oklch(0.11 0.012 158);
+  --code-foreground: oklch(0.9 0.02 156);
+}
+
+@theme inline {
+  --font-sans: "Geist Variable", "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-code: var(--code);
+  --color-code-foreground: var(--code-foreground);
+  --radius-xs: calc(var(--radius) * 0.5);
+  --radius-sm: calc(var(--radius) * 0.75);
+  --radius-md: calc(var(--radius) * 0.875);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    margin: 0;
+    min-width: 320px;
+    font-feature-settings: "ss01" 1, "cv02" 1, "cv11" 1;
+  }
+
+  button,
+  a,
+  input,
+  select {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 28%, transparent);
+  }
+}
+
+@layer components {
+  .site-container {
+    width: min(100% - 2rem, 1240px);
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary;
+  }
+
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--border) 45%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--border) 38%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: center top;
+  }
+
+  .flag-stage {
+    background-image:
+      linear-gradient(45deg, color-mix(in oklab, var(--muted-foreground) 7%, transparent) 25%, transparent 25%),
+      linear-gradient(-45deg, color-mix(in oklab, var(--muted-foreground) 7%, transparent) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, color-mix(in oklab, var(--muted-foreground) 7%, transparent) 75%),
+      linear-gradient(-45deg, transparent 75%, color-mix(in oklab, var(--muted-foreground) 7%, transparent) 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  }
+
+  .prose-doc {
+    @apply text-[15px] leading-7 text-muted-foreground;
+  }
+
+  .prose-doc p,
+  .prose-doc li {
+    max-width: 70ch;
+  }
+
+  .prose-doc ul,
+  .prose-doc ol {
+    @apply ps-5;
+  }
+
+  .prose-doc li + li {
+    @apply mt-2;
+  }
+
+  .prose-doc ul {
+    list-style: disc;
+  }
+
+  .prose-doc ol {
+    list-style: decimal;
+  }
+
+  .prose-doc code:not(pre code) {
+    @apply rounded border bg-muted px-1.5 py-0.5 font-mono text-[12px] text-foreground;
+  }
+
+  .prose-doc th,
+  .prose-doc td {
+    @apply px-3 py-2.5 text-start align-top;
+  }
+
+  .prose-doc th {
+    @apply font-medium;
+  }
+
+  .flag-tile {
+    content-visibility: auto;
+    contain-intrinsic-size: 256px;
+  }
+}
+
+@media (max-width: 639px) {
+  .site-container {
+    width: min(100% - 1.25rem, 1240px);
+  }
+}
+
+@media (hover: none) {
+  .flag-card-actions {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

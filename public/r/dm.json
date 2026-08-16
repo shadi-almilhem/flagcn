@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dm",
+  "title": "Dominica Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Dominica flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/dm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type DominicaFlagProps = Omit<FlagProps, \"code\">\n\nexport function DominicaFlag({ alt = \"Dominica flag\", ...props }: DominicaFlagProps) {\n  return <Flag code=\"dm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/dm.tsx"
+    }
+  ],
+  "meta": {
+    "code": "dm",
+    "country": "Dominica",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import DominicaFlag from @/components/flags/countries/dm.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

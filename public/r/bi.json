@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bi",
+  "title": "Burundi Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Burundi flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/bi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BurundiFlagProps = Omit<FlagProps, \"code\">\n\nexport function BurundiFlag({ alt = \"Burundi flag\", ...props }: BurundiFlagProps) {\n  return <Flag code=\"bi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bi.tsx"
+    }
+  ],
+  "meta": {
+    "code": "bi",
+    "country": "Burundi",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BurundiFlag from @/components/flags/countries/bi.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

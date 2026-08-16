@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "es",
+  "title": "Spain Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Spain flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/es.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SpainFlagProps = Omit<FlagProps, \"code\">\n\nexport function SpainFlag({ alt = \"Spain flag\", ...props }: SpainFlagProps) {\n  return <Flag code=\"es\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/es.tsx"
+    }
+  ],
+  "meta": {
+    "code": "es",
+    "country": "Spain",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SpainFlag from @/components/flags/countries/es.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

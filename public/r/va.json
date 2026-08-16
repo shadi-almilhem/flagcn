@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "va",
+  "title": "Vatican City (Holy See) Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Vatican City (Holy See) flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/va.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type VaticanCityHolySeeFlagProps = Omit<FlagProps, \"code\">\n\nexport function VaticanCityHolySeeFlag({ alt = \"Vatican City (Holy See) flag\", ...props }: VaticanCityHolySeeFlagProps) {\n  return <Flag code=\"va\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/va.tsx"
+    }
+  ],
+  "meta": {
+    "code": "va",
+    "country": "Vatican City (Holy See)",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import VaticanCityHolySeeFlag from @/components/flags/countries/va.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

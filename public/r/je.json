@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "je",
+  "title": "Jersey Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Jersey flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/je.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type JerseyFlagProps = Omit<FlagProps, \"code\">\n\nexport function JerseyFlag({ alt = \"Jersey flag\", ...props }: JerseyFlagProps) {\n  return <Flag code=\"je\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/je.tsx"
+    }
+  ],
+  "meta": {
+    "code": "je",
+    "country": "Jersey",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import JerseyFlag from @/components/flags/countries/je.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

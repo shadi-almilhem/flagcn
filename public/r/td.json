@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "td",
+  "title": "Chad Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Chad flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/td.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ChadFlagProps = Omit<FlagProps, \"code\">\n\nexport function ChadFlag({ alt = \"Chad flag\", ...props }: ChadFlagProps) {\n  return <Flag code=\"td\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/td.tsx"
+    }
+  ],
+  "meta": {
+    "code": "td",
+    "country": "Chad",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import ChadFlag from @/components/flags/countries/td.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kh",
+  "title": "Cambodia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Cambodia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/kh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CambodiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CambodiaFlag({ alt = \"Cambodia flag\", ...props }: CambodiaFlagProps) {\n  return <Flag code=\"kh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kh.tsx"
+    }
+  ],
+  "meta": {
+    "code": "kh",
+    "country": "Cambodia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import CambodiaFlag from @/components/flags/countries/kh.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

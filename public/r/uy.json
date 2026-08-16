@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "uy",
+  "title": "Uruguay Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Uruguay flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/uy.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UruguayFlagProps = Omit<FlagProps, \"code\">\n\nexport function UruguayFlag({ alt = \"Uruguay flag\", ...props }: UruguayFlagProps) {\n  return <Flag code=\"uy\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/uy.tsx"
+    }
+  ],
+  "meta": {
+    "code": "uy",
+    "country": "Uruguay",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import UruguayFlag from @/components/flags/countries/uy.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

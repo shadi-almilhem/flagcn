@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fo",
+  "title": "Faroe Islands Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Faroe Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/fo.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FaroeIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function FaroeIslandsFlag({ alt = \"Faroe Islands flag\", ...props }: FaroeIslandsFlagProps) {\n  return <Flag code=\"fo\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fo.tsx"
+    }
+  ],
+  "meta": {
+    "code": "fo",
+    "country": "Faroe Islands",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import FaroeIslandsFlag from @/components/flags/countries/fo.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

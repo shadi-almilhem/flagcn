@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sm",
+  "title": "San Marino Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed San Marino flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SanMarinoFlagProps = Omit<FlagProps, \"code\">\n\nexport function SanMarinoFlag({ alt = \"San Marino flag\", ...props }: SanMarinoFlagProps) {\n  return <Flag code=\"sm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sm.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sm",
+    "country": "San Marino",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SanMarinoFlag from @/components/flags/countries/sm.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

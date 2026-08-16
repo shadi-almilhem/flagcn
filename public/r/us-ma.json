@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-ma",
+  "title": "Massachusetts Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Massachusetts flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-ma.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MassachusettsFlagProps = Omit<FlagProps, \"code\">\n\nexport function MassachusettsFlag({ alt = \"Massachusetts flag\", ...props }: MassachusettsFlagProps) {\n  return <Flag code=\"us-ma\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ma.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-ma",
+    "country": "Massachusetts",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MassachusettsFlag from @/components/flags/countries/us-ma.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

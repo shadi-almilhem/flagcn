@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fr",
+  "title": "France Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed France flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/fr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FranceFlagProps = Omit<FlagProps, \"code\">\n\nexport function FranceFlag({ alt = \"France flag\", ...props }: FranceFlagProps) {\n  return <Flag code=\"fr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fr.tsx"
+    }
+  ],
+  "meta": {
+    "code": "fr",
+    "country": "France",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import FranceFlag from @/components/flags/countries/fr.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

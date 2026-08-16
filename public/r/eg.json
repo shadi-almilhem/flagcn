@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "eg",
+  "title": "Egypt Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Egypt flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/eg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EgyptFlagProps = Omit<FlagProps, \"code\">\n\nexport function EgyptFlag({ alt = \"Egypt flag\", ...props }: EgyptFlagProps) {\n  return <Flag code=\"eg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/eg.tsx"
+    }
+  ],
+  "meta": {
+    "code": "eg",
+    "country": "Egypt",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import EgyptFlag from @/components/flags/countries/eg.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

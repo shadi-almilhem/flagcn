@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-nh",
+  "title": "New Hampshire Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed New Hampshire flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-nh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NewHampshireFlagProps = Omit<FlagProps, \"code\">\n\nexport function NewHampshireFlag({ alt = \"New Hampshire flag\", ...props }: NewHampshireFlagProps) {\n  return <Flag code=\"us-nh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-nh.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-nh",
+    "country": "New Hampshire",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NewHampshireFlag from @/components/flags/countries/us-nh.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

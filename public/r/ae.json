@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ae",
+  "title": "United Arab Emirates Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed United Arab Emirates flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ae.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UnitedArabEmiratesFlagProps = Omit<FlagProps, \"code\">\n\nexport function UnitedArabEmiratesFlag({ alt = \"United Arab Emirates flag\", ...props }: UnitedArabEmiratesFlagProps) {\n  return <Flag code=\"ae\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ae.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ae",
+    "country": "United Arab Emirates",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import UnitedArabEmiratesFlag from @/components/flags/countries/ae.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

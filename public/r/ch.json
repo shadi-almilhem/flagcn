@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ch",
+  "title": "Switzerland Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Switzerland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ch.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SwitzerlandFlagProps = Omit<FlagProps, \"code\">\n\nexport function SwitzerlandFlag({ alt = \"Switzerland flag\", ...props }: SwitzerlandFlagProps) {\n  return <Flag code=\"ch\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ch.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ch",
+    "country": "Switzerland",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SwitzerlandFlag from @/components/flags/countries/ch.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

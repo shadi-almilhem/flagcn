@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bv",
+  "title": "Bouvet Island Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Bouvet Island flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/bv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BouvetIslandFlagProps = Omit<FlagProps, \"code\">\n\nexport function BouvetIslandFlag({ alt = \"Bouvet Island flag\", ...props }: BouvetIslandFlagProps) {\n  return <Flag code=\"bv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bv.tsx"
+    }
+  ],
+  "meta": {
+    "code": "bv",
+    "country": "Bouvet Island",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BouvetIslandFlag from @/components/flags/countries/bv.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

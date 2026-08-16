@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mx",
+  "title": "Mexico Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Mexico flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mx.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MexicoFlagProps = Omit<FlagProps, \"code\">\n\nexport function MexicoFlag({ alt = \"Mexico flag\", ...props }: MexicoFlagProps) {\n  return <Flag code=\"mx\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mx.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mx",
+    "country": "Mexico",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MexicoFlag from @/components/flags/countries/mx.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

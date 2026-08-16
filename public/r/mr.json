@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mr",
+  "title": "Mauritania Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Mauritania flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MauritaniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MauritaniaFlag({ alt = \"Mauritania flag\", ...props }: MauritaniaFlagProps) {\n  return <Flag code=\"mr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mr.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mr",
+    "country": "Mauritania",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MauritaniaFlag from @/components/flags/countries/mr.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

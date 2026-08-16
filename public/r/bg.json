@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bg",
+  "title": "Bulgaria Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Bulgaria flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/bg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BulgariaFlagProps = Omit<FlagProps, \"code\">\n\nexport function BulgariaFlag({ alt = \"Bulgaria flag\", ...props }: BulgariaFlagProps) {\n  return <Flag code=\"bg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bg.tsx"
+    }
+  ],
+  "meta": {
+    "code": "bg",
+    "country": "Bulgaria",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BulgariaFlag from @/components/flags/countries/bg.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

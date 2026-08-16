@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "km",
+  "title": "Comoros Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Comoros flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/km.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ComorosFlagProps = Omit<FlagProps, \"code\">\n\nexport function ComorosFlag({ alt = \"Comoros flag\", ...props }: ComorosFlagProps) {\n  return <Flag code=\"km\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/km.tsx"
+    }
+  ],
+  "meta": {
+    "code": "km",
+    "country": "Comoros",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import ComorosFlag from @/components/flags/countries/km.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

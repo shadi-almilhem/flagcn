@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mo",
+  "title": "Macau Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Macau flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mo.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MacauFlagProps = Omit<FlagProps, \"code\">\n\nexport function MacauFlag({ alt = \"Macau flag\", ...props }: MacauFlagProps) {\n  return <Flag code=\"mo\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mo.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mo",
+    "country": "Macau",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MacauFlag from @/components/flags/countries/mo.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

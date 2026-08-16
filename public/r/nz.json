@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "nz",
+  "title": "New Zealand Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed New Zealand flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/nz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NewZealandFlagProps = Omit<FlagProps, \"code\">\n\nexport function NewZealandFlag({ alt = \"New Zealand flag\", ...props }: NewZealandFlagProps) {\n  return <Flag code=\"nz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/nz.tsx"
+    }
+  ],
+  "meta": {
+    "code": "nz",
+    "country": "New Zealand",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NewZealandFlag from @/components/flags/countries/nz.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

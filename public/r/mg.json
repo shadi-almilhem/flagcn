@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mg",
+  "title": "Madagascar Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Madagascar flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MadagascarFlagProps = Omit<FlagProps, \"code\">\n\nexport function MadagascarFlag({ alt = \"Madagascar flag\", ...props }: MadagascarFlagProps) {\n  return <Flag code=\"mg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mg.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mg",
+    "country": "Madagascar",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MadagascarFlag from @/components/flags/countries/mg.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

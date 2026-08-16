@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "no",
+  "title": "Norway Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Norway flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/no.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorwayFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorwayFlag({ alt = \"Norway flag\", ...props }: NorwayFlagProps) {\n  return <Flag code=\"no\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/no.tsx"
+    }
+  ],
+  "meta": {
+    "code": "no",
+    "country": "Norway",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NorwayFlag from @/components/flags/countries/no.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

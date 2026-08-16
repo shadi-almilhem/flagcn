@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-sc",
+  "title": "South Carolina Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed South Carolina flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-sc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SouthCarolinaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SouthCarolinaFlag({ alt = \"South Carolina flag\", ...props }: SouthCarolinaFlagProps) {\n  return <Flag code=\"us-sc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-sc.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-sc",
+    "country": "South Carolina",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SouthCarolinaFlag from @/components/flags/countries/us-sc.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

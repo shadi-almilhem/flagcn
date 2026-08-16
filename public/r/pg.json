@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pg",
+  "title": "Papua New Guinea Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Papua New Guinea flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/pg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PapuaNewGuineaFlagProps = Omit<FlagProps, \"code\">\n\nexport function PapuaNewGuineaFlag({ alt = \"Papua New Guinea flag\", ...props }: PapuaNewGuineaFlagProps) {\n  return <Flag code=\"pg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pg.tsx"
+    }
+  ],
+  "meta": {
+    "code": "pg",
+    "country": "Papua New Guinea",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import PapuaNewGuineaFlag from @/components/flags/countries/pg.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

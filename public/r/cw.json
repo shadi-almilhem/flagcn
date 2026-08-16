@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cw",
+  "title": "Curaçao Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Curaçao flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/cw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CuracaoFlagProps = Omit<FlagProps, \"code\">\n\nexport function CuracaoFlag({ alt = \"Curaçao flag\", ...props }: CuracaoFlagProps) {\n  return <Flag code=\"cw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cw.tsx"
+    }
+  ],
+  "meta": {
+    "code": "cw",
+    "country": "Curaçao",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import CuracaoFlag from @/components/flags/countries/cw.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

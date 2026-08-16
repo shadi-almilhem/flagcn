@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ca",
+  "title": "Canada Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Canada flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ca.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CanadaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CanadaFlag({ alt = \"Canada flag\", ...props }: CanadaFlagProps) {\n  return <Flag code=\"ca\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ca.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ca",
+    "country": "Canada",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import CanadaFlag from @/components/flags/countries/ca.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

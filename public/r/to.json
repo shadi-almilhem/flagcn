@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "to",
+  "title": "Tonga Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Tonga flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/to.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TongaFlagProps = Omit<FlagProps, \"code\">\n\nexport function TongaFlag({ alt = \"Tonga flag\", ...props }: TongaFlagProps) {\n  return <Flag code=\"to\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/to.tsx"
+    }
+  ],
+  "meta": {
+    "code": "to",
+    "country": "Tonga",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import TongaFlag from @/components/flags/countries/to.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-nj",
+  "title": "New Jersey Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed New Jersey flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-nj.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NewJerseyFlagProps = Omit<FlagProps, \"code\">\n\nexport function NewJerseyFlag({ alt = \"New Jersey flag\", ...props }: NewJerseyFlagProps) {\n  return <Flag code=\"us-nj\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-nj.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-nj",
+    "country": "New Jersey",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NewJerseyFlag from @/components/flags/countries/us-nj.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

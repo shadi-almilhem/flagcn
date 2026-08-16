@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-me",
+  "title": "Maine Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Maine flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-me.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MaineFlagProps = Omit<FlagProps, \"code\">\n\nexport function MaineFlag({ alt = \"Maine flag\", ...props }: MaineFlagProps) {\n  return <Flag code=\"us-me\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-me.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-me",
+    "country": "Maine",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MaineFlag from @/components/flags/countries/us-me.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

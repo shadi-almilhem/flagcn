@@ -1,0 +1,624 @@
+import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconCheck,
+  IconCopy,
+  IconExternalLink,
+  IconFileText,
+  IconSearch,
+  IconSparkles,
+} from "@tabler/icons-react"
+import * as React from "react"
+import type { ReactNode } from "react"
+import { Link, Navigate, useParams } from "react-router-dom"
+
+import { Flag } from "@/components/flags/flag"
+import { FlagPicker } from "@/components/flags/flag-picker"
+import { CodeBlock } from "@/components/site/code-block"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { NativeSelect } from "@/components/ui/native-select"
+import { Separator } from "@/components/ui/separator"
+import { getRegistryConfig, getSiteOrigin } from "@/config/site"
+import { cn } from "@/lib/utils"
+
+type DocSlug =
+  | "introduction"
+  | "installation"
+  | "flag"
+  | "flag-picker"
+  | "country-components"
+  | "formats-and-ratios"
+  | "styling"
+  | "accessibility"
+  | "ai-agents"
+  | "publishing"
+  | "license"
+
+interface DocNavItem {
+  slug: DocSlug
+  label: string
+}
+
+interface DocNavGroup {
+  label: string
+  items: readonly DocNavItem[]
+}
+
+const docGroups: readonly DocNavGroup[] = [
+  {
+    label: "Getting started",
+    items: [
+      { slug: "introduction", label: "Introduction" },
+      { slug: "installation", label: "Installation" },
+    ],
+  },
+  {
+    label: "Components",
+    items: [
+      { slug: "flag", label: "Flag" },
+      { slug: "flag-picker", label: "Flag Picker" },
+      { slug: "country-components", label: "Country components" },
+    ],
+  },
+  {
+    label: "Guides",
+    items: [
+      { slug: "formats-and-ratios", label: "Formats & ratios" },
+      { slug: "styling", label: "Styling" },
+      { slug: "accessibility", label: "Accessibility" },
+      { slug: "ai-agents", label: "AI agents" },
+    ],
+  },
+  {
+    label: "Resources",
+    items: [
+      { slug: "publishing", label: "Publishing" },
+      { slug: "license", label: "License & attribution" },
+    ],
+  },
+]
+
+const docSections = docGroups.flatMap((group) => group.items)
+
+const tocBySlug: Record<DocSlug, string[]> = {
+  introduction: ["What is Flagcn?", "Choose an install", "Principles"],
+  installation: ["1. Add the registry", "2. Add a component", "3. Render a flag", "Available items"],
+  flag: ["Install", "Usage", "API", "Format behavior"],
+  "flag-picker": ["Install", "Usage", "API"],
+  "country-components": ["Install one country", "Usage", "Why wrappers?", "Install every wrapper"],
+  "formats-and-ratios": ["Formats", "Ratios", "Responsive raster images", "Choosing a combination"],
+  styling: ["Class names", "Native image props", "Common recipes", "Loading behavior"],
+  accessibility: ["Meaningful flags", "Decorative flags", "Do not use color alone"],
+  "ai-agents": ["Machine-readable entry points", "Agent install workflow", "Registry discovery", "Prompt template"],
+  publishing: ["Build the registry", "Deploy checklist", "Deploy from your terminal", "Before directory approval"],
+  license: ["Component source", "Flag artwork", "Attribution", "Flag Icons comparison", "Official symbols"],
+}
+
+const registryConfigCode = (origin: string) => `{
+  "registries": {
+    "@flagcn": {
+      "url": "${origin}/r/{name}.json"
+    }
+  }
+}`
+
+const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode }> = {
+  introduction: {
+    title: "Introduction",
+    summary: "A shadcn registry for flags that remain yours after installation.",
+    content: (
+      <>
+        <DocSection title="What is Flagcn?">
+          <p>Flagcn distributes React source through the shadcn CLI. It is not a component package and it does not put a UI abstraction between you and your code. Install a component, then edit it like any other file in your project.</p>
+          <p>Artwork is served by Flagpedia’s FlagCDN, which offers current flag files in SVG, PNG, and WebP. The core component constructs stable CDN URLs, native responsive image attributes, and consistent 4:3 or 1:1 presentation.</p>
+        </DocSection>
+        <DocSection title="Choose an install">
+          <div className="not-prose grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <MiniDocCard title="flag" text="The small, universal image primitive." command="@flagcn/flag" />
+            <MiniDocCard title="flag-picker" text="Searchable, keyboard-friendly selection." command="@flagcn/flag-picker" />
+            <MiniDocCard title="ae" text="A typed, country-specific wrapper." command="@flagcn/ae" />
+            <MiniDocCard title="all" text="Every typed wrapper in one install." command="@flagcn/all" />
+          </div>
+        </DocSection>
+        <DocSection title="Principles">
+          <ul>
+            <li>Source-owned components with no Flagcn runtime package.</li>
+            <li>Explicit format selection and responsive raster sources.</li>
+            <li>Accessible names and decorative-image support.</li>
+            <li>Small install units so a single flag does not bring the catalog.</li>
+          </ul>
+        </DocSection>
+      </>
+    ),
+  },
+  installation: {
+    title: "Installation",
+    summary: "Connect the registry once, then add components by namespace.",
+    content: <InstallationContent />,
+  },
+  flag: {
+    title: "Flag",
+    summary: "The format-aware primitive for every country, territory, and supported organization.",
+    content: (
+      <>
+        <DocSection title="Install">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/flag" />
+        </DocSection>
+        <DocSection title="Usage">
+          <CodeBlock code={`import { Flag } from "@/components/flags/flag"\n\nexport function Market() {\n  return (\n    <Flag\n      code="ae"\n      format="webp"\n      ratio="1x1"\n      width={160}\n      alt="United Arab Emirates flag"\n      className="rounded-full"\n    />\n  )\n}`} />
+          <div className="not-prose flag-stage mt-4 grid min-h-44 place-items-center rounded-lg border bg-muted/35">
+            <Flag code="ae" format="webp" ratio="1x1" width={160} alt="United Arab Emirates flag" className="max-h-24 max-w-24 rounded-full shadow-[0_0_0_1px_rgba(0,0,0,.14)]" />
+          </div>
+        </DocSection>
+        <DocSection title="API">
+          <ApiTable rows={[
+            ["code", "FlagCode | string", "—", "Lowercase ISO-style code such as ae, jp, gb-eng, or us-ca."],
+            ["alt", "string", "Generated", "Accessible image description. Use decorative for presentation-only flags."],
+            ["format", "svg | png | webp", "svg", "Image format requested from FlagCDN."],
+            ["width", "number", "80", "Rendered width and closest responsive CDN width."],
+            ["ratio", "4x3 | 1x1 | original", "4x3", "Use a consistent landscape or square frame, or preserve official proportions."],
+            ["decorative", "boolean", "false", "Sets empty alt text and aria-hidden."],
+          ]} />
+        </DocSection>
+        <DocSection title="Format behavior">
+          <p>SVG uses one scalable source. PNG and WebP add a width-based <code>srcSet</code>, letting the browser select a suitable raster asset. WebP is the best default for a raster-only pipeline; SVG is the best general default.</p>
+          <p>The component forwards standard image props, including <code>className</code>, <code>style</code>, <code>onLoad</code>, <code>fetchPriority</code>, and <code>ref</code>. Ratio styling can still be refined with your own classes.</p>
+        </DocSection>
+      </>
+    ),
+  },
+  "flag-picker": {
+    title: "Flag Picker",
+    summary: "A searchable combobox with full keyboard selection and typed values.",
+    content: (
+      <>
+        <DocSection title="Install">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/flag-picker" />
+          <p>The registry automatically installs <code>flag</code> and <code>flag-data</code>. The picker is icon-neutral, so it does not add an icon package to the consuming app.</p>
+        </DocSection>
+        <DocSection title="Usage">
+          <CodeBlock code={`import * as React from "react"\nimport { FlagPicker } from "@/components/flags/flag-picker"\nimport type { FlagCode } from "@/components/flags/flag-data"\n\nexport function CountryField() {\n  const [country, setCountry] = React.useState<FlagCode>("ae")\n\n  return (\n    <FlagPicker\n      value={country}\n      onValueChange={setCountry}\n      kinds={["country"]}\n      name="country"\n    />\n  )\n}`} />
+          <div className="not-prose mt-4 max-w-md rounded-lg border bg-card p-5">
+            <p className="mb-2 text-xs font-medium text-muted-foreground">Market</p>
+            <FlagPicker defaultValue="ae" kinds={["country"]} />
+          </div>
+        </DocSection>
+        <DocSection title="API">
+          <ApiTable rows={[
+            ["value", "FlagCode", "—", "Controlled selected code."],
+            ["defaultValue", "FlagCode", "—", "Initial code for uncontrolled usage."],
+            ["onValueChange", "(code) => void", "—", "Called when the user selects a flag."],
+            ["format", "svg | png | webp", "svg", "Preview format used inside the picker."],
+            ["ratio", "4x3 | 1x1 | original", "4x3", "Preview ratio used in the trigger and results."],
+            ["kinds", "FlagKind[]", "all", "Limit results to country, subdivision, or organization."],
+            ["name", "string", "—", "Adds a hidden form field carrying the selected code."],
+          ]} />
+        </DocSection>
+      </>
+    ),
+  },
+  "country-components": {
+    title: "Country components",
+    summary: "Install a named wrapper when a fixed market is clearer than a dynamic code prop.",
+    content: (
+      <>
+        <DocSection title="Install one country">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/ae" />
+          <p>Each country item depends on the small universal <code>flag</code> item and installs a single typed wrapper into <code>components/flags/countries</code>.</p>
+        </DocSection>
+        <DocSection title="Usage">
+          <CodeBlock code={`import { UnitedArabEmiratesFlag } from "@/components/flags/countries/ae"\n\nexport function Header() {\n  return (\n    <UnitedArabEmiratesFlag\n      format="svg"\n      width={32}\n      alt="Available in the UAE"\n    />\n  )\n}`} />
+        </DocSection>
+        <DocSection title="Why wrappers?">
+          <p>Wrappers give design systems a descriptive import, lock the country code at compile time, and still preserve every <code>Flag</code> prop except <code>code</code>. Use the generic primitive for dynamic data and a wrapper for fixed interface chrome.</p>
+        </DocSection>
+        <DocSection title="Install every wrapper">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/all" />
+          <p>This installs the primitive, picker, typed catalog, aggregate exports, and all 306 named wrappers. The generated barrel disambiguates duplicate place names such as Georgia and the U.S. state of Georgia.</p>
+        </DocSection>
+      </>
+    ),
+  },
+  "formats-and-ratios": {
+    title: "Formats & ratios",
+    summary: "Choose the delivery format and visual frame independently for every flag.",
+    content: (
+      <>
+        <DocSection title="Formats">
+          <ApiTable rows={[
+            ["svg", "Vector", "Default", "Sharp at every size and usually the best interface default."],
+            ["png", "Raster", "Optional", "Broad tooling support with responsive width candidates."],
+            ["webp", "Raster", "Optional", "Smaller raster delivery for pipelines that prefer modern images."],
+          ]} />
+          <CodeBlock code={`<Flag code="ae" format="svg" alt="United Arab Emirates flag" />\n<Flag code="ae" format="png" alt="United Arab Emirates flag" />\n<Flag code="ae" format="webp" alt="United Arab Emirates flag" />`} />
+        </DocSection>
+        <DocSection title="Ratios">
+          <p><code>4x3</code> is the default and gives mixed-country interfaces a stable landscape rhythm. <code>1x1</code> crops the artwork into a square frame. <code>original</code> preserves each flag’s official proportions.</p>
+          <CodeBlock code={`<Flag code="ae" ratio="4x3" alt="United Arab Emirates flag" />\n<Flag code="ae" ratio="1x1" alt="United Arab Emirates flag" />\n<Flag code="ae" ratio="original" alt="United Arab Emirates flag" />`} />
+        </DocSection>
+        <DocSection title="Responsive raster images">
+          <p>PNG and WebP automatically receive a width-based <code>srcSet</code> and a matching default <code>sizes</code> value. Pass your own <code>sizes</code> when layout width changes across breakpoints.</p>
+          <CodeBlock code={`<Flag\n  code="br"\n  format="webp"\n  width={160}\n  sizes="(max-width: 640px) 80px, 160px"\n  alt="Brazil flag"\n/>`} />
+        </DocSection>
+        <DocSection title="Choosing a combination">
+          <ul>
+            <li>Use SVG + 4:3 for most application interfaces.</li>
+            <li>Use WebP + 1:1 for dense avatar-like market selectors.</li>
+            <li>Use original when accurate national proportions are part of the content.</li>
+            <li>Use PNG when a downstream tool cannot consume SVG or WebP.</li>
+          </ul>
+        </DocSection>
+      </>
+    ),
+  },
+  styling: {
+    title: "Styling",
+    summary: "Flagcn forwards native image props, so it fits the Tailwind and React patterns you already use.",
+    content: (
+      <>
+        <DocSection title="Class names">
+          <p>Pass <code>className</code> directly. Flagcn does not impose a component theme or wrapper element.</p>
+          <CodeBlock code={`<Flag\n  code="jp"\n  ratio="1x1"\n  alt="Japan flag"\n  className="size-10 rounded-full ring-1 ring-border"\n/>`} />
+        </DocSection>
+        <DocSection title="Native image props">
+          <p>The component forwards <code>id</code>, <code>style</code>, <code>title</code>, <code>onLoad</code>, <code>onError</code>, <code>fetchPriority</code>, <code>crossOrigin</code>, data attributes, and the ref expected by React image elements.</p>
+          <CodeBlock code={`<Flag\n  code="de"\n  alt="Germany flag"\n  fetchPriority="high"\n  onLoad={() => setReady(true)}\n  data-market="eu"\n/>`} />
+        </DocSection>
+        <DocSection title="Common recipes">
+          <CodeBlock code={`// Compact label\n<span className="inline-flex items-center gap-2">\n  <Flag code="ca" width={24} decorative className="rounded-sm" />\n  Canada\n</span>\n\n// Responsive card artwork\n<Flag\n  code="za"\n  width={320}\n  alt="South Africa flag"\n  className="h-auto w-full rounded-lg object-cover"\n/>`} />
+        </DocSection>
+        <DocSection title="Loading behavior">
+          <p>Images are lazy-loaded and asynchronously decoded by default. Override <code>loading="eager"</code> and <code>fetchPriority="high"</code> only for a flag that is important above the fold.</p>
+        </DocSection>
+      </>
+    ),
+  },
+  "ai-agents": {
+    title: "AI agents",
+    summary: "Stable text files and JSON endpoints give coding agents the context they need without scraping the interface.",
+    content: (
+      <>
+        <DocSection title="Machine-readable entry points">
+          <ApiTable compact rows={[
+            ["/llms.txt", "Index", "Short project map, install commands, API summary, and canonical resources."],
+            ["/llms-full.txt", "Reference", "Complete agent-oriented usage, API, accessibility, licensing, and publishing guide."],
+            ["/r/registry.json", "Registry", "The full shadcn registry index and every available item name."],
+            ["/r/<name>.json", "Registry item", "The exact files and dependencies installed for one item."],
+          ]} />
+        </DocSection>
+        <DocSection title="Agent install workflow">
+          <ol>
+            <li>Read <code>/llms.txt</code>, then open <code>/llms-full.txt</code> for the complete contract.</li>
+            <li>Inspect <code>/r/registry.json</code> or the item JSON when exact generated files matter.</li>
+            <li>Add the <code>@flagcn</code> URL to <code>components.json</code> when the namespace is not yet in the shadcn directory.</li>
+            <li>Run the shadcn add command and edit the copied source normally.</li>
+          </ol>
+        </DocSection>
+        <DocSection title="Registry discovery">
+          <CodeBlock language="text" code={`${getSiteOrigin()}/llms.txt\n${getSiteOrigin()}/llms-full.txt\n${getSiteOrigin()}/r/registry.json\n${getSiteOrigin()}/r/ae.json`} />
+          <p>Registry responses allow cross-origin reads, so browser-based tools can inspect the catalog directly. Stable item names such as <code>ae</code>, <code>us-ca</code>, <code>flag</code>, and <code>all</code> are preferable to guessing display names.</p>
+        </DocSection>
+        <DocSection title="Prompt template">
+          <CodeBlock language="text" code={`Read ${getSiteOrigin()}/llms.txt and ${getSiteOrigin()}/llms-full.txt.\nAdd @flagcn/ae with the shadcn CLI, then render it as a decorative 1:1 WebP flag beside the visible label “United Arab Emirates”. Preserve the project’s existing component aliases and styling conventions.`} />
+        </DocSection>
+      </>
+    ),
+  },
+  publishing: {
+    title: "Publishing",
+    summary: "Deploy the static registry, connect a domain, and prepare it for the shadcn directory.",
+    content: (
+      <>
+        <DocSection title="Build the registry">
+          <CodeBlock language="bash" code="REGISTRY_URL=https://flagcn.pages.dev pnpm registry:build" />
+          <p>The generator creates the country wrappers and source catalog. <code>shadcn build</code> then writes installable item payloads to <code>public/r</code>.</p>
+        </DocSection>
+        <DocSection title="Deploy checklist">
+          <ol>
+            <li>Choose the final project and registry name in <code>src/config/site.ts</code>.</li>
+            <li>Create a Cloudflare Pages project connected to the public Git repository.</li>
+            <li>Use <code>pnpm build</code> as the build command and <code>dist</code> as the output directory.</li>
+            <li>Set <code>NODE_VERSION=22</code> and <code>REGISTRY_URL</code> to the production origin.</li>
+            <li>Attach the custom domain and confirm <code>/r/registry.json</code> and <code>/r/flag.json</code> return JSON.</li>
+            <li>Run the clean-consumer install check, then submit the registry to the shadcn Registry Directory.</li>
+          </ol>
+        </DocSection>
+        <DocSection title="Deploy from your terminal">
+          <CodeBlock language="bash" code={`pnpm build\npnpm deploy:cloudflare`} />
+          <p>The repository includes Cloudflare Pages headers, route rewrites, a real registry 404 response, and a Wrangler project configuration. Change the project name in <code>wrangler.jsonc</code> before the first direct deployment if needed.</p>
+        </DocSection>
+        <DocSection title="Before directory approval">
+          <p>Namespaced commands already work for users who add your URL to <code>components.json</code>. Directory inclusion removes that setup step and lets the CLI recognize <code>@flagcn/*</code> globally.</p>
+        </DocSection>
+      </>
+    ),
+  },
+  accessibility: {
+    title: "Accessibility",
+    summary: "Flags communicate identity visually, so their surrounding text and interaction matter.",
+    content: (
+      <>
+        <DocSection title="Meaningful flags">
+          <p>Describe what the image means in context, not only what it looks like. For a locale switcher, “Arabic — United Arab Emirates” is more useful than “striped flag.”</p>
+          <CodeBlock code={`<Flag code="ae" alt="Arabic — United Arab Emirates" />`} />
+        </DocSection>
+        <DocSection title="Decorative flags">
+          <p>When adjacent visible text already names the country, set <code>decorative</code>. The component emits empty alternative text and removes the image from the accessibility tree.</p>
+          <CodeBlock code={`<span className="flex items-center gap-2">\n  <Flag code="am" decorative width={24} />\n  Armenia\n</span>`} />
+        </DocSection>
+        <DocSection title="Do not use color alone">
+          <p>Never make a flag the only indication of language, residency, nationality, or state. Flags can be politically sensitive and do not always map one-to-one with languages. Pair them with precise text.</p>
+        </DocSection>
+      </>
+    ),
+  },
+  license: {
+    title: "License & attribution",
+    summary: "Clear rights for the code and the artwork it displays.",
+    content: (
+      <>
+        <DocSection title="Component source">
+          <p>Flagcn’s original source code is released under the MIT License. Once the shadcn CLI copies a component into your application, it is yours to inspect and modify under those terms.</p>
+        </DocSection>
+        <DocSection title="Flag artwork">
+          <p>Flagpedia states that its flag images are in the public domain and are free for commercial and non-commercial use. The artwork is based on vector files from Wikimedia Commons.</p>
+          <a className="not-prose text-primary inline-flex items-center gap-1.5 text-sm font-medium hover:underline" href="https://flagpedia.net/about" target="_blank" rel="noreferrer">
+            Read Flagpedia’s license statement <IconExternalLink className="size-4" />
+          </a>
+        </DocSection>
+        <DocSection title="Attribution">
+          <p>Flagpedia says attribution is appreciated, not required. This project keeps a visible backlink in its documentation and footer. Applications using installed components may choose attribution appropriate to their own context.</p>
+        </DocSection>
+        <DocSection title="Flag Icons comparison">
+          <p>Flag Icons is an established MIT-licensed SVG and CSS collection with 4:3 and 1:1 variants. Flagcn uses the same practical aspect-ratio choices, but does not copy or bundle Flag Icons source or artwork. Flagcn uses Flagpedia’s broader 306-entry CDN catalog and supports SVG, PNG, and WebP.</p>
+          <a className="not-prose text-primary inline-flex items-center gap-1.5 text-sm font-medium hover:underline" href="https://flagicons.lipis.dev/" target="_blank" rel="noreferrer">
+            Visit Flag Icons <IconExternalLink className="size-4" />
+          </a>
+        </DocSection>
+        <DocSection title="Official symbols">
+          <p>Public-domain artwork status does not replace local rules governing national flags, seals, or official emblems. Use symbols accurately and review the requirements that apply to your product and markets.</p>
+        </DocSection>
+      </>
+    ),
+  },
+}
+
+function InstallationContent() {
+  const origin = getSiteOrigin()
+  return (
+    <>
+      <DocSection title="1. Add the registry">
+        <p>Add this entry to your project’s <code>components.json</code>. The namespace can be changed, but the examples use <code>flagcn</code>.</p>
+        <CodeBlock language="json" code={registryConfigCode(origin)} />
+      </DocSection>
+      <DocSection title="2. Add a component">
+        <CodeBlock language="bash" code={`pnpm dlx shadcn@latest add @flagcn/flag\n# or\nnpx shadcn@latest add @flagcn/flag`} />
+      </DocSection>
+      <DocSection title="3. Render a flag">
+        <CodeBlock code={`import { Flag } from "@/components/flags/flag"\n\n<Flag code="ae" alt="United Arab Emirates flag" />`} />
+      </DocSection>
+      <DocSection title="Available items">
+        <ApiTable rows={[
+          ["@flagcn/flag", "Primitive", "Format-aware image component plus URL helpers."],
+          ["@flagcn/flag-picker", "Block", "Searchable picker and the complete typed catalog."],
+          ["@flagcn/all", "Block", "Primitive, picker, data, and all 306 named wrappers."],
+          ["@flagcn/<code>", "Component", "A typed country or territory wrapper, e.g. @flagcn/ae."],
+        ]} compact />
+      </DocSection>
+      <div className="not-prose rounded-lg border border-primary/25 bg-primary/5 p-4 text-sm">
+        <strong>Registry endpoint:</strong> <code className="ms-1 text-muted-foreground">{getRegistryConfig()}</code>
+      </div>
+    </>
+  )
+}
+
+function DocSection({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section id={headingId(title)} className="scroll-mt-24 border-t pt-9 first:border-0 first:pt-0">
+      <h2 className="text-xl font-semibold tracking-[-0.025em]">{title}</h2>
+      <div className="prose-doc mt-4 grid gap-4">{children}</div>
+    </section>
+  )
+}
+
+function headingId(title: string) {
+  return title.toLocaleLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
+}
+
+function MiniDocCard({ title, text, command }: { title: string; text: string; command: string }) {
+  return (
+    <Card>
+      <CardContent className="p-4">
+        <code className="font-mono text-xs text-primary">{title}</code>
+        <p className="mt-3 text-sm leading-6 text-muted-foreground">{text}</p>
+        <p className="mt-4 truncate font-mono text-[10px] text-muted-foreground">{command}</p>
+      </CardContent>
+    </Card>
+  )
+}
+
+function ApiTable({ rows, compact = false }: { rows: string[][]; compact?: boolean }) {
+  return (
+    <div className="not-prose overflow-x-auto rounded-lg border">
+      <table className="w-full min-w-[560px] text-start text-sm">
+        <thead className="bg-muted/60 text-xs text-muted-foreground">
+          <tr>
+            {compact ? <><th>Item</th><th>Type</th><th>Purpose</th></> : <><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></>}
+          </tr>
+        </thead>
+        <tbody className="divide-y">
+          {rows.map((row) => (
+            <tr key={row[0]}>
+              <td className="font-mono text-xs text-primary">{row[0]}</td>
+              <td>{row[1]}</td>
+              <td>{row[2]}</td>
+              {compact ? null : <td>{row[3]}</td>}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+export function DocsPage() {
+  const { slug } = useParams()
+  const currentSlug = (slug ?? "introduction") as DocSlug
+  const doc = docs[currentSlug]
+  const [query, setQuery] = React.useState("")
+
+  if (!doc) return <Navigate to="/docs/introduction" replace />
+
+  const currentIndex = docSections.findIndex((section) => section.slug === currentSlug)
+  const previous = docSections[currentIndex - 1]
+  const next = docSections[currentIndex + 1]
+  const normalizedQuery = query.trim().toLocaleLowerCase()
+  const agentPrompt = `Read ${getSiteOrigin()}/llms.txt and ${getSiteOrigin()}/llms-full.txt, then help me use Flagcn. I am currently reading the ${doc.title} guide at ${getSiteOrigin()}/docs/${currentSlug}. Preserve my project's existing shadcn aliases and styling conventions.`
+
+  return (
+    <main className="site-container grid min-h-screen lg:grid-cols-[220px_minmax(0,760px)] lg:gap-10 xl:grid-cols-[220px_minmax(0,760px)_180px] xl:gap-12">
+      <aside className="hidden border-e py-10 pe-5 lg:block">
+        <div className="sticky top-22 max-h-[calc(100vh-7rem)] overflow-y-auto pe-1">
+          <p className="mb-3 px-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Documentation</p>
+          <div className="relative mb-5">
+            <IconSearch className="pointer-events-none absolute start-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
+            <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Filter docs…" aria-label="Filter documentation" className="h-8 ps-8 text-xs" />
+          </div>
+          <nav className="grid gap-5" aria-label="Documentation">
+            {docGroups.map((group) => {
+              const visibleItems = group.items.filter((section) => !normalizedQuery || section.label.toLocaleLowerCase().includes(normalizedQuery))
+              if (!visibleItems.length) return null
+              return (
+                <div key={group.label}>
+                  <p className="mb-1.5 px-2 text-xs font-medium text-foreground">{group.label}</p>
+                  <div className="grid gap-0.5">
+                    {visibleItems.map((section) => (
+                      <Link
+                        key={section.slug}
+                        to={`/docs/${section.slug}`}
+                        className={cn(
+                          "rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",
+                          section.slug === currentSlug && "bg-accent font-medium text-foreground",
+                        )}
+                      >
+                        {section.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+          </nav>
+          {normalizedQuery && !docSections.some((section) => section.label.toLocaleLowerCase().includes(normalizedQuery)) ? (
+            <p className="px-2 text-xs leading-5 text-muted-foreground">No documentation sections match.</p>
+          ) : null}
+        </div>
+      </aside>
+
+      <article className="min-w-0 py-10 sm:py-14">
+        <div className="mb-8 lg:hidden">
+          <label htmlFor="doc-section" className="mb-2 block text-xs font-medium text-muted-foreground">Documentation section</label>
+          <NativeSelect
+            id="doc-section"
+            value={currentSlug}
+            onChange={(event) => { window.location.href = `/docs/${event.target.value}` }}
+            className="w-full"
+          >
+            {docSections.map((section) => <option key={section.slug} value={section.slug}>{section.label}</option>)}
+          </NativeSelect>
+        </div>
+        <p className="eyebrow">Docs</p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-[-0.045em] sm:text-5xl">{doc.title}</h1>
+        <p className="text-muted-foreground mt-4 max-w-2xl text-lg leading-8">{doc.summary}</p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <CopyPageButton title={doc.title} />
+          <a href="/llms-full.txt" target="_blank" rel="noreferrer" className={buttonVariants({ variant: "outline", size: "sm" })}>
+            <IconFileText /> Open text
+          </a>
+          <AskAiButton prompt={agentPrompt} />
+        </div>
+        <Separator className="my-9" />
+        <div data-doc-content className="grid gap-10">{doc.content}</div>
+
+        <div className="mt-14 grid gap-3 sm:grid-cols-2">
+          {previous ? (
+            <Link to={`/docs/${previous.slug}`} className="flex items-center gap-3 rounded-lg border p-4 transition-colors hover:border-primary/35 hover:bg-accent/50">
+              <IconArrowLeft className="size-4 text-muted-foreground" />
+              <div>
+                <span className="text-xs text-muted-foreground">Previous</span>
+                <p className="mt-0.5 text-sm font-medium">{previous.label}</p>
+              </div>
+            </Link>
+          ) : <div />}
+          {next ? (
+            <Link to={`/docs/${next.slug}`} className="flex items-center justify-end gap-3 rounded-lg border p-4 text-end transition-colors hover:border-primary/35 hover:bg-accent/50">
+              <div>
+                <span className="text-xs text-muted-foreground">Next</span>
+                <p className="mt-0.5 text-sm font-medium">{next.label}</p>
+              </div>
+              <IconArrowRight className="size-4 text-muted-foreground" />
+            </Link>
+          ) : null}
+        </div>
+        <p className="mt-8 text-xs text-muted-foreground">Last updated August 16, 2026</p>
+      </article>
+
+      <aside className="hidden py-10 xl:block">
+        <div className="sticky top-22">
+          <p className="mb-3 text-xs font-medium">On this page</p>
+          <nav className="grid gap-2 border-s ps-3" aria-label="On this page">
+            {tocBySlug[currentSlug].map((heading) => (
+              <a key={heading} href={`#${headingId(heading)}`} className="text-xs leading-5 text-muted-foreground transition-colors hover:text-foreground">
+                {heading}
+              </a>
+            ))}
+          </nav>
+          <Separator className="my-5" />
+          <p className="mb-2 text-xs font-medium">For agents</p>
+          <div className="grid gap-1.5">
+            <a href="/llms.txt" className="text-xs text-muted-foreground hover:text-foreground">llms.txt</a>
+            <a href="/llms-full.txt" className="text-xs text-muted-foreground hover:text-foreground">llms-full.txt</a>
+            <a href="/r/registry.json" className="text-xs text-muted-foreground hover:text-foreground">registry.json</a>
+          </div>
+        </div>
+      </aside>
+    </main>
+  )
+}
+
+function CopyPageButton({ title }: { title: string }) {
+  const [copied, setCopied] = React.useState(false)
+
+  async function copyPage() {
+    const content = document.querySelector<HTMLElement>("[data-doc-content]")?.innerText ?? ""
+    await navigator.clipboard.writeText(`# ${title}\n\n${content}\n\nSource: ${window.location.href}`)
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 1600)
+  }
+
+  return (
+    <Button variant="outline" size="sm" onClick={copyPage}>
+      {copied ? <IconCheck /> : <IconCopy />}
+      {copied ? "Copied" : "Copy Markdown"}
+    </Button>
+  )
+}
+
+function AskAiButton({ prompt }: { prompt: string }) {
+  const [copied, setCopied] = React.useState(false)
+
+  async function copyPrompt() {
+    await navigator.clipboard.writeText(prompt)
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 1600)
+  }
+
+  return (
+    <Button variant="outline" size="sm" onClick={copyPrompt}>
+      {copied ? <IconCheck /> : <IconSparkles />}
+      {copied ? "Prompt copied" : "Ask AI"}
+    </Button>
+  )
+}

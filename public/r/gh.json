@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gh",
+  "title": "Ghana Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Ghana flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/gh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GhanaFlagProps = Omit<FlagProps, \"code\">\n\nexport function GhanaFlag({ alt = \"Ghana flag\", ...props }: GhanaFlagProps) {\n  return <Flag code=\"gh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gh.tsx"
+    }
+  ],
+  "meta": {
+    "code": "gh",
+    "country": "Ghana",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import GhanaFlag from @/components/flags/countries/gh.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

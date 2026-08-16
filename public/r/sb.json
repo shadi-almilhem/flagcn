@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sb",
+  "title": "Solomon Islands Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Solomon Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sb.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SolomonIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function SolomonIslandsFlag({ alt = \"Solomon Islands flag\", ...props }: SolomonIslandsFlagProps) {\n  return <Flag code=\"sb\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sb.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sb",
+    "country": "Solomon Islands",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SolomonIslandsFlag from @/components/flags/countries/sb.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

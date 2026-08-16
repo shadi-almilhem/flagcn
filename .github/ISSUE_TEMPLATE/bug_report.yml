@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a reproducible problem with a component, registry payload, or documentation page.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve Flagcn. Please remove private data from the reproduction.
+  - type: input
+    id: item
+    attributes:
+      label: Registry item
+      description: For example, @flagcn/flag or @flagcn/ae.
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the install command, component usage, and the smallest reproducible example.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include OS, Node, package manager, shadcn CLI, React, and browser versions.
+    validations:
+      required: true

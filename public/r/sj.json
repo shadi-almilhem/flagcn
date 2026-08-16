@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sj",
+  "title": "Svalbard and Jan Mayen Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Svalbard and Jan Mayen flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sj.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SvalbardAndJanMayenFlagProps = Omit<FlagProps, \"code\">\n\nexport function SvalbardAndJanMayenFlag({ alt = \"Svalbard and Jan Mayen flag\", ...props }: SvalbardAndJanMayenFlagProps) {\n  return <Flag code=\"sj\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sj.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sj",
+    "country": "Svalbard and Jan Mayen",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SvalbardAndJanMayenFlag from @/components/flags/countries/sj.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

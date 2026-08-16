@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-wi",
+  "title": "Wisconsin Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Wisconsin flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-wi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type WisconsinFlagProps = Omit<FlagProps, \"code\">\n\nexport function WisconsinFlag({ alt = \"Wisconsin flag\", ...props }: WisconsinFlagProps) {\n  return <Flag code=\"us-wi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-wi.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-wi",
+    "country": "Wisconsin",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import WisconsinFlag from @/components/flags/countries/us-wi.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

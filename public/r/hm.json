@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hm",
+  "title": "Heard Island and McDonald Islands Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Heard Island and McDonald Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/hm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type HeardIslandAndMcdonaldIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function HeardIslandAndMcdonaldIslandsFlag({ alt = \"Heard Island and McDonald Islands flag\", ...props }: HeardIslandAndMcdonaldIslandsFlagProps) {\n  return <Flag code=\"hm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/hm.tsx"
+    }
+  ],
+  "meta": {
+    "code": "hm",
+    "country": "Heard Island and McDonald Islands",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import HeardIslandAndMcdonaldIslandsFlag from @/components/flags/countries/hm.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

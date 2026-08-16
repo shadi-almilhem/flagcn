@@ -1,0 +1,1895 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "all",
+  "title": "All Flagcn Components",
+  "author": "Shadi Al Milhem",
+  "description": "The flag primitive, picker, typed catalog, and all 306 individually named flag components.",
+  "files": [
+    {
+      "path": "src/components/flags/flag.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport * as React from \"react\"\n\nimport {\n  getFlagSrcSet,\n  getFlagUrl,\n  type FlagFormat,\n  type FlagRatio,\n  type FlagWidth,\n} from \"./flag-utils\"\n\nexport interface FlagProps\n  extends Omit<React.ComponentProps<\"img\">, \"src\" | \"srcSet\" | \"width\" | \"height\"> {\n  code: string\n  format?: FlagFormat\n  width?: FlagWidth | number\n  ratio?: FlagRatio\n  decorative?: boolean\n}\n\nexport function Flag({\n  code,\n  format = \"svg\",\n  width = 80,\n  ratio = \"4x3\",\n  decorative = false,\n  alt,\n  loading = \"lazy\",\n  decoding = \"async\",\n  sizes,\n  className,\n  style,\n  ...props\n}: FlagProps) {\n  const src = getFlagUrl(code, { format, width, ratio })\n  const srcSet = getFlagSrcSet(code, { format, width, ratio })\n  const normalizedCode = code.trim().toLowerCase()\n  const height = ratio === \"original\" ? undefined : ratio === \"1x1\" ? width : Math.round(width * 0.75)\n  const aspectRatio = ratio === \"original\" ? undefined : ratio === \"1x1\" ? \"1 / 1\" : \"4 / 3\"\n\n  return (\n    <img\n      {...props}\n      data-slot=\"flag\"\n      data-code={normalizedCode}\n      data-format={format}\n      data-ratio={ratio}\n      src={src}\n      srcSet={srcSet}\n      sizes={sizes ?? (srcSet ? `${width}px` : undefined)}\n      width={width}\n      height={height}\n      alt={decorative ? \"\" : (alt ?? `${code.toUpperCase()} flag`)}\n      aria-hidden={decorative || undefined}\n      loading={loading}\n      decoding={decoding}\n      className={className}\n      style={{\n        display: \"block\",\n        maxWidth: \"100%\",\n        ...(aspectRatio ? { aspectRatio, objectFit: \"cover\" as const } : {}),\n        ...style,\n      }}\n    />\n  )\n}\n",
+      "type": "registry:ui",
+      "target": "@components/flags/flag.tsx"
+    },
+    {
+      "path": "src/components/flags/flag-utils.ts",
+      "content": "// SPDX-License-Identifier: MIT\n\nexport const flagFormats = [\"svg\", \"png\", \"webp\"] as const\nexport type FlagFormat = (typeof flagFormats)[number]\n\nexport const flagWidths = [20, 40, 80, 160, 320, 640, 1280, 2560] as const\nexport type FlagWidth = (typeof flagWidths)[number]\nexport const flagRatios = [\"4x3\", \"1x1\", \"original\"] as const\nexport type FlagRatio = (typeof flagRatios)[number]\n\nexport const flagIconWidths = [\n  16, 20, 24, 28, 32, 36, 40, 48, 56, 60, 64, 72, 80, 84, 96, 108, 112,\n  120, 128, 144, 160, 192, 224, 256,\n] as const\n\nexport interface FlagUrlOptions {\n  format?: FlagFormat\n  width?: FlagWidth | number\n  ratio?: FlagRatio\n}\n\nexport function normalizeFlagCode(code: string) {\n  const normalizedCode = code.trim().toLowerCase()\n  if (!/^[a-z]{2}(?:-[a-z0-9]{2,3})?$/.test(normalizedCode)) {\n    throw new Error(`Invalid flag code: ${code}`)\n  }\n  return normalizedCode\n}\n\nexport function getFlagUrl(code: string, options: FlagUrlOptions = {}) {\n  const normalizedCode = normalizeFlagCode(code)\n  const format = options.format ?? \"svg\"\n  const width = options.width ?? 80\n  const ratio = options.ratio ?? \"4x3\"\n  validateFlagWidth(width)\n\n  if (format === \"svg\") {\n    return `https://flagcdn.com/${normalizedCode}.svg`\n  }\n\n  if (ratio !== \"original\" && width <= flagIconWidths.at(-1)!) {\n    const iconWidth = closestWidth(width, flagIconWidths)\n    return `https://flagcdn.com/${iconWidth}x${Math.round(iconWidth * 0.75)}/${normalizedCode}.${format}`\n  }\n\n  return `https://flagcdn.com/w${closestWidth(width, flagWidths)}/${normalizedCode}.${format}`\n}\n\nexport function getFlagSrcSet(code: string, options: FlagUrlOptions = {}) {\n  const format = options.format ?? \"svg\"\n  if (format === \"svg\") return undefined\n\n  const ratio = options.ratio ?? \"4x3\"\n  const requestedWidth = options.width ?? 80\n  validateFlagWidth(requestedWidth)\n  const availableWidths = ratio === \"original\" ? flagWidths : flagIconWidths\n  const candidates = [requestedWidth, requestedWidth * 2, requestedWidth * 3]\n    .map((candidate) => closestWidth(candidate, availableWidths))\n    .filter((candidate, index, values) => values.indexOf(candidate) === index)\n\n  return candidates\n    .map((candidate) => `${getFlagUrl(code, { ...options, width: candidate, ratio })} ${candidate}w`)\n    .join(\", \")\n}\n\nfunction closestWidth<T extends number>(width: number, widths: readonly T[]): T {\n  return widths.reduce((closest, candidate) =>\n    Math.abs(candidate - width) < Math.abs(closest - width) ? candidate : closest,\n  )\n}\n\nfunction validateFlagWidth(width: number) {\n  if (!Number.isFinite(width) || width <= 0) {\n    throw new Error(`Flag width must be a positive finite number: ${width}`)\n  }\n}\n",
+      "type": "registry:lib",
+      "target": "@components/flags/flag-utils.ts"
+    },
+    {
+      "path": "src/components/flags/flag-picker.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/lib/utils\"\n\nimport { Flag } from \"./flag\"\nimport { flagNames, flags, type FlagCode, type FlagKind } from \"./flag-data\"\nimport type { FlagFormat, FlagRatio } from \"./flag-utils\"\n\nexport interface FlagPickerProps {\n  value?: FlagCode\n  defaultValue?: FlagCode\n  onValueChange?: (code: FlagCode) => void\n  format?: FlagFormat\n  ratio?: FlagRatio\n  placeholder?: string\n  searchPlaceholder?: string\n  emptyMessage?: string\n  kinds?: FlagKind[]\n  disabled?: boolean\n  className?: string\n  name?: string\n}\n\nexport function FlagPicker({\n  value,\n  defaultValue,\n  onValueChange,\n  format = \"svg\",\n  ratio = \"4x3\",\n  placeholder = \"Select a flag\",\n  searchPlaceholder = \"Search by name or code…\",\n  emptyMessage = \"No flags found.\",\n  kinds,\n  disabled = false,\n  className,\n  name,\n}: FlagPickerProps) {\n  const [internalValue, setInternalValue] = React.useState<FlagCode | undefined>(defaultValue)\n  const [open, setOpen] = React.useState(false)\n  const [query, setQuery] = React.useState(\"\")\n  const [activeIndex, setActiveIndex] = React.useState(0)\n  const rootRef = React.useRef<HTMLDivElement>(null)\n  const triggerRef = React.useRef<HTMLButtonElement>(null)\n  const searchRef = React.useRef<HTMLInputElement>(null)\n  const listId = React.useId()\n  const currentValue = value ?? internalValue\n\n  const filteredFlags = React.useMemo(() => {\n    const normalizedQuery = query.trim().toLocaleLowerCase()\n    return flags.filter((flag) => {\n      const inKind = !kinds?.length || kinds.includes(flag.kind)\n      const matches = !normalizedQuery\n        || flag.name.toLocaleLowerCase().includes(normalizedQuery)\n        || flag.code.includes(normalizedQuery)\n      return inKind && matches\n    })\n  }, [kinds, query])\n\n  React.useEffect(() => {\n    if (!open) return\n    const onPointerDown = (event: PointerEvent) => {\n      if (!rootRef.current?.contains(event.target as Node)) setOpen(false)\n    }\n    document.addEventListener(\"pointerdown\", onPointerDown)\n    return () => document.removeEventListener(\"pointerdown\", onPointerDown)\n  }, [open])\n\n  React.useEffect(() => {\n    if (!open) return\n    requestAnimationFrame(() => searchRef.current?.focus())\n  }, [open])\n\n  function selectFlag(code: FlagCode) {\n    if (value === undefined) setInternalValue(code)\n    onValueChange?.(code)\n    setQuery(\"\")\n    setOpen(false)\n    requestAnimationFrame(() => triggerRef.current?.focus())\n  }\n\n  function handleKeyDown(event: React.KeyboardEvent) {\n    if (event.key === \"Escape\") {\n      setOpen(false)\n      requestAnimationFrame(() => triggerRef.current?.focus())\n      return\n    }\n    if (event.key === \"ArrowDown\") {\n      event.preventDefault()\n      setActiveIndex((index) => Math.min(index + 1, filteredFlags.length - 1))\n    }\n    if (event.key === \"ArrowUp\") {\n      event.preventDefault()\n      setActiveIndex((index) => Math.max(index - 1, 0))\n    }\n    if (event.key === \"Enter\" && filteredFlags[activeIndex]) {\n      event.preventDefault()\n      selectFlag(filteredFlags[activeIndex].code)\n    }\n  }\n\n  function toggleOpen() {\n    const nextOpen = !open\n    if (nextOpen) setActiveIndex(0)\n    setOpen(nextOpen)\n  }\n\n  return (\n    <div ref={rootRef} data-slot=\"flag-picker\" className={cn(\"relative w-full\", className)}>\n      {name ? <input type=\"hidden\" name={name} value={currentValue ?? \"\"} /> : null}\n      <button\n        ref={triggerRef}\n        type=\"button\"\n        role=\"combobox\"\n        aria-expanded={open}\n        aria-controls={listId}\n        aria-haspopup=\"listbox\"\n        disabled={disabled}\n        className={cn(\n          \"border-input bg-background ring-offset-background flex h-9 w-full items-center justify-between rounded-md border px-3 text-sm shadow-xs outline-none transition-[color,box-shadow]\",\n          \"focus-visible:border-ring focus-visible:ring-ring/30 focus-visible:ring-[3px]\",\n          \"disabled:cursor-not-allowed disabled:opacity-50\",\n        )}\n        onClick={toggleOpen}\n        onKeyDown={(event) => {\n          if (!open && (event.key === \"ArrowDown\" || event.key === \"Enter\" || event.key === \" \")) {\n            event.preventDefault()\n            setActiveIndex(0)\n            setOpen(true)\n          }\n        }}\n      >\n        <span className={cn(\"flex min-w-0 items-center gap-2\", !currentValue && \"text-muted-foreground\")}>\n          {currentValue ? (\n            <Flag\n              code={currentValue}\n              format={format}\n              width={24}\n              ratio={ratio}\n              alt=\"\"\n              decorative\n              className=\"size-5 rounded-[2px] object-cover shadow-[0_0_0_1px_rgba(0,0,0,0.12)]\"\n            />\n          ) : null}\n          <span className=\"truncate\">{currentValue ? flagNames[currentValue] : placeholder}</span>\n        </span>\n        <ChevronDownIcon aria-hidden=\"true\" className=\"text-muted-foreground size-4 shrink-0\" />\n      </button>\n\n      {open ? (\n        <div\n          className=\"bg-popover text-popover-foreground absolute z-50 mt-1 w-full min-w-64 overflow-hidden rounded-md border shadow-md\"\n          onKeyDown={handleKeyDown}\n        >\n          <div className=\"border-b p-2\">\n            <div className=\"relative\">\n              <SearchIcon\n                aria-hidden=\"true\"\n                className=\"text-muted-foreground pointer-events-none absolute start-2.5 top-1/2 size-4 -translate-y-1/2\"\n              />\n              <input\n                ref={searchRef}\n                value={query}\n                onChange={(event) => {\n                  setQuery(event.target.value)\n                  setActiveIndex(0)\n                }}\n                placeholder={searchPlaceholder}\n                aria-label={searchPlaceholder}\n                className=\"placeholder:text-muted-foreground h-9 w-full rounded-sm bg-transparent ps-8 pe-3 text-sm outline-none\"\n              />\n            </div>\n          </div>\n          <div id={listId} role=\"listbox\" className=\"max-h-72 overflow-y-auto p-1\">\n            {filteredFlags.length ? filteredFlags.map((flag, index) => (\n              <button\n                key={flag.code}\n                type=\"button\"\n                role=\"option\"\n                aria-selected={currentValue === flag.code}\n                data-active={index === activeIndex || undefined}\n                className=\"data-[active]:bg-accent data-[active]:text-accent-foreground flex w-full items-center gap-2 rounded-sm px-2 py-2 text-start text-sm outline-none hover:bg-accent hover:text-accent-foreground\"\n                onPointerMove={() => setActiveIndex(index)}\n                onClick={() => selectFlag(flag.code)}\n              >\n                <Flag\n                  code={flag.code}\n                  format={format}\n                  width={24}\n                  ratio={ratio}\n                  alt=\"\"\n                  decorative\n                  className=\"h-[15px] w-5 shrink-0 rounded-[2px] object-cover shadow-[0_0_0_1px_rgba(0,0,0,0.12)]\"\n                />\n                <span className=\"min-w-0 flex-1 truncate\">{flag.name}</span>\n                <span className=\"text-muted-foreground font-mono text-[11px] uppercase\">{flag.code}</span>\n                <CheckIcon\n                  aria-hidden=\"true\"\n                  className={cn(\"size-4\", currentValue === flag.code ? \"opacity-100\" : \"opacity-0\")}\n                />\n              </button>\n            )) : (\n              <p className=\"text-muted-foreground px-3 py-8 text-center text-sm\">{emptyMessage}</p>\n            )}\n          </div>\n        </div>\n      ) : null}\n    </div>\n  )\n}\n\nfunction ChevronDownIcon(props: React.ComponentProps<\"svg\">) {\n  return (\n    <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\" {...props}>\n      <path d=\"m6 9 6 6 6-6\" />\n    </svg>\n  )\n}\n\nfunction SearchIcon(props: React.ComponentProps<\"svg\">) {\n  return (\n    <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\" {...props}>\n      <circle cx=\"11\" cy=\"11\" r=\"8\" />\n      <path d=\"m21 21-4.35-4.35\" />\n    </svg>\n  )\n}\n\nfunction CheckIcon(props: React.ComponentProps<\"svg\">) {\n  return (\n    <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" strokeLinejoin=\"round\" {...props}>\n      <path d=\"m5 12 4 4L19 6\" />\n    </svg>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/flag-picker.tsx"
+    },
+    {
+      "path": "src/components/flags/flag-data.ts",
+      "content": "// SPDX-License-Identifier: MIT\n\nexport const flagNames = {\n  ad: \"Andorra\",\n  ae: \"United Arab Emirates\",\n  af: \"Afghanistan\",\n  ag: \"Antigua and Barbuda\",\n  ai: \"Anguilla\",\n  al: \"Albania\",\n  am: \"Armenia\",\n  ao: \"Angola\",\n  aq: \"Antarctica\",\n  ar: \"Argentina\",\n  as: \"American Samoa\",\n  at: \"Austria\",\n  au: \"Australia\",\n  aw: \"Aruba\",\n  ax: \"Åland Islands\",\n  az: \"Azerbaijan\",\n  ba: \"Bosnia and Herzegovina\",\n  bb: \"Barbados\",\n  bd: \"Bangladesh\",\n  be: \"Belgium\",\n  bf: \"Burkina Faso\",\n  bg: \"Bulgaria\",\n  bh: \"Bahrain\",\n  bi: \"Burundi\",\n  bj: \"Benin\",\n  bl: \"Saint Barthélemy\",\n  bm: \"Bermuda\",\n  bn: \"Brunei\",\n  bo: \"Bolivia\",\n  bq: \"Caribbean Netherlands\",\n  br: \"Brazil\",\n  bs: \"Bahamas\",\n  bt: \"Bhutan\",\n  bv: \"Bouvet Island\",\n  bw: \"Botswana\",\n  by: \"Belarus\",\n  bz: \"Belize\",\n  ca: \"Canada\",\n  cc: \"Cocos (Keeling) Islands\",\n  cd: \"DR Congo\",\n  cf: \"Central African Republic\",\n  cg: \"Republic of the Congo\",\n  ch: \"Switzerland\",\n  ci: \"Côte d'Ivoire (Ivory Coast)\",\n  ck: \"Cook Islands\",\n  cl: \"Chile\",\n  cm: \"Cameroon\",\n  cn: \"China\",\n  co: \"Colombia\",\n  cr: \"Costa Rica\",\n  cu: \"Cuba\",\n  cv: \"Cape Verde\",\n  cw: \"Curaçao\",\n  cx: \"Christmas Island\",\n  cy: \"Cyprus\",\n  cz: \"Czechia\",\n  de: \"Germany\",\n  dj: \"Djibouti\",\n  dk: \"Denmark\",\n  dm: \"Dominica\",\n  do: \"Dominican Republic\",\n  dz: \"Algeria\",\n  ec: \"Ecuador\",\n  ee: \"Estonia\",\n  eg: \"Egypt\",\n  eh: \"Western Sahara\",\n  er: \"Eritrea\",\n  es: \"Spain\",\n  et: \"Ethiopia\",\n  eu: \"European Union\",\n  fi: \"Finland\",\n  fj: \"Fiji\",\n  fk: \"Falkland Islands\",\n  fm: \"Micronesia\",\n  fo: \"Faroe Islands\",\n  fr: \"France\",\n  ga: \"Gabon\",\n  gb: \"United Kingdom\",\n  \"gb-eng\": \"England\",\n  \"gb-nir\": \"Northern Ireland\",\n  \"gb-sct\": \"Scotland\",\n  \"gb-wls\": \"Wales\",\n  gd: \"Grenada\",\n  ge: \"Georgia\",\n  gf: \"French Guiana\",\n  gg: \"Guernsey\",\n  gh: \"Ghana\",\n  gi: \"Gibraltar\",\n  gl: \"Greenland\",\n  gm: \"Gambia\",\n  gn: \"Guinea\",\n  gp: \"Guadeloupe\",\n  gq: \"Equatorial Guinea\",\n  gr: \"Greece\",\n  gs: \"South Georgia\",\n  gt: \"Guatemala\",\n  gu: \"Guam\",\n  gw: \"Guinea-Bissau\",\n  gy: \"Guyana\",\n  hk: \"Hong Kong\",\n  hm: \"Heard Island and McDonald Islands\",\n  hn: \"Honduras\",\n  hr: \"Croatia\",\n  ht: \"Haiti\",\n  hu: \"Hungary\",\n  id: \"Indonesia\",\n  ie: \"Ireland\",\n  il: \"Israel\",\n  im: \"Isle of Man\",\n  in: \"India\",\n  io: \"British Indian Ocean Territory\",\n  iq: \"Iraq\",\n  ir: \"Iran\",\n  is: \"Iceland\",\n  it: \"Italy\",\n  je: \"Jersey\",\n  jm: \"Jamaica\",\n  jo: \"Jordan\",\n  jp: \"Japan\",\n  ke: \"Kenya\",\n  kg: \"Kyrgyzstan\",\n  kh: \"Cambodia\",\n  ki: \"Kiribati\",\n  km: \"Comoros\",\n  kn: \"Saint Kitts and Nevis\",\n  kp: \"North Korea\",\n  kr: \"South Korea\",\n  kw: \"Kuwait\",\n  ky: \"Cayman Islands\",\n  kz: \"Kazakhstan\",\n  la: \"Laos\",\n  lb: \"Lebanon\",\n  lc: \"Saint Lucia\",\n  li: \"Liechtenstein\",\n  lk: \"Sri Lanka\",\n  lr: \"Liberia\",\n  ls: \"Lesotho\",\n  lt: \"Lithuania\",\n  lu: \"Luxembourg\",\n  lv: \"Latvia\",\n  ly: \"Libya\",\n  ma: \"Morocco\",\n  mc: \"Monaco\",\n  md: \"Moldova\",\n  me: \"Montenegro\",\n  mf: \"Saint Martin\",\n  mg: \"Madagascar\",\n  mh: \"Marshall Islands\",\n  mk: \"North Macedonia\",\n  ml: \"Mali\",\n  mm: \"Myanmar\",\n  mn: \"Mongolia\",\n  mo: \"Macau\",\n  mp: \"Northern Mariana Islands\",\n  mq: \"Martinique\",\n  mr: \"Mauritania\",\n  ms: \"Montserrat\",\n  mt: \"Malta\",\n  mu: \"Mauritius\",\n  mv: \"Maldives\",\n  mw: \"Malawi\",\n  mx: \"Mexico\",\n  my: \"Malaysia\",\n  mz: \"Mozambique\",\n  na: \"Namibia\",\n  nc: \"New Caledonia\",\n  ne: \"Niger\",\n  nf: \"Norfolk Island\",\n  ng: \"Nigeria\",\n  ni: \"Nicaragua\",\n  nl: \"Netherlands\",\n  no: \"Norway\",\n  np: \"Nepal\",\n  nr: \"Nauru\",\n  nu: \"Niue\",\n  nz: \"New Zealand\",\n  om: \"Oman\",\n  pa: \"Panama\",\n  pe: \"Peru\",\n  pf: \"French Polynesia\",\n  pg: \"Papua New Guinea\",\n  ph: \"Philippines\",\n  pk: \"Pakistan\",\n  pl: \"Poland\",\n  pm: \"Saint Pierre and Miquelon\",\n  pn: \"Pitcairn Islands\",\n  pr: \"Puerto Rico\",\n  ps: \"Palestine\",\n  pt: \"Portugal\",\n  pw: \"Palau\",\n  py: \"Paraguay\",\n  qa: \"Qatar\",\n  re: \"Réunion\",\n  ro: \"Romania\",\n  rs: \"Serbia\",\n  ru: \"Russia\",\n  rw: \"Rwanda\",\n  sa: \"Saudi Arabia\",\n  sb: \"Solomon Islands\",\n  sc: \"Seychelles\",\n  sd: \"Sudan\",\n  se: \"Sweden\",\n  sg: \"Singapore\",\n  sh: \"Saint Helena, Ascension and Tristan da Cunha\",\n  si: \"Slovenia\",\n  sj: \"Svalbard and Jan Mayen\",\n  sk: \"Slovakia\",\n  sl: \"Sierra Leone\",\n  sm: \"San Marino\",\n  sn: \"Senegal\",\n  so: \"Somalia\",\n  sr: \"Suriname\",\n  ss: \"South Sudan\",\n  st: \"São Tomé and Príncipe\",\n  sv: \"El Salvador\",\n  sx: \"Sint Maarten\",\n  sy: \"Syria\",\n  sz: \"Eswatini (Swaziland)\",\n  tc: \"Turks and Caicos Islands\",\n  td: \"Chad\",\n  tf: \"French Southern and Antarctic Lands\",\n  tg: \"Togo\",\n  th: \"Thailand\",\n  tj: \"Tajikistan\",\n  tk: \"Tokelau\",\n  tl: \"Timor-Leste\",\n  tm: \"Turkmenistan\",\n  tn: \"Tunisia\",\n  to: \"Tonga\",\n  tr: \"Turkey\",\n  tt: \"Trinidad and Tobago\",\n  tv: \"Tuvalu\",\n  tw: \"Taiwan\",\n  tz: \"Tanzania\",\n  ua: \"Ukraine\",\n  ug: \"Uganda\",\n  um: \"United States Minor Outlying Islands\",\n  un: \"United Nations\",\n  us: \"United States\",\n  \"us-ak\": \"Alaska\",\n  \"us-al\": \"Alabama\",\n  \"us-ar\": \"Arkansas\",\n  \"us-az\": \"Arizona\",\n  \"us-ca\": \"California\",\n  \"us-co\": \"Colorado\",\n  \"us-ct\": \"Connecticut\",\n  \"us-de\": \"Delaware\",\n  \"us-fl\": \"Florida\",\n  \"us-ga\": \"Georgia\",\n  \"us-hi\": \"Hawaii\",\n  \"us-ia\": \"Iowa\",\n  \"us-id\": \"Idaho\",\n  \"us-il\": \"Illinois\",\n  \"us-in\": \"Indiana\",\n  \"us-ks\": \"Kansas\",\n  \"us-ky\": \"Kentucky\",\n  \"us-la\": \"Louisiana\",\n  \"us-ma\": \"Massachusetts\",\n  \"us-md\": \"Maryland\",\n  \"us-me\": \"Maine\",\n  \"us-mi\": \"Michigan\",\n  \"us-mn\": \"Minnesota\",\n  \"us-mo\": \"Missouri\",\n  \"us-ms\": \"Mississippi\",\n  \"us-mt\": \"Montana\",\n  \"us-nc\": \"North Carolina\",\n  \"us-nd\": \"North Dakota\",\n  \"us-ne\": \"Nebraska\",\n  \"us-nh\": \"New Hampshire\",\n  \"us-nj\": \"New Jersey\",\n  \"us-nm\": \"New Mexico\",\n  \"us-nv\": \"Nevada\",\n  \"us-ny\": \"New York\",\n  \"us-oh\": \"Ohio\",\n  \"us-ok\": \"Oklahoma\",\n  \"us-or\": \"Oregon\",\n  \"us-pa\": \"Pennsylvania\",\n  \"us-ri\": \"Rhode Island\",\n  \"us-sc\": \"South Carolina\",\n  \"us-sd\": \"South Dakota\",\n  \"us-tn\": \"Tennessee\",\n  \"us-tx\": \"Texas\",\n  \"us-ut\": \"Utah\",\n  \"us-va\": \"Virginia\",\n  \"us-vt\": \"Vermont\",\n  \"us-wa\": \"Washington\",\n  \"us-wi\": \"Wisconsin\",\n  \"us-wv\": \"West Virginia\",\n  \"us-wy\": \"Wyoming\",\n  uy: \"Uruguay\",\n  uz: \"Uzbekistan\",\n  va: \"Vatican City (Holy See)\",\n  vc: \"Saint Vincent and the Grenadines\",\n  ve: \"Venezuela\",\n  vg: \"British Virgin Islands\",\n  vi: \"United States Virgin Islands\",\n  vn: \"Vietnam\",\n  vu: \"Vanuatu\",\n  wf: \"Wallis and Futuna\",\n  ws: \"Samoa\",\n  xk: \"Kosovo\",\n  ye: \"Yemen\",\n  yt: \"Mayotte\",\n  za: \"South Africa\",\n  zm: \"Zambia\",\n  zw: \"Zimbabwe\",\n} as const\n\nexport type FlagCode = keyof typeof flagNames\nexport type FlagKind = \"country\" | \"subdivision\" | \"organization\"\n\nexport interface FlagMeta {\n  code: FlagCode\n  name: (typeof flagNames)[FlagCode]\n  kind: FlagKind\n}\n\nexport const flags = Object.entries(flagNames).map(([code, name]) => ({\n  code: code as FlagCode,\n  name,\n  kind: code === \"eu\" || code === \"un\"\n    ? \"organization\"\n    : code.startsWith(\"us-\") || code.startsWith(\"gb-\")\n      ? \"subdivision\"\n      : \"country\",\n})) satisfies FlagMeta[]\n\nexport const flagCount = flags.length\n\nexport function isFlagCode(value: string): value is FlagCode {\n  return Object.prototype.hasOwnProperty.call(flagNames, value.toLowerCase())\n}\n",
+      "type": "registry:lib",
+      "target": "@components/flags/flag-data.ts"
+    },
+    {
+      "path": "src/components/flags/index.ts",
+      "content": "// SPDX-License-Identifier: MIT\n\nexport { Flag, type FlagProps } from \"./flag\"\nexport { FlagPicker, type FlagPickerProps } from \"./flag-picker\"\nexport { flagCount, flagNames, flags, isFlagCode, type FlagCode, type FlagKind, type FlagMeta } from \"./flag-data\"\nexport * from \"./countries\"\nexport {\n  flagFormats,\n  flagIconWidths,\n  flagRatios,\n  flagWidths,\n  getFlagSrcSet,\n  getFlagUrl,\n  normalizeFlagCode,\n  type FlagFormat,\n  type FlagRatio,\n  type FlagUrlOptions,\n  type FlagWidth,\n} from \"./flag-utils\"\n",
+      "type": "registry:component",
+      "target": "@components/flags/index.ts"
+    },
+    {
+      "path": "src/components/flags/countries/index.ts",
+      "content": "// SPDX-License-Identifier: MIT\n\nexport { AndorraFlag, type AndorraFlagProps } from \"./ad\"\nexport { UnitedArabEmiratesFlag, type UnitedArabEmiratesFlagProps } from \"./ae\"\nexport { AfghanistanFlag, type AfghanistanFlagProps } from \"./af\"\nexport { AntiguaAndBarbudaFlag, type AntiguaAndBarbudaFlagProps } from \"./ag\"\nexport { AnguillaFlag, type AnguillaFlagProps } from \"./ai\"\nexport { AlbaniaFlag, type AlbaniaFlagProps } from \"./al\"\nexport { ArmeniaFlag, type ArmeniaFlagProps } from \"./am\"\nexport { AngolaFlag, type AngolaFlagProps } from \"./ao\"\nexport { AntarcticaFlag, type AntarcticaFlagProps } from \"./aq\"\nexport { ArgentinaFlag, type ArgentinaFlagProps } from \"./ar\"\nexport { AmericanSamoaFlag, type AmericanSamoaFlagProps } from \"./as\"\nexport { AustriaFlag, type AustriaFlagProps } from \"./at\"\nexport { AustraliaFlag, type AustraliaFlagProps } from \"./au\"\nexport { ArubaFlag, type ArubaFlagProps } from \"./aw\"\nexport { AlandIslandsFlag, type AlandIslandsFlagProps } from \"./ax\"\nexport { AzerbaijanFlag, type AzerbaijanFlagProps } from \"./az\"\nexport { BosniaAndHerzegovinaFlag, type BosniaAndHerzegovinaFlagProps } from \"./ba\"\nexport { BarbadosFlag, type BarbadosFlagProps } from \"./bb\"\nexport { BangladeshFlag, type BangladeshFlagProps } from \"./bd\"\nexport { BelgiumFlag, type BelgiumFlagProps } from \"./be\"\nexport { BurkinaFasoFlag, type BurkinaFasoFlagProps } from \"./bf\"\nexport { BulgariaFlag, type BulgariaFlagProps } from \"./bg\"\nexport { BahrainFlag, type BahrainFlagProps } from \"./bh\"\nexport { BurundiFlag, type BurundiFlagProps } from \"./bi\"\nexport { BeninFlag, type BeninFlagProps } from \"./bj\"\nexport { SaintBarthelemyFlag, type SaintBarthelemyFlagProps } from \"./bl\"\nexport { BermudaFlag, type BermudaFlagProps } from \"./bm\"\nexport { BruneiFlag, type BruneiFlagProps } from \"./bn\"\nexport { BoliviaFlag, type BoliviaFlagProps } from \"./bo\"\nexport { CaribbeanNetherlandsFlag, type CaribbeanNetherlandsFlagProps } from \"./bq\"\nexport { BrazilFlag, type BrazilFlagProps } from \"./br\"\nexport { BahamasFlag, type BahamasFlagProps } from \"./bs\"\nexport { BhutanFlag, type BhutanFlagProps } from \"./bt\"\nexport { BouvetIslandFlag, type BouvetIslandFlagProps } from \"./bv\"\nexport { BotswanaFlag, type BotswanaFlagProps } from \"./bw\"\nexport { BelarusFlag, type BelarusFlagProps } from \"./by\"\nexport { BelizeFlag, type BelizeFlagProps } from \"./bz\"\nexport { CanadaFlag, type CanadaFlagProps } from \"./ca\"\nexport { CocosKeelingIslandsFlag, type CocosKeelingIslandsFlagProps } from \"./cc\"\nexport { DrCongoFlag, type DrCongoFlagProps } from \"./cd\"\nexport { CentralAfricanRepublicFlag, type CentralAfricanRepublicFlagProps } from \"./cf\"\nexport { RepublicOfTheCongoFlag, type RepublicOfTheCongoFlagProps } from \"./cg\"\nexport { SwitzerlandFlag, type SwitzerlandFlagProps } from \"./ch\"\nexport { CoteDIvoireIvoryCoastFlag, type CoteDIvoireIvoryCoastFlagProps } from \"./ci\"\nexport { CookIslandsFlag, type CookIslandsFlagProps } from \"./ck\"\nexport { ChileFlag, type ChileFlagProps } from \"./cl\"\nexport { CameroonFlag, type CameroonFlagProps } from \"./cm\"\nexport { ChinaFlag, type ChinaFlagProps } from \"./cn\"\nexport { ColombiaFlag, type ColombiaFlagProps } from \"./co\"\nexport { CostaRicaFlag, type CostaRicaFlagProps } from \"./cr\"\nexport { CubaFlag, type CubaFlagProps } from \"./cu\"\nexport { CapeVerdeFlag, type CapeVerdeFlagProps } from \"./cv\"\nexport { CuracaoFlag, type CuracaoFlagProps } from \"./cw\"\nexport { ChristmasIslandFlag, type ChristmasIslandFlagProps } from \"./cx\"\nexport { CyprusFlag, type CyprusFlagProps } from \"./cy\"\nexport { CzechiaFlag, type CzechiaFlagProps } from \"./cz\"\nexport { GermanyFlag, type GermanyFlagProps } from \"./de\"\nexport { DjiboutiFlag, type DjiboutiFlagProps } from \"./dj\"\nexport { DenmarkFlag, type DenmarkFlagProps } from \"./dk\"\nexport { DominicaFlag, type DominicaFlagProps } from \"./dm\"\nexport { DominicanRepublicFlag, type DominicanRepublicFlagProps } from \"./do\"\nexport { AlgeriaFlag, type AlgeriaFlagProps } from \"./dz\"\nexport { EcuadorFlag, type EcuadorFlagProps } from \"./ec\"\nexport { EstoniaFlag, type EstoniaFlagProps } from \"./ee\"\nexport { EgyptFlag, type EgyptFlagProps } from \"./eg\"\nexport { WesternSaharaFlag, type WesternSaharaFlagProps } from \"./eh\"\nexport { EritreaFlag, type EritreaFlagProps } from \"./er\"\nexport { SpainFlag, type SpainFlagProps } from \"./es\"\nexport { EthiopiaFlag, type EthiopiaFlagProps } from \"./et\"\nexport { EuropeanUnionFlag, type EuropeanUnionFlagProps } from \"./eu\"\nexport { FinlandFlag, type FinlandFlagProps } from \"./fi\"\nexport { FijiFlag, type FijiFlagProps } from \"./fj\"\nexport { FalklandIslandsFlag, type FalklandIslandsFlagProps } from \"./fk\"\nexport { MicronesiaFlag, type MicronesiaFlagProps } from \"./fm\"\nexport { FaroeIslandsFlag, type FaroeIslandsFlagProps } from \"./fo\"\nexport { FranceFlag, type FranceFlagProps } from \"./fr\"\nexport { GabonFlag, type GabonFlagProps } from \"./ga\"\nexport { UnitedKingdomFlag, type UnitedKingdomFlagProps } from \"./gb\"\nexport { EnglandFlag, type EnglandFlagProps } from \"./gb-eng\"\nexport { NorthernIrelandFlag, type NorthernIrelandFlagProps } from \"./gb-nir\"\nexport { ScotlandFlag, type ScotlandFlagProps } from \"./gb-sct\"\nexport { WalesFlag, type WalesFlagProps } from \"./gb-wls\"\nexport { GrenadaFlag, type GrenadaFlagProps } from \"./gd\"\nexport { GeorgiaFlag, type GeorgiaFlagProps } from \"./ge\"\nexport { FrenchGuianaFlag, type FrenchGuianaFlagProps } from \"./gf\"\nexport { GuernseyFlag, type GuernseyFlagProps } from \"./gg\"\nexport { GhanaFlag, type GhanaFlagProps } from \"./gh\"\nexport { GibraltarFlag, type GibraltarFlagProps } from \"./gi\"\nexport { GreenlandFlag, type GreenlandFlagProps } from \"./gl\"\nexport { GambiaFlag, type GambiaFlagProps } from \"./gm\"\nexport { GuineaFlag, type GuineaFlagProps } from \"./gn\"\nexport { GuadeloupeFlag, type GuadeloupeFlagProps } from \"./gp\"\nexport { EquatorialGuineaFlag, type EquatorialGuineaFlagProps } from \"./gq\"\nexport { GreeceFlag, type GreeceFlagProps } from \"./gr\"\nexport { SouthGeorgiaFlag, type SouthGeorgiaFlagProps } from \"./gs\"\nexport { GuatemalaFlag, type GuatemalaFlagProps } from \"./gt\"\nexport { GuamFlag, type GuamFlagProps } from \"./gu\"\nexport { GuineaBissauFlag, type GuineaBissauFlagProps } from \"./gw\"\nexport { GuyanaFlag, type GuyanaFlagProps } from \"./gy\"\nexport { HongKongFlag, type HongKongFlagProps } from \"./hk\"\nexport { HeardIslandAndMcdonaldIslandsFlag, type HeardIslandAndMcdonaldIslandsFlagProps } from \"./hm\"\nexport { HondurasFlag, type HondurasFlagProps } from \"./hn\"\nexport { CroatiaFlag, type CroatiaFlagProps } from \"./hr\"\nexport { HaitiFlag, type HaitiFlagProps } from \"./ht\"\nexport { HungaryFlag, type HungaryFlagProps } from \"./hu\"\nexport { IndonesiaFlag, type IndonesiaFlagProps } from \"./id\"\nexport { IrelandFlag, type IrelandFlagProps } from \"./ie\"\nexport { IsraelFlag, type IsraelFlagProps } from \"./il\"\nexport { IsleOfManFlag, type IsleOfManFlagProps } from \"./im\"\nexport { IndiaFlag, type IndiaFlagProps } from \"./in\"\nexport { BritishIndianOceanTerritoryFlag, type BritishIndianOceanTerritoryFlagProps } from \"./io\"\nexport { IraqFlag, type IraqFlagProps } from \"./iq\"\nexport { IranFlag, type IranFlagProps } from \"./ir\"\nexport { IcelandFlag, type IcelandFlagProps } from \"./is\"\nexport { ItalyFlag, type ItalyFlagProps } from \"./it\"\nexport { JerseyFlag, type JerseyFlagProps } from \"./je\"\nexport { JamaicaFlag, type JamaicaFlagProps } from \"./jm\"\nexport { JordanFlag, type JordanFlagProps } from \"./jo\"\nexport { JapanFlag, type JapanFlagProps } from \"./jp\"\nexport { KenyaFlag, type KenyaFlagProps } from \"./ke\"\nexport { KyrgyzstanFlag, type KyrgyzstanFlagProps } from \"./kg\"\nexport { CambodiaFlag, type CambodiaFlagProps } from \"./kh\"\nexport { KiribatiFlag, type KiribatiFlagProps } from \"./ki\"\nexport { ComorosFlag, type ComorosFlagProps } from \"./km\"\nexport { SaintKittsAndNevisFlag, type SaintKittsAndNevisFlagProps } from \"./kn\"\nexport { NorthKoreaFlag, type NorthKoreaFlagProps } from \"./kp\"\nexport { SouthKoreaFlag, type SouthKoreaFlagProps } from \"./kr\"\nexport { KuwaitFlag, type KuwaitFlagProps } from \"./kw\"\nexport { CaymanIslandsFlag, type CaymanIslandsFlagProps } from \"./ky\"\nexport { KazakhstanFlag, type KazakhstanFlagProps } from \"./kz\"\nexport { LaosFlag, type LaosFlagProps } from \"./la\"\nexport { LebanonFlag, type LebanonFlagProps } from \"./lb\"\nexport { SaintLuciaFlag, type SaintLuciaFlagProps } from \"./lc\"\nexport { LiechtensteinFlag, type LiechtensteinFlagProps } from \"./li\"\nexport { SriLankaFlag, type SriLankaFlagProps } from \"./lk\"\nexport { LiberiaFlag, type LiberiaFlagProps } from \"./lr\"\nexport { LesothoFlag, type LesothoFlagProps } from \"./ls\"\nexport { LithuaniaFlag, type LithuaniaFlagProps } from \"./lt\"\nexport { LuxembourgFlag, type LuxembourgFlagProps } from \"./lu\"\nexport { LatviaFlag, type LatviaFlagProps } from \"./lv\"\nexport { LibyaFlag, type LibyaFlagProps } from \"./ly\"\nexport { MoroccoFlag, type MoroccoFlagProps } from \"./ma\"\nexport { MonacoFlag, type MonacoFlagProps } from \"./mc\"\nexport { MoldovaFlag, type MoldovaFlagProps } from \"./md\"\nexport { MontenegroFlag, type MontenegroFlagProps } from \"./me\"\nexport { SaintMartinFlag, type SaintMartinFlagProps } from \"./mf\"\nexport { MadagascarFlag, type MadagascarFlagProps } from \"./mg\"\nexport { MarshallIslandsFlag, type MarshallIslandsFlagProps } from \"./mh\"\nexport { NorthMacedoniaFlag, type NorthMacedoniaFlagProps } from \"./mk\"\nexport { MaliFlag, type MaliFlagProps } from \"./ml\"\nexport { MyanmarFlag, type MyanmarFlagProps } from \"./mm\"\nexport { MongoliaFlag, type MongoliaFlagProps } from \"./mn\"\nexport { MacauFlag, type MacauFlagProps } from \"./mo\"\nexport { NorthernMarianaIslandsFlag, type NorthernMarianaIslandsFlagProps } from \"./mp\"\nexport { MartiniqueFlag, type MartiniqueFlagProps } from \"./mq\"\nexport { MauritaniaFlag, type MauritaniaFlagProps } from \"./mr\"\nexport { MontserratFlag, type MontserratFlagProps } from \"./ms\"\nexport { MaltaFlag, type MaltaFlagProps } from \"./mt\"\nexport { MauritiusFlag, type MauritiusFlagProps } from \"./mu\"\nexport { MaldivesFlag, type MaldivesFlagProps } from \"./mv\"\nexport { MalawiFlag, type MalawiFlagProps } from \"./mw\"\nexport { MexicoFlag, type MexicoFlagProps } from \"./mx\"\nexport { MalaysiaFlag, type MalaysiaFlagProps } from \"./my\"\nexport { MozambiqueFlag, type MozambiqueFlagProps } from \"./mz\"\nexport { NamibiaFlag, type NamibiaFlagProps } from \"./na\"\nexport { NewCaledoniaFlag, type NewCaledoniaFlagProps } from \"./nc\"\nexport { NigerFlag, type NigerFlagProps } from \"./ne\"\nexport { NorfolkIslandFlag, type NorfolkIslandFlagProps } from \"./nf\"\nexport { NigeriaFlag, type NigeriaFlagProps } from \"./ng\"\nexport { NicaraguaFlag, type NicaraguaFlagProps } from \"./ni\"\nexport { NetherlandsFlag, type NetherlandsFlagProps } from \"./nl\"\nexport { NorwayFlag, type NorwayFlagProps } from \"./no\"\nexport { NepalFlag, type NepalFlagProps } from \"./np\"\nexport { NauruFlag, type NauruFlagProps } from \"./nr\"\nexport { NiueFlag, type NiueFlagProps } from \"./nu\"\nexport { NewZealandFlag, type NewZealandFlagProps } from \"./nz\"\nexport { OmanFlag, type OmanFlagProps } from \"./om\"\nexport { PanamaFlag, type PanamaFlagProps } from \"./pa\"\nexport { PeruFlag, type PeruFlagProps } from \"./pe\"\nexport { FrenchPolynesiaFlag, type FrenchPolynesiaFlagProps } from \"./pf\"\nexport { PapuaNewGuineaFlag, type PapuaNewGuineaFlagProps } from \"./pg\"\nexport { PhilippinesFlag, type PhilippinesFlagProps } from \"./ph\"\nexport { PakistanFlag, type PakistanFlagProps } from \"./pk\"\nexport { PolandFlag, type PolandFlagProps } from \"./pl\"\nexport { SaintPierreAndMiquelonFlag, type SaintPierreAndMiquelonFlagProps } from \"./pm\"\nexport { PitcairnIslandsFlag, type PitcairnIslandsFlagProps } from \"./pn\"\nexport { PuertoRicoFlag, type PuertoRicoFlagProps } from \"./pr\"\nexport { PalestineFlag, type PalestineFlagProps } from \"./ps\"\nexport { PortugalFlag, type PortugalFlagProps } from \"./pt\"\nexport { PalauFlag, type PalauFlagProps } from \"./pw\"\nexport { ParaguayFlag, type ParaguayFlagProps } from \"./py\"\nexport { QatarFlag, type QatarFlagProps } from \"./qa\"\nexport { ReunionFlag, type ReunionFlagProps } from \"./re\"\nexport { RomaniaFlag, type RomaniaFlagProps } from \"./ro\"\nexport { SerbiaFlag, type SerbiaFlagProps } from \"./rs\"\nexport { RussiaFlag, type RussiaFlagProps } from \"./ru\"\nexport { RwandaFlag, type RwandaFlagProps } from \"./rw\"\nexport { SaudiArabiaFlag, type SaudiArabiaFlagProps } from \"./sa\"\nexport { SolomonIslandsFlag, type SolomonIslandsFlagProps } from \"./sb\"\nexport { SeychellesFlag, type SeychellesFlagProps } from \"./sc\"\nexport { SudanFlag, type SudanFlagProps } from \"./sd\"\nexport { SwedenFlag, type SwedenFlagProps } from \"./se\"\nexport { SingaporeFlag, type SingaporeFlagProps } from \"./sg\"\nexport { SaintHelenaAscensionAndTristanDaCunhaFlag, type SaintHelenaAscensionAndTristanDaCunhaFlagProps } from \"./sh\"\nexport { SloveniaFlag, type SloveniaFlagProps } from \"./si\"\nexport { SvalbardAndJanMayenFlag, type SvalbardAndJanMayenFlagProps } from \"./sj\"\nexport { SlovakiaFlag, type SlovakiaFlagProps } from \"./sk\"\nexport { SierraLeoneFlag, type SierraLeoneFlagProps } from \"./sl\"\nexport { SanMarinoFlag, type SanMarinoFlagProps } from \"./sm\"\nexport { SenegalFlag, type SenegalFlagProps } from \"./sn\"\nexport { SomaliaFlag, type SomaliaFlagProps } from \"./so\"\nexport { SurinameFlag, type SurinameFlagProps } from \"./sr\"\nexport { SouthSudanFlag, type SouthSudanFlagProps } from \"./ss\"\nexport { SaoTomeAndPrincipeFlag, type SaoTomeAndPrincipeFlagProps } from \"./st\"\nexport { ElSalvadorFlag, type ElSalvadorFlagProps } from \"./sv\"\nexport { SintMaartenFlag, type SintMaartenFlagProps } from \"./sx\"\nexport { SyriaFlag, type SyriaFlagProps } from \"./sy\"\nexport { EswatiniSwazilandFlag, type EswatiniSwazilandFlagProps } from \"./sz\"\nexport { TurksAndCaicosIslandsFlag, type TurksAndCaicosIslandsFlagProps } from \"./tc\"\nexport { ChadFlag, type ChadFlagProps } from \"./td\"\nexport { FrenchSouthernAndAntarcticLandsFlag, type FrenchSouthernAndAntarcticLandsFlagProps } from \"./tf\"\nexport { TogoFlag, type TogoFlagProps } from \"./tg\"\nexport { ThailandFlag, type ThailandFlagProps } from \"./th\"\nexport { TajikistanFlag, type TajikistanFlagProps } from \"./tj\"\nexport { TokelauFlag, type TokelauFlagProps } from \"./tk\"\nexport { TimorLesteFlag, type TimorLesteFlagProps } from \"./tl\"\nexport { TurkmenistanFlag, type TurkmenistanFlagProps } from \"./tm\"\nexport { TunisiaFlag, type TunisiaFlagProps } from \"./tn\"\nexport { TongaFlag, type TongaFlagProps } from \"./to\"\nexport { TurkeyFlag, type TurkeyFlagProps } from \"./tr\"\nexport { TrinidadAndTobagoFlag, type TrinidadAndTobagoFlagProps } from \"./tt\"\nexport { TuvaluFlag, type TuvaluFlagProps } from \"./tv\"\nexport { TaiwanFlag, type TaiwanFlagProps } from \"./tw\"\nexport { TanzaniaFlag, type TanzaniaFlagProps } from \"./tz\"\nexport { UkraineFlag, type UkraineFlagProps } from \"./ua\"\nexport { UgandaFlag, type UgandaFlagProps } from \"./ug\"\nexport { UnitedStatesMinorOutlyingIslandsFlag, type UnitedStatesMinorOutlyingIslandsFlagProps } from \"./um\"\nexport { UnitedNationsFlag, type UnitedNationsFlagProps } from \"./un\"\nexport { UnitedStatesFlag, type UnitedStatesFlagProps } from \"./us\"\nexport { AlaskaFlag, type AlaskaFlagProps } from \"./us-ak\"\nexport { AlabamaFlag, type AlabamaFlagProps } from \"./us-al\"\nexport { ArkansasFlag, type ArkansasFlagProps } from \"./us-ar\"\nexport { ArizonaFlag, type ArizonaFlagProps } from \"./us-az\"\nexport { CaliforniaFlag, type CaliforniaFlagProps } from \"./us-ca\"\nexport { ColoradoFlag, type ColoradoFlagProps } from \"./us-co\"\nexport { ConnecticutFlag, type ConnecticutFlagProps } from \"./us-ct\"\nexport { DelawareFlag, type DelawareFlagProps } from \"./us-de\"\nexport { FloridaFlag, type FloridaFlagProps } from \"./us-fl\"\nexport { GeorgiaUsStateFlag, type GeorgiaUsStateFlagProps } from \"./us-ga\"\nexport { HawaiiFlag, type HawaiiFlagProps } from \"./us-hi\"\nexport { IowaFlag, type IowaFlagProps } from \"./us-ia\"\nexport { IdahoFlag, type IdahoFlagProps } from \"./us-id\"\nexport { IllinoisFlag, type IllinoisFlagProps } from \"./us-il\"\nexport { IndianaFlag, type IndianaFlagProps } from \"./us-in\"\nexport { KansasFlag, type KansasFlagProps } from \"./us-ks\"\nexport { KentuckyFlag, type KentuckyFlagProps } from \"./us-ky\"\nexport { LouisianaFlag, type LouisianaFlagProps } from \"./us-la\"\nexport { MassachusettsFlag, type MassachusettsFlagProps } from \"./us-ma\"\nexport { MarylandFlag, type MarylandFlagProps } from \"./us-md\"\nexport { MaineFlag, type MaineFlagProps } from \"./us-me\"\nexport { MichiganFlag, type MichiganFlagProps } from \"./us-mi\"\nexport { MinnesotaFlag, type MinnesotaFlagProps } from \"./us-mn\"\nexport { MissouriFlag, type MissouriFlagProps } from \"./us-mo\"\nexport { MississippiFlag, type MississippiFlagProps } from \"./us-ms\"\nexport { MontanaFlag, type MontanaFlagProps } from \"./us-mt\"\nexport { NorthCarolinaFlag, type NorthCarolinaFlagProps } from \"./us-nc\"\nexport { NorthDakotaFlag, type NorthDakotaFlagProps } from \"./us-nd\"\nexport { NebraskaFlag, type NebraskaFlagProps } from \"./us-ne\"\nexport { NewHampshireFlag, type NewHampshireFlagProps } from \"./us-nh\"\nexport { NewJerseyFlag, type NewJerseyFlagProps } from \"./us-nj\"\nexport { NewMexicoFlag, type NewMexicoFlagProps } from \"./us-nm\"\nexport { NevadaFlag, type NevadaFlagProps } from \"./us-nv\"\nexport { NewYorkFlag, type NewYorkFlagProps } from \"./us-ny\"\nexport { OhioFlag, type OhioFlagProps } from \"./us-oh\"\nexport { OklahomaFlag, type OklahomaFlagProps } from \"./us-ok\"\nexport { OregonFlag, type OregonFlagProps } from \"./us-or\"\nexport { PennsylvaniaFlag, type PennsylvaniaFlagProps } from \"./us-pa\"\nexport { RhodeIslandFlag, type RhodeIslandFlagProps } from \"./us-ri\"\nexport { SouthCarolinaFlag, type SouthCarolinaFlagProps } from \"./us-sc\"\nexport { SouthDakotaFlag, type SouthDakotaFlagProps } from \"./us-sd\"\nexport { TennesseeFlag, type TennesseeFlagProps } from \"./us-tn\"\nexport { TexasFlag, type TexasFlagProps } from \"./us-tx\"\nexport { UtahFlag, type UtahFlagProps } from \"./us-ut\"\nexport { VirginiaFlag, type VirginiaFlagProps } from \"./us-va\"\nexport { VermontFlag, type VermontFlagProps } from \"./us-vt\"\nexport { WashingtonFlag, type WashingtonFlagProps } from \"./us-wa\"\nexport { WisconsinFlag, type WisconsinFlagProps } from \"./us-wi\"\nexport { WestVirginiaFlag, type WestVirginiaFlagProps } from \"./us-wv\"\nexport { WyomingFlag, type WyomingFlagProps } from \"./us-wy\"\nexport { UruguayFlag, type UruguayFlagProps } from \"./uy\"\nexport { UzbekistanFlag, type UzbekistanFlagProps } from \"./uz\"\nexport { VaticanCityHolySeeFlag, type VaticanCityHolySeeFlagProps } from \"./va\"\nexport { SaintVincentAndTheGrenadinesFlag, type SaintVincentAndTheGrenadinesFlagProps } from \"./vc\"\nexport { VenezuelaFlag, type VenezuelaFlagProps } from \"./ve\"\nexport { BritishVirginIslandsFlag, type BritishVirginIslandsFlagProps } from \"./vg\"\nexport { UnitedStatesVirginIslandsFlag, type UnitedStatesVirginIslandsFlagProps } from \"./vi\"\nexport { VietnamFlag, type VietnamFlagProps } from \"./vn\"\nexport { VanuatuFlag, type VanuatuFlagProps } from \"./vu\"\nexport { WallisAndFutunaFlag, type WallisAndFutunaFlagProps } from \"./wf\"\nexport { SamoaFlag, type SamoaFlagProps } from \"./ws\"\nexport { KosovoFlag, type KosovoFlagProps } from \"./xk\"\nexport { YemenFlag, type YemenFlagProps } from \"./ye\"\nexport { MayotteFlag, type MayotteFlagProps } from \"./yt\"\nexport { SouthAfricaFlag, type SouthAfricaFlagProps } from \"./za\"\nexport { ZambiaFlag, type ZambiaFlagProps } from \"./zm\"\nexport { ZimbabweFlag, type ZimbabweFlagProps } from \"./zw\"\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/index.ts"
+    },
+    {
+      "path": "src/components/flags/countries/ad.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AndorraFlagProps = Omit<FlagProps, \"code\">\n\nexport function AndorraFlag({ alt = \"Andorra flag\", ...props }: AndorraFlagProps) {\n  return <Flag code=\"ad\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ad.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ae.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UnitedArabEmiratesFlagProps = Omit<FlagProps, \"code\">\n\nexport function UnitedArabEmiratesFlag({ alt = \"United Arab Emirates flag\", ...props }: UnitedArabEmiratesFlagProps) {\n  return <Flag code=\"ae\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ae.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/af.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AfghanistanFlagProps = Omit<FlagProps, \"code\">\n\nexport function AfghanistanFlag({ alt = \"Afghanistan flag\", ...props }: AfghanistanFlagProps) {\n  return <Flag code=\"af\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/af.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ag.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AntiguaAndBarbudaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AntiguaAndBarbudaFlag({ alt = \"Antigua and Barbuda flag\", ...props }: AntiguaAndBarbudaFlagProps) {\n  return <Flag code=\"ag\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ag.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ai.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AnguillaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AnguillaFlag({ alt = \"Anguilla flag\", ...props }: AnguillaFlagProps) {\n  return <Flag code=\"ai\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ai.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/al.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AlbaniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AlbaniaFlag({ alt = \"Albania flag\", ...props }: AlbaniaFlagProps) {\n  return <Flag code=\"al\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/al.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/am.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ArmeniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function ArmeniaFlag({ alt = \"Armenia flag\", ...props }: ArmeniaFlagProps) {\n  return <Flag code=\"am\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/am.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ao.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AngolaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AngolaFlag({ alt = \"Angola flag\", ...props }: AngolaFlagProps) {\n  return <Flag code=\"ao\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ao.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/aq.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AntarcticaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AntarcticaFlag({ alt = \"Antarctica flag\", ...props }: AntarcticaFlagProps) {\n  return <Flag code=\"aq\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/aq.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ar.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ArgentinaFlagProps = Omit<FlagProps, \"code\">\n\nexport function ArgentinaFlag({ alt = \"Argentina flag\", ...props }: ArgentinaFlagProps) {\n  return <Flag code=\"ar\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ar.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/as.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AmericanSamoaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AmericanSamoaFlag({ alt = \"American Samoa flag\", ...props }: AmericanSamoaFlagProps) {\n  return <Flag code=\"as\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/as.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/at.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AustriaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AustriaFlag({ alt = \"Austria flag\", ...props }: AustriaFlagProps) {\n  return <Flag code=\"at\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/at.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/au.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AustraliaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AustraliaFlag({ alt = \"Australia flag\", ...props }: AustraliaFlagProps) {\n  return <Flag code=\"au\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/au.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/aw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ArubaFlagProps = Omit<FlagProps, \"code\">\n\nexport function ArubaFlag({ alt = \"Aruba flag\", ...props }: ArubaFlagProps) {\n  return <Flag code=\"aw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/aw.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ax.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AlandIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function AlandIslandsFlag({ alt = \"Åland Islands flag\", ...props }: AlandIslandsFlagProps) {\n  return <Flag code=\"ax\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ax.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/az.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AzerbaijanFlagProps = Omit<FlagProps, \"code\">\n\nexport function AzerbaijanFlag({ alt = \"Azerbaijan flag\", ...props }: AzerbaijanFlagProps) {\n  return <Flag code=\"az\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/az.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ba.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BosniaAndHerzegovinaFlagProps = Omit<FlagProps, \"code\">\n\nexport function BosniaAndHerzegovinaFlag({ alt = \"Bosnia and Herzegovina flag\", ...props }: BosniaAndHerzegovinaFlagProps) {\n  return <Flag code=\"ba\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ba.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bb.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BarbadosFlagProps = Omit<FlagProps, \"code\">\n\nexport function BarbadosFlag({ alt = \"Barbados flag\", ...props }: BarbadosFlagProps) {\n  return <Flag code=\"bb\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bb.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bd.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BangladeshFlagProps = Omit<FlagProps, \"code\">\n\nexport function BangladeshFlag({ alt = \"Bangladesh flag\", ...props }: BangladeshFlagProps) {\n  return <Flag code=\"bd\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bd.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/be.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BelgiumFlagProps = Omit<FlagProps, \"code\">\n\nexport function BelgiumFlag({ alt = \"Belgium flag\", ...props }: BelgiumFlagProps) {\n  return <Flag code=\"be\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/be.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BurkinaFasoFlagProps = Omit<FlagProps, \"code\">\n\nexport function BurkinaFasoFlag({ alt = \"Burkina Faso flag\", ...props }: BurkinaFasoFlagProps) {\n  return <Flag code=\"bf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bf.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BulgariaFlagProps = Omit<FlagProps, \"code\">\n\nexport function BulgariaFlag({ alt = \"Bulgaria flag\", ...props }: BulgariaFlagProps) {\n  return <Flag code=\"bg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bg.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BahrainFlagProps = Omit<FlagProps, \"code\">\n\nexport function BahrainFlag({ alt = \"Bahrain flag\", ...props }: BahrainFlagProps) {\n  return <Flag code=\"bh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bh.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BurundiFlagProps = Omit<FlagProps, \"code\">\n\nexport function BurundiFlag({ alt = \"Burundi flag\", ...props }: BurundiFlagProps) {\n  return <Flag code=\"bi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bi.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bj.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BeninFlagProps = Omit<FlagProps, \"code\">\n\nexport function BeninFlag({ alt = \"Benin flag\", ...props }: BeninFlagProps) {\n  return <Flag code=\"bj\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bj.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintBarthelemyFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintBarthelemyFlag({ alt = \"Saint Barthélemy flag\", ...props }: SaintBarthelemyFlagProps) {\n  return <Flag code=\"bl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bl.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BermudaFlagProps = Omit<FlagProps, \"code\">\n\nexport function BermudaFlag({ alt = \"Bermuda flag\", ...props }: BermudaFlagProps) {\n  return <Flag code=\"bm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BruneiFlagProps = Omit<FlagProps, \"code\">\n\nexport function BruneiFlag({ alt = \"Brunei flag\", ...props }: BruneiFlagProps) {\n  return <Flag code=\"bn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bo.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BoliviaFlagProps = Omit<FlagProps, \"code\">\n\nexport function BoliviaFlag({ alt = \"Bolivia flag\", ...props }: BoliviaFlagProps) {\n  return <Flag code=\"bo\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bo.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bq.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CaribbeanNetherlandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function CaribbeanNetherlandsFlag({ alt = \"Caribbean Netherlands flag\", ...props }: CaribbeanNetherlandsFlagProps) {\n  return <Flag code=\"bq\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bq.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/br.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BrazilFlagProps = Omit<FlagProps, \"code\">\n\nexport function BrazilFlag({ alt = \"Brazil flag\", ...props }: BrazilFlagProps) {\n  return <Flag code=\"br\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/br.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bs.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BahamasFlagProps = Omit<FlagProps, \"code\">\n\nexport function BahamasFlag({ alt = \"Bahamas flag\", ...props }: BahamasFlagProps) {\n  return <Flag code=\"bs\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bs.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BhutanFlagProps = Omit<FlagProps, \"code\">\n\nexport function BhutanFlag({ alt = \"Bhutan flag\", ...props }: BhutanFlagProps) {\n  return <Flag code=\"bt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bt.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BouvetIslandFlagProps = Omit<FlagProps, \"code\">\n\nexport function BouvetIslandFlag({ alt = \"Bouvet Island flag\", ...props }: BouvetIslandFlagProps) {\n  return <Flag code=\"bv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bv.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BotswanaFlagProps = Omit<FlagProps, \"code\">\n\nexport function BotswanaFlag({ alt = \"Botswana flag\", ...props }: BotswanaFlagProps) {\n  return <Flag code=\"bw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bw.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/by.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BelarusFlagProps = Omit<FlagProps, \"code\">\n\nexport function BelarusFlag({ alt = \"Belarus flag\", ...props }: BelarusFlagProps) {\n  return <Flag code=\"by\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/by.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/bz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BelizeFlagProps = Omit<FlagProps, \"code\">\n\nexport function BelizeFlag({ alt = \"Belize flag\", ...props }: BelizeFlagProps) {\n  return <Flag code=\"bz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bz.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ca.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CanadaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CanadaFlag({ alt = \"Canada flag\", ...props }: CanadaFlagProps) {\n  return <Flag code=\"ca\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ca.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CocosKeelingIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function CocosKeelingIslandsFlag({ alt = \"Cocos (Keeling) Islands flag\", ...props }: CocosKeelingIslandsFlagProps) {\n  return <Flag code=\"cc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cc.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cd.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type DrCongoFlagProps = Omit<FlagProps, \"code\">\n\nexport function DrCongoFlag({ alt = \"DR Congo flag\", ...props }: DrCongoFlagProps) {\n  return <Flag code=\"cd\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cd.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CentralAfricanRepublicFlagProps = Omit<FlagProps, \"code\">\n\nexport function CentralAfricanRepublicFlag({ alt = \"Central African Republic flag\", ...props }: CentralAfricanRepublicFlagProps) {\n  return <Flag code=\"cf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cf.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type RepublicOfTheCongoFlagProps = Omit<FlagProps, \"code\">\n\nexport function RepublicOfTheCongoFlag({ alt = \"Republic of the Congo flag\", ...props }: RepublicOfTheCongoFlagProps) {\n  return <Flag code=\"cg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cg.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ch.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SwitzerlandFlagProps = Omit<FlagProps, \"code\">\n\nexport function SwitzerlandFlag({ alt = \"Switzerland flag\", ...props }: SwitzerlandFlagProps) {\n  return <Flag code=\"ch\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ch.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ci.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CoteDIvoireIvoryCoastFlagProps = Omit<FlagProps, \"code\">\n\nexport function CoteDIvoireIvoryCoastFlag({ alt = \"Côte d'Ivoire (Ivory Coast) flag\", ...props }: CoteDIvoireIvoryCoastFlagProps) {\n  return <Flag code=\"ci\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ci.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ck.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CookIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function CookIslandsFlag({ alt = \"Cook Islands flag\", ...props }: CookIslandsFlagProps) {\n  return <Flag code=\"ck\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ck.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ChileFlagProps = Omit<FlagProps, \"code\">\n\nexport function ChileFlag({ alt = \"Chile flag\", ...props }: ChileFlagProps) {\n  return <Flag code=\"cl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cl.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CameroonFlagProps = Omit<FlagProps, \"code\">\n\nexport function CameroonFlag({ alt = \"Cameroon flag\", ...props }: CameroonFlagProps) {\n  return <Flag code=\"cm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ChinaFlagProps = Omit<FlagProps, \"code\">\n\nexport function ChinaFlag({ alt = \"China flag\", ...props }: ChinaFlagProps) {\n  return <Flag code=\"cn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/co.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ColombiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function ColombiaFlag({ alt = \"Colombia flag\", ...props }: ColombiaFlagProps) {\n  return <Flag code=\"co\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/co.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CostaRicaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CostaRicaFlag({ alt = \"Costa Rica flag\", ...props }: CostaRicaFlagProps) {\n  return <Flag code=\"cr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CubaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CubaFlag({ alt = \"Cuba flag\", ...props }: CubaFlagProps) {\n  return <Flag code=\"cu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cu.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CapeVerdeFlagProps = Omit<FlagProps, \"code\">\n\nexport function CapeVerdeFlag({ alt = \"Cape Verde flag\", ...props }: CapeVerdeFlagProps) {\n  return <Flag code=\"cv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cv.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CuracaoFlagProps = Omit<FlagProps, \"code\">\n\nexport function CuracaoFlag({ alt = \"Curaçao flag\", ...props }: CuracaoFlagProps) {\n  return <Flag code=\"cw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cw.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cx.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ChristmasIslandFlagProps = Omit<FlagProps, \"code\">\n\nexport function ChristmasIslandFlag({ alt = \"Christmas Island flag\", ...props }: ChristmasIslandFlagProps) {\n  return <Flag code=\"cx\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cx.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cy.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CyprusFlagProps = Omit<FlagProps, \"code\">\n\nexport function CyprusFlag({ alt = \"Cyprus flag\", ...props }: CyprusFlagProps) {\n  return <Flag code=\"cy\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cy.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/cz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CzechiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CzechiaFlag({ alt = \"Czechia flag\", ...props }: CzechiaFlagProps) {\n  return <Flag code=\"cz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cz.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/de.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GermanyFlagProps = Omit<FlagProps, \"code\">\n\nexport function GermanyFlag({ alt = \"Germany flag\", ...props }: GermanyFlagProps) {\n  return <Flag code=\"de\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/de.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/dj.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type DjiboutiFlagProps = Omit<FlagProps, \"code\">\n\nexport function DjiboutiFlag({ alt = \"Djibouti flag\", ...props }: DjiboutiFlagProps) {\n  return <Flag code=\"dj\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/dj.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/dk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type DenmarkFlagProps = Omit<FlagProps, \"code\">\n\nexport function DenmarkFlag({ alt = \"Denmark flag\", ...props }: DenmarkFlagProps) {\n  return <Flag code=\"dk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/dk.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/dm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type DominicaFlagProps = Omit<FlagProps, \"code\">\n\nexport function DominicaFlag({ alt = \"Dominica flag\", ...props }: DominicaFlagProps) {\n  return <Flag code=\"dm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/dm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/do.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type DominicanRepublicFlagProps = Omit<FlagProps, \"code\">\n\nexport function DominicanRepublicFlag({ alt = \"Dominican Republic flag\", ...props }: DominicanRepublicFlagProps) {\n  return <Flag code=\"do\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/do.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/dz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AlgeriaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AlgeriaFlag({ alt = \"Algeria flag\", ...props }: AlgeriaFlagProps) {\n  return <Flag code=\"dz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/dz.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ec.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EcuadorFlagProps = Omit<FlagProps, \"code\">\n\nexport function EcuadorFlag({ alt = \"Ecuador flag\", ...props }: EcuadorFlagProps) {\n  return <Flag code=\"ec\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ec.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ee.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EstoniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function EstoniaFlag({ alt = \"Estonia flag\", ...props }: EstoniaFlagProps) {\n  return <Flag code=\"ee\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ee.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/eg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EgyptFlagProps = Omit<FlagProps, \"code\">\n\nexport function EgyptFlag({ alt = \"Egypt flag\", ...props }: EgyptFlagProps) {\n  return <Flag code=\"eg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/eg.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/eh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type WesternSaharaFlagProps = Omit<FlagProps, \"code\">\n\nexport function WesternSaharaFlag({ alt = \"Western Sahara flag\", ...props }: WesternSaharaFlagProps) {\n  return <Flag code=\"eh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/eh.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/er.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EritreaFlagProps = Omit<FlagProps, \"code\">\n\nexport function EritreaFlag({ alt = \"Eritrea flag\", ...props }: EritreaFlagProps) {\n  return <Flag code=\"er\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/er.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/es.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SpainFlagProps = Omit<FlagProps, \"code\">\n\nexport function SpainFlag({ alt = \"Spain flag\", ...props }: SpainFlagProps) {\n  return <Flag code=\"es\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/es.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/et.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EthiopiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function EthiopiaFlag({ alt = \"Ethiopia flag\", ...props }: EthiopiaFlagProps) {\n  return <Flag code=\"et\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/et.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/eu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EuropeanUnionFlagProps = Omit<FlagProps, \"code\">\n\nexport function EuropeanUnionFlag({ alt = \"European Union flag\", ...props }: EuropeanUnionFlagProps) {\n  return <Flag code=\"eu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/eu.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/fi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FinlandFlagProps = Omit<FlagProps, \"code\">\n\nexport function FinlandFlag({ alt = \"Finland flag\", ...props }: FinlandFlagProps) {\n  return <Flag code=\"fi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fi.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/fj.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FijiFlagProps = Omit<FlagProps, \"code\">\n\nexport function FijiFlag({ alt = \"Fiji flag\", ...props }: FijiFlagProps) {\n  return <Flag code=\"fj\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fj.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/fk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FalklandIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function FalklandIslandsFlag({ alt = \"Falkland Islands flag\", ...props }: FalklandIslandsFlagProps) {\n  return <Flag code=\"fk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fk.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/fm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MicronesiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MicronesiaFlag({ alt = \"Micronesia flag\", ...props }: MicronesiaFlagProps) {\n  return <Flag code=\"fm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/fo.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FaroeIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function FaroeIslandsFlag({ alt = \"Faroe Islands flag\", ...props }: FaroeIslandsFlagProps) {\n  return <Flag code=\"fo\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fo.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/fr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FranceFlagProps = Omit<FlagProps, \"code\">\n\nexport function FranceFlag({ alt = \"France flag\", ...props }: FranceFlagProps) {\n  return <Flag code=\"fr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ga.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GabonFlagProps = Omit<FlagProps, \"code\">\n\nexport function GabonFlag({ alt = \"Gabon flag\", ...props }: GabonFlagProps) {\n  return <Flag code=\"ga\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ga.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gb.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UnitedKingdomFlagProps = Omit<FlagProps, \"code\">\n\nexport function UnitedKingdomFlag({ alt = \"United Kingdom flag\", ...props }: UnitedKingdomFlagProps) {\n  return <Flag code=\"gb\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gb.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gb-eng.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EnglandFlagProps = Omit<FlagProps, \"code\">\n\nexport function EnglandFlag({ alt = \"England flag\", ...props }: EnglandFlagProps) {\n  return <Flag code=\"gb-eng\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gb-eng.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gb-nir.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorthernIrelandFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorthernIrelandFlag({ alt = \"Northern Ireland flag\", ...props }: NorthernIrelandFlagProps) {\n  return <Flag code=\"gb-nir\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gb-nir.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gb-sct.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ScotlandFlagProps = Omit<FlagProps, \"code\">\n\nexport function ScotlandFlag({ alt = \"Scotland flag\", ...props }: ScotlandFlagProps) {\n  return <Flag code=\"gb-sct\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gb-sct.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gb-wls.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type WalesFlagProps = Omit<FlagProps, \"code\">\n\nexport function WalesFlag({ alt = \"Wales flag\", ...props }: WalesFlagProps) {\n  return <Flag code=\"gb-wls\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gb-wls.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gd.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GrenadaFlagProps = Omit<FlagProps, \"code\">\n\nexport function GrenadaFlag({ alt = \"Grenada flag\", ...props }: GrenadaFlagProps) {\n  return <Flag code=\"gd\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gd.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ge.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GeorgiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function GeorgiaFlag({ alt = \"Georgia flag\", ...props }: GeorgiaFlagProps) {\n  return <Flag code=\"ge\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ge.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FrenchGuianaFlagProps = Omit<FlagProps, \"code\">\n\nexport function FrenchGuianaFlag({ alt = \"French Guiana flag\", ...props }: FrenchGuianaFlagProps) {\n  return <Flag code=\"gf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gf.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GuernseyFlagProps = Omit<FlagProps, \"code\">\n\nexport function GuernseyFlag({ alt = \"Guernsey flag\", ...props }: GuernseyFlagProps) {\n  return <Flag code=\"gg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gg.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GhanaFlagProps = Omit<FlagProps, \"code\">\n\nexport function GhanaFlag({ alt = \"Ghana flag\", ...props }: GhanaFlagProps) {\n  return <Flag code=\"gh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gh.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GibraltarFlagProps = Omit<FlagProps, \"code\">\n\nexport function GibraltarFlag({ alt = \"Gibraltar flag\", ...props }: GibraltarFlagProps) {\n  return <Flag code=\"gi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gi.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GreenlandFlagProps = Omit<FlagProps, \"code\">\n\nexport function GreenlandFlag({ alt = \"Greenland flag\", ...props }: GreenlandFlagProps) {\n  return <Flag code=\"gl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gl.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GambiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function GambiaFlag({ alt = \"Gambia flag\", ...props }: GambiaFlagProps) {\n  return <Flag code=\"gm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GuineaFlagProps = Omit<FlagProps, \"code\">\n\nexport function GuineaFlag({ alt = \"Guinea flag\", ...props }: GuineaFlagProps) {\n  return <Flag code=\"gn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gp.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GuadeloupeFlagProps = Omit<FlagProps, \"code\">\n\nexport function GuadeloupeFlag({ alt = \"Guadeloupe flag\", ...props }: GuadeloupeFlagProps) {\n  return <Flag code=\"gp\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gp.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gq.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EquatorialGuineaFlagProps = Omit<FlagProps, \"code\">\n\nexport function EquatorialGuineaFlag({ alt = \"Equatorial Guinea flag\", ...props }: EquatorialGuineaFlagProps) {\n  return <Flag code=\"gq\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gq.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GreeceFlagProps = Omit<FlagProps, \"code\">\n\nexport function GreeceFlag({ alt = \"Greece flag\", ...props }: GreeceFlagProps) {\n  return <Flag code=\"gr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gs.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SouthGeorgiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SouthGeorgiaFlag({ alt = \"South Georgia flag\", ...props }: SouthGeorgiaFlagProps) {\n  return <Flag code=\"gs\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gs.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GuatemalaFlagProps = Omit<FlagProps, \"code\">\n\nexport function GuatemalaFlag({ alt = \"Guatemala flag\", ...props }: GuatemalaFlagProps) {\n  return <Flag code=\"gt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gt.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GuamFlagProps = Omit<FlagProps, \"code\">\n\nexport function GuamFlag({ alt = \"Guam flag\", ...props }: GuamFlagProps) {\n  return <Flag code=\"gu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gu.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GuineaBissauFlagProps = Omit<FlagProps, \"code\">\n\nexport function GuineaBissauFlag({ alt = \"Guinea-Bissau flag\", ...props }: GuineaBissauFlagProps) {\n  return <Flag code=\"gw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gw.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/gy.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GuyanaFlagProps = Omit<FlagProps, \"code\">\n\nexport function GuyanaFlag({ alt = \"Guyana flag\", ...props }: GuyanaFlagProps) {\n  return <Flag code=\"gy\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gy.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/hk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type HongKongFlagProps = Omit<FlagProps, \"code\">\n\nexport function HongKongFlag({ alt = \"Hong Kong flag\", ...props }: HongKongFlagProps) {\n  return <Flag code=\"hk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/hk.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/hm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type HeardIslandAndMcdonaldIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function HeardIslandAndMcdonaldIslandsFlag({ alt = \"Heard Island and McDonald Islands flag\", ...props }: HeardIslandAndMcdonaldIslandsFlagProps) {\n  return <Flag code=\"hm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/hm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/hn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type HondurasFlagProps = Omit<FlagProps, \"code\">\n\nexport function HondurasFlag({ alt = \"Honduras flag\", ...props }: HondurasFlagProps) {\n  return <Flag code=\"hn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/hn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/hr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CroatiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CroatiaFlag({ alt = \"Croatia flag\", ...props }: CroatiaFlagProps) {\n  return <Flag code=\"hr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/hr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ht.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type HaitiFlagProps = Omit<FlagProps, \"code\">\n\nexport function HaitiFlag({ alt = \"Haiti flag\", ...props }: HaitiFlagProps) {\n  return <Flag code=\"ht\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ht.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/hu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type HungaryFlagProps = Omit<FlagProps, \"code\">\n\nexport function HungaryFlag({ alt = \"Hungary flag\", ...props }: HungaryFlagProps) {\n  return <Flag code=\"hu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/hu.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/id.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IndonesiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function IndonesiaFlag({ alt = \"Indonesia flag\", ...props }: IndonesiaFlagProps) {\n  return <Flag code=\"id\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/id.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ie.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IrelandFlagProps = Omit<FlagProps, \"code\">\n\nexport function IrelandFlag({ alt = \"Ireland flag\", ...props }: IrelandFlagProps) {\n  return <Flag code=\"ie\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ie.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/il.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IsraelFlagProps = Omit<FlagProps, \"code\">\n\nexport function IsraelFlag({ alt = \"Israel flag\", ...props }: IsraelFlagProps) {\n  return <Flag code=\"il\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/il.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/im.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IsleOfManFlagProps = Omit<FlagProps, \"code\">\n\nexport function IsleOfManFlag({ alt = \"Isle of Man flag\", ...props }: IsleOfManFlagProps) {\n  return <Flag code=\"im\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/im.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/in.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IndiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function IndiaFlag({ alt = \"India flag\", ...props }: IndiaFlagProps) {\n  return <Flag code=\"in\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/in.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/io.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BritishIndianOceanTerritoryFlagProps = Omit<FlagProps, \"code\">\n\nexport function BritishIndianOceanTerritoryFlag({ alt = \"British Indian Ocean Territory flag\", ...props }: BritishIndianOceanTerritoryFlagProps) {\n  return <Flag code=\"io\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/io.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/iq.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IraqFlagProps = Omit<FlagProps, \"code\">\n\nexport function IraqFlag({ alt = \"Iraq flag\", ...props }: IraqFlagProps) {\n  return <Flag code=\"iq\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/iq.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ir.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IranFlagProps = Omit<FlagProps, \"code\">\n\nexport function IranFlag({ alt = \"Iran flag\", ...props }: IranFlagProps) {\n  return <Flag code=\"ir\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ir.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/is.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IcelandFlagProps = Omit<FlagProps, \"code\">\n\nexport function IcelandFlag({ alt = \"Iceland flag\", ...props }: IcelandFlagProps) {\n  return <Flag code=\"is\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/is.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/it.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ItalyFlagProps = Omit<FlagProps, \"code\">\n\nexport function ItalyFlag({ alt = \"Italy flag\", ...props }: ItalyFlagProps) {\n  return <Flag code=\"it\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/it.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/je.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type JerseyFlagProps = Omit<FlagProps, \"code\">\n\nexport function JerseyFlag({ alt = \"Jersey flag\", ...props }: JerseyFlagProps) {\n  return <Flag code=\"je\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/je.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/jm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type JamaicaFlagProps = Omit<FlagProps, \"code\">\n\nexport function JamaicaFlag({ alt = \"Jamaica flag\", ...props }: JamaicaFlagProps) {\n  return <Flag code=\"jm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/jm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/jo.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type JordanFlagProps = Omit<FlagProps, \"code\">\n\nexport function JordanFlag({ alt = \"Jordan flag\", ...props }: JordanFlagProps) {\n  return <Flag code=\"jo\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/jo.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/jp.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type JapanFlagProps = Omit<FlagProps, \"code\">\n\nexport function JapanFlag({ alt = \"Japan flag\", ...props }: JapanFlagProps) {\n  return <Flag code=\"jp\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/jp.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ke.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type KenyaFlagProps = Omit<FlagProps, \"code\">\n\nexport function KenyaFlag({ alt = \"Kenya flag\", ...props }: KenyaFlagProps) {\n  return <Flag code=\"ke\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ke.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/kg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type KyrgyzstanFlagProps = Omit<FlagProps, \"code\">\n\nexport function KyrgyzstanFlag({ alt = \"Kyrgyzstan flag\", ...props }: KyrgyzstanFlagProps) {\n  return <Flag code=\"kg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kg.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/kh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CambodiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CambodiaFlag({ alt = \"Cambodia flag\", ...props }: CambodiaFlagProps) {\n  return <Flag code=\"kh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kh.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ki.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type KiribatiFlagProps = Omit<FlagProps, \"code\">\n\nexport function KiribatiFlag({ alt = \"Kiribati flag\", ...props }: KiribatiFlagProps) {\n  return <Flag code=\"ki\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ki.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/km.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ComorosFlagProps = Omit<FlagProps, \"code\">\n\nexport function ComorosFlag({ alt = \"Comoros flag\", ...props }: ComorosFlagProps) {\n  return <Flag code=\"km\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/km.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/kn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintKittsAndNevisFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintKittsAndNevisFlag({ alt = \"Saint Kitts and Nevis flag\", ...props }: SaintKittsAndNevisFlagProps) {\n  return <Flag code=\"kn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/kp.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorthKoreaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorthKoreaFlag({ alt = \"North Korea flag\", ...props }: NorthKoreaFlagProps) {\n  return <Flag code=\"kp\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kp.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/kr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SouthKoreaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SouthKoreaFlag({ alt = \"South Korea flag\", ...props }: SouthKoreaFlagProps) {\n  return <Flag code=\"kr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/kw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type KuwaitFlagProps = Omit<FlagProps, \"code\">\n\nexport function KuwaitFlag({ alt = \"Kuwait flag\", ...props }: KuwaitFlagProps) {\n  return <Flag code=\"kw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kw.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ky.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CaymanIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function CaymanIslandsFlag({ alt = \"Cayman Islands flag\", ...props }: CaymanIslandsFlagProps) {\n  return <Flag code=\"ky\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ky.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/kz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type KazakhstanFlagProps = Omit<FlagProps, \"code\">\n\nexport function KazakhstanFlag({ alt = \"Kazakhstan flag\", ...props }: KazakhstanFlagProps) {\n  return <Flag code=\"kz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kz.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/la.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LaosFlagProps = Omit<FlagProps, \"code\">\n\nexport function LaosFlag({ alt = \"Laos flag\", ...props }: LaosFlagProps) {\n  return <Flag code=\"la\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/la.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/lb.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LebanonFlagProps = Omit<FlagProps, \"code\">\n\nexport function LebanonFlag({ alt = \"Lebanon flag\", ...props }: LebanonFlagProps) {\n  return <Flag code=\"lb\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/lb.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/lc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintLuciaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintLuciaFlag({ alt = \"Saint Lucia flag\", ...props }: SaintLuciaFlagProps) {\n  return <Flag code=\"lc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/lc.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/li.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LiechtensteinFlagProps = Omit<FlagProps, \"code\">\n\nexport function LiechtensteinFlag({ alt = \"Liechtenstein flag\", ...props }: LiechtensteinFlagProps) {\n  return <Flag code=\"li\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/li.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/lk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SriLankaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SriLankaFlag({ alt = \"Sri Lanka flag\", ...props }: SriLankaFlagProps) {\n  return <Flag code=\"lk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/lk.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/lr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LiberiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function LiberiaFlag({ alt = \"Liberia flag\", ...props }: LiberiaFlagProps) {\n  return <Flag code=\"lr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/lr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ls.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LesothoFlagProps = Omit<FlagProps, \"code\">\n\nexport function LesothoFlag({ alt = \"Lesotho flag\", ...props }: LesothoFlagProps) {\n  return <Flag code=\"ls\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ls.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/lt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LithuaniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function LithuaniaFlag({ alt = \"Lithuania flag\", ...props }: LithuaniaFlagProps) {\n  return <Flag code=\"lt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/lt.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/lu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LuxembourgFlagProps = Omit<FlagProps, \"code\">\n\nexport function LuxembourgFlag({ alt = \"Luxembourg flag\", ...props }: LuxembourgFlagProps) {\n  return <Flag code=\"lu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/lu.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/lv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LatviaFlagProps = Omit<FlagProps, \"code\">\n\nexport function LatviaFlag({ alt = \"Latvia flag\", ...props }: LatviaFlagProps) {\n  return <Flag code=\"lv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/lv.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ly.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LibyaFlagProps = Omit<FlagProps, \"code\">\n\nexport function LibyaFlag({ alt = \"Libya flag\", ...props }: LibyaFlagProps) {\n  return <Flag code=\"ly\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ly.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ma.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MoroccoFlagProps = Omit<FlagProps, \"code\">\n\nexport function MoroccoFlag({ alt = \"Morocco flag\", ...props }: MoroccoFlagProps) {\n  return <Flag code=\"ma\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ma.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MonacoFlagProps = Omit<FlagProps, \"code\">\n\nexport function MonacoFlag({ alt = \"Monaco flag\", ...props }: MonacoFlagProps) {\n  return <Flag code=\"mc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mc.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/md.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MoldovaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MoldovaFlag({ alt = \"Moldova flag\", ...props }: MoldovaFlagProps) {\n  return <Flag code=\"md\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/md.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/me.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MontenegroFlagProps = Omit<FlagProps, \"code\">\n\nexport function MontenegroFlag({ alt = \"Montenegro flag\", ...props }: MontenegroFlagProps) {\n  return <Flag code=\"me\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/me.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintMartinFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintMartinFlag({ alt = \"Saint Martin flag\", ...props }: SaintMartinFlagProps) {\n  return <Flag code=\"mf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mf.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MadagascarFlagProps = Omit<FlagProps, \"code\">\n\nexport function MadagascarFlag({ alt = \"Madagascar flag\", ...props }: MadagascarFlagProps) {\n  return <Flag code=\"mg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mg.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MarshallIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function MarshallIslandsFlag({ alt = \"Marshall Islands flag\", ...props }: MarshallIslandsFlagProps) {\n  return <Flag code=\"mh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mh.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorthMacedoniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorthMacedoniaFlag({ alt = \"North Macedonia flag\", ...props }: NorthMacedoniaFlagProps) {\n  return <Flag code=\"mk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mk.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ml.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MaliFlagProps = Omit<FlagProps, \"code\">\n\nexport function MaliFlag({ alt = \"Mali flag\", ...props }: MaliFlagProps) {\n  return <Flag code=\"ml\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ml.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MyanmarFlagProps = Omit<FlagProps, \"code\">\n\nexport function MyanmarFlag({ alt = \"Myanmar flag\", ...props }: MyanmarFlagProps) {\n  return <Flag code=\"mm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MongoliaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MongoliaFlag({ alt = \"Mongolia flag\", ...props }: MongoliaFlagProps) {\n  return <Flag code=\"mn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mo.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MacauFlagProps = Omit<FlagProps, \"code\">\n\nexport function MacauFlag({ alt = \"Macau flag\", ...props }: MacauFlagProps) {\n  return <Flag code=\"mo\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mo.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mp.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorthernMarianaIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorthernMarianaIslandsFlag({ alt = \"Northern Mariana Islands flag\", ...props }: NorthernMarianaIslandsFlagProps) {\n  return <Flag code=\"mp\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mp.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mq.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MartiniqueFlagProps = Omit<FlagProps, \"code\">\n\nexport function MartiniqueFlag({ alt = \"Martinique flag\", ...props }: MartiniqueFlagProps) {\n  return <Flag code=\"mq\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mq.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MauritaniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MauritaniaFlag({ alt = \"Mauritania flag\", ...props }: MauritaniaFlagProps) {\n  return <Flag code=\"mr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ms.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MontserratFlagProps = Omit<FlagProps, \"code\">\n\nexport function MontserratFlag({ alt = \"Montserrat flag\", ...props }: MontserratFlagProps) {\n  return <Flag code=\"ms\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ms.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MaltaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MaltaFlag({ alt = \"Malta flag\", ...props }: MaltaFlagProps) {\n  return <Flag code=\"mt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mt.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MauritiusFlagProps = Omit<FlagProps, \"code\">\n\nexport function MauritiusFlag({ alt = \"Mauritius flag\", ...props }: MauritiusFlagProps) {\n  return <Flag code=\"mu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mu.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MaldivesFlagProps = Omit<FlagProps, \"code\">\n\nexport function MaldivesFlag({ alt = \"Maldives flag\", ...props }: MaldivesFlagProps) {\n  return <Flag code=\"mv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mv.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MalawiFlagProps = Omit<FlagProps, \"code\">\n\nexport function MalawiFlag({ alt = \"Malawi flag\", ...props }: MalawiFlagProps) {\n  return <Flag code=\"mw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mw.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mx.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MexicoFlagProps = Omit<FlagProps, \"code\">\n\nexport function MexicoFlag({ alt = \"Mexico flag\", ...props }: MexicoFlagProps) {\n  return <Flag code=\"mx\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mx.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/my.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MalaysiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MalaysiaFlag({ alt = \"Malaysia flag\", ...props }: MalaysiaFlagProps) {\n  return <Flag code=\"my\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/my.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/mz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MozambiqueFlagProps = Omit<FlagProps, \"code\">\n\nexport function MozambiqueFlag({ alt = \"Mozambique flag\", ...props }: MozambiqueFlagProps) {\n  return <Flag code=\"mz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mz.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/na.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NamibiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NamibiaFlag({ alt = \"Namibia flag\", ...props }: NamibiaFlagProps) {\n  return <Flag code=\"na\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/na.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/nc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NewCaledoniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NewCaledoniaFlag({ alt = \"New Caledonia flag\", ...props }: NewCaledoniaFlagProps) {\n  return <Flag code=\"nc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/nc.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ne.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NigerFlagProps = Omit<FlagProps, \"code\">\n\nexport function NigerFlag({ alt = \"Niger flag\", ...props }: NigerFlagProps) {\n  return <Flag code=\"ne\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ne.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/nf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorfolkIslandFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorfolkIslandFlag({ alt = \"Norfolk Island flag\", ...props }: NorfolkIslandFlagProps) {\n  return <Flag code=\"nf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/nf.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ng.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NigeriaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NigeriaFlag({ alt = \"Nigeria flag\", ...props }: NigeriaFlagProps) {\n  return <Flag code=\"ng\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ng.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ni.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NicaraguaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NicaraguaFlag({ alt = \"Nicaragua flag\", ...props }: NicaraguaFlagProps) {\n  return <Flag code=\"ni\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ni.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/nl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NetherlandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function NetherlandsFlag({ alt = \"Netherlands flag\", ...props }: NetherlandsFlagProps) {\n  return <Flag code=\"nl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/nl.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/no.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorwayFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorwayFlag({ alt = \"Norway flag\", ...props }: NorwayFlagProps) {\n  return <Flag code=\"no\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/no.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/np.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NepalFlagProps = Omit<FlagProps, \"code\">\n\nexport function NepalFlag({ alt = \"Nepal flag\", ...props }: NepalFlagProps) {\n  return <Flag code=\"np\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/np.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/nr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NauruFlagProps = Omit<FlagProps, \"code\">\n\nexport function NauruFlag({ alt = \"Nauru flag\", ...props }: NauruFlagProps) {\n  return <Flag code=\"nr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/nr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/nu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NiueFlagProps = Omit<FlagProps, \"code\">\n\nexport function NiueFlag({ alt = \"Niue flag\", ...props }: NiueFlagProps) {\n  return <Flag code=\"nu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/nu.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/nz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NewZealandFlagProps = Omit<FlagProps, \"code\">\n\nexport function NewZealandFlag({ alt = \"New Zealand flag\", ...props }: NewZealandFlagProps) {\n  return <Flag code=\"nz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/nz.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/om.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type OmanFlagProps = Omit<FlagProps, \"code\">\n\nexport function OmanFlag({ alt = \"Oman flag\", ...props }: OmanFlagProps) {\n  return <Flag code=\"om\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/om.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pa.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PanamaFlagProps = Omit<FlagProps, \"code\">\n\nexport function PanamaFlag({ alt = \"Panama flag\", ...props }: PanamaFlagProps) {\n  return <Flag code=\"pa\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pa.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pe.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PeruFlagProps = Omit<FlagProps, \"code\">\n\nexport function PeruFlag({ alt = \"Peru flag\", ...props }: PeruFlagProps) {\n  return <Flag code=\"pe\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pe.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FrenchPolynesiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function FrenchPolynesiaFlag({ alt = \"French Polynesia flag\", ...props }: FrenchPolynesiaFlagProps) {\n  return <Flag code=\"pf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pf.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PapuaNewGuineaFlagProps = Omit<FlagProps, \"code\">\n\nexport function PapuaNewGuineaFlag({ alt = \"Papua New Guinea flag\", ...props }: PapuaNewGuineaFlagProps) {\n  return <Flag code=\"pg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pg.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ph.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PhilippinesFlagProps = Omit<FlagProps, \"code\">\n\nexport function PhilippinesFlag({ alt = \"Philippines flag\", ...props }: PhilippinesFlagProps) {\n  return <Flag code=\"ph\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ph.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PakistanFlagProps = Omit<FlagProps, \"code\">\n\nexport function PakistanFlag({ alt = \"Pakistan flag\", ...props }: PakistanFlagProps) {\n  return <Flag code=\"pk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pk.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PolandFlagProps = Omit<FlagProps, \"code\">\n\nexport function PolandFlag({ alt = \"Poland flag\", ...props }: PolandFlagProps) {\n  return <Flag code=\"pl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pl.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintPierreAndMiquelonFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintPierreAndMiquelonFlag({ alt = \"Saint Pierre and Miquelon flag\", ...props }: SaintPierreAndMiquelonFlagProps) {\n  return <Flag code=\"pm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PitcairnIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function PitcairnIslandsFlag({ alt = \"Pitcairn Islands flag\", ...props }: PitcairnIslandsFlagProps) {\n  return <Flag code=\"pn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PuertoRicoFlagProps = Omit<FlagProps, \"code\">\n\nexport function PuertoRicoFlag({ alt = \"Puerto Rico flag\", ...props }: PuertoRicoFlagProps) {\n  return <Flag code=\"pr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ps.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PalestineFlagProps = Omit<FlagProps, \"code\">\n\nexport function PalestineFlag({ alt = \"Palestine flag\", ...props }: PalestineFlagProps) {\n  return <Flag code=\"ps\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ps.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PortugalFlagProps = Omit<FlagProps, \"code\">\n\nexport function PortugalFlag({ alt = \"Portugal flag\", ...props }: PortugalFlagProps) {\n  return <Flag code=\"pt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pt.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/pw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PalauFlagProps = Omit<FlagProps, \"code\">\n\nexport function PalauFlag({ alt = \"Palau flag\", ...props }: PalauFlagProps) {\n  return <Flag code=\"pw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pw.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/py.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ParaguayFlagProps = Omit<FlagProps, \"code\">\n\nexport function ParaguayFlag({ alt = \"Paraguay flag\", ...props }: ParaguayFlagProps) {\n  return <Flag code=\"py\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/py.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/qa.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type QatarFlagProps = Omit<FlagProps, \"code\">\n\nexport function QatarFlag({ alt = \"Qatar flag\", ...props }: QatarFlagProps) {\n  return <Flag code=\"qa\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/qa.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/re.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ReunionFlagProps = Omit<FlagProps, \"code\">\n\nexport function ReunionFlag({ alt = \"Réunion flag\", ...props }: ReunionFlagProps) {\n  return <Flag code=\"re\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/re.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ro.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type RomaniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function RomaniaFlag({ alt = \"Romania flag\", ...props }: RomaniaFlagProps) {\n  return <Flag code=\"ro\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ro.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/rs.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SerbiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SerbiaFlag({ alt = \"Serbia flag\", ...props }: SerbiaFlagProps) {\n  return <Flag code=\"rs\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/rs.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ru.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type RussiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function RussiaFlag({ alt = \"Russia flag\", ...props }: RussiaFlagProps) {\n  return <Flag code=\"ru\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ru.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/rw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type RwandaFlagProps = Omit<FlagProps, \"code\">\n\nexport function RwandaFlag({ alt = \"Rwanda flag\", ...props }: RwandaFlagProps) {\n  return <Flag code=\"rw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/rw.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sa.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaudiArabiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaudiArabiaFlag({ alt = \"Saudi Arabia flag\", ...props }: SaudiArabiaFlagProps) {\n  return <Flag code=\"sa\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sa.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sb.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SolomonIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function SolomonIslandsFlag({ alt = \"Solomon Islands flag\", ...props }: SolomonIslandsFlagProps) {\n  return <Flag code=\"sb\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sb.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SeychellesFlagProps = Omit<FlagProps, \"code\">\n\nexport function SeychellesFlag({ alt = \"Seychelles flag\", ...props }: SeychellesFlagProps) {\n  return <Flag code=\"sc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sc.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sd.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SudanFlagProps = Omit<FlagProps, \"code\">\n\nexport function SudanFlag({ alt = \"Sudan flag\", ...props }: SudanFlagProps) {\n  return <Flag code=\"sd\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sd.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/se.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SwedenFlagProps = Omit<FlagProps, \"code\">\n\nexport function SwedenFlag({ alt = \"Sweden flag\", ...props }: SwedenFlagProps) {\n  return <Flag code=\"se\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/se.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SingaporeFlagProps = Omit<FlagProps, \"code\">\n\nexport function SingaporeFlag({ alt = \"Singapore flag\", ...props }: SingaporeFlagProps) {\n  return <Flag code=\"sg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sg.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintHelenaAscensionAndTristanDaCunhaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintHelenaAscensionAndTristanDaCunhaFlag({ alt = \"Saint Helena, Ascension and Tristan da Cunha flag\", ...props }: SaintHelenaAscensionAndTristanDaCunhaFlagProps) {\n  return <Flag code=\"sh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sh.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/si.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SloveniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SloveniaFlag({ alt = \"Slovenia flag\", ...props }: SloveniaFlagProps) {\n  return <Flag code=\"si\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/si.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sj.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SvalbardAndJanMayenFlagProps = Omit<FlagProps, \"code\">\n\nexport function SvalbardAndJanMayenFlag({ alt = \"Svalbard and Jan Mayen flag\", ...props }: SvalbardAndJanMayenFlagProps) {\n  return <Flag code=\"sj\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sj.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SlovakiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SlovakiaFlag({ alt = \"Slovakia flag\", ...props }: SlovakiaFlagProps) {\n  return <Flag code=\"sk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sk.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SierraLeoneFlagProps = Omit<FlagProps, \"code\">\n\nexport function SierraLeoneFlag({ alt = \"Sierra Leone flag\", ...props }: SierraLeoneFlagProps) {\n  return <Flag code=\"sl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sl.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SanMarinoFlagProps = Omit<FlagProps, \"code\">\n\nexport function SanMarinoFlag({ alt = \"San Marino flag\", ...props }: SanMarinoFlagProps) {\n  return <Flag code=\"sm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SenegalFlagProps = Omit<FlagProps, \"code\">\n\nexport function SenegalFlag({ alt = \"Senegal flag\", ...props }: SenegalFlagProps) {\n  return <Flag code=\"sn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/so.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SomaliaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SomaliaFlag({ alt = \"Somalia flag\", ...props }: SomaliaFlagProps) {\n  return <Flag code=\"so\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/so.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SurinameFlagProps = Omit<FlagProps, \"code\">\n\nexport function SurinameFlag({ alt = \"Suriname flag\", ...props }: SurinameFlagProps) {\n  return <Flag code=\"sr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ss.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SouthSudanFlagProps = Omit<FlagProps, \"code\">\n\nexport function SouthSudanFlag({ alt = \"South Sudan flag\", ...props }: SouthSudanFlagProps) {\n  return <Flag code=\"ss\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ss.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/st.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaoTomeAndPrincipeFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaoTomeAndPrincipeFlag({ alt = \"São Tomé and Príncipe flag\", ...props }: SaoTomeAndPrincipeFlagProps) {\n  return <Flag code=\"st\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/st.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ElSalvadorFlagProps = Omit<FlagProps, \"code\">\n\nexport function ElSalvadorFlag({ alt = \"El Salvador flag\", ...props }: ElSalvadorFlagProps) {\n  return <Flag code=\"sv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sv.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sx.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SintMaartenFlagProps = Omit<FlagProps, \"code\">\n\nexport function SintMaartenFlag({ alt = \"Sint Maarten flag\", ...props }: SintMaartenFlagProps) {\n  return <Flag code=\"sx\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sx.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sy.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SyriaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SyriaFlag({ alt = \"Syria flag\", ...props }: SyriaFlagProps) {\n  return <Flag code=\"sy\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sy.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/sz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EswatiniSwazilandFlagProps = Omit<FlagProps, \"code\">\n\nexport function EswatiniSwazilandFlag({ alt = \"Eswatini (Swaziland) flag\", ...props }: EswatiniSwazilandFlagProps) {\n  return <Flag code=\"sz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sz.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TurksAndCaicosIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function TurksAndCaicosIslandsFlag({ alt = \"Turks and Caicos Islands flag\", ...props }: TurksAndCaicosIslandsFlagProps) {\n  return <Flag code=\"tc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tc.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/td.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ChadFlagProps = Omit<FlagProps, \"code\">\n\nexport function ChadFlag({ alt = \"Chad flag\", ...props }: ChadFlagProps) {\n  return <Flag code=\"td\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/td.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FrenchSouthernAndAntarcticLandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function FrenchSouthernAndAntarcticLandsFlag({ alt = \"French Southern and Antarctic Lands flag\", ...props }: FrenchSouthernAndAntarcticLandsFlagProps) {\n  return <Flag code=\"tf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tf.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TogoFlagProps = Omit<FlagProps, \"code\">\n\nexport function TogoFlag({ alt = \"Togo flag\", ...props }: TogoFlagProps) {\n  return <Flag code=\"tg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tg.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/th.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ThailandFlagProps = Omit<FlagProps, \"code\">\n\nexport function ThailandFlag({ alt = \"Thailand flag\", ...props }: ThailandFlagProps) {\n  return <Flag code=\"th\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/th.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tj.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TajikistanFlagProps = Omit<FlagProps, \"code\">\n\nexport function TajikistanFlag({ alt = \"Tajikistan flag\", ...props }: TajikistanFlagProps) {\n  return <Flag code=\"tj\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tj.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TokelauFlagProps = Omit<FlagProps, \"code\">\n\nexport function TokelauFlag({ alt = \"Tokelau flag\", ...props }: TokelauFlagProps) {\n  return <Flag code=\"tk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tk.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TimorLesteFlagProps = Omit<FlagProps, \"code\">\n\nexport function TimorLesteFlag({ alt = \"Timor-Leste flag\", ...props }: TimorLesteFlagProps) {\n  return <Flag code=\"tl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tl.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TurkmenistanFlagProps = Omit<FlagProps, \"code\">\n\nexport function TurkmenistanFlag({ alt = \"Turkmenistan flag\", ...props }: TurkmenistanFlagProps) {\n  return <Flag code=\"tm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TunisiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function TunisiaFlag({ alt = \"Tunisia flag\", ...props }: TunisiaFlagProps) {\n  return <Flag code=\"tn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/to.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TongaFlagProps = Omit<FlagProps, \"code\">\n\nexport function TongaFlag({ alt = \"Tonga flag\", ...props }: TongaFlagProps) {\n  return <Flag code=\"to\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/to.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TurkeyFlagProps = Omit<FlagProps, \"code\">\n\nexport function TurkeyFlag({ alt = \"Turkey flag\", ...props }: TurkeyFlagProps) {\n  return <Flag code=\"tr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tr.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TrinidadAndTobagoFlagProps = Omit<FlagProps, \"code\">\n\nexport function TrinidadAndTobagoFlag({ alt = \"Trinidad and Tobago flag\", ...props }: TrinidadAndTobagoFlagProps) {\n  return <Flag code=\"tt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tt.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TuvaluFlagProps = Omit<FlagProps, \"code\">\n\nexport function TuvaluFlag({ alt = \"Tuvalu flag\", ...props }: TuvaluFlagProps) {\n  return <Flag code=\"tv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tv.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TaiwanFlagProps = Omit<FlagProps, \"code\">\n\nexport function TaiwanFlag({ alt = \"Taiwan flag\", ...props }: TaiwanFlagProps) {\n  return <Flag code=\"tw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tw.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/tz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TanzaniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function TanzaniaFlag({ alt = \"Tanzania flag\", ...props }: TanzaniaFlagProps) {\n  return <Flag code=\"tz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tz.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ua.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UkraineFlagProps = Omit<FlagProps, \"code\">\n\nexport function UkraineFlag({ alt = \"Ukraine flag\", ...props }: UkraineFlagProps) {\n  return <Flag code=\"ua\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ua.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ug.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UgandaFlagProps = Omit<FlagProps, \"code\">\n\nexport function UgandaFlag({ alt = \"Uganda flag\", ...props }: UgandaFlagProps) {\n  return <Flag code=\"ug\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ug.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/um.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UnitedStatesMinorOutlyingIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function UnitedStatesMinorOutlyingIslandsFlag({ alt = \"United States Minor Outlying Islands flag\", ...props }: UnitedStatesMinorOutlyingIslandsFlagProps) {\n  return <Flag code=\"um\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/um.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/un.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UnitedNationsFlagProps = Omit<FlagProps, \"code\">\n\nexport function UnitedNationsFlag({ alt = \"United Nations flag\", ...props }: UnitedNationsFlagProps) {\n  return <Flag code=\"un\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/un.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UnitedStatesFlagProps = Omit<FlagProps, \"code\">\n\nexport function UnitedStatesFlag({ alt = \"United States flag\", ...props }: UnitedStatesFlagProps) {\n  return <Flag code=\"us\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ak.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AlaskaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AlaskaFlag({ alt = \"Alaska flag\", ...props }: AlaskaFlagProps) {\n  return <Flag code=\"us-ak\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ak.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-al.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AlabamaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AlabamaFlag({ alt = \"Alabama flag\", ...props }: AlabamaFlagProps) {\n  return <Flag code=\"us-al\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-al.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ar.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ArkansasFlagProps = Omit<FlagProps, \"code\">\n\nexport function ArkansasFlag({ alt = \"Arkansas flag\", ...props }: ArkansasFlagProps) {\n  return <Flag code=\"us-ar\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ar.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-az.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ArizonaFlagProps = Omit<FlagProps, \"code\">\n\nexport function ArizonaFlag({ alt = \"Arizona flag\", ...props }: ArizonaFlagProps) {\n  return <Flag code=\"us-az\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-az.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ca.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CaliforniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CaliforniaFlag({ alt = \"California flag\", ...props }: CaliforniaFlagProps) {\n  return <Flag code=\"us-ca\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ca.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-co.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ColoradoFlagProps = Omit<FlagProps, \"code\">\n\nexport function ColoradoFlag({ alt = \"Colorado flag\", ...props }: ColoradoFlagProps) {\n  return <Flag code=\"us-co\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-co.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ct.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ConnecticutFlagProps = Omit<FlagProps, \"code\">\n\nexport function ConnecticutFlag({ alt = \"Connecticut flag\", ...props }: ConnecticutFlagProps) {\n  return <Flag code=\"us-ct\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ct.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-de.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type DelawareFlagProps = Omit<FlagProps, \"code\">\n\nexport function DelawareFlag({ alt = \"Delaware flag\", ...props }: DelawareFlagProps) {\n  return <Flag code=\"us-de\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-de.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-fl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FloridaFlagProps = Omit<FlagProps, \"code\">\n\nexport function FloridaFlag({ alt = \"Florida flag\", ...props }: FloridaFlagProps) {\n  return <Flag code=\"us-fl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-fl.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ga.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GeorgiaUsStateFlagProps = Omit<FlagProps, \"code\">\n\nexport function GeorgiaUsStateFlag({ alt = \"Georgia flag\", ...props }: GeorgiaUsStateFlagProps) {\n  return <Flag code=\"us-ga\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ga.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-hi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type HawaiiFlagProps = Omit<FlagProps, \"code\">\n\nexport function HawaiiFlag({ alt = \"Hawaii flag\", ...props }: HawaiiFlagProps) {\n  return <Flag code=\"us-hi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-hi.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ia.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IowaFlagProps = Omit<FlagProps, \"code\">\n\nexport function IowaFlag({ alt = \"Iowa flag\", ...props }: IowaFlagProps) {\n  return <Flag code=\"us-ia\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ia.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-id.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IdahoFlagProps = Omit<FlagProps, \"code\">\n\nexport function IdahoFlag({ alt = \"Idaho flag\", ...props }: IdahoFlagProps) {\n  return <Flag code=\"us-id\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-id.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-il.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IllinoisFlagProps = Omit<FlagProps, \"code\">\n\nexport function IllinoisFlag({ alt = \"Illinois flag\", ...props }: IllinoisFlagProps) {\n  return <Flag code=\"us-il\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-il.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-in.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IndianaFlagProps = Omit<FlagProps, \"code\">\n\nexport function IndianaFlag({ alt = \"Indiana flag\", ...props }: IndianaFlagProps) {\n  return <Flag code=\"us-in\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-in.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ks.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type KansasFlagProps = Omit<FlagProps, \"code\">\n\nexport function KansasFlag({ alt = \"Kansas flag\", ...props }: KansasFlagProps) {\n  return <Flag code=\"us-ks\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ks.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ky.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type KentuckyFlagProps = Omit<FlagProps, \"code\">\n\nexport function KentuckyFlag({ alt = \"Kentucky flag\", ...props }: KentuckyFlagProps) {\n  return <Flag code=\"us-ky\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ky.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-la.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LouisianaFlagProps = Omit<FlagProps, \"code\">\n\nexport function LouisianaFlag({ alt = \"Louisiana flag\", ...props }: LouisianaFlagProps) {\n  return <Flag code=\"us-la\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-la.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ma.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MassachusettsFlagProps = Omit<FlagProps, \"code\">\n\nexport function MassachusettsFlag({ alt = \"Massachusetts flag\", ...props }: MassachusettsFlagProps) {\n  return <Flag code=\"us-ma\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ma.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-md.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MarylandFlagProps = Omit<FlagProps, \"code\">\n\nexport function MarylandFlag({ alt = \"Maryland flag\", ...props }: MarylandFlagProps) {\n  return <Flag code=\"us-md\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-md.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-me.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MaineFlagProps = Omit<FlagProps, \"code\">\n\nexport function MaineFlag({ alt = \"Maine flag\", ...props }: MaineFlagProps) {\n  return <Flag code=\"us-me\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-me.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-mi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MichiganFlagProps = Omit<FlagProps, \"code\">\n\nexport function MichiganFlag({ alt = \"Michigan flag\", ...props }: MichiganFlagProps) {\n  return <Flag code=\"us-mi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-mi.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-mn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MinnesotaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MinnesotaFlag({ alt = \"Minnesota flag\", ...props }: MinnesotaFlagProps) {\n  return <Flag code=\"us-mn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-mn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-mo.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MissouriFlagProps = Omit<FlagProps, \"code\">\n\nexport function MissouriFlag({ alt = \"Missouri flag\", ...props }: MissouriFlagProps) {\n  return <Flag code=\"us-mo\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-mo.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ms.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MississippiFlagProps = Omit<FlagProps, \"code\">\n\nexport function MississippiFlag({ alt = \"Mississippi flag\", ...props }: MississippiFlagProps) {\n  return <Flag code=\"us-ms\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ms.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-mt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MontanaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MontanaFlag({ alt = \"Montana flag\", ...props }: MontanaFlagProps) {\n  return <Flag code=\"us-mt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-mt.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-nc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorthCarolinaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorthCarolinaFlag({ alt = \"North Carolina flag\", ...props }: NorthCarolinaFlagProps) {\n  return <Flag code=\"us-nc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-nc.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-nd.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorthDakotaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorthDakotaFlag({ alt = \"North Dakota flag\", ...props }: NorthDakotaFlagProps) {\n  return <Flag code=\"us-nd\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-nd.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ne.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NebraskaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NebraskaFlag({ alt = \"Nebraska flag\", ...props }: NebraskaFlagProps) {\n  return <Flag code=\"us-ne\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ne.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-nh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NewHampshireFlagProps = Omit<FlagProps, \"code\">\n\nexport function NewHampshireFlag({ alt = \"New Hampshire flag\", ...props }: NewHampshireFlagProps) {\n  return <Flag code=\"us-nh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-nh.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-nj.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NewJerseyFlagProps = Omit<FlagProps, \"code\">\n\nexport function NewJerseyFlag({ alt = \"New Jersey flag\", ...props }: NewJerseyFlagProps) {\n  return <Flag code=\"us-nj\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-nj.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-nm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NewMexicoFlagProps = Omit<FlagProps, \"code\">\n\nexport function NewMexicoFlag({ alt = \"New Mexico flag\", ...props }: NewMexicoFlagProps) {\n  return <Flag code=\"us-nm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-nm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-nv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NevadaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NevadaFlag({ alt = \"Nevada flag\", ...props }: NevadaFlagProps) {\n  return <Flag code=\"us-nv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-nv.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ny.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NewYorkFlagProps = Omit<FlagProps, \"code\">\n\nexport function NewYorkFlag({ alt = \"New York flag\", ...props }: NewYorkFlagProps) {\n  return <Flag code=\"us-ny\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ny.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-oh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type OhioFlagProps = Omit<FlagProps, \"code\">\n\nexport function OhioFlag({ alt = \"Ohio flag\", ...props }: OhioFlagProps) {\n  return <Flag code=\"us-oh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-oh.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ok.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type OklahomaFlagProps = Omit<FlagProps, \"code\">\n\nexport function OklahomaFlag({ alt = \"Oklahoma flag\", ...props }: OklahomaFlagProps) {\n  return <Flag code=\"us-ok\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ok.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-or.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type OregonFlagProps = Omit<FlagProps, \"code\">\n\nexport function OregonFlag({ alt = \"Oregon flag\", ...props }: OregonFlagProps) {\n  return <Flag code=\"us-or\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-or.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-pa.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PennsylvaniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function PennsylvaniaFlag({ alt = \"Pennsylvania flag\", ...props }: PennsylvaniaFlagProps) {\n  return <Flag code=\"us-pa\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-pa.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ri.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type RhodeIslandFlagProps = Omit<FlagProps, \"code\">\n\nexport function RhodeIslandFlag({ alt = \"Rhode Island flag\", ...props }: RhodeIslandFlagProps) {\n  return <Flag code=\"us-ri\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ri.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-sc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SouthCarolinaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SouthCarolinaFlag({ alt = \"South Carolina flag\", ...props }: SouthCarolinaFlagProps) {\n  return <Flag code=\"us-sc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-sc.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-sd.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SouthDakotaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SouthDakotaFlag({ alt = \"South Dakota flag\", ...props }: SouthDakotaFlagProps) {\n  return <Flag code=\"us-sd\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-sd.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-tn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TennesseeFlagProps = Omit<FlagProps, \"code\">\n\nexport function TennesseeFlag({ alt = \"Tennessee flag\", ...props }: TennesseeFlagProps) {\n  return <Flag code=\"us-tn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-tn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-tx.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TexasFlagProps = Omit<FlagProps, \"code\">\n\nexport function TexasFlag({ alt = \"Texas flag\", ...props }: TexasFlagProps) {\n  return <Flag code=\"us-tx\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-tx.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-ut.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UtahFlagProps = Omit<FlagProps, \"code\">\n\nexport function UtahFlag({ alt = \"Utah flag\", ...props }: UtahFlagProps) {\n  return <Flag code=\"us-ut\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ut.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-va.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type VirginiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function VirginiaFlag({ alt = \"Virginia flag\", ...props }: VirginiaFlagProps) {\n  return <Flag code=\"us-va\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-va.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-vt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type VermontFlagProps = Omit<FlagProps, \"code\">\n\nexport function VermontFlag({ alt = \"Vermont flag\", ...props }: VermontFlagProps) {\n  return <Flag code=\"us-vt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-vt.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-wa.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type WashingtonFlagProps = Omit<FlagProps, \"code\">\n\nexport function WashingtonFlag({ alt = \"Washington flag\", ...props }: WashingtonFlagProps) {\n  return <Flag code=\"us-wa\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-wa.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-wi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type WisconsinFlagProps = Omit<FlagProps, \"code\">\n\nexport function WisconsinFlag({ alt = \"Wisconsin flag\", ...props }: WisconsinFlagProps) {\n  return <Flag code=\"us-wi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-wi.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-wv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type WestVirginiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function WestVirginiaFlag({ alt = \"West Virginia flag\", ...props }: WestVirginiaFlagProps) {\n  return <Flag code=\"us-wv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-wv.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/us-wy.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type WyomingFlagProps = Omit<FlagProps, \"code\">\n\nexport function WyomingFlag({ alt = \"Wyoming flag\", ...props }: WyomingFlagProps) {\n  return <Flag code=\"us-wy\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-wy.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/uy.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UruguayFlagProps = Omit<FlagProps, \"code\">\n\nexport function UruguayFlag({ alt = \"Uruguay flag\", ...props }: UruguayFlagProps) {\n  return <Flag code=\"uy\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/uy.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/uz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UzbekistanFlagProps = Omit<FlagProps, \"code\">\n\nexport function UzbekistanFlag({ alt = \"Uzbekistan flag\", ...props }: UzbekistanFlagProps) {\n  return <Flag code=\"uz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/uz.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/va.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type VaticanCityHolySeeFlagProps = Omit<FlagProps, \"code\">\n\nexport function VaticanCityHolySeeFlag({ alt = \"Vatican City (Holy See) flag\", ...props }: VaticanCityHolySeeFlagProps) {\n  return <Flag code=\"va\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/va.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/vc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintVincentAndTheGrenadinesFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintVincentAndTheGrenadinesFlag({ alt = \"Saint Vincent and the Grenadines flag\", ...props }: SaintVincentAndTheGrenadinesFlagProps) {\n  return <Flag code=\"vc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/vc.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ve.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type VenezuelaFlagProps = Omit<FlagProps, \"code\">\n\nexport function VenezuelaFlag({ alt = \"Venezuela flag\", ...props }: VenezuelaFlagProps) {\n  return <Flag code=\"ve\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ve.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/vg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BritishVirginIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function BritishVirginIslandsFlag({ alt = \"British Virgin Islands flag\", ...props }: BritishVirginIslandsFlagProps) {\n  return <Flag code=\"vg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/vg.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/vi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UnitedStatesVirginIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function UnitedStatesVirginIslandsFlag({ alt = \"United States Virgin Islands flag\", ...props }: UnitedStatesVirginIslandsFlagProps) {\n  return <Flag code=\"vi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/vi.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/vn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type VietnamFlagProps = Omit<FlagProps, \"code\">\n\nexport function VietnamFlag({ alt = \"Vietnam flag\", ...props }: VietnamFlagProps) {\n  return <Flag code=\"vn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/vn.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/vu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type VanuatuFlagProps = Omit<FlagProps, \"code\">\n\nexport function VanuatuFlag({ alt = \"Vanuatu flag\", ...props }: VanuatuFlagProps) {\n  return <Flag code=\"vu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/vu.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/wf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type WallisAndFutunaFlagProps = Omit<FlagProps, \"code\">\n\nexport function WallisAndFutunaFlag({ alt = \"Wallis and Futuna flag\", ...props }: WallisAndFutunaFlagProps) {\n  return <Flag code=\"wf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/wf.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ws.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SamoaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SamoaFlag({ alt = \"Samoa flag\", ...props }: SamoaFlagProps) {\n  return <Flag code=\"ws\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ws.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/xk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type KosovoFlagProps = Omit<FlagProps, \"code\">\n\nexport function KosovoFlag({ alt = \"Kosovo flag\", ...props }: KosovoFlagProps) {\n  return <Flag code=\"xk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/xk.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/ye.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type YemenFlagProps = Omit<FlagProps, \"code\">\n\nexport function YemenFlag({ alt = \"Yemen flag\", ...props }: YemenFlagProps) {\n  return <Flag code=\"ye\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ye.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/yt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MayotteFlagProps = Omit<FlagProps, \"code\">\n\nexport function MayotteFlag({ alt = \"Mayotte flag\", ...props }: MayotteFlagProps) {\n  return <Flag code=\"yt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/yt.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/za.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SouthAfricaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SouthAfricaFlag({ alt = \"South Africa flag\", ...props }: SouthAfricaFlagProps) {\n  return <Flag code=\"za\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/za.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/zm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ZambiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function ZambiaFlag({ alt = \"Zambia flag\", ...props }: ZambiaFlagProps) {\n  return <Flag code=\"zm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/zm.tsx"
+    },
+    {
+      "path": "src/components/flags/countries/zw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ZimbabweFlagProps = Omit<FlagProps, \"code\">\n\nexport function ZimbabweFlag({ alt = \"Zimbabwe flag\", ...props }: ZimbabweFlagProps) {\n  return <Flag code=\"zw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/zw.tsx"
+    }
+  ],
+  "meta": {
+    "count": 306,
+    "includesAllFlags": true,
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Installs every flag wrapper. Import the core API from @/components/flags or named flags from @/components/flags/countries.",
+  "categories": [
+    "flags",
+    "images",
+    "forms",
+    "internationalization"
+  ],
+  "type": "registry:block"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gi",
+  "title": "Gibraltar Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Gibraltar flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/gi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GibraltarFlagProps = Omit<FlagProps, \"code\">\n\nexport function GibraltarFlag({ alt = \"Gibraltar flag\", ...props }: GibraltarFlagProps) {\n  return <Flag code=\"gi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gi.tsx"
+    }
+  ],
+  "meta": {
+    "code": "gi",
+    "country": "Gibraltar",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import GibraltarFlag from @/components/flags/countries/gi.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

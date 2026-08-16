@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bt",
+  "title": "Bhutan Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Bhutan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/bt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BhutanFlagProps = Omit<FlagProps, \"code\">\n\nexport function BhutanFlag({ alt = \"Bhutan flag\", ...props }: BhutanFlagProps) {\n  return <Flag code=\"bt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bt.tsx"
+    }
+  ],
+  "meta": {
+    "code": "bt",
+    "country": "Bhutan",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BhutanFlag from @/components/flags/countries/bt.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

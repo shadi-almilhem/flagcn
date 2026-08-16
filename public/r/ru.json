@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ru",
+  "title": "Russia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Russia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ru.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type RussiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function RussiaFlag({ alt = \"Russia flag\", ...props }: RussiaFlagProps) {\n  return <Flag code=\"ru\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ru.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ru",
+    "country": "Russia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import RussiaFlag from @/components/flags/countries/ru.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

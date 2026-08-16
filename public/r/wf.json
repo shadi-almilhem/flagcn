@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "wf",
+  "title": "Wallis and Futuna Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Wallis and Futuna flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/wf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type WallisAndFutunaFlagProps = Omit<FlagProps, \"code\">\n\nexport function WallisAndFutunaFlag({ alt = \"Wallis and Futuna flag\", ...props }: WallisAndFutunaFlagProps) {\n  return <Flag code=\"wf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/wf.tsx"
+    }
+  ],
+  "meta": {
+    "code": "wf",
+    "country": "Wallis and Futuna",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import WallisAndFutunaFlag from @/components/flags/countries/wf.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

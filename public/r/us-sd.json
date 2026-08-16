@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-sd",
+  "title": "South Dakota Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed South Dakota flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-sd.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SouthDakotaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SouthDakotaFlag({ alt = \"South Dakota flag\", ...props }: SouthDakotaFlagProps) {\n  return <Flag code=\"us-sd\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-sd.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-sd",
+    "country": "South Dakota",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SouthDakotaFlag from @/components/flags/countries/us-sd.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "um",
+  "title": "United States Minor Outlying Islands Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed United States Minor Outlying Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/um.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UnitedStatesMinorOutlyingIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function UnitedStatesMinorOutlyingIslandsFlag({ alt = \"United States Minor Outlying Islands flag\", ...props }: UnitedStatesMinorOutlyingIslandsFlagProps) {\n  return <Flag code=\"um\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/um.tsx"
+    }
+  ],
+  "meta": {
+    "code": "um",
+    "country": "United States Minor Outlying Islands",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import UnitedStatesMinorOutlyingIslandsFlag from @/components/flags/countries/um.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

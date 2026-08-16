@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bw",
+  "title": "Botswana Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Botswana flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/bw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BotswanaFlagProps = Omit<FlagProps, \"code\">\n\nexport function BotswanaFlag({ alt = \"Botswana flag\", ...props }: BotswanaFlagProps) {\n  return <Flag code=\"bw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bw.tsx"
+    }
+  ],
+  "meta": {
+    "code": "bw",
+    "country": "Botswana",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BotswanaFlag from @/components/flags/countries/bw.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

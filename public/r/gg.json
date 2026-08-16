@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gg",
+  "title": "Guernsey Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Guernsey flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/gg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GuernseyFlagProps = Omit<FlagProps, \"code\">\n\nexport function GuernseyFlag({ alt = \"Guernsey flag\", ...props }: GuernseyFlagProps) {\n  return <Flag code=\"gg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gg.tsx"
+    }
+  ],
+  "meta": {
+    "code": "gg",
+    "country": "Guernsey",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import GuernseyFlag from @/components/flags/countries/gg.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

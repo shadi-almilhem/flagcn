@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ng",
+  "title": "Nigeria Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Nigeria flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ng.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NigeriaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NigeriaFlag({ alt = \"Nigeria flag\", ...props }: NigeriaFlagProps) {\n  return <Flag code=\"ng\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ng.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ng",
+    "country": "Nigeria",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NigeriaFlag from @/components/flags/countries/ng.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

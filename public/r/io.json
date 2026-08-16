@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "io",
+  "title": "British Indian Ocean Territory Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed British Indian Ocean Territory flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/io.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BritishIndianOceanTerritoryFlagProps = Omit<FlagProps, \"code\">\n\nexport function BritishIndianOceanTerritoryFlag({ alt = \"British Indian Ocean Territory flag\", ...props }: BritishIndianOceanTerritoryFlagProps) {\n  return <Flag code=\"io\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/io.tsx"
+    }
+  ],
+  "meta": {
+    "code": "io",
+    "country": "British Indian Ocean Territory",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BritishIndianOceanTerritoryFlag from @/components/flags/countries/io.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

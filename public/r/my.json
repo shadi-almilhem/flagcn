@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "my",
+  "title": "Malaysia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Malaysia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/my.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MalaysiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MalaysiaFlag({ alt = \"Malaysia flag\", ...props }: MalaysiaFlagProps) {\n  return <Flag code=\"my\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/my.tsx"
+    }
+  ],
+  "meta": {
+    "code": "my",
+    "country": "Malaysia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MalaysiaFlag from @/components/flags/countries/my.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

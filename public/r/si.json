@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "si",
+  "title": "Slovenia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Slovenia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/si.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SloveniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SloveniaFlag({ alt = \"Slovenia flag\", ...props }: SloveniaFlagProps) {\n  return <Flag code=\"si\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/si.tsx"
+    }
+  ],
+  "meta": {
+    "code": "si",
+    "country": "Slovenia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SloveniaFlag from @/components/flags/countries/si.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

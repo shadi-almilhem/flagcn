@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cy",
+  "title": "Cyprus Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Cyprus flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/cy.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CyprusFlagProps = Omit<FlagProps, \"code\">\n\nexport function CyprusFlag({ alt = \"Cyprus flag\", ...props }: CyprusFlagProps) {\n  return <Flag code=\"cy\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cy.tsx"
+    }
+  ],
+  "meta": {
+    "code": "cy",
+    "country": "Cyprus",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import CyprusFlag from @/components/flags/countries/cy.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

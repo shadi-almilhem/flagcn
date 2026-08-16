@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tk",
+  "title": "Tokelau Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Tokelau flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/tk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TokelauFlagProps = Omit<FlagProps, \"code\">\n\nexport function TokelauFlag({ alt = \"Tokelau flag\", ...props }: TokelauFlagProps) {\n  return <Flag code=\"tk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tk.tsx"
+    }
+  ],
+  "meta": {
+    "code": "tk",
+    "country": "Tokelau",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import TokelauFlag from @/components/flags/countries/tk.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

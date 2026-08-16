@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ua",
+  "title": "Ukraine Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Ukraine flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ua.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UkraineFlagProps = Omit<FlagProps, \"code\">\n\nexport function UkraineFlag({ alt = \"Ukraine flag\", ...props }: UkraineFlagProps) {\n  return <Flag code=\"ua\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ua.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ua",
+    "country": "Ukraine",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import UkraineFlag from @/components/flags/countries/ua.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

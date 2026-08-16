@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "rw",
+  "title": "Rwanda Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Rwanda flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/rw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type RwandaFlagProps = Omit<FlagProps, \"code\">\n\nexport function RwandaFlag({ alt = \"Rwanda flag\", ...props }: RwandaFlagProps) {\n  return <Flag code=\"rw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/rw.tsx"
+    }
+  ],
+  "meta": {
+    "code": "rw",
+    "country": "Rwanda",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import RwandaFlag from @/components/flags/countries/rw.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

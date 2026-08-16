@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dj",
+  "title": "Djibouti Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Djibouti flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/dj.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type DjiboutiFlagProps = Omit<FlagProps, \"code\">\n\nexport function DjiboutiFlag({ alt = \"Djibouti flag\", ...props }: DjiboutiFlagProps) {\n  return <Flag code=\"dj\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/dj.tsx"
+    }
+  ],
+  "meta": {
+    "code": "dj",
+    "country": "Djibouti",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import DjiboutiFlag from @/components/flags/countries/dj.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

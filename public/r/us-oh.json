@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-oh",
+  "title": "Ohio Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Ohio flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-oh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type OhioFlagProps = Omit<FlagProps, \"code\">\n\nexport function OhioFlag({ alt = \"Ohio flag\", ...props }: OhioFlagProps) {\n  return <Flag code=\"us-oh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-oh.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-oh",
+    "country": "Ohio",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import OhioFlag from @/components/flags/countries/us-oh.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

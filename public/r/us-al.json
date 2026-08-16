@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-al",
+  "title": "Alabama Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Alabama flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-al.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AlabamaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AlabamaFlag({ alt = \"Alabama flag\", ...props }: AlabamaFlagProps) {\n  return <Flag code=\"us-al\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-al.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-al",
+    "country": "Alabama",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import AlabamaFlag from @/components/flags/countries/us-al.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

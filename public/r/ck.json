@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ck",
+  "title": "Cook Islands Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Cook Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ck.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CookIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function CookIslandsFlag({ alt = \"Cook Islands flag\", ...props }: CookIslandsFlagProps) {\n  return <Flag code=\"ck\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ck.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ck",
+    "country": "Cook Islands",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import CookIslandsFlag from @/components/flags/countries/ck.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

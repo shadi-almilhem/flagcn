@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "be",
+  "title": "Belgium Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Belgium flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/be.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BelgiumFlagProps = Omit<FlagProps, \"code\">\n\nexport function BelgiumFlag({ alt = \"Belgium flag\", ...props }: BelgiumFlagProps) {\n  return <Flag code=\"be\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/be.tsx"
+    }
+  ],
+  "meta": {
+    "code": "be",
+    "country": "Belgium",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BelgiumFlag from @/components/flags/countries/be.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

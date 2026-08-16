@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sl",
+  "title": "Sierra Leone Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Sierra Leone flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SierraLeoneFlagProps = Omit<FlagProps, \"code\">\n\nexport function SierraLeoneFlag({ alt = \"Sierra Leone flag\", ...props }: SierraLeoneFlagProps) {\n  return <Flag code=\"sl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sl.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sl",
+    "country": "Sierra Leone",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SierraLeoneFlag from @/components/flags/countries/sl.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

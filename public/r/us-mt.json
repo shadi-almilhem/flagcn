@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-mt",
+  "title": "Montana Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Montana flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-mt.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MontanaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MontanaFlag({ alt = \"Montana flag\", ...props }: MontanaFlagProps) {\n  return <Flag code=\"us-mt\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-mt.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-mt",
+    "country": "Montana",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MontanaFlag from @/components/flags/countries/us-mt.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pl",
+  "title": "Poland Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Poland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/pl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PolandFlagProps = Omit<FlagProps, \"code\">\n\nexport function PolandFlag({ alt = \"Poland flag\", ...props }: PolandFlagProps) {\n  return <Flag code=\"pl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pl.tsx"
+    }
+  ],
+  "meta": {
+    "code": "pl",
+    "country": "Poland",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import PolandFlag from @/components/flags/countries/pl.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

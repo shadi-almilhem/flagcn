@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-fl",
+  "title": "Florida Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Florida flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-fl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FloridaFlagProps = Omit<FlagProps, \"code\">\n\nexport function FloridaFlag({ alt = \"Florida flag\", ...props }: FloridaFlagProps) {\n  return <Flag code=\"us-fl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-fl.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-fl",
+    "country": "Florida",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import FloridaFlag from @/components/flags/countries/us-fl.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

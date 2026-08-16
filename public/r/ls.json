@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ls",
+  "title": "Lesotho Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Lesotho flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ls.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LesothoFlagProps = Omit<FlagProps, \"code\">\n\nexport function LesothoFlag({ alt = \"Lesotho flag\", ...props }: LesothoFlagProps) {\n  return <Flag code=\"ls\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ls.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ls",
+    "country": "Lesotho",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import LesothoFlag from @/components/flags/countries/ls.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tg",
+  "title": "Togo Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Togo flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/tg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TogoFlagProps = Omit<FlagProps, \"code\">\n\nexport function TogoFlag({ alt = \"Togo flag\", ...props }: TogoFlagProps) {\n  return <Flag code=\"tg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tg.tsx"
+    }
+  ],
+  "meta": {
+    "code": "tg",
+    "country": "Togo",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import TogoFlag from @/components/flags/countries/tg.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

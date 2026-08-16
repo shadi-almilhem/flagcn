@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "zm",
+  "title": "Zambia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Zambia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/zm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ZambiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function ZambiaFlag({ alt = \"Zambia flag\", ...props }: ZambiaFlagProps) {\n  return <Flag code=\"zm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/zm.tsx"
+    }
+  ],
+  "meta": {
+    "code": "zm",
+    "country": "Zambia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import ZambiaFlag from @/components/flags/countries/zm.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

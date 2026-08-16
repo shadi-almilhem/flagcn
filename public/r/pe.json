@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pe",
+  "title": "Peru Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Peru flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/pe.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type PeruFlagProps = Omit<FlagProps, \"code\">\n\nexport function PeruFlag({ alt = \"Peru flag\", ...props }: PeruFlagProps) {\n  return <Flag code=\"pe\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/pe.tsx"
+    }
+  ],
+  "meta": {
+    "code": "pe",
+    "country": "Peru",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import PeruFlag from @/components/flags/countries/pe.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

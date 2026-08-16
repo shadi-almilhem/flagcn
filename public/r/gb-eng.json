@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gb-eng",
+  "title": "England Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed England flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/gb-eng.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EnglandFlagProps = Omit<FlagProps, \"code\">\n\nexport function EnglandFlag({ alt = \"England flag\", ...props }: EnglandFlagProps) {\n  return <Flag code=\"gb-eng\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gb-eng.tsx"
+    }
+  ],
+  "meta": {
+    "code": "gb-eng",
+    "country": "England",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import EnglandFlag from @/components/flags/countries/gb-eng.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

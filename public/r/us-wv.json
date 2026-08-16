@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-wv",
+  "title": "West Virginia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed West Virginia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-wv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type WestVirginiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function WestVirginiaFlag({ alt = \"West Virginia flag\", ...props }: WestVirginiaFlagProps) {\n  return <Flag code=\"us-wv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-wv.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-wv",
+    "country": "West Virginia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import WestVirginiaFlag from @/components/flags/countries/us-wv.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

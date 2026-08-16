@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aq",
+  "title": "Antarctica Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Antarctica flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/aq.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AntarcticaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AntarcticaFlag({ alt = \"Antarctica flag\", ...props }: AntarcticaFlagProps) {\n  return <Flag code=\"aq\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/aq.tsx"
+    }
+  ],
+  "meta": {
+    "code": "aq",
+    "country": "Antarctica",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import AntarcticaFlag from @/components/flags/countries/aq.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

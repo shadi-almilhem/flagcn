@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fj",
+  "title": "Fiji Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Fiji flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/fj.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FijiFlagProps = Omit<FlagProps, \"code\">\n\nexport function FijiFlag({ alt = \"Fiji flag\", ...props }: FijiFlagProps) {\n  return <Flag code=\"fj\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fj.tsx"
+    }
+  ],
+  "meta": {
+    "code": "fj",
+    "country": "Fiji",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import FijiFlag from @/components/flags/countries/fj.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

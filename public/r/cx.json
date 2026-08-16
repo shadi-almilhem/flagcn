@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cx",
+  "title": "Christmas Island Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Christmas Island flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/cx.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ChristmasIslandFlagProps = Omit<FlagProps, \"code\">\n\nexport function ChristmasIslandFlag({ alt = \"Christmas Island flag\", ...props }: ChristmasIslandFlagProps) {\n  return <Flag code=\"cx\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cx.tsx"
+    }
+  ],
+  "meta": {
+    "code": "cx",
+    "country": "Christmas Island",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import ChristmasIslandFlag from @/components/flags/countries/cx.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

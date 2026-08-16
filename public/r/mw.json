@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mw",
+  "title": "Malawi Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Malawi flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MalawiFlagProps = Omit<FlagProps, \"code\">\n\nexport function MalawiFlag({ alt = \"Malawi flag\", ...props }: MalawiFlagProps) {\n  return <Flag code=\"mw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mw.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mw",
+    "country": "Malawi",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MalawiFlag from @/components/flags/countries/mw.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

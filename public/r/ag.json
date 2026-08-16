@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ag",
+  "title": "Antigua and Barbuda Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Antigua and Barbuda flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ag.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AntiguaAndBarbudaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AntiguaAndBarbudaFlag({ alt = \"Antigua and Barbuda flag\", ...props }: AntiguaAndBarbudaFlagProps) {\n  return <Flag code=\"ag\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ag.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ag",
+    "country": "Antigua and Barbuda",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import AntiguaAndBarbudaFlag from @/components/flags/countries/ag.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

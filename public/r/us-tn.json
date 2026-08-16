@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-tn",
+  "title": "Tennessee Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Tennessee flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-tn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TennesseeFlagProps = Omit<FlagProps, \"code\">\n\nexport function TennesseeFlag({ alt = \"Tennessee flag\", ...props }: TennesseeFlagProps) {\n  return <Flag code=\"us-tn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-tn.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-tn",
+    "country": "Tennessee",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import TennesseeFlag from @/components/flags/countries/us-tn.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

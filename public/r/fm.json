@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fm",
+  "title": "Micronesia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Micronesia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/fm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MicronesiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MicronesiaFlag({ alt = \"Micronesia flag\", ...props }: MicronesiaFlagProps) {\n  return <Flag code=\"fm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fm.tsx"
+    }
+  ],
+  "meta": {
+    "code": "fm",
+    "country": "Micronesia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MicronesiaFlag from @/components/flags/countries/fm.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

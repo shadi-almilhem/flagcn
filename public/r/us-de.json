@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-de",
+  "title": "Delaware Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Delaware flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-de.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type DelawareFlagProps = Omit<FlagProps, \"code\">\n\nexport function DelawareFlag({ alt = \"Delaware flag\", ...props }: DelawareFlagProps) {\n  return <Flag code=\"us-de\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-de.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-de",
+    "country": "Delaware",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import DelawareFlag from @/components/flags/countries/us-de.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

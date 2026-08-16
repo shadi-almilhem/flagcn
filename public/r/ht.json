@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ht",
+  "title": "Haiti Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Haiti flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ht.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type HaitiFlagProps = Omit<FlagProps, \"code\">\n\nexport function HaitiFlag({ alt = \"Haiti flag\", ...props }: HaitiFlagProps) {\n  return <Flag code=\"ht\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ht.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ht",
+    "country": "Haiti",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import HaitiFlag from @/components/flags/countries/ht.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

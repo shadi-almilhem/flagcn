@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gu",
+  "title": "Guam Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Guam flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/gu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GuamFlagProps = Omit<FlagProps, \"code\">\n\nexport function GuamFlag({ alt = \"Guam flag\", ...props }: GuamFlagProps) {\n  return <Flag code=\"gu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gu.tsx"
+    }
+  ],
+  "meta": {
+    "code": "gu",
+    "country": "Guam",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import GuamFlag from @/components/flags/countries/gu.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

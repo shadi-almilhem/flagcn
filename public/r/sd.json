@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sd",
+  "title": "Sudan Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Sudan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sd.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SudanFlagProps = Omit<FlagProps, \"code\">\n\nexport function SudanFlag({ alt = \"Sudan flag\", ...props }: SudanFlagProps) {\n  return <Flag code=\"sd\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sd.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sd",
+    "country": "Sudan",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SudanFlag from @/components/flags/countries/sd.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "nf",
+  "title": "Norfolk Island Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Norfolk Island flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/nf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorfolkIslandFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorfolkIslandFlag({ alt = \"Norfolk Island flag\", ...props }: NorfolkIslandFlagProps) {\n  return <Flag code=\"nf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/nf.tsx"
+    }
+  ],
+  "meta": {
+    "code": "nf",
+    "country": "Norfolk Island",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NorfolkIslandFlag from @/components/flags/countries/nf.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

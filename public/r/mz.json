@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mz",
+  "title": "Mozambique Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Mozambique flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MozambiqueFlagProps = Omit<FlagProps, \"code\">\n\nexport function MozambiqueFlag({ alt = \"Mozambique flag\", ...props }: MozambiqueFlagProps) {\n  return <Flag code=\"mz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mz.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mz",
+    "country": "Mozambique",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MozambiqueFlag from @/components/flags/countries/mz.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

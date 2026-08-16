@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-nc",
+  "title": "North Carolina Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed North Carolina flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-nc.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorthCarolinaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorthCarolinaFlag({ alt = \"North Carolina flag\", ...props }: NorthCarolinaFlagProps) {\n  return <Flag code=\"us-nc\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-nc.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-nc",
+    "country": "North Carolina",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NorthCarolinaFlag from @/components/flags/countries/us-nc.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

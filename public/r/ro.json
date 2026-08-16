@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ro",
+  "title": "Romania Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Romania flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ro.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type RomaniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function RomaniaFlag({ alt = \"Romania flag\", ...props }: RomaniaFlagProps) {\n  return <Flag code=\"ro\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ro.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ro",
+    "country": "Romania",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import RomaniaFlag from @/components/flags/countries/ro.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

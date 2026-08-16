@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "il",
+  "title": "Israel Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Israel flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/il.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IsraelFlagProps = Omit<FlagProps, \"code\">\n\nexport function IsraelFlag({ alt = \"Israel flag\", ...props }: IsraelFlagProps) {\n  return <Flag code=\"il\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/il.tsx"
+    }
+  ],
+  "meta": {
+    "code": "il",
+    "country": "Israel",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import IsraelFlag from @/components/flags/countries/il.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

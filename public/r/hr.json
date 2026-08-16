@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hr",
+  "title": "Croatia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Croatia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/hr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CroatiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CroatiaFlag({ alt = \"Croatia flag\", ...props }: CroatiaFlagProps) {\n  return <Flag code=\"hr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/hr.tsx"
+    }
+  ],
+  "meta": {
+    "code": "hr",
+    "country": "Croatia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import CroatiaFlag from @/components/flags/countries/hr.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

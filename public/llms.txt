@@ -1,0 +1,34 @@
+# Flagcn
+
+> Flagcn is a shadcn registry for 306 accessible React flag components. It copies editable source into a project and has no Flagcn runtime package.
+
+## Start here
+
+- [Complete agent reference](/llms-full.txt): Full API, installation, accessibility, licensing, and publishing contract.
+- [Agent instructions](/AGENTS.md): Safe defaults for coding agents modifying a consumer project.
+- [Registry index](/r/registry.json): Exact shadcn registry items and stable names.
+- [Documentation](/docs): Human-readable guides.
+- [Flag catalog](/flags): Search and preview every format and ratio.
+
+## Install
+
+If the `@flagcn` namespace is not yet globally recognized, configure its URL in `components.json` as `ORIGIN/r/{name}.json`, where ORIGIN is the host serving this file.
+
+```bash
+pnpm dlx shadcn@latest add @flagcn/flag
+pnpm dlx shadcn@latest add @flagcn/flag-picker
+pnpm dlx shadcn@latest add @flagcn/ae
+pnpm dlx shadcn@latest add @flagcn/all
+```
+
+## API summary
+
+`Flag` accepts `code`, `alt`, `format` (`svg | png | webp`), `width`, `ratio` (`4x3 | 1x1 | original`), `decorative`, `className`, `style`, `ref`, and standard React image props. Defaults are SVG, width 80, ratio 4:3, lazy loading, and async decoding.
+
+`FlagPicker` supports controlled or uncontrolled selection, search, keyboard operation, `format`, `ratio`, flag-kind filtering, a hidden form field through `name`, and native styling props.
+
+`@flagcn/<code>` installs one typed wrapper. `@flagcn/all` installs the primitive, picker, typed data, aggregate exports, and all 306 wrappers.
+
+## Rights
+
+Flagcn original source is MIT licensed. Artwork is delivered by FlagCDN; Flagpedia documents it as public domain and says attribution is appreciated. Flagcn does not bundle Flag Icons source or artwork. See [license documentation](/docs/license) and [Flagpedia's statement](https://flagpedia.net/about).

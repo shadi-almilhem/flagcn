@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gl",
+  "title": "Greenland Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Greenland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/gl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GreenlandFlagProps = Omit<FlagProps, \"code\">\n\nexport function GreenlandFlag({ alt = \"Greenland flag\", ...props }: GreenlandFlagProps) {\n  return <Flag code=\"gl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gl.tsx"
+    }
+  ],
+  "meta": {
+    "code": "gl",
+    "country": "Greenland",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import GreenlandFlag from @/components/flags/countries/gl.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

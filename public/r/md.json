@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "md",
+  "title": "Moldova Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Moldova flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/md.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MoldovaFlagProps = Omit<FlagProps, \"code\">\n\nexport function MoldovaFlag({ alt = \"Moldova flag\", ...props }: MoldovaFlagProps) {\n  return <Flag code=\"md\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/md.tsx"
+    }
+  ],
+  "meta": {
+    "code": "md",
+    "country": "Moldova",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MoldovaFlag from @/components/flags/countries/md.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

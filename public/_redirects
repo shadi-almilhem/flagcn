@@ -1,0 +1,6 @@
+# A top-level 404.html keeps missing registry items as real 404 responses.
+# List every client-side route explicitly so React Router still works on refresh.
+/docs /index.html 200
+/docs/* /index.html 200
+/flags /index.html 200
+/flags/* /index.html 200

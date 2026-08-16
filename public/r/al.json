@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "al",
+  "title": "Albania Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Albania flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/al.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AlbaniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AlbaniaFlag({ alt = \"Albania flag\", ...props }: AlbaniaFlagProps) {\n  return <Flag code=\"al\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/al.tsx"
+    }
+  ],
+  "meta": {
+    "code": "al",
+    "country": "Albania",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import AlbaniaFlag from @/components/flags/countries/al.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "is",
+  "title": "Iceland Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Iceland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/is.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type IcelandFlagProps = Omit<FlagProps, \"code\">\n\nexport function IcelandFlag({ alt = \"Iceland flag\", ...props }: IcelandFlagProps) {\n  return <Flag code=\"is\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/is.tsx"
+    }
+  ],
+  "meta": {
+    "code": "is",
+    "country": "Iceland",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import IcelandFlag from @/components/flags/countries/is.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

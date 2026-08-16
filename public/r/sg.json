@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sg",
+  "title": "Singapore Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Singapore flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sg.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SingaporeFlagProps = Omit<FlagProps, \"code\">\n\nexport function SingaporeFlag({ alt = \"Singapore flag\", ...props }: SingaporeFlagProps) {\n  return <Flag code=\"sg\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sg.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sg",
+    "country": "Singapore",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SingaporeFlag from @/components/flags/countries/sg.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

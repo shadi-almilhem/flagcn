@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tf",
+  "title": "French Southern and Antarctic Lands Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed French Southern and Antarctic Lands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/tf.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FrenchSouthernAndAntarcticLandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function FrenchSouthernAndAntarcticLandsFlag({ alt = \"French Southern and Antarctic Lands flag\", ...props }: FrenchSouthernAndAntarcticLandsFlagProps) {\n  return <Flag code=\"tf\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tf.tsx"
+    }
+  ],
+  "meta": {
+    "code": "tf",
+    "country": "French Southern and Antarctic Lands",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import FrenchSouthernAndAntarcticLandsFlag from @/components/flags/countries/tf.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

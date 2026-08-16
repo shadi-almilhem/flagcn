@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "br",
+  "title": "Brazil Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Brazil flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/br.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BrazilFlagProps = Omit<FlagProps, \"code\">\n\nexport function BrazilFlag({ alt = \"Brazil flag\", ...props }: BrazilFlagProps) {\n  return <Flag code=\"br\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/br.tsx"
+    }
+  ],
+  "meta": {
+    "code": "br",
+    "country": "Brazil",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BrazilFlag from @/components/flags/countries/br.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

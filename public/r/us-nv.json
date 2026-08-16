@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-nv",
+  "title": "Nevada Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Nevada flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-nv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NevadaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NevadaFlag({ alt = \"Nevada flag\", ...props }: NevadaFlagProps) {\n  return <Flag code=\"us-nv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-nv.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-nv",
+    "country": "Nevada",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NevadaFlag from @/components/flags/countries/us-nv.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bz",
+  "title": "Belize Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Belize flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/bz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BelizeFlagProps = Omit<FlagProps, \"code\">\n\nexport function BelizeFlag({ alt = \"Belize flag\", ...props }: BelizeFlagProps) {\n  return <Flag code=\"bz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bz.tsx"
+    }
+  ],
+  "meta": {
+    "code": "bz",
+    "country": "Belize",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BelizeFlag from @/components/flags/countries/bz.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

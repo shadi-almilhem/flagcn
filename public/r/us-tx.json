@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-tx",
+  "title": "Texas Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Texas flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-tx.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TexasFlagProps = Omit<FlagProps, \"code\">\n\nexport function TexasFlag({ alt = \"Texas flag\", ...props }: TexasFlagProps) {\n  return <Flag code=\"us-tx\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-tx.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-tx",
+    "country": "Texas",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import TexasFlag from @/components/flags/countries/us-tx.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ne",
+  "title": "Niger Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Niger flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ne.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NigerFlagProps = Omit<FlagProps, \"code\">\n\nexport function NigerFlag({ alt = \"Niger flag\", ...props }: NigerFlagProps) {\n  return <Flag code=\"ne\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ne.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ne",
+    "country": "Niger",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NigerFlag from @/components/flags/countries/ne.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

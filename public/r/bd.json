@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bd",
+  "title": "Bangladesh Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Bangladesh flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/bd.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BangladeshFlagProps = Omit<FlagProps, \"code\">\n\nexport function BangladeshFlag({ alt = \"Bangladesh flag\", ...props }: BangladeshFlagProps) {\n  return <Flag code=\"bd\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bd.tsx"
+    }
+  ],
+  "meta": {
+    "code": "bd",
+    "country": "Bangladesh",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BangladeshFlag from @/components/flags/countries/bd.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

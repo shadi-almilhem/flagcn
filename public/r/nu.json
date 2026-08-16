@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "nu",
+  "title": "Niue Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Niue flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/nu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NiueFlagProps = Omit<FlagProps, \"code\">\n\nexport function NiueFlag({ alt = \"Niue flag\", ...props }: NiueFlagProps) {\n  return <Flag code=\"nu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/nu.tsx"
+    }
+  ],
+  "meta": {
+    "code": "nu",
+    "country": "Niue",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NiueFlag from @/components/flags/countries/nu.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ec",
+  "title": "Ecuador Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Ecuador flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ec.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EcuadorFlagProps = Omit<FlagProps, \"code\">\n\nexport function EcuadorFlag({ alt = \"Ecuador flag\", ...props }: EcuadorFlagProps) {\n  return <Flag code=\"ec\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ec.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ec",
+    "country": "Ecuador",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import EcuadorFlag from @/components/flags/countries/ec.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

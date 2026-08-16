@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "st",
+  "title": "São Tomé and Príncipe Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed São Tomé and Príncipe flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/st.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaoTomeAndPrincipeFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaoTomeAndPrincipeFlag({ alt = \"São Tomé and Príncipe flag\", ...props }: SaoTomeAndPrincipeFlagProps) {\n  return <Flag code=\"st\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/st.tsx"
+    }
+  ],
+  "meta": {
+    "code": "st",
+    "country": "São Tomé and Príncipe",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SaoTomeAndPrincipeFlag from @/components/flags/countries/st.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

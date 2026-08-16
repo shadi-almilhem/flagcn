@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gm",
+  "title": "Gambia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Gambia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/gm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GambiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function GambiaFlag({ alt = \"Gambia flag\", ...props }: GambiaFlagProps) {\n  return <Flag code=\"gm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gm.tsx"
+    }
+  ],
+  "meta": {
+    "code": "gm",
+    "country": "Gambia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import GambiaFlag from @/components/flags/countries/gm.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

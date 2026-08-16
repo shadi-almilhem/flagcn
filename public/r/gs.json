@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gs",
+  "title": "South Georgia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed South Georgia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/gs.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SouthGeorgiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SouthGeorgiaFlag({ alt = \"South Georgia flag\", ...props }: SouthGeorgiaFlagProps) {\n  return <Flag code=\"gs\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gs.tsx"
+    }
+  ],
+  "meta": {
+    "code": "gs",
+    "country": "South Georgia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SouthGeorgiaFlag from @/components/flags/countries/gs.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

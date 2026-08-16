@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sh",
+  "title": "Saint Helena, Ascension and Tristan da Cunha Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Saint Helena, Ascension and Tristan da Cunha flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintHelenaAscensionAndTristanDaCunhaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintHelenaAscensionAndTristanDaCunhaFlag({ alt = \"Saint Helena, Ascension and Tristan da Cunha flag\", ...props }: SaintHelenaAscensionAndTristanDaCunhaFlagProps) {\n  return <Flag code=\"sh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sh.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sh",
+    "country": "Saint Helena, Ascension and Tristan da Cunha",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SaintHelenaAscensionAndTristanDaCunhaFlag from @/components/flags/countries/sh.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

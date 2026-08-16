@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sa",
+  "title": "Saudi Arabia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Saudi Arabia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sa.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaudiArabiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaudiArabiaFlag({ alt = \"Saudi Arabia flag\", ...props }: SaudiArabiaFlagProps) {\n  return <Flag code=\"sa\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sa.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sa",
+    "country": "Saudi Arabia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SaudiArabiaFlag from @/components/flags/countries/sa.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

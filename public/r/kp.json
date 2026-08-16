@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kp",
+  "title": "North Korea Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed North Korea flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/kp.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorthKoreaFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorthKoreaFlag({ alt = \"North Korea flag\", ...props }: NorthKoreaFlagProps) {\n  return <Flag code=\"kp\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kp.tsx"
+    }
+  ],
+  "meta": {
+    "code": "kp",
+    "country": "North Korea",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NorthKoreaFlag from @/components/flags/countries/kp.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

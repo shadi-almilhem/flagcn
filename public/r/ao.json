@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ao",
+  "title": "Angola Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Angola flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ao.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AngolaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AngolaFlag({ alt = \"Angola flag\", ...props }: AngolaFlagProps) {\n  return <Flag code=\"ao\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ao.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ao",
+    "country": "Angola",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import AngolaFlag from @/components/flags/countries/ao.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "lu",
+  "title": "Luxembourg Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Luxembourg flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/lu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LuxembourgFlagProps = Omit<FlagProps, \"code\">\n\nexport function LuxembourgFlag({ alt = \"Luxembourg flag\", ...props }: LuxembourgFlagProps) {\n  return <Flag code=\"lu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/lu.tsx"
+    }
+  ],
+  "meta": {
+    "code": "lu",
+    "country": "Luxembourg",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import LuxembourgFlag from @/components/flags/countries/lu.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

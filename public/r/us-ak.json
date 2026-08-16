@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-ak",
+  "title": "Alaska Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Alaska flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-ak.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type AlaskaFlagProps = Omit<FlagProps, \"code\">\n\nexport function AlaskaFlag({ alt = \"Alaska flag\", ...props }: AlaskaFlagProps) {\n  return <Flag code=\"us-ak\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ak.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-ak",
+    "country": "Alaska",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import AlaskaFlag from @/components/flags/countries/us-ak.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

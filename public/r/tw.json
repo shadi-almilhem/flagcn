@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tw",
+  "title": "Taiwan Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Taiwan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/tw.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TaiwanFlagProps = Omit<FlagProps, \"code\">\n\nexport function TaiwanFlag({ alt = \"Taiwan flag\", ...props }: TaiwanFlagProps) {\n  return <Flag code=\"tw\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tw.tsx"
+    }
+  ],
+  "meta": {
+    "code": "tw",
+    "country": "Taiwan",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import TaiwanFlag from @/components/flags/countries/tw.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

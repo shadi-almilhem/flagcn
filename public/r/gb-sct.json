@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gb-sct",
+  "title": "Scotland Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Scotland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/gb-sct.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type ScotlandFlagProps = Omit<FlagProps, \"code\">\n\nexport function ScotlandFlag({ alt = \"Scotland flag\", ...props }: ScotlandFlagProps) {\n  return <Flag code=\"gb-sct\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gb-sct.tsx"
+    }
+  ],
+  "meta": {
+    "code": "gb-sct",
+    "country": "Scotland",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import ScotlandFlag from @/components/flags/countries/gb-sct.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

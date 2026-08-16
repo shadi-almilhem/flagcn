@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "fk",
+  "title": "Falkland Islands Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Falkland Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/fk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type FalklandIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function FalklandIslandsFlag({ alt = \"Falkland Islands flag\", ...props }: FalklandIslandsFlagProps) {\n  return <Flag code=\"fk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/fk.tsx"
+    }
+  ],
+  "meta": {
+    "code": "fk",
+    "country": "Falkland Islands",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import FalklandIslandsFlag from @/components/flags/countries/fk.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

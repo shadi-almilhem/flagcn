@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sx",
+  "title": "Sint Maarten Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Sint Maarten flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sx.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SintMaartenFlagProps = Omit<FlagProps, \"code\">\n\nexport function SintMaartenFlag({ alt = \"Sint Maarten flag\", ...props }: SintMaartenFlagProps) {\n  return <Flag code=\"sx\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sx.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sx",
+    "country": "Sint Maarten",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SintMaartenFlag from @/components/flags/countries/sx.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

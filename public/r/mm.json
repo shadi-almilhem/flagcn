@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mm",
+  "title": "Myanmar Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Myanmar flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mm.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MyanmarFlagProps = Omit<FlagProps, \"code\">\n\nexport function MyanmarFlag({ alt = \"Myanmar flag\", ...props }: MyanmarFlagProps) {\n  return <Flag code=\"mm\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mm.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mm",
+    "country": "Myanmar",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MyanmarFlag from @/components/flags/countries/mm.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

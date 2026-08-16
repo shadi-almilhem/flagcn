@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "lr",
+  "title": "Liberia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Liberia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/lr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type LiberiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function LiberiaFlag({ alt = \"Liberia flag\", ...props }: LiberiaFlagProps) {\n  return <Flag code=\"lr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/lr.tsx"
+    }
+  ],
+  "meta": {
+    "code": "lr",
+    "country": "Liberia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import LiberiaFlag from @/components/flags/countries/lr.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

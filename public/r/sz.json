@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sz",
+  "title": "Eswatini (Swaziland) Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Eswatini (Swaziland) flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EswatiniSwazilandFlagProps = Omit<FlagProps, \"code\">\n\nexport function EswatiniSwazilandFlag({ alt = \"Eswatini (Swaziland) flag\", ...props }: EswatiniSwazilandFlagProps) {\n  return <Flag code=\"sz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sz.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sz",
+    "country": "Eswatini (Swaziland)",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import EswatiniSwazilandFlag from @/components/flags/countries/sz.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

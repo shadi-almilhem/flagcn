@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tz",
+  "title": "Tanzania Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Tanzania flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/tz.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TanzaniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function TanzaniaFlag({ alt = \"Tanzania flag\", ...props }: TanzaniaFlagProps) {\n  return <Flag code=\"tz\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tz.tsx"
+    }
+  ],
+  "meta": {
+    "code": "tz",
+    "country": "Tanzania",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import TanzaniaFlag from @/components/flags/countries/tz.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cu",
+  "title": "Cuba Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Cuba flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/cu.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type CubaFlagProps = Omit<FlagProps, \"code\">\n\nexport function CubaFlag({ alt = \"Cuba flag\", ...props }: CubaFlagProps) {\n  return <Flag code=\"cu\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/cu.tsx"
+    }
+  ],
+  "meta": {
+    "code": "cu",
+    "country": "Cuba",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import CubaFlag from @/components/flags/countries/cu.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

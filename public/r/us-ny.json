@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-ny",
+  "title": "New York Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed New York flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-ny.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NewYorkFlagProps = Omit<FlagProps, \"code\">\n\nexport function NewYorkFlag({ alt = \"New York flag\", ...props }: NewYorkFlagProps) {\n  return <Flag code=\"us-ny\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-ny.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-ny",
+    "country": "New York",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NewYorkFlag from @/components/flags/countries/us-ny.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

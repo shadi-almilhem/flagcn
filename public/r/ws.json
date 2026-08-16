@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ws",
+  "title": "Samoa Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Samoa flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ws.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SamoaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SamoaFlag({ alt = \"Samoa flag\", ...props }: SamoaFlagProps) {\n  return <Flag code=\"ws\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ws.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ws",
+    "country": "Samoa",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SamoaFlag from @/components/flags/countries/ws.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

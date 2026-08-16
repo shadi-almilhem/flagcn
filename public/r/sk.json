@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sk",
+  "title": "Slovakia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Slovakia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/sk.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SlovakiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SlovakiaFlag({ alt = \"Slovakia flag\", ...props }: SlovakiaFlagProps) {\n  return <Flag code=\"sk\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/sk.tsx"
+    }
+  ],
+  "meta": {
+    "code": "sk",
+    "country": "Slovakia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SlovakiaFlag from @/components/flags/countries/sk.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

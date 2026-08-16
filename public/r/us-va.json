@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "us-va",
+  "title": "Virginia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Virginia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/us-va.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type VirginiaFlagProps = Omit<FlagProps, \"code\">\n\nexport function VirginiaFlag({ alt = \"Virginia flag\", ...props }: VirginiaFlagProps) {\n  return <Flag code=\"us-va\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/us-va.tsx"
+    }
+  ],
+  "meta": {
+    "code": "us-va",
+    "country": "Virginia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import VirginiaFlag from @/components/flags/countries/us-va.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

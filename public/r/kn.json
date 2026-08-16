@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kn",
+  "title": "Saint Kitts and Nevis Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Saint Kitts and Nevis flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/kn.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintKittsAndNevisFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintKittsAndNevisFlag({ alt = \"Saint Kitts and Nevis flag\", ...props }: SaintKittsAndNevisFlagProps) {\n  return <Flag code=\"kn\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kn.tsx"
+    }
+  ],
+  "meta": {
+    "code": "kn",
+    "country": "Saint Kitts and Nevis",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SaintKittsAndNevisFlag from @/components/flags/countries/kn.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

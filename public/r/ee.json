@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ee",
+  "title": "Estonia Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Estonia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ee.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type EstoniaFlagProps = Omit<FlagProps, \"code\">\n\nexport function EstoniaFlag({ alt = \"Estonia flag\", ...props }: EstoniaFlagProps) {\n  return <Flag code=\"ee\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ee.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ee",
+    "country": "Estonia",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import EstoniaFlag from @/components/flags/countries/ee.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mv",
+  "title": "Maldives Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Maldives flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mv.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MaldivesFlagProps = Omit<FlagProps, \"code\">\n\nexport function MaldivesFlag({ alt = \"Maldives flag\", ...props }: MaldivesFlagProps) {\n  return <Flag code=\"mv\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mv.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mv",
+    "country": "Maldives",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MaldivesFlag from @/components/flags/countries/mv.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gd",
+  "title": "Grenada Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Grenada flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/gd.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type GrenadaFlagProps = Omit<FlagProps, \"code\">\n\nexport function GrenadaFlag({ alt = \"Grenada flag\", ...props }: GrenadaFlagProps) {\n  return <Flag code=\"gd\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/gd.tsx"
+    }
+  ],
+  "meta": {
+    "code": "gd",
+    "country": "Grenada",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import GrenadaFlag from @/components/flags/countries/gd.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

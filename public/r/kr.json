@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kr",
+  "title": "South Korea Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed South Korea flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/kr.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SouthKoreaFlagProps = Omit<FlagProps, \"code\">\n\nexport function SouthKoreaFlag({ alt = \"South Korea flag\", ...props }: SouthKoreaFlagProps) {\n  return <Flag code=\"kr\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/kr.tsx"
+    }
+  ],
+  "meta": {
+    "code": "kr",
+    "country": "South Korea",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SouthKoreaFlag from @/components/flags/countries/kr.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

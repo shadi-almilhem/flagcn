@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mp",
+  "title": "Northern Mariana Islands Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Northern Mariana Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mp.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type NorthernMarianaIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function NorthernMarianaIslandsFlag({ alt = \"Northern Mariana Islands flag\", ...props }: NorthernMarianaIslandsFlagProps) {\n  return <Flag code=\"mp\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mp.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mp",
+    "country": "Northern Mariana Islands",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import NorthernMarianaIslandsFlag from @/components/flags/countries/mp.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

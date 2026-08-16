@@ -1,0 +1,229 @@
+# Flagcn — complete reference for AI agents
+
+Flagcn is a shadcn registry for accessible React flag components. It copies source files into the user's project through the shadcn CLI. It is not an npm runtime package.
+
+## Canonical machine-readable resources
+
+- Short index: /llms.txt
+- Complete reference: /llms-full.txt
+- Agent instructions: /AGENTS.md
+- Registry index: /r/registry.json
+- Registry item pattern: /r/{name}.json
+- Human documentation: /docs
+- Complete visual catalog: /flags
+
+Resolve relative paths against the origin from which this file was fetched.
+
+## Inventory
+
+- 306 flag entries.
+- Countries, territories, organizations, and selected subdivisions.
+- Universal primitive: @flagcn/flag.
+- Searchable picker: @flagcn/flag-picker.
+- Typed wrappers: @flagcn/{lowercase-code}, for example @flagcn/ae and @flagcn/us-ca.
+- Complete install: @flagcn/all.
+- Formats: svg, png, webp.
+- Ratios: 4x3, 1x1, original.
+- Default format: svg.
+- Default ratio: 4x3.
+- Source license: MIT.
+- Artwork delivery: FlagCDN, sourced by Flagpedia.
+
+## Connect the registry
+
+Until @flagcn is accepted into the official shadcn Registry Directory, add this to components.json. Replace FLAGCN_ORIGIN with the origin that served this document.
+
+```json
+{
+  "registries": {
+    "@flagcn": {
+      "url": "FLAGCN_ORIGIN/r/{name}.json"
+    }
+  }
+}
+```
+
+After directory acceptance, the same namespaced commands can work without project-local configuration.
+
+## Install commands
+
+```bash
+pnpm dlx shadcn@latest add @flagcn/flag
+pnpm dlx shadcn@latest add @flagcn/flag-picker
+pnpm dlx shadcn@latest add @flagcn/ae
+pnpm dlx shadcn@latest add @flagcn/all
+```
+
+Package manager equivalents for @flagcn/ae:
+
+```bash
+npx shadcn@latest add @flagcn/ae
+yarn dlx shadcn@latest add @flagcn/ae
+bunx --bun shadcn@latest add @flagcn/ae
+```
+
+Use one named item when the interface needs a fixed flag. Use @flagcn/flag for dynamic codes. Use @flagcn/flag-picker for selection. Use @flagcn/all only when the complete typed catalog is genuinely needed.
+
+## Universal Flag component
+
+Typical import after installation:
+
+```tsx
+import { Flag } from "@/components/flags/flag"
+
+export function Market() {
+  return (
+    <Flag
+      code="ae"
+      format="svg"
+      ratio="4x3"
+      width={80}
+      alt="United Arab Emirates flag"
+      className="rounded-sm"
+    />
+  )
+}
+```
+
+### Flag props
+
+- code: string, required. Lowercase ISO-style code such as ae, jp, gb-eng, or us-ca. Runtime input is trimmed and lowercased.
+- alt: string. Defaults to an uppercase-code description, but context-specific text is recommended.
+- format: "svg" | "png" | "webp". Default: "svg".
+- width: positive number. Default: 80. Used for rendered width and CDN source selection.
+- ratio: "4x3" | "1x1" | "original". Default: "4x3".
+- decorative: boolean. Default: false. When true, emits alt="" and aria-hidden.
+- sizes: forwarded; a width-matching value is generated for raster srcSet when omitted.
+- loading: forwarded. Default: "lazy".
+- decoding: forwarded. Default: "async".
+- className, style, ref, id, title, events, fetchPriority, crossOrigin, data attributes, and other standard React img props are forwarded.
+- src and srcSet cannot be overridden because the component owns source construction.
+
+The component renders a native img and no wrapper element.
+
+## Formats and ratios
+
+SVG uses a scalable source. PNG and WebP receive responsive srcSet candidates. Pass a custom sizes value when the visual width changes with media queries.
+
+The 4x3 ratio provides consistent landscape tiles and is the default. The 1x1 ratio crops with object-fit: cover. The original ratio preserves the source artwork's proportions.
+
+Recommended combinations:
+
+- General UI: svg + 4x3.
+- Dense square picker/avatar treatment: webp + 1x1.
+- Accurate editorial display: svg + original.
+- Raster-only downstream workflow: webp, or png when WebP is unsupported.
+
+## URL utilities
+
+The flag registry item includes typed helpers:
+
+- getFlagUrl(code, { format, width, ratio }): returns one FlagCDN URL.
+- getFlagSrcSet(code, { format, width, ratio }): returns undefined for SVG and a width descriptor list for PNG/WebP.
+- normalizeFlagCode(code): trims, lowercases, and validates supported ISO-style syntax.
+- flagFormats: readonly ["svg", "png", "webp"].
+- flagRatios: readonly ["4x3", "1x1", "original"].
+
+## FlagPicker
+
+```tsx
+import * as React from "react"
+import { FlagPicker } from "@/components/flags/flag-picker"
+import type { FlagCode } from "@/components/flags/flag-data"
+
+export function CountryField() {
+  const [country, setCountry] = React.useState<FlagCode>("ae")
+  return <FlagPicker value={country} onValueChange={setCountry} kinds={["country"]} name="country" />
+}
+```
+
+Important props:
+
+- value: controlled FlagCode.
+- defaultValue: initial uncontrolled FlagCode.
+- onValueChange: callback receiving a FlagCode.
+- format: svg | png | webp. Default: svg.
+- ratio: 4x3 | 1x1 | original. Default: 4x3.
+- kinds: array of country, subdivision, or organization.
+- placeholder: trigger/search placeholder.
+- name: adds a hidden form input carrying the selected code.
+- disabled and className are supported.
+
+The picker is searchable and keyboard operable. It is icon-neutral and does not add an icon library to a consuming project.
+
+## Named wrappers
+
+```tsx
+import { UnitedArabEmiratesFlag } from "@/components/flags/countries/ae"
+
+<UnitedArabEmiratesFlag width={32} alt="Available in the UAE" />
+```
+
+A named wrapper fixes the code prop and forwards the rest of FlagProps. Use /r/registry.json to discover exact item names. The @flagcn/all item installs the primitive, picker, data, aggregate exports, and all 306 named wrapper files.
+
+## Accessibility rules
+
+- Write alt text for the meaning in context, not the visible stripe pattern.
+- If adjacent text already communicates the country or market, set decorative.
+- Never use a flag as the sole indicator of language, nationality, residency, or state.
+- Pair flags with precise visible text; flags and languages do not map one-to-one.
+- Treat politically sensitive and official symbols carefully.
+
+## Styling recipes
+
+```tsx
+// Visible label provides the accessible name.
+<span className="inline-flex items-center gap-2">
+  <Flag code="am" width={24} decorative className="rounded-sm ring-1 ring-border" />
+  Armenia
+</span>
+
+// Square market avatar.
+<Flag code="jp" ratio="1x1" alt="Japan flag" className="size-10 rounded-full" />
+
+// Responsive raster image.
+<Flag code="br" format="webp" width={160} sizes="(max-width: 640px) 80px, 160px" alt="Brazil flag" />
+```
+
+## Registry response behavior
+
+- /r/registry.json lists every item.
+- /r/flag.json is the universal primitive payload.
+- /r/flag-picker.json is the picker payload.
+- /r/ae.json is an example named wrapper payload.
+- /r/all.json is the complete catalog payload.
+- Registry responses allow cross-origin GET, HEAD, and OPTIONS.
+- Registry routes should return JSON and a real JSON 404 for unknown items.
+
+## Agent workflow
+
+1. Read /llms.txt and this complete reference.
+2. Inspect /r/registry.json for exact item names.
+3. Inspect /r/{name}.json if exact installed files or dependencies matter.
+4. Preserve the consumer project's components.json aliases and shadcn style.
+5. Configure @flagcn if the namespace is not yet globally recognized.
+6. Run the appropriate shadcn CLI command.
+7. Import the copied source through the project's existing alias.
+8. Supply meaningful alt text or explicitly set decorative.
+9. Run the consumer project's typecheck, lint, and tests.
+
+## Publishing and operating the registry
+
+The static site is compatible with Cloudflare Pages. Build with pnpm build and publish dist. Set REGISTRY_URL to the final production origin before generating registry payloads. Confirm /r/registry.json and /r/flag.json after deployment. A Git push is not proof of deployment; verify the live response.
+
+## Licensing and third-party rights
+
+Flagcn original source code is MIT licensed. The repository includes LICENSE and THIRD_PARTY_NOTICES.md.
+
+Flagpedia states that its flag images are public domain and free for commercial and non-commercial use, with attribution appreciated but not required. Artwork is delivered from https://flagcdn.com and documented at https://flagpedia.net/about.
+
+Flag Icons at https://flagicons.lipis.dev/ was reviewed as a product comparison. Flagcn does not bundle or copy Flag Icons source or artwork.
+
+Public-domain status does not override laws or protocols governing use of national flags, seals, emblems, or other official symbols. Users remain responsible for accurate use in their jurisdictions and markets.
+
+## Project constraints and truthfulness
+
+- Flagcn depends on remote FlagCDN availability unless the installed source is modified to self-host artwork.
+- The name @flagcn works without components.json only after acceptance into the shadcn Registry Directory or equivalent global configuration.
+- The deployed origin must replace any development or example origin in generated registry payloads.
+- Display names are human labels; registry item codes are the stable identifiers.

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tl",
+  "title": "Timor-Leste Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Timor-Leste flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/tl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type TimorLesteFlagProps = Omit<FlagProps, \"code\">\n\nexport function TimorLesteFlag({ alt = \"Timor-Leste flag\", ...props }: TimorLesteFlagProps) {\n  return <Flag code=\"tl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/tl.tsx"
+    }
+  ],
+  "meta": {
+    "code": "tl",
+    "country": "Timor-Leste",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import TimorLesteFlag from @/components/flags/countries/tl.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

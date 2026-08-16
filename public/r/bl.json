@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bl",
+  "title": "Saint Barthélemy Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Saint Barthélemy flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/bl.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type SaintBarthelemyFlagProps = Omit<FlagProps, \"code\">\n\nexport function SaintBarthelemyFlag({ alt = \"Saint Barthélemy flag\", ...props }: SaintBarthelemyFlagProps) {\n  return <Flag code=\"bl\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/bl.tsx"
+    }
+  ],
+  "meta": {
+    "code": "bl",
+    "country": "Saint Barthélemy",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import SaintBarthelemyFlag from @/components/flags/countries/bl.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

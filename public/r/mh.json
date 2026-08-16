@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "mh",
+  "title": "Marshall Islands Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Marshall Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/mh.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type MarshallIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function MarshallIslandsFlag({ alt = \"Marshall Islands flag\", ...props }: MarshallIslandsFlagProps) {\n  return <Flag code=\"mh\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/mh.tsx"
+    }
+  ],
+  "meta": {
+    "code": "mh",
+    "country": "Marshall Islands",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import MarshallIslandsFlag from @/components/flags/countries/mh.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

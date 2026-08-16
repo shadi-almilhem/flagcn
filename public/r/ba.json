@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ba",
+  "title": "Bosnia and Herzegovina Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed Bosnia and Herzegovina flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/ba.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type BosniaAndHerzegovinaFlagProps = Omit<FlagProps, \"code\">\n\nexport function BosniaAndHerzegovinaFlag({ alt = \"Bosnia and Herzegovina flag\", ...props }: BosniaAndHerzegovinaFlagProps) {\n  return <Flag code=\"ba\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/ba.tsx"
+    }
+  ],
+  "meta": {
+    "code": "ba",
+    "country": "Bosnia and Herzegovina",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import BosniaAndHerzegovinaFlag from @/components/flags/countries/ba.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}

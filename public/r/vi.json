@@ -1,0 +1,41 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "vi",
+  "title": "United States Virgin Islands Flag",
+  "author": "Shadi Al Milhem",
+  "description": "A typed United States Virgin Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "registryDependencies": [
+    "@flagcn/flag"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/countries/vi.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport { Flag, type FlagProps } from \"../flag\"\n\nexport type UnitedStatesVirginIslandsFlagProps = Omit<FlagProps, \"code\">\n\nexport function UnitedStatesVirginIslandsFlag({ alt = \"United States Virgin Islands flag\", ...props }: UnitedStatesVirginIslandsFlagProps) {\n  return <Flag code=\"vi\" alt={alt} {...props} />\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/countries/vi.tsx"
+    }
+  ],
+  "meta": {
+    "code": "vi",
+    "country": "United States Virgin Islands",
+    "formats": [
+      "svg",
+      "png",
+      "webp"
+    ],
+    "ratios": [
+      "4x3",
+      "1x1",
+      "original"
+    ],
+    "license": "MIT",
+    "artworkLicense": "Public Domain"
+  },
+  "docs": "Import UnitedStatesVirginIslandsFlag from @/components/flags/countries/vi.",
+  "categories": [
+    "flags",
+    "countries",
+    "internationalization"
+  ],
+  "type": "registry:component"
+}
