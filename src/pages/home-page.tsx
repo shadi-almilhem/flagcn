@@ -73,8 +73,8 @@ export function HomePage() {
 
           <div className="mt-12 grid w-full max-w-3xl grid-cols-6 border-s border-t sm:grid-cols-12" aria-label="A sample of available flags">
             {heroFlags.map((code) => (
-              <div key={code} className="aspect-[4/3] overflow-hidden border-e border-b bg-card/70">
-                <Flag code={code} format="svg" ratio="4x3" width={160} decorative className="size-full object-cover" />
+              <div key={code} className="grid aspect-[4/3] place-items-center overflow-hidden border-e border-b bg-card/70">
+                <Flag code={code} format="svg" ratio="4x3" width={160} decorative className="h-auto w-4/5 object-contain" />
                 <span className="sr-only">{flagNames[code]}</span>
               </div>
             ))}

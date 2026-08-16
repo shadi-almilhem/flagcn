@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Flagcn">
+  <rect width="64" height="64" fill="#000"/>
+  <g transform="translate(7.36 7.36) scale(.77)">
+    <rect x="13" y="7" width="6" height="50" rx="3" fill="#fff"/>
+    <path d="M19 15c8-2 14-4 22-2 7 2 10 5 17 3v23c-7 3-12 0-18-2-8-3-13-1-21 1V15Z" fill="#fff"/>
+  </g>
+</svg>
