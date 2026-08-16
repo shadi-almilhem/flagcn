@@ -134,7 +134,7 @@ import type { FlagCode } from "@/components/flags/flag-data"
 
 export function CountryField() {
   const [country, setCountry] = React.useState<FlagCode>("ae")
-  return <FlagPicker value={country} onValueChange={setCountry} kinds={["country"]} name="country" />
+  return <FlagPicker value={country} onValueChange={setCountry} kinds={["country"]} name="country" aria-label="Market" />
 }
 ```
 
@@ -147,6 +147,7 @@ Important props:
 - ratio: 4x3 | 1x1 | original. Default: 4x3.
 - kinds: array of country, subdivision, or organization.
 - placeholder: trigger/search placeholder.
+- aria-label: accessible name for the combobox trigger. Defaults to the placeholder and selected flag name.
 - name: adds a hidden form input carrying the selected code.
 - disabled and className are supported.
 

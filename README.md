@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/shadi-almilhem/flagcn/actions/workflows/ci.yml/badge.svg)](https://github.com/shadi-almilhem/flagcn/actions/workflows/ci.yml)
 
+Made by [Shadi Al Milhem](https://flagcn.dev) · [@shadi_m02](https://x.com/shadi_m02)
+
 Flagcn is a source-owned shadcn registry for accessible flags. It ships a small React image primitive, a searchable picker, and one installable wrapper for every flag in the catalog. SVG assets use [Flag Icons](https://flagicons.lipis.dev/) in 4:3 and 1:1 variants. PNG, WebP, and JPEG assets use [Flagpedia's FlagCDN](https://flagpedia.net/download/api). U.S. state SVGs and original-proportion SVGs use FlagCDN as a documented fallback.
 
 ## What is included

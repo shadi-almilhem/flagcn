@@ -21,6 +21,7 @@ export interface FlagPickerProps {
   disabled?: boolean
   className?: string
   name?: string
+  "aria-label"?: string
 }
 
 export function FlagPicker({
@@ -36,6 +37,7 @@ export function FlagPicker({
   disabled = false,
   className,
   name,
+  "aria-label": ariaLabel,
 }: FlagPickerProps) {
   const [internalValue, setInternalValue] = React.useState<FlagCode | undefined>(defaultValue)
   const [open, setOpen] = React.useState(false)
@@ -116,6 +118,7 @@ export function FlagPicker({
         aria-expanded={open}
         aria-controls={listId}
         aria-haspopup="listbox"
+        aria-label={ariaLabel ?? (currentValue ? `${placeholder}: ${flagNames[currentValue]}` : placeholder)}
         disabled={disabled}
         className={cn(
           "border-input bg-background ring-offset-background flex h-9 w-full items-center justify-between rounded-md border px-3 text-sm shadow-xs outline-none transition-[color,box-shadow]",
@@ -168,7 +171,7 @@ export function FlagPicker({
                 }}
                 placeholder={searchPlaceholder}
                 aria-label={searchPlaceholder}
-                className="placeholder:text-muted-foreground h-9 w-full rounded-sm bg-transparent ps-8 pe-3 text-sm outline-none"
+                className="placeholder:text-muted-foreground h-9 w-full rounded-sm bg-transparent ps-8 pe-3 text-sm focus-visible:ring-ring/30 focus-visible:ring-[3px]"
               />
             </div>
           </div>
@@ -180,7 +183,7 @@ export function FlagPicker({
                 role="option"
                 aria-selected={currentValue === flag.code}
                 data-active={index === activeIndex || undefined}
-                className="data-[active]:bg-accent data-[active]:text-accent-foreground flex w-full items-center gap-2 rounded-sm px-2 py-2 text-start text-sm outline-none hover:bg-accent hover:text-accent-foreground"
+                className="data-[active]:bg-accent data-[active]:text-accent-foreground flex w-full items-center gap-2 rounded-sm px-2 py-2 text-start text-sm hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring/30 focus-visible:ring-[3px]"
                 onPointerMove={() => setActiveIndex(index)}
                 onClick={() => selectFlag(flag.code)}
               >

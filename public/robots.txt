@@ -18,3 +18,5 @@ Allow: /
 
 User-agent: Google-Extended
 Allow: /
+
+Sitemap: https://flagcn.dev/sitemap.xml

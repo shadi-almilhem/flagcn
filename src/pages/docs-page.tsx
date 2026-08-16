@@ -24,6 +24,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty"
 import {
   Select,
   SelectContent,
@@ -189,10 +190,10 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
           <p>The registry automatically installs <code>flag</code> and <code>flag-data</code>. The picker is icon-neutral, so it does not add an icon package to the consuming app.</p>
         </DocSection>
         <DocSection title="Usage">
-          <CodeBlock code={`import * as React from "react"\nimport { FlagPicker } from "@/components/flags/flag-picker"\nimport type { FlagCode } from "@/components/flags/flag-data"\n\nexport function CountryField() {\n  const [country, setCountry] = React.useState<FlagCode>("ae")\n\n  return (\n    <FlagPicker\n      value={country}\n      onValueChange={setCountry}\n      kinds={["country"]}\n      name="country"\n    />\n  )\n}`} />
+          <CodeBlock code={`import * as React from "react"\nimport { FlagPicker } from "@/components/flags/flag-picker"\nimport type { FlagCode } from "@/components/flags/flag-data"\n\nexport function CountryField() {\n  const [country, setCountry] = React.useState<FlagCode>("ae")\n\n  return (\n    <FlagPicker\n      value={country}\n      onValueChange={setCountry}\n      kinds={["country"]}\n      name="country"\n      aria-label="Market"\n    />\n  )\n}`} />
           <div className="not-prose mt-4 max-w-md rounded-lg border bg-card p-5">
             <p className="mb-2 text-xs font-medium text-muted-foreground">Market</p>
-            <FlagPicker defaultValue="ae" kinds={["country"]} />
+            <FlagPicker defaultValue="ae" kinds={["country"]} aria-label="Market" />
           </div>
         </DocSection>
         <DocSection title="API">
@@ -204,6 +205,7 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
             ["ratio", "4x3 | 1x1 | original", "4x3", "Preview ratio used in the trigger and results."],
             ["kinds", "FlagKind[]", "all", "Limit results to country, subdivision, or organization."],
             ["name", "string", "Optional", "Adds a hidden form field carrying the selected code."],
+            ["aria-label", "string", "placeholder", "Sets the accessible name for the combobox trigger."],
           ]} />
         </DocSection>
       </>
@@ -399,9 +401,9 @@ function InstallationContent() {
 
 function DocSection({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section id={headingId(title)} className="scroll-mt-24 border-t pt-9 first:border-0 first:pt-0">
+    <section id={headingId(title)} className="min-w-0 scroll-mt-24 border-t pt-9 first:border-0 first:pt-0">
       <h2 className="text-2xl font-semibold tracking-[-0.035em]">{title}</h2>
-      <div className="prose-doc mt-4 grid gap-4">{children}</div>
+      <div className="prose-doc mt-4 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4">{children}</div>
     </section>
   )
 }
@@ -425,8 +427,19 @@ function MiniDocCard({ title, text, command }: { title: string; text: string; co
 }
 
 function ApiTable({ rows, compact = false }: { rows: string[][]; compact?: boolean }) {
+  if (!rows.length) {
+    return (
+      <Empty className="not-prose min-h-40 border">
+        <EmptyHeader>
+          <EmptyTitle>No API entries</EmptyTitle>
+          <EmptyDescription>This reference does not expose any entries yet.</EmptyDescription>
+        </EmptyHeader>
+      </Empty>
+    )
+  }
+
   return (
-    <div className="not-prose overflow-x-auto border">
+    <div className="not-prose w-full min-w-0 max-w-full overflow-x-auto border">
       <table className="w-full min-w-[560px] text-start text-sm">
         <thead className="bg-muted/40 text-xs text-muted-foreground">
           <tr>
@@ -535,7 +548,7 @@ export function DocsPage() {
           <AskAiButton prompt={agentPrompt} />
         </div>
         <Separator className="my-9" />
-        <div data-doc-content className="grid gap-12">{doc.content}</div>
+        <div data-doc-content className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-12">{doc.content}</div>
 
         <div className="mt-14 grid gap-3 sm:grid-cols-2">
           {previous ? (

@@ -6,6 +6,12 @@ export const siteConfig = {
   rasterSource: "https://flagpedia.net",
   rasterApi: "https://flagcdn.com",
   github: import.meta.env.VITE_GITHUB_URL || "https://github.com/shadi-almilhem/flagcn",
+  creator: {
+    name: "Shadi Al Milhem",
+    website: "https://flagcn.dev",
+    x: "https://x.com/shadi_m02",
+    xHandle: "@shadi_m02",
+  },
 } as const
 
 export const packageManagers = ["pnpm", "npm", "yarn", "bun"] as const
