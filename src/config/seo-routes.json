@@ -1,0 +1,54 @@
+{
+  "/": {
+    "title": "Flagcn: Accessible Flag Components for shadcn/ui",
+    "description": "Install 306 accessible, source-owned React flag components with the shadcn CLI. Use SVG, PNG, WebP, or JPEG in 4:3, square, or original frames."
+  },
+  "/flags": {
+    "title": "Browse 306 React Flag Components | Flagcn",
+    "description": "Search and preview every Flagcn component. Switch between SVG, PNG, WebP, and JPEG, choose 4:3, square, or original frames, then copy or install."
+  },
+  "/docs": {
+    "title": "Flagcn Documentation: shadcn Flag Registry",
+    "description": "Learn how to install and use Flagcn, an accessible React flag registry for shadcn/ui with typed components, four formats, and flexible ratios."
+  },
+  "/docs/introduction": {
+    "title": "Introduction to Flagcn | shadcn Flag Registry",
+    "description": "Understand how Flagcn delivers source-owned, accessible React flag components through the shadcn CLI without a runtime package."
+  },
+  "/docs/installation": {
+    "title": "Install Flagcn with the shadcn CLI",
+    "description": "Configure the @flagcn registry and install one flag, the Flag primitive, FlagPicker, or all 306 React flag components with the shadcn CLI."
+  },
+  "/docs/flag": {
+    "title": "React Flag Component API and Props | Flagcn",
+    "description": "Use the typed Flag React component with accessible alt text, SVG or raster formats, 4:3, square, and original ratios, classes, refs, and image props."
+  },
+  "/docs/flag-picker": {
+    "title": "Accessible FlagPicker Component | Flagcn",
+    "description": "Add a searchable, keyboard-ready React flag picker with controlled state, hidden form fields, format and ratio options, and accessible labels."
+  },
+  "/docs/country-components": {
+    "title": "Country Flag Components | Flagcn",
+    "description": "Install typed React wrappers for individual countries, territories, organizations, and supported subdivisions from the Flagcn shadcn registry."
+  },
+  "/docs/formats-and-ratios": {
+    "title": "Flag Formats and Ratios | Flagcn",
+    "description": "Choose SVG, PNG, WebP, or JPEG flags in no-crop 4:3, 1:1 square, or original frames and understand the asset source used for each option."
+  },
+  "/docs/styling": {
+    "title": "Style React Flag Components | Flagcn",
+    "description": "Style Flagcn components with className, inline styles, native image attributes, responsive sizing, borders, and the design tokens in your shadcn app."
+  },
+  "/docs/accessibility": {
+    "title": "Accessible Flag Components | Flagcn",
+    "description": "Use meaningful alternative text, decorative flags, keyboard navigation, explicit picker labels, and inclusive flag semantics in React applications."
+  },
+  "/docs/ai-agents": {
+    "title": "Flagcn Registry for AI Coding Agents",
+    "description": "Give AI coding agents exact Flagcn registry routes, component contracts, safe defaults, accessibility guidance, and machine-readable llms.txt instructions."
+  },
+  "/docs/license": {
+    "title": "Flagcn License and Artwork Sources",
+    "description": "Review the MIT license for Flagcn source, the Flag Icons SVG license, Flagpedia public-domain artwork notes, attribution, and official-symbol guidance."
+  }
+}

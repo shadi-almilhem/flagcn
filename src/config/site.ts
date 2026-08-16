@@ -8,7 +8,7 @@ export const siteConfig = {
   github: import.meta.env.VITE_GITHUB_URL || "https://github.com/shadi-almilhem/flagcn",
   creator: {
     name: "Shadi Al Milhem",
-    website: "https://flagcn.dev",
+    website: "https://shadialmilhem.com",
     x: "https://x.com/shadi_m02",
     xHandle: "@shadi_m02",
   },

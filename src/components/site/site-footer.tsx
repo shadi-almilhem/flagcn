@@ -15,7 +15,13 @@ export function SiteFooter() {
           </p>
           <p className="mt-4 text-sm text-muted-foreground">
             Made by{" "}
-            <a href={siteConfig.creator.website} className="font-medium text-foreground underline-offset-4 hover:underline">
+            <a
+              href={siteConfig.creator.website}
+              target="_blank"
+              rel="author me noreferrer"
+              title="Visit shadialmilhem.com"
+              className="font-medium text-foreground underline-offset-4 hover:underline"
+            >
               {siteConfig.creator.name}
             </a>
             {" · "}
