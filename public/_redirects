@@ -1,4 +1,15 @@
-# Serve existing static files first, keep unknown registry items as real 404s,
-# and let React Router handle every other application route.
-/r/* /404.html 404
-/* /index.html 200
+# List every client-side route explicitly so React Router works on refresh
+# while unknown registry items continue to use the top-level 404.html.
+/docs /index.html 200
+/docs/introduction /index.html 200
+/docs/installation /index.html 200
+/docs/flag /index.html 200
+/docs/flag-picker /index.html 200
+/docs/country-components /index.html 200
+/docs/formats-and-ratios /index.html 200
+/docs/styling /index.html 200
+/docs/accessibility /index.html 200
+/docs/ai-agents /index.html 200
+/docs/publishing /index.html 200
+/docs/license /index.html 200
+/flags /index.html 200
