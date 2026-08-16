@@ -35,6 +35,8 @@ pnpm check
 
 `pnpm build` regenerates every country wrapper, runs `shadcn build`, type-checks the app, and produces the static site. `pnpm check` additionally runs lint, unit tests, registry validation, and installs `@flagcn/ae` into a temporary clean consumer through the shadcn CLI.
 
+After deployment, set `REGISTRY_TEST_ORIGIN` to the public origin and run `pnpm test:install` to repeat the clean-consumer test against the live registry.
+
 Generated registry payloads live in `public/r`. Do not hand-edit the country wrappers or generated JSON; change the source data or generator and rebuild instead.
 
 ## Use the registry

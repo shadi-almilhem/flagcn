@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url"
 const ROOT = join(fileURLToPath(new URL("..", import.meta.url)))
 const PUBLIC_DIR = join(ROOT, "public")
 const consumerDirs = new Set()
+const externalOrigin = process.env.REGISTRY_TEST_ORIGIN?.replace(/\/$/, "")
 
 const baseColor = {
   cssVars: { theme: {}, light: {}, dark: {} },
@@ -104,7 +105,9 @@ const server = createServer((request, response) => {
 async function verifyInstall(origin, item, expectedFiles) {
   const label = item.slice(item.lastIndexOf("/") + 1)
   const consumerDir = createConsumer(origin, label)
-  const cleanEnv = { ...process.env, REGISTRY_URL: `${origin}/r`, NODE_USE_ENV_PROXY: "0" }
+  const cleanEnv = { ...process.env, NODE_USE_ENV_PROXY: "0" }
+  if (origin.startsWith("http://127.0.0.1:")) cleanEnv.REGISTRY_URL = `${origin}/r`
+  else delete cleanEnv.REGISTRY_URL
   for (const key of [
     "ALL_PROXY", "all_proxy", "HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy",
     "npm_config_proxy", "npm_config_http_proxy", "npm_config_https_proxy",
@@ -123,10 +126,13 @@ async function verifyInstall(origin, item, expectedFiles) {
 }
 
 try {
-  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve))
-  const address = server.address()
-  if (!address || typeof address === "string") throw new Error("Could not start the local registry server.")
-  const origin = `http://127.0.0.1:${address.port}`
+  let origin = externalOrigin
+  if (!origin) {
+    await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve))
+    const address = server.address()
+    if (!address || typeof address === "string") throw new Error("Could not start the local registry server.")
+    origin = `http://127.0.0.1:${address.port}`
+  }
 
   await verifyInstall(origin, "@flagcn/ae", [
     "src/components/flags/flag.tsx",
@@ -150,6 +156,6 @@ try {
 
   console.log("Verified clean shadcn installs of @flagcn/ae and @flagcn/all, including all 306 wrappers.")
 } finally {
-  await new Promise((resolve) => server.close(resolve))
+  if (server.listening) await new Promise((resolve) => server.close(resolve))
   for (const consumerDir of consumerDirs) rmSync(consumerDir, { recursive: true, force: true })
 }
