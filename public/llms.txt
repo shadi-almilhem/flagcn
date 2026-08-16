@@ -4,7 +4,7 @@
 
 ## Start here
 
-- [Complete agent reference](/llms-full.txt): Full API, installation, accessibility, licensing, and publishing contract.
+- [Complete agent reference](/llms-full.txt): Full API, installation, accessibility, and licensing contract.
 - [Agent instructions](/AGENTS.md): Safe defaults for coding agents modifying a consumer project.
 - [Registry index](/r/registry.json): Exact shadcn registry items and stable names.
 - [Documentation](/docs): Human-readable guides.
@@ -31,4 +31,4 @@ pnpm dlx shadcn@latest add @flagcn/all
 
 ## Rights
 
-Flagcn original source is MIT licensed. Artwork is delivered by FlagCDN; Flagpedia documents it as public domain and says attribution is appreciated. Flagcn does not bundle Flag Icons source or artwork. See [license documentation](/docs/license) and [Flagpedia's statement](https://flagpedia.net/about).
+Flagcn original source is MIT licensed. SVG artwork uses Flag Icons 7.5.0 under MIT. Raster artwork, U.S. state SVGs, and original-proportion SVGs use FlagCDN; Flagpedia documents its artwork as public domain. See [license documentation](/docs/license), [Flag Icons](https://flagicons.lipis.dev/), and [Flagpedia's statement](https://flagpedia.net/about).

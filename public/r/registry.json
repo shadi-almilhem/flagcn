@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "flagcn",
-  "homepage": "https://flagcn.pages.dev",
+  "homepage": "https://flagcn.dev",
   "items": [
     {
       "name": "flag",
@@ -26,7 +26,7 @@
         "images",
         "internationalization"
       ],
-      "docs": "Pass a FlagCDN code and meaningful alt text. Use ratio='1x1' for square UI or ratio='4x3' for consistent cards. Set decorative when nearby text already names the place.",
+      "docs": "Pass a supported flag code and meaningful alt text. Use ratio='1x1' for square UI or ratio='4x3' for consistent cards. Set decorative when nearby text already names the place.",
       "meta": {
         "formats": [
           "svg",

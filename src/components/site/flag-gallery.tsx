@@ -1,4 +1,4 @@
-import { IconExternalLink, IconFlagOff, IconSearch } from "@tabler/icons-react"
+import { IconCheck, IconCopy, IconSearch } from "@tabler/icons-react"
 import * as React from "react"
 
 import { Flag } from "@/components/flags/flag"
@@ -19,6 +19,14 @@ import { SlidingToggleGroup } from "@/components/site/sliding-toggle-group"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
   Empty,
   EmptyContent,
   EmptyDescription,
@@ -27,8 +35,16 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty"
 import { Input } from "@/components/ui/input"
-import { NativeSelect } from "@/components/ui/native-select"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { getInstallCommand } from "@/config/site"
+import { copyImageToClipboard } from "@/lib/copy-image"
 import { cn } from "@/lib/utils"
 
 type KindFilter = FlagKind | "all"
@@ -53,6 +69,12 @@ const formatLabels: Record<FlagFormat, string> = {
 
 const formatOptions = flagFormats.map((value) => ({ value, label: formatLabels[value] }))
 const ratioOptions = flagRatios.map((value) => ({ value, label: ratioLabels[value] }))
+const kindOptions: { value: KindFilter; label: string }[] = [
+  { value: "all", label: "All flag types" },
+  { value: "country", label: "Countries" },
+  { value: "subdivision", label: "Subdivisions" },
+  { value: "organization", label: "Organizations" },
+]
 const flagsByCode = new Map(flags.map((flag) => [flag.code, flag]))
 
 export function FlagGallery({ className, featuredCodes }: FlagGalleryProps) {
@@ -113,17 +135,22 @@ export function FlagGallery({ className, featuredCodes }: FlagGalleryProps) {
           </div>
 
           <div className="bg-background p-1">
-            <NativeSelect
+            <Select
+              items={kindOptions}
               value={kind}
-              onChange={(event) => setKind(event.target.value as KindFilter)}
-              aria-label="Filter by flag type"
-              className="h-9 w-full border-0 bg-transparent shadow-none lg:w-42"
+              onValueChange={(value) => setKind(value as KindFilter)}
             >
-              <option value="all">All flag types</option>
-              <option value="country">Countries</option>
-              <option value="subdivision">Subdivisions</option>
-              <option value="organization">Organizations</option>
-            </NativeSelect>
+              <SelectTrigger aria-label="Filter by flag type" className="h-9 w-full border-0 bg-transparent shadow-none lg:w-42">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent alignItemWithTrigger={false} align="end">
+                <SelectGroup>
+                  {kindOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       </div>
@@ -142,11 +169,11 @@ export function FlagGallery({ className, featuredCodes }: FlagGalleryProps) {
           {filteredFlags.map((flag) => {
             const assetUrl = getFlagUrl(flag.code, { format, ratio, width: 160 })
             return (
-              <article
+              <Card
                 key={flag.code}
-                className={cn("group border-e border-b bg-card", !featuredCodes && "flag-tile")}
+                className={cn("group gap-0 rounded-none border-0 border-e border-b py-0 shadow-none", !featuredCodes && "flag-tile")}
               >
-                <div className="flag-stage grid h-44 place-items-center border-b bg-muted/10 p-7">
+                <CardContent className="flag-stage grid h-44 place-items-center border-b bg-muted/10 p-7">
                   <Flag
                     code={flag.code}
                     format={format}
@@ -160,40 +187,37 @@ export function FlagGallery({ className, featuredCodes }: FlagGalleryProps) {
                       ratio === "original" && "h-24 w-32",
                     )}
                   />
-                </div>
+                </CardContent>
 
-                <div className="flex min-h-22 items-center gap-3 p-3.5">
-                  <div className="min-w-0 flex-1">
-                    <h3 className="truncate text-sm font-medium">{flag.name}</h3>
-                    <p className="mt-1 truncate font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                <CardHeader className="min-w-0 gap-1 p-3.5 pb-3">
+                  <CardTitle className="truncate text-sm font-medium">{flag.name}</CardTitle>
+                  <CardDescription className="truncate font-mono text-[10px] uppercase tracking-wider">
                       {flag.code} · {flag.kind}
-                    </p>
-                  </div>
+                  </CardDescription>
+                </CardHeader>
+                <CardFooter className="grid grid-cols-2 border-t p-0">
                   <CopyButton
                     value={getInstallCommand(flag.code)}
                     label="Install"
                     aria-label={`Copy install command for ${flag.name}`}
-                    className="h-8 shrink-0 border px-2.5"
+                    className="h-9 rounded-none border-0 border-e px-2"
                   />
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    aria-label={`Open ${flag.name} ${formatLabels[format]} source asset`}
-                    title={`Open ${formatLabels[format]} source asset`}
-                    onClick={() => window.open(assetUrl, "_blank", "noopener,noreferrer")}
-                    className="size-8 shrink-0"
-                  >
-                    <IconExternalLink />
-                  </Button>
-                </div>
-              </article>
+                  <ImageCopyButton
+                    sourceUrl={assetUrl}
+                    ratio={ratio}
+                    format={format}
+                    formatLabel={formatLabels[format]}
+                    flagName={flag.name}
+                  />
+                </CardFooter>
+              </Card>
             )
           })}
         </div>
       ) : (
         <Empty className="min-h-80 border border-t-0">
           <EmptyHeader>
-            <EmptyMedia variant="icon"><IconFlagOff /></EmptyMedia>
+            <EmptyMedia variant="icon"><IconSearch /></EmptyMedia>
             <EmptyTitle>No matching flags</EmptyTitle>
             <EmptyDescription>Try another country name, ISO code, or flag type.</EmptyDescription>
           </EmptyHeader>
@@ -203,5 +227,52 @@ export function FlagGallery({ className, featuredCodes }: FlagGalleryProps) {
         </Empty>
       )}
     </div>
+  )
+}
+
+function ImageCopyButton({
+  sourceUrl,
+  ratio,
+  format,
+  formatLabel,
+  flagName,
+}: {
+  sourceUrl: string
+  ratio: FlagRatio
+  format: FlagFormat
+  formatLabel: string
+  flagName: string
+}) {
+  const [status, setStatus] = React.useState<"idle" | "copied" | "error">("idle")
+
+  async function copyImage() {
+    try {
+      await copyImageToClipboard(sourceUrl, { ratio, format })
+      setStatus("copied")
+      window.setTimeout(() => setStatus("idle"), 1600)
+    } catch {
+      setStatus("error")
+      window.setTimeout(() => setStatus("idle"), 2200)
+    }
+  }
+
+  const label = status === "copied" ? "Copied" : status === "error" ? "Try again" : `Copy ${formatLabel}`
+
+  return (
+    <Button
+      type="button"
+      variant="ghost"
+      size="sm"
+      onClick={copyImage}
+      aria-label={`Copy ${flagName} ${formatLabel} image`}
+      className="h-9 rounded-none border-0 px-2"
+    >
+      <span className="t-icon-swap" data-state={status === "copied" ? "b" : "a"} data-icon="inline-start" aria-hidden="true">
+        <span className="t-icon" data-icon="a"><IconCopy /></span>
+        <span className="t-icon" data-icon="b"><IconCheck /></span>
+      </span>
+      <span className="inline-grid min-w-14 place-items-center">{label}</span>
+      <span className="sr-only" aria-live="polite">{status === "copied" ? `${flagName} image copied` : status === "error" ? "Copy failed" : ""}</span>
+    </Button>
   )
 }

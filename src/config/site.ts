@@ -2,8 +2,9 @@ export const siteConfig = {
   name: "Flagcn",
   namespace: "flagcn",
   description: "Copy-owned, accessible flags for shadcn/ui.",
-  flagSource: "https://flagpedia.net",
-  flagApi: "https://flagcdn.com",
+  svgSource: "https://flagicons.lipis.dev",
+  rasterSource: "https://flagpedia.net",
+  rasterApi: "https://flagcdn.com",
   github: import.meta.env.VITE_GITHUB_URL || "https://github.com/shadi-almilhem/flagcn",
 } as const
 
@@ -11,7 +12,7 @@ export const packageManagers = ["pnpm", "npm", "yarn", "bun"] as const
 export type PackageManager = (typeof packageManagers)[number]
 
 export function getSiteOrigin() {
-  if (typeof window === "undefined") return "https://flagcn.pages.dev"
+  if (typeof window === "undefined") return "https://flagcn.dev"
   return window.location.origin
 }
 

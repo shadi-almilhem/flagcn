@@ -18,6 +18,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const heroFlags: FlagCode[] = ["ae", "sa", "jp", "br", "za", "ca", "de", "in", "am", "mx", "kr", "gb"]
+const featuredFlags: FlagCode[] = ["ae", "sa", "jp", "br", "za", "ca", "de", "in", "us-ca", "gb-eng", "eu", "un"]
 
 const benefits = [
   {
@@ -47,19 +48,14 @@ export function HomePage() {
 
   return (
     <main>
-      <section className="hero-grid overflow-hidden border-b">
+      <section className="overflow-hidden border-b">
         <div className="site-container flex min-h-[720px] flex-col items-center justify-center py-20 text-center sm:py-28">
-          <Badge variant="outline" className="mb-6 bg-background/80 px-3 py-1 backdrop-blur">
-            <span className="size-1.5 bg-primary" aria-hidden="true" />
-            The shadcn registry for flags
-          </Badge>
-
           <div className={cn("t-stagger", heroShown && "is-shown")}>
-            <h1 className="t-stagger-line t-stagger-line--1 max-w-5xl text-balance text-5xl font-semibold leading-[0.96] tracking-[-0.06em] sm:text-7xl lg:text-[84px]">
-              The missing flag registry for shadcn.
+            <h1 className="t-stagger-line t-stagger-line--1 max-w-5xl text-balance text-5xl font-semibold leading-[1.04] tracking-[-0.06em] sm:text-7xl sm:leading-[1.03] lg:text-[84px]">
+              Every flag your shadcn app needs.
             </h1>
             <p className="t-stagger-line t-stagger-line--2 mx-auto mt-7 max-w-2xl text-pretty text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-              Install one accessible React flag—or the complete {flagCount}-component catalog. Choose SVG, PNG, WebP, or JPEG, keep every edge visible, and style the source you own.
+              Add one accessible React flag or the complete {flagCount}-component catalog. Pick SVG, PNG, WebP, or JPEG, switch between 4:3 and 1:1, then style the source as your own.
             </p>
           </div>
 
@@ -78,7 +74,7 @@ export function HomePage() {
           <div className="mt-12 grid w-full max-w-3xl grid-cols-6 border-s border-t sm:grid-cols-12" aria-label="A sample of available flags">
             {heroFlags.map((code) => (
               <div key={code} className="grid h-14 place-items-center border-e border-b bg-card/70">
-                <Flag code={code} width={30} decorative className="h-5 w-7 object-contain ring-1 ring-border" />
+                <Flag code={code} format="png" ratio="4x3" width={40} decorative className="h-5 w-7 object-contain ring-1 ring-border" />
                 <span className="sr-only">{flagNames[code]}</span>
               </div>
             ))}
@@ -117,7 +113,7 @@ export function HomePage() {
             </div>
           </div>
 
-          <FlagGallery featuredCodes={heroFlags} className="mt-10" />
+          <FlagGallery featuredCodes={featuredFlags} className="mt-10" />
 
           <div className="mt-6 flex justify-center">
             <Link to="/flags" className={buttonVariants({ variant: "outline" })}>
@@ -136,7 +132,7 @@ export function HomePage() {
               Built for production, from the component API to the license.
             </h2>
             <p className="mt-4 max-w-xl leading-7 text-muted-foreground">
-              Flagcn source is MIT licensed. Artwork is delivered by FlagCDN, whose Flagpedia documentation marks the images as public domain. Attribution and official-symbol guidance remain visible and explicit.
+              Flagcn source is MIT licensed. SVG artwork comes from Flag Icons under MIT. Raster artwork is delivered by FlagCDN, whose Flagpedia documentation marks the images as public domain. Attribution and official-symbol guidance stay visible and explicit.
             </p>
             <Link to="/docs/license" className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
               Read the license notes <IconArrowRight className="size-4" />

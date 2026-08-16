@@ -5,7 +5,7 @@
   "description": "Accessible, source-owned flag components for the shadcn CLI.",
   "license": "MIT",
   "author": "Shadi Al Milhem",
-  "homepage": "https://flagcn.pages.dev",
+  "homepage": "https://flagcn.dev",
   "repository": {
     "type": "git",
     "url": "https://github.com/shadi-almilhem/flagcn.git"

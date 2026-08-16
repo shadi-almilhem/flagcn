@@ -57,7 +57,7 @@ export function InstallCommand({ item = "ae", className }: InstallCommandProps) 
         onValueChange={(value) => setPackageManager(value as PackageManager)}
         className="flex-col gap-0"
       >
-        <div className="flex min-h-10 items-center border-b border-border/60 px-2 pe-22 sm:pe-30">
+        <div className="flex min-h-10 items-center border-b border-border/60 px-2 pe-28">
           <PackageManagerIcon aria-hidden="true" className="mx-1 size-4 shrink-0 text-muted-foreground" />
           <TabsList className="h-9 bg-transparent p-0">
             {packageManagers.map((manager) => (
@@ -92,11 +92,12 @@ export function InstallCommand({ item = "ae", className }: InstallCommandProps) 
         idleIcon={IconPlus}
         aria-label="Copy command to add the Flagcn registry"
         title="Copy registry setup command"
-        className="absolute end-10 top-1.5 h-7 border-0 px-2 text-muted-foreground hover:text-foreground sm:end-12"
+        className="absolute end-10 top-1.5 h-7 w-16 border-0 px-0 text-muted-foreground hover:text-foreground"
       />
       <CopyButton
         value={() => getPackageInstallCommand(activeItem, packageManager)}
         label=""
+        hideLabel
         aria-label="Copy current install command"
         title="Copy install command"
         className="absolute end-1.5 top-1.5 size-7 border-0 px-0 text-muted-foreground hover:text-foreground"

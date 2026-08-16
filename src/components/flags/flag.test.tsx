@@ -7,7 +7,7 @@ describe("Flag", () => {
   it("renders a meaningful SVG image", () => {
     render(<Flag code="ae" alt="United Arab Emirates flag" width={80} className="rounded-md" />)
     const image = screen.getByRole("img", { name: "United Arab Emirates flag" })
-    expect(image).toHaveAttribute("src", "https://flagcdn.com/ae.svg")
+    expect(image).toHaveAttribute("src", "https://cdn.jsdelivr.net/npm/flag-icons@7.5.0/flags/4x3/ae.svg")
     expect(image).toHaveAttribute("data-format", "svg")
     expect(image).toHaveAttribute("data-ratio", "4x3")
     expect(image).toHaveAttribute("width", "80")

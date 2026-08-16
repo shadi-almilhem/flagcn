@@ -3,15 +3,13 @@
 export const flagFormats = ["svg", "png", "webp", "jpg"] as const
 export type FlagFormat = (typeof flagFormats)[number]
 
+export const flagIconsVersion = "7.5.0" as const
+export const flagIconsBaseUrl = `https://cdn.jsdelivr.net/npm/flag-icons@${flagIconsVersion}/flags`
+
 export const flagWidths = [20, 40, 80, 160, 320, 640, 1280, 2560] as const
 export type FlagWidth = (typeof flagWidths)[number]
 export const flagRatios = ["4x3", "1x1", "original"] as const
 export type FlagRatio = (typeof flagRatios)[number]
-
-export const flagIconWidths = [
-  16, 20, 24, 28, 32, 36, 40, 48, 56, 60, 64, 72, 80, 84, 96, 108, 112,
-  120, 128, 144, 160, 192, 224, 256,
-] as const
 
 export interface FlagUrlOptions {
   format?: FlagFormat
@@ -35,15 +33,14 @@ export function getFlagUrl(code: string, options: FlagUrlOptions = {}) {
   validateFlagWidth(width)
 
   if (format === "svg") {
+    if (ratio !== "original" && !normalizedCode.startsWith("us-")) {
+      return `${flagIconsBaseUrl}/${ratio}/${normalizedCode}.svg`
+    }
+
     return `https://flagcdn.com/${normalizedCode}.svg`
   }
 
-  if ((format === "png" || format === "webp") && ratio !== "original" && width <= flagIconWidths.at(-1)!) {
-    const iconWidth = closestWidth(width, flagIconWidths)
-    return `https://flagcdn.com/${iconWidth}x${Math.round(iconWidth * 0.75)}/${normalizedCode}.${format}`
-  }
-
-  return `https://flagcdn.com/w${closestWidth(width, flagWidths)}/${normalizedCode}.${format}`
+  return `https://flagcdn.com/w${atLeastWidth(width, flagWidths)}/${normalizedCode}.${format}`
 }
 
 export function getFlagSrcSet(code: string, options: FlagUrlOptions = {}) {
@@ -53,9 +50,8 @@ export function getFlagSrcSet(code: string, options: FlagUrlOptions = {}) {
   const ratio = options.ratio ?? "4x3"
   const requestedWidth = options.width ?? 80
   validateFlagWidth(requestedWidth)
-  const availableWidths = format === "jpg" || ratio === "original" ? flagWidths : flagIconWidths
   const candidates = [requestedWidth, requestedWidth * 2, requestedWidth * 3]
-    .map((candidate) => closestWidth(candidate, availableWidths))
+    .map((candidate) => atLeastWidth(candidate, flagWidths))
     .filter((candidate, index, values) => values.indexOf(candidate) === index)
 
   return candidates
@@ -63,10 +59,8 @@ export function getFlagSrcSet(code: string, options: FlagUrlOptions = {}) {
     .join(", ")
 }
 
-function closestWidth<T extends number>(width: number, widths: readonly T[]): T {
-  return widths.reduce((closest, candidate) =>
-    Math.abs(candidate - width) < Math.abs(closest - width) ? candidate : closest,
-  )
+function atLeastWidth<T extends number>(width: number, widths: readonly T[]): T {
+  return widths.find((candidate) => candidate >= width) ?? widths.at(-1)!
 }
 
 function validateFlagWidth(width: number) {

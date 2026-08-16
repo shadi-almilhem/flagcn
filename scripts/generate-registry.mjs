@@ -7,7 +7,7 @@ const DATA_FILE = join(ROOT, "src/components/flags/flag-data.ts")
 const COUNTRIES_DIR = join(ROOT, "src/components/flags/countries")
 const COUNTRIES_INDEX_FILE = join(COUNTRIES_DIR, "index.ts")
 const REGISTRY_FILE = join(ROOT, "registry.json")
-const REGISTRY_URL = (process.env.REGISTRY_URL || "https://flagcn.pages.dev").replace(/\/$/, "")
+const REGISTRY_URL = (process.env.REGISTRY_URL || "https://flagcn.dev").replace(/\/$/, "")
 const AUTHOR = "Shadi Al Milhem"
 const SPDX_HEADER = "// SPDX-License-Identifier: MIT\n\n"
 
@@ -96,7 +96,7 @@ function coreItems(flags) {
         { path: "src/components/flags/flag-utils.ts", type: "registry:lib", target: "@components/flags/flag-utils.ts" },
       ],
       categories: ["flags", "images", "internationalization"],
-      docs: "Pass a FlagCDN code and meaningful alt text. Use ratio='1x1' for square UI or ratio='4x3' for consistent cards. Set decorative when nearby text already names the place.",
+      docs: "Pass a supported flag code and meaningful alt text. Use ratio='1x1' for square UI or ratio='4x3' for consistent cards. Set decorative when nearby text already names the place.",
       meta: {
         formats: ["svg", "png", "webp", "jpg"],
         ratios: ["4x3", "1x1", "original"],

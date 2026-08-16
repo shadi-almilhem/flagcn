@@ -2,14 +2,14 @@
 
 [![CI](https://github.com/shadi-almilhem/flagcn/actions/workflows/ci.yml/badge.svg)](https://github.com/shadi-almilhem/flagcn/actions/workflows/ci.yml)
 
-Flagcn is a source-owned shadcn registry for accessible flags. It ships a small React image primitive, a searchable picker, and one installable wrapper for every flag in the catalog. Assets are requested from [Flagpedia's FlagCDN](https://flagpedia.net/download/api) in SVG, PNG, WebP, or JPEG and can render in no-crop 4:3 and 1:1 frames or at their original ratio.
+Flagcn is a source-owned shadcn registry for accessible flags. It ships a small React image primitive, a searchable picker, and one installable wrapper for every flag in the catalog. SVG assets use [Flag Icons](https://flagicons.lipis.dev/) in 4:3 and 1:1 variants. PNG, WebP, and JPEG assets use [Flagpedia's FlagCDN](https://flagpedia.net/download/api). U.S. state SVGs and original-proportion SVGs use FlagCDN as a documented fallback.
 
 ## What is included
 
-- `@flagcn/flag` — accessible, responsive SVG/PNG/WebP/JPEG primitive with no-crop 4:3 and square presentation.
-- `@flagcn/flag-picker` — searchable keyboard-friendly selector.
-- `@flagcn/all` — the core components, picker, catalog, and all 306 named flag wrappers.
-- `@flagcn/<code>` — 306 individually installable country, territory, subdivision, and organization wrappers.
+- `@flagcn/flag`: accessible, responsive SVG/PNG/WebP/JPEG primitive with 4:3 and square presentation.
+- `@flagcn/flag-picker`: searchable keyboard-friendly selector.
+- `@flagcn/all`: the core components, picker, catalog, and all 306 named flag wrappers.
+- `@flagcn/<code>`: 306 individually installable country, territory, subdivision, and organization wrappers.
 - A Vite + React landing page with package-manager install tabs and a complete filterable catalog.
 - Fumadocs-inspired documentation with grouped navigation, page outlines, copy actions, and AI-agent guidance.
 - Machine-readable `/llms.txt`, `/llms-full.txt`, `/AGENTS.md`, and registry JSON endpoints.
@@ -24,7 +24,7 @@ pnpm install
 pnpm dev
 ```
 
-The app follows shadcn preset `b5dMnNEf2`: Base UI, Lyra, olive base color, teal theme, Tabler icons, and DM Sans. The site is dark-first with zero-radius geometry.
+The app follows shadcn preset `b5dN5XYzA`: Base UI, Lyra, Mist base color, teal theme, Tabler icons, and DM Sans. The site is dark-first with zero-radius geometry.
 
 ## Build and verify
 
@@ -47,7 +47,7 @@ Until the registry is listed in the official shadcn directory, users add its nam
 {
   "registries": {
     "@flagcn": {
-      "url": "https://flagcn.pages.dev/r/{name}.json"
+      "url": "https://flagcn.dev/r/{name}.json"
     }
   }
 }
@@ -65,7 +65,7 @@ pnpm dlx shadcn@latest add @flagcn/all
 You can also configure the namespace with the CLI:
 
 ```bash
-pnpm dlx shadcn@latest registry add @flagcn=https://flagcn.pages.dev/r/{name}.json
+pnpm dlx shadcn@latest registry add @flagcn=https://flagcn.dev/r/{name}.json
 ```
 
 After the public registry is deployed and accepted into the official shadcn Registry Directory, `@flagcn/*` can work globally without a local registry entry. Directory acceptance is an external review step; publishing this repository alone does not reserve the namespace.
@@ -104,7 +104,7 @@ export function MarketFlag() {
 Example:
 
 ```bash
-REGISTRY_URL=https://flagcn.pages.dev \
+REGISTRY_URL=https://flagcn.dev \
 VITE_GITHUB_URL=https://github.com/shadi-almilhem/flagcn \
 pnpm build
 ```
@@ -116,7 +116,7 @@ Git deployment is the recommended production path:
 1. Push the project to GitHub or GitLab.
 2. In Cloudflare, open **Workers & Pages**, create a Pages project, and connect the repository.
 3. Use `pnpm build` as the build command and `dist` as the output directory.
-4. Set `NODE_VERSION=22`, `REGISTRY_URL=https://flagcn.pages.dev`, and `VITE_GITHUB_URL=https://github.com/shadi-almilhem/flagcn` in the production environment.
+4. Set `NODE_VERSION=22`, `REGISTRY_URL=https://flagcn.dev`, and `VITE_GITHUB_URL=https://github.com/shadi-almilhem/flagcn` in the production environment.
 5. After the first deployment, attach the custom domain from the Pages project's **Custom domains** tab.
 
 For a manual deployment after `pnpm build`:
@@ -145,9 +145,7 @@ public/AGENTS.md                      consumer-agent operating instructions
 
 ## Data and licensing
 
-Original Flagcn source code is MIT licensed and distributed files carry an SPDX identifier. Flagpedia states that the flag artwork it provides is public domain and based on Wikimedia Commons files; see [Flagpedia's license statement](https://flagpedia.net/about). Attribution is appreciated, so the site keeps a visible backlink.
-
-[Flag Icons](https://flagicons.lipis.dev/) was reviewed as the established comparison: it is MIT licensed and provides 4:3 and 1:1 SVG/CSS variants. Flagcn does not copy or bundle Flag Icons source or artwork; it uses Flagpedia/FlagCDN for the broader 306-entry catalog and multiple image formats. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the exact boundary.
+Original Flagcn source code is MIT licensed and distributed files carry an SPDX identifier. Country, territory, and organization SVGs are served from Flag Icons 7.5.0, which is MIT licensed and provides 4:3 and 1:1 variants. PNG, WebP, and JPEG assets come from Flagpedia's FlagCDN. Flagpedia states that its artwork is public domain and based on Wikimedia Commons files; see [Flagpedia's license statement](https://flagpedia.net/about). U.S. state SVGs and original-proportion SVGs also use FlagCDN because Flag Icons does not provide those exact assets. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the full boundary.
 
 Public-domain artwork status does not override jurisdiction-specific rules governing national flags, seals, or official emblems. Applications are responsible for using official symbols appropriately in their markets.
 

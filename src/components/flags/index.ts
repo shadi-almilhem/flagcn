@@ -6,7 +6,6 @@ export { flagCount, flagNames, flags, isFlagCode, type FlagCode, type FlagKind, 
 export * from "./countries"
 export {
   flagFormats,
-  flagIconWidths,
   flagRatios,
   flagWidths,
   getFlagSrcSet,

@@ -7,7 +7,7 @@ All notable changes to this project will be documented here. The format follows 
 ### Added
 
 - Initial Vite, React, Tailwind CSS, and shadcn registry project.
-- SVG, PNG, and WebP flag primitive backed by FlagCDN.
+- SVG flag primitive backed by Flag Icons, with PNG and WebP from FlagCDN.
 - Searchable accessible flag picker.
 - 306 individually installable flag wrappers.
 - Documentation site, flag catalog, generator, validation, tests, and deployment configuration.

@@ -57,7 +57,7 @@ function createConsumer(origin, label) {
     style: "base-lyra",
     rsc: false,
     tsx: true,
-    tailwind: { config: "", css: "src/index.css", baseColor: "olive", cssVariables: true, prefix: "" },
+    tailwind: { config: "", css: "src/index.css", baseColor: "mist", cssVariables: true, prefix: "" },
     iconLibrary: "tabler",
     rtl: false,
     menuColor: "default",
@@ -84,7 +84,7 @@ function run(command, args, options = {}) {
 
 const server = createServer((request, response) => {
   response.setHeader("Access-Control-Allow-Origin", "*")
-  if (request.url === "/r/colors/olive.json") {
+  if (request.url === "/r/colors/mist.json") {
     response.setHeader("Content-Type", "application/json")
     response.end(JSON.stringify(baseColor))
     return

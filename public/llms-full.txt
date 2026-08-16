@@ -1,4 +1,4 @@
-# Flagcn — complete reference for AI agents
+# Flagcn: complete reference for AI agents
 
 Flagcn is a shadcn registry for accessible React flag components. It copies source files into the user's project through the shadcn CLI. It is not an npm runtime package.
 
@@ -27,7 +27,8 @@ Resolve relative paths against the origin from which this file was fetched.
 - Default format: svg.
 - Default ratio: 4x3.
 - Source license: MIT.
-- Artwork delivery: FlagCDN, sourced by Flagpedia.
+- SVG artwork: Flag Icons 7.5.0 for supported 4:3 and 1:1 assets.
+- Raster artwork and SVG fallbacks: FlagCDN, sourced by Flagpedia.
 
 ## Connect the registry
 
@@ -103,7 +104,7 @@ The component renders a native img and no wrapper element.
 
 ## Formats and ratios
 
-SVG uses a scalable source. PNG, WebP, and JPEG receive responsive srcSet candidates. Pass a custom sizes value when the visual width changes with media queries.
+SVG uses pinned Flag Icons sources for supported 4:3 and 1:1 assets. U.S. state SVGs and original-proportion SVGs use FlagCDN as a fallback. PNG, WebP, and JPEG receive responsive srcSet candidates. Pass a custom sizes value when the visual width changes with media queries.
 
 The 4x3 ratio provides consistent landscape tiles and is the default. The 1x1 ratio creates a square image box. Both fixed frames use object-fit: contain so the complete flag remains visible. The original ratio preserves the source artwork's proportions.
 
@@ -118,7 +119,7 @@ Recommended combinations:
 
 The flag registry item includes typed helpers:
 
-- getFlagUrl(code, { format, width, ratio }): returns one FlagCDN URL.
+- getFlagUrl(code, { format, width, ratio }): returns one pinned Flag Icons or FlagCDN URL.
 - getFlagSrcSet(code, { format, width, ratio }): returns undefined for SVG and a width descriptor list for PNG/WebP/JPEG.
 - normalizeFlagCode(code): trims, lowercases, and validates supported ISO-style syntax.
 - flagFormats: readonly ["svg", "png", "webp", "jpg"].
@@ -207,23 +208,19 @@ A named wrapper fixes the code prop and forwards the rest of FlagProps. Use /r/r
 8. Supply meaningful alt text or explicitly set decorative.
 9. Run the consumer project's typecheck, lint, and tests.
 
-## Publishing and operating the registry
-
-The static site is compatible with Cloudflare Pages. Build with pnpm build and publish dist. Set REGISTRY_URL to the final production origin before generating registry payloads. Confirm /r/registry.json and /r/flag.json after deployment. A Git push is not proof of deployment; verify the live response.
-
 ## Licensing and third-party rights
 
 Flagcn original source code is MIT licensed. The repository includes LICENSE and THIRD_PARTY_NOTICES.md.
 
-Flagpedia states that its flag images are public domain and free for commercial and non-commercial use, with attribution appreciated but not required. Artwork is delivered from https://flagcdn.com and documented at https://flagpedia.net/about.
+Flag Icons is MIT licensed. Flagcn requests version 7.5.0 SVG assets at runtime for supported 4:3 and 1:1 flags. The required copyright and permission notice is preserved in THIRD_PARTY_NOTICES.md.
 
-Flag Icons at https://flagicons.lipis.dev/ was reviewed as a product comparison. Flagcn does not bundle or copy Flag Icons source or artwork.
+Flagpedia states that its flag images are public domain and free for commercial and non-commercial use, with attribution appreciated but not required. Raster artwork, U.S. state SVGs, and original-proportion SVGs are delivered from https://flagcdn.com and documented at https://flagpedia.net/about.
 
 Public-domain status does not override laws or protocols governing use of national flags, seals, emblems, or other official symbols. Users remain responsible for accurate use in their jurisdictions and markets.
 
 ## Project constraints and truthfulness
 
-- Flagcn depends on remote FlagCDN availability unless the installed source is modified to self-host artwork.
+- Flagcn depends on remote jsDelivr and FlagCDN availability unless the installed source is modified to self-host artwork.
 - The name @flagcn works without components.json only after acceptance into the shadcn Registry Directory or equivalent global configuration.
 - The deployed origin must replace any development or example origin in generated registry payloads.
 - Display names are human labels; registry item codes are the stable identifiers.

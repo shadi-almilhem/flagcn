@@ -9,4 +9,4 @@
 7. Do not use a flag as the only label for a language, nationality, residency, or market.
 8. After installation, run the consumer project's typecheck, lint, and relevant tests.
 
-Flagcn copies MIT-licensed React source through the shadcn CLI. It has no runtime package. Artwork is requested from FlagCDN and is documented by Flagpedia as public domain; review `/docs/license` for the full rights note.
+Flagcn copies MIT-licensed React source through the shadcn CLI. It has no runtime package. SVG artwork uses the MIT-licensed Flag Icons collection. Raster artwork and documented SVG fallbacks use FlagCDN; Flagpedia describes its artwork as public domain. Review `/docs/license` for the full rights note.

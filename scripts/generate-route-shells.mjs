@@ -13,7 +13,6 @@ const routes = [
   "docs/styling",
   "docs/accessibility",
   "docs/ai-agents",
-  "docs/publishing",
   "docs/license",
 ]
 
