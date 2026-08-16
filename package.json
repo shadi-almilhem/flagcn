@@ -27,8 +27,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-registry.mjs && shadcn build && tsc -b && vite build",
-    "build:site": "tsc -b && vite build",
+    "build": "node scripts/generate-registry.mjs && shadcn build && tsc -b && vite build && node scripts/generate-route-shells.mjs",
+    "build:site": "tsc -b && vite build && node scripts/generate-route-shells.mjs",
     "preview:cloudflare": "pnpm dlx wrangler@latest pages dev dist",
     "deploy:cloudflare": "pnpm dlx wrangler@latest pages deploy dist --project-name flagcn",
     "lint": "eslint .",
