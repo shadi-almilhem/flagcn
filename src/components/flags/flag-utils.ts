@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-export const flagFormats = ["svg", "png", "webp"] as const
+export const flagFormats = ["svg", "png", "webp", "jpg"] as const
 export type FlagFormat = (typeof flagFormats)[number]
 
 export const flagWidths = [20, 40, 80, 160, 320, 640, 1280, 2560] as const
@@ -38,7 +38,7 @@ export function getFlagUrl(code: string, options: FlagUrlOptions = {}) {
     return `https://flagcdn.com/${normalizedCode}.svg`
   }
 
-  if (ratio !== "original" && width <= flagIconWidths.at(-1)!) {
+  if ((format === "png" || format === "webp") && ratio !== "original" && width <= flagIconWidths.at(-1)!) {
     const iconWidth = closestWidth(width, flagIconWidths)
     return `https://flagcdn.com/${iconWidth}x${Math.round(iconWidth * 0.75)}/${normalizedCode}.${format}`
   }
@@ -53,7 +53,7 @@ export function getFlagSrcSet(code: string, options: FlagUrlOptions = {}) {
   const ratio = options.ratio ?? "4x3"
   const requestedWidth = options.width ?? 80
   validateFlagWidth(requestedWidth)
-  const availableWidths = ratio === "original" ? flagWidths : flagIconWidths
+  const availableWidths = format === "jpg" || ratio === "original" ? flagWidths : flagIconWidths
   const candidates = [requestedWidth, requestedWidth * 2, requestedWidth * 3]
     .map((candidate) => closestWidth(candidate, availableWidths))
     .filter((candidate, index, values) => values.indexOf(candidate) === index)

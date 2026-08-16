@@ -140,7 +140,7 @@ export function FlagPicker({
               ratio={ratio}
               alt=""
               decorative
-              className="size-5 rounded-[2px] object-cover shadow-[0_0_0_1px_rgba(0,0,0,0.12)]"
+              className="size-5 object-contain ring-1 ring-border"
             />
           ) : null}
           <span className="truncate">{currentValue ? flagNames[currentValue] : placeholder}</span>
@@ -191,7 +191,7 @@ export function FlagPicker({
                   ratio={ratio}
                   alt=""
                   decorative
-                  className="h-[15px] w-5 shrink-0 rounded-[2px] object-cover shadow-[0_0_0_1px_rgba(0,0,0,0.12)]"
+                  className="h-[15px] w-5 shrink-0 object-contain ring-1 ring-border"
                 />
                 <span className="min-w-0 flex-1 truncate">{flag.name}</span>
                 <span className="text-muted-foreground font-mono text-[11px] uppercase">{flag.code}</span>

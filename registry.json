@@ -7,7 +7,7 @@
       "name": "flag",
       "type": "registry:ui",
       "title": "Flag",
-      "description": "An accessible flag image primitive with 4:3, 1:1, and original ratios in SVG, PNG, or WebP.",
+      "description": "An accessible no-crop flag image primitive with 4:3, 1:1, and original frames in SVG, PNG, WebP, or JPEG.",
       "author": "Shadi Al Milhem",
       "files": [
         {
@@ -31,7 +31,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -1665,7 +1666,7 @@
       "name": "ad",
       "type": "registry:component",
       "title": "Andorra Flag",
-      "description": "A typed Andorra flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Andorra flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -1689,7 +1690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -1704,7 +1706,7 @@
       "name": "ae",
       "type": "registry:component",
       "title": "United Arab Emirates Flag",
-      "description": "A typed United Arab Emirates flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed United Arab Emirates flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -1728,7 +1730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -1743,7 +1746,7 @@
       "name": "af",
       "type": "registry:component",
       "title": "Afghanistan Flag",
-      "description": "A typed Afghanistan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Afghanistan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -1767,7 +1770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -1782,7 +1786,7 @@
       "name": "ag",
       "type": "registry:component",
       "title": "Antigua and Barbuda Flag",
-      "description": "A typed Antigua and Barbuda flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Antigua and Barbuda flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -1806,7 +1810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -1821,7 +1826,7 @@
       "name": "ai",
       "type": "registry:component",
       "title": "Anguilla Flag",
-      "description": "A typed Anguilla flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Anguilla flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -1845,7 +1850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -1860,7 +1866,7 @@
       "name": "al",
       "type": "registry:component",
       "title": "Albania Flag",
-      "description": "A typed Albania flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Albania flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -1884,7 +1890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -1899,7 +1906,7 @@
       "name": "am",
       "type": "registry:component",
       "title": "Armenia Flag",
-      "description": "A typed Armenia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Armenia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -1923,7 +1930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -1938,7 +1946,7 @@
       "name": "ao",
       "type": "registry:component",
       "title": "Angola Flag",
-      "description": "A typed Angola flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Angola flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -1962,7 +1970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -1977,7 +1986,7 @@
       "name": "aq",
       "type": "registry:component",
       "title": "Antarctica Flag",
-      "description": "A typed Antarctica flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Antarctica flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2001,7 +2010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2016,7 +2026,7 @@
       "name": "ar",
       "type": "registry:component",
       "title": "Argentina Flag",
-      "description": "A typed Argentina flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Argentina flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2040,7 +2050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2055,7 +2066,7 @@
       "name": "as",
       "type": "registry:component",
       "title": "American Samoa Flag",
-      "description": "A typed American Samoa flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed American Samoa flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2079,7 +2090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2094,7 +2106,7 @@
       "name": "at",
       "type": "registry:component",
       "title": "Austria Flag",
-      "description": "A typed Austria flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Austria flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2118,7 +2130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2133,7 +2146,7 @@
       "name": "au",
       "type": "registry:component",
       "title": "Australia Flag",
-      "description": "A typed Australia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Australia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2157,7 +2170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2172,7 +2186,7 @@
       "name": "aw",
       "type": "registry:component",
       "title": "Aruba Flag",
-      "description": "A typed Aruba flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Aruba flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2196,7 +2210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2211,7 +2226,7 @@
       "name": "ax",
       "type": "registry:component",
       "title": "Åland Islands Flag",
-      "description": "A typed Åland Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Åland Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2235,7 +2250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2250,7 +2266,7 @@
       "name": "az",
       "type": "registry:component",
       "title": "Azerbaijan Flag",
-      "description": "A typed Azerbaijan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Azerbaijan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2274,7 +2290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2289,7 +2306,7 @@
       "name": "ba",
       "type": "registry:component",
       "title": "Bosnia and Herzegovina Flag",
-      "description": "A typed Bosnia and Herzegovina flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Bosnia and Herzegovina flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2313,7 +2330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2328,7 +2346,7 @@
       "name": "bb",
       "type": "registry:component",
       "title": "Barbados Flag",
-      "description": "A typed Barbados flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Barbados flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2352,7 +2370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2367,7 +2386,7 @@
       "name": "bd",
       "type": "registry:component",
       "title": "Bangladesh Flag",
-      "description": "A typed Bangladesh flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Bangladesh flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2391,7 +2410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2406,7 +2426,7 @@
       "name": "be",
       "type": "registry:component",
       "title": "Belgium Flag",
-      "description": "A typed Belgium flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Belgium flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2430,7 +2450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2445,7 +2466,7 @@
       "name": "bf",
       "type": "registry:component",
       "title": "Burkina Faso Flag",
-      "description": "A typed Burkina Faso flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Burkina Faso flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2469,7 +2490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2484,7 +2506,7 @@
       "name": "bg",
       "type": "registry:component",
       "title": "Bulgaria Flag",
-      "description": "A typed Bulgaria flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Bulgaria flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2508,7 +2530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2523,7 +2546,7 @@
       "name": "bh",
       "type": "registry:component",
       "title": "Bahrain Flag",
-      "description": "A typed Bahrain flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Bahrain flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2547,7 +2570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2562,7 +2586,7 @@
       "name": "bi",
       "type": "registry:component",
       "title": "Burundi Flag",
-      "description": "A typed Burundi flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Burundi flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2586,7 +2610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2601,7 +2626,7 @@
       "name": "bj",
       "type": "registry:component",
       "title": "Benin Flag",
-      "description": "A typed Benin flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Benin flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2625,7 +2650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2640,7 +2666,7 @@
       "name": "bl",
       "type": "registry:component",
       "title": "Saint Barthélemy Flag",
-      "description": "A typed Saint Barthélemy flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Saint Barthélemy flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2664,7 +2690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2679,7 +2706,7 @@
       "name": "bm",
       "type": "registry:component",
       "title": "Bermuda Flag",
-      "description": "A typed Bermuda flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Bermuda flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2703,7 +2730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2718,7 +2746,7 @@
       "name": "bn",
       "type": "registry:component",
       "title": "Brunei Flag",
-      "description": "A typed Brunei flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Brunei flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2742,7 +2770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2757,7 +2786,7 @@
       "name": "bo",
       "type": "registry:component",
       "title": "Bolivia Flag",
-      "description": "A typed Bolivia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Bolivia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2781,7 +2810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2796,7 +2826,7 @@
       "name": "bq",
       "type": "registry:component",
       "title": "Caribbean Netherlands Flag",
-      "description": "A typed Caribbean Netherlands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Caribbean Netherlands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2820,7 +2850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2835,7 +2866,7 @@
       "name": "br",
       "type": "registry:component",
       "title": "Brazil Flag",
-      "description": "A typed Brazil flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Brazil flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2859,7 +2890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2874,7 +2906,7 @@
       "name": "bs",
       "type": "registry:component",
       "title": "Bahamas Flag",
-      "description": "A typed Bahamas flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Bahamas flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2898,7 +2930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2913,7 +2946,7 @@
       "name": "bt",
       "type": "registry:component",
       "title": "Bhutan Flag",
-      "description": "A typed Bhutan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Bhutan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2937,7 +2970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2952,7 +2986,7 @@
       "name": "bv",
       "type": "registry:component",
       "title": "Bouvet Island Flag",
-      "description": "A typed Bouvet Island flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Bouvet Island flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -2976,7 +3010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -2991,7 +3026,7 @@
       "name": "bw",
       "type": "registry:component",
       "title": "Botswana Flag",
-      "description": "A typed Botswana flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Botswana flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3015,7 +3050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3030,7 +3066,7 @@
       "name": "by",
       "type": "registry:component",
       "title": "Belarus Flag",
-      "description": "A typed Belarus flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Belarus flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3054,7 +3090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3069,7 +3106,7 @@
       "name": "bz",
       "type": "registry:component",
       "title": "Belize Flag",
-      "description": "A typed Belize flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Belize flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3093,7 +3130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3108,7 +3146,7 @@
       "name": "ca",
       "type": "registry:component",
       "title": "Canada Flag",
-      "description": "A typed Canada flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Canada flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3132,7 +3170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3147,7 +3186,7 @@
       "name": "cc",
       "type": "registry:component",
       "title": "Cocos (Keeling) Islands Flag",
-      "description": "A typed Cocos (Keeling) Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Cocos (Keeling) Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3171,7 +3210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3186,7 +3226,7 @@
       "name": "cd",
       "type": "registry:component",
       "title": "DR Congo Flag",
-      "description": "A typed DR Congo flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed DR Congo flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3210,7 +3250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3225,7 +3266,7 @@
       "name": "cf",
       "type": "registry:component",
       "title": "Central African Republic Flag",
-      "description": "A typed Central African Republic flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Central African Republic flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3249,7 +3290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3264,7 +3306,7 @@
       "name": "cg",
       "type": "registry:component",
       "title": "Republic of the Congo Flag",
-      "description": "A typed Republic of the Congo flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Republic of the Congo flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3288,7 +3330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3303,7 +3346,7 @@
       "name": "ch",
       "type": "registry:component",
       "title": "Switzerland Flag",
-      "description": "A typed Switzerland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Switzerland flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3327,7 +3370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3342,7 +3386,7 @@
       "name": "ci",
       "type": "registry:component",
       "title": "Côte d'Ivoire (Ivory Coast) Flag",
-      "description": "A typed Côte d'Ivoire (Ivory Coast) flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Côte d'Ivoire (Ivory Coast) flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3366,7 +3410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3381,7 +3426,7 @@
       "name": "ck",
       "type": "registry:component",
       "title": "Cook Islands Flag",
-      "description": "A typed Cook Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Cook Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3405,7 +3450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3420,7 +3466,7 @@
       "name": "cl",
       "type": "registry:component",
       "title": "Chile Flag",
-      "description": "A typed Chile flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Chile flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3444,7 +3490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3459,7 +3506,7 @@
       "name": "cm",
       "type": "registry:component",
       "title": "Cameroon Flag",
-      "description": "A typed Cameroon flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Cameroon flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3483,7 +3530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3498,7 +3546,7 @@
       "name": "cn",
       "type": "registry:component",
       "title": "China Flag",
-      "description": "A typed China flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed China flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3522,7 +3570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3537,7 +3586,7 @@
       "name": "co",
       "type": "registry:component",
       "title": "Colombia Flag",
-      "description": "A typed Colombia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Colombia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3561,7 +3610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3576,7 +3626,7 @@
       "name": "cr",
       "type": "registry:component",
       "title": "Costa Rica Flag",
-      "description": "A typed Costa Rica flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Costa Rica flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3600,7 +3650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3615,7 +3666,7 @@
       "name": "cu",
       "type": "registry:component",
       "title": "Cuba Flag",
-      "description": "A typed Cuba flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Cuba flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3639,7 +3690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3654,7 +3706,7 @@
       "name": "cv",
       "type": "registry:component",
       "title": "Cape Verde Flag",
-      "description": "A typed Cape Verde flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Cape Verde flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3678,7 +3730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3693,7 +3746,7 @@
       "name": "cw",
       "type": "registry:component",
       "title": "Curaçao Flag",
-      "description": "A typed Curaçao flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Curaçao flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3717,7 +3770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3732,7 +3786,7 @@
       "name": "cx",
       "type": "registry:component",
       "title": "Christmas Island Flag",
-      "description": "A typed Christmas Island flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Christmas Island flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3756,7 +3810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3771,7 +3826,7 @@
       "name": "cy",
       "type": "registry:component",
       "title": "Cyprus Flag",
-      "description": "A typed Cyprus flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Cyprus flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3795,7 +3850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3810,7 +3866,7 @@
       "name": "cz",
       "type": "registry:component",
       "title": "Czechia Flag",
-      "description": "A typed Czechia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Czechia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3834,7 +3890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3849,7 +3906,7 @@
       "name": "de",
       "type": "registry:component",
       "title": "Germany Flag",
-      "description": "A typed Germany flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Germany flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3873,7 +3930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3888,7 +3946,7 @@
       "name": "dj",
       "type": "registry:component",
       "title": "Djibouti Flag",
-      "description": "A typed Djibouti flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Djibouti flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3912,7 +3970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3927,7 +3986,7 @@
       "name": "dk",
       "type": "registry:component",
       "title": "Denmark Flag",
-      "description": "A typed Denmark flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Denmark flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3951,7 +4010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -3966,7 +4026,7 @@
       "name": "dm",
       "type": "registry:component",
       "title": "Dominica Flag",
-      "description": "A typed Dominica flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Dominica flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -3990,7 +4050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4005,7 +4066,7 @@
       "name": "do",
       "type": "registry:component",
       "title": "Dominican Republic Flag",
-      "description": "A typed Dominican Republic flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Dominican Republic flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4029,7 +4090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4044,7 +4106,7 @@
       "name": "dz",
       "type": "registry:component",
       "title": "Algeria Flag",
-      "description": "A typed Algeria flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Algeria flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4068,7 +4130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4083,7 +4146,7 @@
       "name": "ec",
       "type": "registry:component",
       "title": "Ecuador Flag",
-      "description": "A typed Ecuador flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Ecuador flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4107,7 +4170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4122,7 +4186,7 @@
       "name": "ee",
       "type": "registry:component",
       "title": "Estonia Flag",
-      "description": "A typed Estonia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Estonia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4146,7 +4210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4161,7 +4226,7 @@
       "name": "eg",
       "type": "registry:component",
       "title": "Egypt Flag",
-      "description": "A typed Egypt flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Egypt flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4185,7 +4250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4200,7 +4266,7 @@
       "name": "eh",
       "type": "registry:component",
       "title": "Western Sahara Flag",
-      "description": "A typed Western Sahara flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Western Sahara flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4224,7 +4290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4239,7 +4306,7 @@
       "name": "er",
       "type": "registry:component",
       "title": "Eritrea Flag",
-      "description": "A typed Eritrea flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Eritrea flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4263,7 +4330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4278,7 +4346,7 @@
       "name": "es",
       "type": "registry:component",
       "title": "Spain Flag",
-      "description": "A typed Spain flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Spain flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4302,7 +4370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4317,7 +4386,7 @@
       "name": "et",
       "type": "registry:component",
       "title": "Ethiopia Flag",
-      "description": "A typed Ethiopia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Ethiopia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4341,7 +4410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4356,7 +4426,7 @@
       "name": "eu",
       "type": "registry:component",
       "title": "European Union Flag",
-      "description": "A typed European Union flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed European Union flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4380,7 +4450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4395,7 +4466,7 @@
       "name": "fi",
       "type": "registry:component",
       "title": "Finland Flag",
-      "description": "A typed Finland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Finland flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4419,7 +4490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4434,7 +4506,7 @@
       "name": "fj",
       "type": "registry:component",
       "title": "Fiji Flag",
-      "description": "A typed Fiji flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Fiji flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4458,7 +4530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4473,7 +4546,7 @@
       "name": "fk",
       "type": "registry:component",
       "title": "Falkland Islands Flag",
-      "description": "A typed Falkland Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Falkland Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4497,7 +4570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4512,7 +4586,7 @@
       "name": "fm",
       "type": "registry:component",
       "title": "Micronesia Flag",
-      "description": "A typed Micronesia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Micronesia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4536,7 +4610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4551,7 +4626,7 @@
       "name": "fo",
       "type": "registry:component",
       "title": "Faroe Islands Flag",
-      "description": "A typed Faroe Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Faroe Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4575,7 +4650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4590,7 +4666,7 @@
       "name": "fr",
       "type": "registry:component",
       "title": "France Flag",
-      "description": "A typed France flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed France flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4614,7 +4690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4629,7 +4706,7 @@
       "name": "ga",
       "type": "registry:component",
       "title": "Gabon Flag",
-      "description": "A typed Gabon flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Gabon flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4653,7 +4730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4668,7 +4746,7 @@
       "name": "gb",
       "type": "registry:component",
       "title": "United Kingdom Flag",
-      "description": "A typed United Kingdom flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed United Kingdom flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4692,7 +4770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4707,7 +4786,7 @@
       "name": "gb-eng",
       "type": "registry:component",
       "title": "England Flag",
-      "description": "A typed England flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed England flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4731,7 +4810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4746,7 +4826,7 @@
       "name": "gb-nir",
       "type": "registry:component",
       "title": "Northern Ireland Flag",
-      "description": "A typed Northern Ireland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Northern Ireland flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4770,7 +4850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4785,7 +4866,7 @@
       "name": "gb-sct",
       "type": "registry:component",
       "title": "Scotland Flag",
-      "description": "A typed Scotland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Scotland flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4809,7 +4890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4824,7 +4906,7 @@
       "name": "gb-wls",
       "type": "registry:component",
       "title": "Wales Flag",
-      "description": "A typed Wales flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Wales flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4848,7 +4930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4863,7 +4946,7 @@
       "name": "gd",
       "type": "registry:component",
       "title": "Grenada Flag",
-      "description": "A typed Grenada flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Grenada flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4887,7 +4970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4902,7 +4986,7 @@
       "name": "ge",
       "type": "registry:component",
       "title": "Georgia Flag",
-      "description": "A typed Georgia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Georgia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4926,7 +5010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4941,7 +5026,7 @@
       "name": "gf",
       "type": "registry:component",
       "title": "French Guiana Flag",
-      "description": "A typed French Guiana flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed French Guiana flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -4965,7 +5050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -4980,7 +5066,7 @@
       "name": "gg",
       "type": "registry:component",
       "title": "Guernsey Flag",
-      "description": "A typed Guernsey flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Guernsey flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5004,7 +5090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5019,7 +5106,7 @@
       "name": "gh",
       "type": "registry:component",
       "title": "Ghana Flag",
-      "description": "A typed Ghana flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Ghana flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5043,7 +5130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5058,7 +5146,7 @@
       "name": "gi",
       "type": "registry:component",
       "title": "Gibraltar Flag",
-      "description": "A typed Gibraltar flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Gibraltar flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5082,7 +5170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5097,7 +5186,7 @@
       "name": "gl",
       "type": "registry:component",
       "title": "Greenland Flag",
-      "description": "A typed Greenland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Greenland flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5121,7 +5210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5136,7 +5226,7 @@
       "name": "gm",
       "type": "registry:component",
       "title": "Gambia Flag",
-      "description": "A typed Gambia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Gambia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5160,7 +5250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5175,7 +5266,7 @@
       "name": "gn",
       "type": "registry:component",
       "title": "Guinea Flag",
-      "description": "A typed Guinea flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Guinea flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5199,7 +5290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5214,7 +5306,7 @@
       "name": "gp",
       "type": "registry:component",
       "title": "Guadeloupe Flag",
-      "description": "A typed Guadeloupe flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Guadeloupe flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5238,7 +5330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5253,7 +5346,7 @@
       "name": "gq",
       "type": "registry:component",
       "title": "Equatorial Guinea Flag",
-      "description": "A typed Equatorial Guinea flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Equatorial Guinea flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5277,7 +5370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5292,7 +5386,7 @@
       "name": "gr",
       "type": "registry:component",
       "title": "Greece Flag",
-      "description": "A typed Greece flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Greece flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5316,7 +5410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5331,7 +5426,7 @@
       "name": "gs",
       "type": "registry:component",
       "title": "South Georgia Flag",
-      "description": "A typed South Georgia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed South Georgia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5355,7 +5450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5370,7 +5466,7 @@
       "name": "gt",
       "type": "registry:component",
       "title": "Guatemala Flag",
-      "description": "A typed Guatemala flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Guatemala flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5394,7 +5490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5409,7 +5506,7 @@
       "name": "gu",
       "type": "registry:component",
       "title": "Guam Flag",
-      "description": "A typed Guam flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Guam flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5433,7 +5530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5448,7 +5546,7 @@
       "name": "gw",
       "type": "registry:component",
       "title": "Guinea-Bissau Flag",
-      "description": "A typed Guinea-Bissau flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Guinea-Bissau flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5472,7 +5570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5487,7 +5586,7 @@
       "name": "gy",
       "type": "registry:component",
       "title": "Guyana Flag",
-      "description": "A typed Guyana flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Guyana flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5511,7 +5610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5526,7 +5626,7 @@
       "name": "hk",
       "type": "registry:component",
       "title": "Hong Kong Flag",
-      "description": "A typed Hong Kong flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Hong Kong flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5550,7 +5650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5565,7 +5666,7 @@
       "name": "hm",
       "type": "registry:component",
       "title": "Heard Island and McDonald Islands Flag",
-      "description": "A typed Heard Island and McDonald Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Heard Island and McDonald Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5589,7 +5690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5604,7 +5706,7 @@
       "name": "hn",
       "type": "registry:component",
       "title": "Honduras Flag",
-      "description": "A typed Honduras flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Honduras flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5628,7 +5730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5643,7 +5746,7 @@
       "name": "hr",
       "type": "registry:component",
       "title": "Croatia Flag",
-      "description": "A typed Croatia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Croatia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5667,7 +5770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5682,7 +5786,7 @@
       "name": "ht",
       "type": "registry:component",
       "title": "Haiti Flag",
-      "description": "A typed Haiti flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Haiti flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5706,7 +5810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5721,7 +5826,7 @@
       "name": "hu",
       "type": "registry:component",
       "title": "Hungary Flag",
-      "description": "A typed Hungary flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Hungary flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5745,7 +5850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5760,7 +5866,7 @@
       "name": "id",
       "type": "registry:component",
       "title": "Indonesia Flag",
-      "description": "A typed Indonesia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Indonesia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5784,7 +5890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5799,7 +5906,7 @@
       "name": "ie",
       "type": "registry:component",
       "title": "Ireland Flag",
-      "description": "A typed Ireland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Ireland flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5823,7 +5930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5838,7 +5946,7 @@
       "name": "il",
       "type": "registry:component",
       "title": "Israel Flag",
-      "description": "A typed Israel flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Israel flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5862,7 +5970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5877,7 +5986,7 @@
       "name": "im",
       "type": "registry:component",
       "title": "Isle of Man Flag",
-      "description": "A typed Isle of Man flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Isle of Man flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5901,7 +6010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5916,7 +6026,7 @@
       "name": "in",
       "type": "registry:component",
       "title": "India Flag",
-      "description": "A typed India flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed India flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5940,7 +6050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5955,7 +6066,7 @@
       "name": "io",
       "type": "registry:component",
       "title": "British Indian Ocean Territory Flag",
-      "description": "A typed British Indian Ocean Territory flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed British Indian Ocean Territory flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -5979,7 +6090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -5994,7 +6106,7 @@
       "name": "iq",
       "type": "registry:component",
       "title": "Iraq Flag",
-      "description": "A typed Iraq flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Iraq flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6018,7 +6130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6033,7 +6146,7 @@
       "name": "ir",
       "type": "registry:component",
       "title": "Iran Flag",
-      "description": "A typed Iran flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Iran flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6057,7 +6170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6072,7 +6186,7 @@
       "name": "is",
       "type": "registry:component",
       "title": "Iceland Flag",
-      "description": "A typed Iceland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Iceland flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6096,7 +6210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6111,7 +6226,7 @@
       "name": "it",
       "type": "registry:component",
       "title": "Italy Flag",
-      "description": "A typed Italy flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Italy flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6135,7 +6250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6150,7 +6266,7 @@
       "name": "je",
       "type": "registry:component",
       "title": "Jersey Flag",
-      "description": "A typed Jersey flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Jersey flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6174,7 +6290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6189,7 +6306,7 @@
       "name": "jm",
       "type": "registry:component",
       "title": "Jamaica Flag",
-      "description": "A typed Jamaica flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Jamaica flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6213,7 +6330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6228,7 +6346,7 @@
       "name": "jo",
       "type": "registry:component",
       "title": "Jordan Flag",
-      "description": "A typed Jordan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Jordan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6252,7 +6370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6267,7 +6386,7 @@
       "name": "jp",
       "type": "registry:component",
       "title": "Japan Flag",
-      "description": "A typed Japan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Japan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6291,7 +6410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6306,7 +6426,7 @@
       "name": "ke",
       "type": "registry:component",
       "title": "Kenya Flag",
-      "description": "A typed Kenya flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Kenya flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6330,7 +6450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6345,7 +6466,7 @@
       "name": "kg",
       "type": "registry:component",
       "title": "Kyrgyzstan Flag",
-      "description": "A typed Kyrgyzstan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Kyrgyzstan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6369,7 +6490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6384,7 +6506,7 @@
       "name": "kh",
       "type": "registry:component",
       "title": "Cambodia Flag",
-      "description": "A typed Cambodia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Cambodia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6408,7 +6530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6423,7 +6546,7 @@
       "name": "ki",
       "type": "registry:component",
       "title": "Kiribati Flag",
-      "description": "A typed Kiribati flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Kiribati flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6447,7 +6570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6462,7 +6586,7 @@
       "name": "km",
       "type": "registry:component",
       "title": "Comoros Flag",
-      "description": "A typed Comoros flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Comoros flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6486,7 +6610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6501,7 +6626,7 @@
       "name": "kn",
       "type": "registry:component",
       "title": "Saint Kitts and Nevis Flag",
-      "description": "A typed Saint Kitts and Nevis flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Saint Kitts and Nevis flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6525,7 +6650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6540,7 +6666,7 @@
       "name": "kp",
       "type": "registry:component",
       "title": "North Korea Flag",
-      "description": "A typed North Korea flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed North Korea flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6564,7 +6690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6579,7 +6706,7 @@
       "name": "kr",
       "type": "registry:component",
       "title": "South Korea Flag",
-      "description": "A typed South Korea flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed South Korea flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6603,7 +6730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6618,7 +6746,7 @@
       "name": "kw",
       "type": "registry:component",
       "title": "Kuwait Flag",
-      "description": "A typed Kuwait flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Kuwait flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6642,7 +6770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6657,7 +6786,7 @@
       "name": "ky",
       "type": "registry:component",
       "title": "Cayman Islands Flag",
-      "description": "A typed Cayman Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Cayman Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6681,7 +6810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6696,7 +6826,7 @@
       "name": "kz",
       "type": "registry:component",
       "title": "Kazakhstan Flag",
-      "description": "A typed Kazakhstan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Kazakhstan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6720,7 +6850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6735,7 +6866,7 @@
       "name": "la",
       "type": "registry:component",
       "title": "Laos Flag",
-      "description": "A typed Laos flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Laos flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6759,7 +6890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6774,7 +6906,7 @@
       "name": "lb",
       "type": "registry:component",
       "title": "Lebanon Flag",
-      "description": "A typed Lebanon flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Lebanon flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6798,7 +6930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6813,7 +6946,7 @@
       "name": "lc",
       "type": "registry:component",
       "title": "Saint Lucia Flag",
-      "description": "A typed Saint Lucia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Saint Lucia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6837,7 +6970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6852,7 +6986,7 @@
       "name": "li",
       "type": "registry:component",
       "title": "Liechtenstein Flag",
-      "description": "A typed Liechtenstein flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Liechtenstein flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6876,7 +7010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6891,7 +7026,7 @@
       "name": "lk",
       "type": "registry:component",
       "title": "Sri Lanka Flag",
-      "description": "A typed Sri Lanka flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Sri Lanka flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6915,7 +7050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6930,7 +7066,7 @@
       "name": "lr",
       "type": "registry:component",
       "title": "Liberia Flag",
-      "description": "A typed Liberia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Liberia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6954,7 +7090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -6969,7 +7106,7 @@
       "name": "ls",
       "type": "registry:component",
       "title": "Lesotho Flag",
-      "description": "A typed Lesotho flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Lesotho flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -6993,7 +7130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7008,7 +7146,7 @@
       "name": "lt",
       "type": "registry:component",
       "title": "Lithuania Flag",
-      "description": "A typed Lithuania flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Lithuania flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7032,7 +7170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7047,7 +7186,7 @@
       "name": "lu",
       "type": "registry:component",
       "title": "Luxembourg Flag",
-      "description": "A typed Luxembourg flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Luxembourg flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7071,7 +7210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7086,7 +7226,7 @@
       "name": "lv",
       "type": "registry:component",
       "title": "Latvia Flag",
-      "description": "A typed Latvia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Latvia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7110,7 +7250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7125,7 +7266,7 @@
       "name": "ly",
       "type": "registry:component",
       "title": "Libya Flag",
-      "description": "A typed Libya flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Libya flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7149,7 +7290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7164,7 +7306,7 @@
       "name": "ma",
       "type": "registry:component",
       "title": "Morocco Flag",
-      "description": "A typed Morocco flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Morocco flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7188,7 +7330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7203,7 +7346,7 @@
       "name": "mc",
       "type": "registry:component",
       "title": "Monaco Flag",
-      "description": "A typed Monaco flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Monaco flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7227,7 +7370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7242,7 +7386,7 @@
       "name": "md",
       "type": "registry:component",
       "title": "Moldova Flag",
-      "description": "A typed Moldova flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Moldova flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7266,7 +7410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7281,7 +7426,7 @@
       "name": "me",
       "type": "registry:component",
       "title": "Montenegro Flag",
-      "description": "A typed Montenegro flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Montenegro flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7305,7 +7450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7320,7 +7466,7 @@
       "name": "mf",
       "type": "registry:component",
       "title": "Saint Martin Flag",
-      "description": "A typed Saint Martin flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Saint Martin flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7344,7 +7490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7359,7 +7506,7 @@
       "name": "mg",
       "type": "registry:component",
       "title": "Madagascar Flag",
-      "description": "A typed Madagascar flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Madagascar flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7383,7 +7530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7398,7 +7546,7 @@
       "name": "mh",
       "type": "registry:component",
       "title": "Marshall Islands Flag",
-      "description": "A typed Marshall Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Marshall Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7422,7 +7570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7437,7 +7586,7 @@
       "name": "mk",
       "type": "registry:component",
       "title": "North Macedonia Flag",
-      "description": "A typed North Macedonia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed North Macedonia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7461,7 +7610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7476,7 +7626,7 @@
       "name": "ml",
       "type": "registry:component",
       "title": "Mali Flag",
-      "description": "A typed Mali flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Mali flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7500,7 +7650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7515,7 +7666,7 @@
       "name": "mm",
       "type": "registry:component",
       "title": "Myanmar Flag",
-      "description": "A typed Myanmar flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Myanmar flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7539,7 +7690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7554,7 +7706,7 @@
       "name": "mn",
       "type": "registry:component",
       "title": "Mongolia Flag",
-      "description": "A typed Mongolia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Mongolia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7578,7 +7730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7593,7 +7746,7 @@
       "name": "mo",
       "type": "registry:component",
       "title": "Macau Flag",
-      "description": "A typed Macau flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Macau flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7617,7 +7770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7632,7 +7786,7 @@
       "name": "mp",
       "type": "registry:component",
       "title": "Northern Mariana Islands Flag",
-      "description": "A typed Northern Mariana Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Northern Mariana Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7656,7 +7810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7671,7 +7826,7 @@
       "name": "mq",
       "type": "registry:component",
       "title": "Martinique Flag",
-      "description": "A typed Martinique flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Martinique flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7695,7 +7850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7710,7 +7866,7 @@
       "name": "mr",
       "type": "registry:component",
       "title": "Mauritania Flag",
-      "description": "A typed Mauritania flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Mauritania flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7734,7 +7890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7749,7 +7906,7 @@
       "name": "ms",
       "type": "registry:component",
       "title": "Montserrat Flag",
-      "description": "A typed Montserrat flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Montserrat flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7773,7 +7930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7788,7 +7946,7 @@
       "name": "mt",
       "type": "registry:component",
       "title": "Malta Flag",
-      "description": "A typed Malta flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Malta flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7812,7 +7970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7827,7 +7986,7 @@
       "name": "mu",
       "type": "registry:component",
       "title": "Mauritius Flag",
-      "description": "A typed Mauritius flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Mauritius flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7851,7 +8010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7866,7 +8026,7 @@
       "name": "mv",
       "type": "registry:component",
       "title": "Maldives Flag",
-      "description": "A typed Maldives flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Maldives flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7890,7 +8050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7905,7 +8066,7 @@
       "name": "mw",
       "type": "registry:component",
       "title": "Malawi Flag",
-      "description": "A typed Malawi flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Malawi flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7929,7 +8090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7944,7 +8106,7 @@
       "name": "mx",
       "type": "registry:component",
       "title": "Mexico Flag",
-      "description": "A typed Mexico flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Mexico flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -7968,7 +8130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -7983,7 +8146,7 @@
       "name": "my",
       "type": "registry:component",
       "title": "Malaysia Flag",
-      "description": "A typed Malaysia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Malaysia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8007,7 +8170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8022,7 +8186,7 @@
       "name": "mz",
       "type": "registry:component",
       "title": "Mozambique Flag",
-      "description": "A typed Mozambique flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Mozambique flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8046,7 +8210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8061,7 +8226,7 @@
       "name": "na",
       "type": "registry:component",
       "title": "Namibia Flag",
-      "description": "A typed Namibia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Namibia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8085,7 +8250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8100,7 +8266,7 @@
       "name": "nc",
       "type": "registry:component",
       "title": "New Caledonia Flag",
-      "description": "A typed New Caledonia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed New Caledonia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8124,7 +8290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8139,7 +8306,7 @@
       "name": "ne",
       "type": "registry:component",
       "title": "Niger Flag",
-      "description": "A typed Niger flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Niger flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8163,7 +8330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8178,7 +8346,7 @@
       "name": "nf",
       "type": "registry:component",
       "title": "Norfolk Island Flag",
-      "description": "A typed Norfolk Island flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Norfolk Island flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8202,7 +8370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8217,7 +8386,7 @@
       "name": "ng",
       "type": "registry:component",
       "title": "Nigeria Flag",
-      "description": "A typed Nigeria flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Nigeria flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8241,7 +8410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8256,7 +8426,7 @@
       "name": "ni",
       "type": "registry:component",
       "title": "Nicaragua Flag",
-      "description": "A typed Nicaragua flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Nicaragua flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8280,7 +8450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8295,7 +8466,7 @@
       "name": "nl",
       "type": "registry:component",
       "title": "Netherlands Flag",
-      "description": "A typed Netherlands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Netherlands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8319,7 +8490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8334,7 +8506,7 @@
       "name": "no",
       "type": "registry:component",
       "title": "Norway Flag",
-      "description": "A typed Norway flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Norway flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8358,7 +8530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8373,7 +8546,7 @@
       "name": "np",
       "type": "registry:component",
       "title": "Nepal Flag",
-      "description": "A typed Nepal flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Nepal flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8397,7 +8570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8412,7 +8586,7 @@
       "name": "nr",
       "type": "registry:component",
       "title": "Nauru Flag",
-      "description": "A typed Nauru flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Nauru flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8436,7 +8610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8451,7 +8626,7 @@
       "name": "nu",
       "type": "registry:component",
       "title": "Niue Flag",
-      "description": "A typed Niue flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Niue flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8475,7 +8650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8490,7 +8666,7 @@
       "name": "nz",
       "type": "registry:component",
       "title": "New Zealand Flag",
-      "description": "A typed New Zealand flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed New Zealand flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8514,7 +8690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8529,7 +8706,7 @@
       "name": "om",
       "type": "registry:component",
       "title": "Oman Flag",
-      "description": "A typed Oman flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Oman flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8553,7 +8730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8568,7 +8746,7 @@
       "name": "pa",
       "type": "registry:component",
       "title": "Panama Flag",
-      "description": "A typed Panama flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Panama flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8592,7 +8770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8607,7 +8786,7 @@
       "name": "pe",
       "type": "registry:component",
       "title": "Peru Flag",
-      "description": "A typed Peru flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Peru flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8631,7 +8810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8646,7 +8826,7 @@
       "name": "pf",
       "type": "registry:component",
       "title": "French Polynesia Flag",
-      "description": "A typed French Polynesia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed French Polynesia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8670,7 +8850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8685,7 +8866,7 @@
       "name": "pg",
       "type": "registry:component",
       "title": "Papua New Guinea Flag",
-      "description": "A typed Papua New Guinea flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Papua New Guinea flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8709,7 +8890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8724,7 +8906,7 @@
       "name": "ph",
       "type": "registry:component",
       "title": "Philippines Flag",
-      "description": "A typed Philippines flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Philippines flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8748,7 +8930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8763,7 +8946,7 @@
       "name": "pk",
       "type": "registry:component",
       "title": "Pakistan Flag",
-      "description": "A typed Pakistan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Pakistan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8787,7 +8970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8802,7 +8986,7 @@
       "name": "pl",
       "type": "registry:component",
       "title": "Poland Flag",
-      "description": "A typed Poland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Poland flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8826,7 +9010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8841,7 +9026,7 @@
       "name": "pm",
       "type": "registry:component",
       "title": "Saint Pierre and Miquelon Flag",
-      "description": "A typed Saint Pierre and Miquelon flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Saint Pierre and Miquelon flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8865,7 +9050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8880,7 +9066,7 @@
       "name": "pn",
       "type": "registry:component",
       "title": "Pitcairn Islands Flag",
-      "description": "A typed Pitcairn Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Pitcairn Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8904,7 +9090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8919,7 +9106,7 @@
       "name": "pr",
       "type": "registry:component",
       "title": "Puerto Rico Flag",
-      "description": "A typed Puerto Rico flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Puerto Rico flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8943,7 +9130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8958,7 +9146,7 @@
       "name": "ps",
       "type": "registry:component",
       "title": "Palestine Flag",
-      "description": "A typed Palestine flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Palestine flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -8982,7 +9170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -8997,7 +9186,7 @@
       "name": "pt",
       "type": "registry:component",
       "title": "Portugal Flag",
-      "description": "A typed Portugal flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Portugal flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9021,7 +9210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9036,7 +9226,7 @@
       "name": "pw",
       "type": "registry:component",
       "title": "Palau Flag",
-      "description": "A typed Palau flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Palau flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9060,7 +9250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9075,7 +9266,7 @@
       "name": "py",
       "type": "registry:component",
       "title": "Paraguay Flag",
-      "description": "A typed Paraguay flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Paraguay flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9099,7 +9290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9114,7 +9306,7 @@
       "name": "qa",
       "type": "registry:component",
       "title": "Qatar Flag",
-      "description": "A typed Qatar flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Qatar flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9138,7 +9330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9153,7 +9346,7 @@
       "name": "re",
       "type": "registry:component",
       "title": "Réunion Flag",
-      "description": "A typed Réunion flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Réunion flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9177,7 +9370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9192,7 +9386,7 @@
       "name": "ro",
       "type": "registry:component",
       "title": "Romania Flag",
-      "description": "A typed Romania flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Romania flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9216,7 +9410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9231,7 +9426,7 @@
       "name": "rs",
       "type": "registry:component",
       "title": "Serbia Flag",
-      "description": "A typed Serbia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Serbia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9255,7 +9450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9270,7 +9466,7 @@
       "name": "ru",
       "type": "registry:component",
       "title": "Russia Flag",
-      "description": "A typed Russia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Russia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9294,7 +9490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9309,7 +9506,7 @@
       "name": "rw",
       "type": "registry:component",
       "title": "Rwanda Flag",
-      "description": "A typed Rwanda flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Rwanda flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9333,7 +9530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9348,7 +9546,7 @@
       "name": "sa",
       "type": "registry:component",
       "title": "Saudi Arabia Flag",
-      "description": "A typed Saudi Arabia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Saudi Arabia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9372,7 +9570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9387,7 +9586,7 @@
       "name": "sb",
       "type": "registry:component",
       "title": "Solomon Islands Flag",
-      "description": "A typed Solomon Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Solomon Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9411,7 +9610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9426,7 +9626,7 @@
       "name": "sc",
       "type": "registry:component",
       "title": "Seychelles Flag",
-      "description": "A typed Seychelles flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Seychelles flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9450,7 +9650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9465,7 +9666,7 @@
       "name": "sd",
       "type": "registry:component",
       "title": "Sudan Flag",
-      "description": "A typed Sudan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Sudan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9489,7 +9690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9504,7 +9706,7 @@
       "name": "se",
       "type": "registry:component",
       "title": "Sweden Flag",
-      "description": "A typed Sweden flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Sweden flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9528,7 +9730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9543,7 +9746,7 @@
       "name": "sg",
       "type": "registry:component",
       "title": "Singapore Flag",
-      "description": "A typed Singapore flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Singapore flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9567,7 +9770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9582,7 +9786,7 @@
       "name": "sh",
       "type": "registry:component",
       "title": "Saint Helena, Ascension and Tristan da Cunha Flag",
-      "description": "A typed Saint Helena, Ascension and Tristan da Cunha flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Saint Helena, Ascension and Tristan da Cunha flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9606,7 +9810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9621,7 +9826,7 @@
       "name": "si",
       "type": "registry:component",
       "title": "Slovenia Flag",
-      "description": "A typed Slovenia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Slovenia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9645,7 +9850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9660,7 +9866,7 @@
       "name": "sj",
       "type": "registry:component",
       "title": "Svalbard and Jan Mayen Flag",
-      "description": "A typed Svalbard and Jan Mayen flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Svalbard and Jan Mayen flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9684,7 +9890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9699,7 +9906,7 @@
       "name": "sk",
       "type": "registry:component",
       "title": "Slovakia Flag",
-      "description": "A typed Slovakia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Slovakia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9723,7 +9930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9738,7 +9946,7 @@
       "name": "sl",
       "type": "registry:component",
       "title": "Sierra Leone Flag",
-      "description": "A typed Sierra Leone flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Sierra Leone flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9762,7 +9970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9777,7 +9986,7 @@
       "name": "sm",
       "type": "registry:component",
       "title": "San Marino Flag",
-      "description": "A typed San Marino flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed San Marino flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9801,7 +10010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9816,7 +10026,7 @@
       "name": "sn",
       "type": "registry:component",
       "title": "Senegal Flag",
-      "description": "A typed Senegal flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Senegal flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9840,7 +10050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9855,7 +10066,7 @@
       "name": "so",
       "type": "registry:component",
       "title": "Somalia Flag",
-      "description": "A typed Somalia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Somalia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9879,7 +10090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9894,7 +10106,7 @@
       "name": "sr",
       "type": "registry:component",
       "title": "Suriname Flag",
-      "description": "A typed Suriname flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Suriname flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9918,7 +10130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9933,7 +10146,7 @@
       "name": "ss",
       "type": "registry:component",
       "title": "South Sudan Flag",
-      "description": "A typed South Sudan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed South Sudan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9957,7 +10170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -9972,7 +10186,7 @@
       "name": "st",
       "type": "registry:component",
       "title": "São Tomé and Príncipe Flag",
-      "description": "A typed São Tomé and Príncipe flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed São Tomé and Príncipe flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -9996,7 +10210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10011,7 +10226,7 @@
       "name": "sv",
       "type": "registry:component",
       "title": "El Salvador Flag",
-      "description": "A typed El Salvador flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed El Salvador flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10035,7 +10250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10050,7 +10266,7 @@
       "name": "sx",
       "type": "registry:component",
       "title": "Sint Maarten Flag",
-      "description": "A typed Sint Maarten flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Sint Maarten flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10074,7 +10290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10089,7 +10306,7 @@
       "name": "sy",
       "type": "registry:component",
       "title": "Syria Flag",
-      "description": "A typed Syria flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Syria flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10113,7 +10330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10128,7 +10346,7 @@
       "name": "sz",
       "type": "registry:component",
       "title": "Eswatini (Swaziland) Flag",
-      "description": "A typed Eswatini (Swaziland) flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Eswatini (Swaziland) flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10152,7 +10370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10167,7 +10386,7 @@
       "name": "tc",
       "type": "registry:component",
       "title": "Turks and Caicos Islands Flag",
-      "description": "A typed Turks and Caicos Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Turks and Caicos Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10191,7 +10410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10206,7 +10426,7 @@
       "name": "td",
       "type": "registry:component",
       "title": "Chad Flag",
-      "description": "A typed Chad flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Chad flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10230,7 +10450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10245,7 +10466,7 @@
       "name": "tf",
       "type": "registry:component",
       "title": "French Southern and Antarctic Lands Flag",
-      "description": "A typed French Southern and Antarctic Lands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed French Southern and Antarctic Lands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10269,7 +10490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10284,7 +10506,7 @@
       "name": "tg",
       "type": "registry:component",
       "title": "Togo Flag",
-      "description": "A typed Togo flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Togo flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10308,7 +10530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10323,7 +10546,7 @@
       "name": "th",
       "type": "registry:component",
       "title": "Thailand Flag",
-      "description": "A typed Thailand flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Thailand flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10347,7 +10570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10362,7 +10586,7 @@
       "name": "tj",
       "type": "registry:component",
       "title": "Tajikistan Flag",
-      "description": "A typed Tajikistan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Tajikistan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10386,7 +10610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10401,7 +10626,7 @@
       "name": "tk",
       "type": "registry:component",
       "title": "Tokelau Flag",
-      "description": "A typed Tokelau flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Tokelau flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10425,7 +10650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10440,7 +10666,7 @@
       "name": "tl",
       "type": "registry:component",
       "title": "Timor-Leste Flag",
-      "description": "A typed Timor-Leste flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Timor-Leste flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10464,7 +10690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10479,7 +10706,7 @@
       "name": "tm",
       "type": "registry:component",
       "title": "Turkmenistan Flag",
-      "description": "A typed Turkmenistan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Turkmenistan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10503,7 +10730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10518,7 +10746,7 @@
       "name": "tn",
       "type": "registry:component",
       "title": "Tunisia Flag",
-      "description": "A typed Tunisia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Tunisia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10542,7 +10770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10557,7 +10786,7 @@
       "name": "to",
       "type": "registry:component",
       "title": "Tonga Flag",
-      "description": "A typed Tonga flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Tonga flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10581,7 +10810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10596,7 +10826,7 @@
       "name": "tr",
       "type": "registry:component",
       "title": "Turkey Flag",
-      "description": "A typed Turkey flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Turkey flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10620,7 +10850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10635,7 +10866,7 @@
       "name": "tt",
       "type": "registry:component",
       "title": "Trinidad and Tobago Flag",
-      "description": "A typed Trinidad and Tobago flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Trinidad and Tobago flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10659,7 +10890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10674,7 +10906,7 @@
       "name": "tv",
       "type": "registry:component",
       "title": "Tuvalu Flag",
-      "description": "A typed Tuvalu flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Tuvalu flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10698,7 +10930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10713,7 +10946,7 @@
       "name": "tw",
       "type": "registry:component",
       "title": "Taiwan Flag",
-      "description": "A typed Taiwan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Taiwan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10737,7 +10970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10752,7 +10986,7 @@
       "name": "tz",
       "type": "registry:component",
       "title": "Tanzania Flag",
-      "description": "A typed Tanzania flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Tanzania flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10776,7 +11010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10791,7 +11026,7 @@
       "name": "ua",
       "type": "registry:component",
       "title": "Ukraine Flag",
-      "description": "A typed Ukraine flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Ukraine flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10815,7 +11050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10830,7 +11066,7 @@
       "name": "ug",
       "type": "registry:component",
       "title": "Uganda Flag",
-      "description": "A typed Uganda flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Uganda flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10854,7 +11090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10869,7 +11106,7 @@
       "name": "um",
       "type": "registry:component",
       "title": "United States Minor Outlying Islands Flag",
-      "description": "A typed United States Minor Outlying Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed United States Minor Outlying Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10893,7 +11130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10908,7 +11146,7 @@
       "name": "un",
       "type": "registry:component",
       "title": "United Nations Flag",
-      "description": "A typed United Nations flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed United Nations flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10932,7 +11170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10947,7 +11186,7 @@
       "name": "us",
       "type": "registry:component",
       "title": "United States Flag",
-      "description": "A typed United States flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed United States flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -10971,7 +11210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -10986,7 +11226,7 @@
       "name": "us-ak",
       "type": "registry:component",
       "title": "Alaska Flag",
-      "description": "A typed Alaska flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Alaska flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11010,7 +11250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11025,7 +11266,7 @@
       "name": "us-al",
       "type": "registry:component",
       "title": "Alabama Flag",
-      "description": "A typed Alabama flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Alabama flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11049,7 +11290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11064,7 +11306,7 @@
       "name": "us-ar",
       "type": "registry:component",
       "title": "Arkansas Flag",
-      "description": "A typed Arkansas flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Arkansas flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11088,7 +11330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11103,7 +11346,7 @@
       "name": "us-az",
       "type": "registry:component",
       "title": "Arizona Flag",
-      "description": "A typed Arizona flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Arizona flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11127,7 +11370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11142,7 +11386,7 @@
       "name": "us-ca",
       "type": "registry:component",
       "title": "California Flag",
-      "description": "A typed California flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed California flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11166,7 +11410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11181,7 +11426,7 @@
       "name": "us-co",
       "type": "registry:component",
       "title": "Colorado Flag",
-      "description": "A typed Colorado flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Colorado flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11205,7 +11450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11220,7 +11466,7 @@
       "name": "us-ct",
       "type": "registry:component",
       "title": "Connecticut Flag",
-      "description": "A typed Connecticut flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Connecticut flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11244,7 +11490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11259,7 +11506,7 @@
       "name": "us-de",
       "type": "registry:component",
       "title": "Delaware Flag",
-      "description": "A typed Delaware flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Delaware flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11283,7 +11530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11298,7 +11546,7 @@
       "name": "us-fl",
       "type": "registry:component",
       "title": "Florida Flag",
-      "description": "A typed Florida flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Florida flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11322,7 +11570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11337,7 +11586,7 @@
       "name": "us-ga",
       "type": "registry:component",
       "title": "Georgia Flag",
-      "description": "A typed Georgia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Georgia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11361,7 +11610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11376,7 +11626,7 @@
       "name": "us-hi",
       "type": "registry:component",
       "title": "Hawaii Flag",
-      "description": "A typed Hawaii flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Hawaii flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11400,7 +11650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11415,7 +11666,7 @@
       "name": "us-ia",
       "type": "registry:component",
       "title": "Iowa Flag",
-      "description": "A typed Iowa flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Iowa flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11439,7 +11690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11454,7 +11706,7 @@
       "name": "us-id",
       "type": "registry:component",
       "title": "Idaho Flag",
-      "description": "A typed Idaho flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Idaho flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11478,7 +11730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11493,7 +11746,7 @@
       "name": "us-il",
       "type": "registry:component",
       "title": "Illinois Flag",
-      "description": "A typed Illinois flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Illinois flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11517,7 +11770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11532,7 +11786,7 @@
       "name": "us-in",
       "type": "registry:component",
       "title": "Indiana Flag",
-      "description": "A typed Indiana flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Indiana flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11556,7 +11810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11571,7 +11826,7 @@
       "name": "us-ks",
       "type": "registry:component",
       "title": "Kansas Flag",
-      "description": "A typed Kansas flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Kansas flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11595,7 +11850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11610,7 +11866,7 @@
       "name": "us-ky",
       "type": "registry:component",
       "title": "Kentucky Flag",
-      "description": "A typed Kentucky flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Kentucky flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11634,7 +11890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11649,7 +11906,7 @@
       "name": "us-la",
       "type": "registry:component",
       "title": "Louisiana Flag",
-      "description": "A typed Louisiana flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Louisiana flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11673,7 +11930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11688,7 +11946,7 @@
       "name": "us-ma",
       "type": "registry:component",
       "title": "Massachusetts Flag",
-      "description": "A typed Massachusetts flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Massachusetts flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11712,7 +11970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11727,7 +11986,7 @@
       "name": "us-md",
       "type": "registry:component",
       "title": "Maryland Flag",
-      "description": "A typed Maryland flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Maryland flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11751,7 +12010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11766,7 +12026,7 @@
       "name": "us-me",
       "type": "registry:component",
       "title": "Maine Flag",
-      "description": "A typed Maine flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Maine flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11790,7 +12050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11805,7 +12066,7 @@
       "name": "us-mi",
       "type": "registry:component",
       "title": "Michigan Flag",
-      "description": "A typed Michigan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Michigan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11829,7 +12090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11844,7 +12106,7 @@
       "name": "us-mn",
       "type": "registry:component",
       "title": "Minnesota Flag",
-      "description": "A typed Minnesota flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Minnesota flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11868,7 +12130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11883,7 +12146,7 @@
       "name": "us-mo",
       "type": "registry:component",
       "title": "Missouri Flag",
-      "description": "A typed Missouri flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Missouri flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11907,7 +12170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11922,7 +12186,7 @@
       "name": "us-ms",
       "type": "registry:component",
       "title": "Mississippi Flag",
-      "description": "A typed Mississippi flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Mississippi flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11946,7 +12210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -11961,7 +12226,7 @@
       "name": "us-mt",
       "type": "registry:component",
       "title": "Montana Flag",
-      "description": "A typed Montana flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Montana flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -11985,7 +12250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12000,7 +12266,7 @@
       "name": "us-nc",
       "type": "registry:component",
       "title": "North Carolina Flag",
-      "description": "A typed North Carolina flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed North Carolina flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12024,7 +12290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12039,7 +12306,7 @@
       "name": "us-nd",
       "type": "registry:component",
       "title": "North Dakota Flag",
-      "description": "A typed North Dakota flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed North Dakota flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12063,7 +12330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12078,7 +12346,7 @@
       "name": "us-ne",
       "type": "registry:component",
       "title": "Nebraska Flag",
-      "description": "A typed Nebraska flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Nebraska flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12102,7 +12370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12117,7 +12386,7 @@
       "name": "us-nh",
       "type": "registry:component",
       "title": "New Hampshire Flag",
-      "description": "A typed New Hampshire flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed New Hampshire flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12141,7 +12410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12156,7 +12426,7 @@
       "name": "us-nj",
       "type": "registry:component",
       "title": "New Jersey Flag",
-      "description": "A typed New Jersey flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed New Jersey flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12180,7 +12450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12195,7 +12466,7 @@
       "name": "us-nm",
       "type": "registry:component",
       "title": "New Mexico Flag",
-      "description": "A typed New Mexico flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed New Mexico flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12219,7 +12490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12234,7 +12506,7 @@
       "name": "us-nv",
       "type": "registry:component",
       "title": "Nevada Flag",
-      "description": "A typed Nevada flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Nevada flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12258,7 +12530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12273,7 +12546,7 @@
       "name": "us-ny",
       "type": "registry:component",
       "title": "New York Flag",
-      "description": "A typed New York flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed New York flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12297,7 +12570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12312,7 +12586,7 @@
       "name": "us-oh",
       "type": "registry:component",
       "title": "Ohio Flag",
-      "description": "A typed Ohio flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Ohio flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12336,7 +12610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12351,7 +12626,7 @@
       "name": "us-ok",
       "type": "registry:component",
       "title": "Oklahoma Flag",
-      "description": "A typed Oklahoma flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Oklahoma flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12375,7 +12650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12390,7 +12666,7 @@
       "name": "us-or",
       "type": "registry:component",
       "title": "Oregon Flag",
-      "description": "A typed Oregon flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Oregon flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12414,7 +12690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12429,7 +12706,7 @@
       "name": "us-pa",
       "type": "registry:component",
       "title": "Pennsylvania Flag",
-      "description": "A typed Pennsylvania flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Pennsylvania flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12453,7 +12730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12468,7 +12746,7 @@
       "name": "us-ri",
       "type": "registry:component",
       "title": "Rhode Island Flag",
-      "description": "A typed Rhode Island flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Rhode Island flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12492,7 +12770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12507,7 +12786,7 @@
       "name": "us-sc",
       "type": "registry:component",
       "title": "South Carolina Flag",
-      "description": "A typed South Carolina flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed South Carolina flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12531,7 +12810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12546,7 +12826,7 @@
       "name": "us-sd",
       "type": "registry:component",
       "title": "South Dakota Flag",
-      "description": "A typed South Dakota flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed South Dakota flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12570,7 +12850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12585,7 +12866,7 @@
       "name": "us-tn",
       "type": "registry:component",
       "title": "Tennessee Flag",
-      "description": "A typed Tennessee flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Tennessee flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12609,7 +12890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12624,7 +12906,7 @@
       "name": "us-tx",
       "type": "registry:component",
       "title": "Texas Flag",
-      "description": "A typed Texas flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Texas flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12648,7 +12930,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12663,7 +12946,7 @@
       "name": "us-ut",
       "type": "registry:component",
       "title": "Utah Flag",
-      "description": "A typed Utah flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Utah flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12687,7 +12970,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12702,7 +12986,7 @@
       "name": "us-va",
       "type": "registry:component",
       "title": "Virginia Flag",
-      "description": "A typed Virginia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Virginia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12726,7 +13010,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12741,7 +13026,7 @@
       "name": "us-vt",
       "type": "registry:component",
       "title": "Vermont Flag",
-      "description": "A typed Vermont flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Vermont flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12765,7 +13050,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12780,7 +13066,7 @@
       "name": "us-wa",
       "type": "registry:component",
       "title": "Washington Flag",
-      "description": "A typed Washington flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Washington flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12804,7 +13090,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12819,7 +13106,7 @@
       "name": "us-wi",
       "type": "registry:component",
       "title": "Wisconsin Flag",
-      "description": "A typed Wisconsin flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Wisconsin flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12843,7 +13130,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12858,7 +13146,7 @@
       "name": "us-wv",
       "type": "registry:component",
       "title": "West Virginia Flag",
-      "description": "A typed West Virginia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed West Virginia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12882,7 +13170,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12897,7 +13186,7 @@
       "name": "us-wy",
       "type": "registry:component",
       "title": "Wyoming Flag",
-      "description": "A typed Wyoming flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Wyoming flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12921,7 +13210,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12936,7 +13226,7 @@
       "name": "uy",
       "type": "registry:component",
       "title": "Uruguay Flag",
-      "description": "A typed Uruguay flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Uruguay flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12960,7 +13250,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -12975,7 +13266,7 @@
       "name": "uz",
       "type": "registry:component",
       "title": "Uzbekistan Flag",
-      "description": "A typed Uzbekistan flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Uzbekistan flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -12999,7 +13290,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13014,7 +13306,7 @@
       "name": "va",
       "type": "registry:component",
       "title": "Vatican City (Holy See) Flag",
-      "description": "A typed Vatican City (Holy See) flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Vatican City (Holy See) flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13038,7 +13330,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13053,7 +13346,7 @@
       "name": "vc",
       "type": "registry:component",
       "title": "Saint Vincent and the Grenadines Flag",
-      "description": "A typed Saint Vincent and the Grenadines flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Saint Vincent and the Grenadines flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13077,7 +13370,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13092,7 +13386,7 @@
       "name": "ve",
       "type": "registry:component",
       "title": "Venezuela Flag",
-      "description": "A typed Venezuela flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Venezuela flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13116,7 +13410,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13131,7 +13426,7 @@
       "name": "vg",
       "type": "registry:component",
       "title": "British Virgin Islands Flag",
-      "description": "A typed British Virgin Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed British Virgin Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13155,7 +13450,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13170,7 +13466,7 @@
       "name": "vi",
       "type": "registry:component",
       "title": "United States Virgin Islands Flag",
-      "description": "A typed United States Virgin Islands flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed United States Virgin Islands flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13194,7 +13490,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13209,7 +13506,7 @@
       "name": "vn",
       "type": "registry:component",
       "title": "Vietnam Flag",
-      "description": "A typed Vietnam flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Vietnam flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13233,7 +13530,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13248,7 +13546,7 @@
       "name": "vu",
       "type": "registry:component",
       "title": "Vanuatu Flag",
-      "description": "A typed Vanuatu flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Vanuatu flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13272,7 +13570,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13287,7 +13586,7 @@
       "name": "wf",
       "type": "registry:component",
       "title": "Wallis and Futuna Flag",
-      "description": "A typed Wallis and Futuna flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Wallis and Futuna flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13311,7 +13610,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13326,7 +13626,7 @@
       "name": "ws",
       "type": "registry:component",
       "title": "Samoa Flag",
-      "description": "A typed Samoa flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Samoa flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13350,7 +13650,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13365,7 +13666,7 @@
       "name": "xk",
       "type": "registry:component",
       "title": "Kosovo Flag",
-      "description": "A typed Kosovo flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Kosovo flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13389,7 +13690,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13404,7 +13706,7 @@
       "name": "ye",
       "type": "registry:component",
       "title": "Yemen Flag",
-      "description": "A typed Yemen flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Yemen flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13428,7 +13730,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13443,7 +13746,7 @@
       "name": "yt",
       "type": "registry:component",
       "title": "Mayotte Flag",
-      "description": "A typed Mayotte flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Mayotte flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13467,7 +13770,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13482,7 +13786,7 @@
       "name": "za",
       "type": "registry:component",
       "title": "South Africa Flag",
-      "description": "A typed South Africa flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed South Africa flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13506,7 +13810,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13521,7 +13826,7 @@
       "name": "zm",
       "type": "registry:component",
       "title": "Zambia Flag",
-      "description": "A typed Zambia flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Zambia flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13545,7 +13850,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",
@@ -13560,7 +13866,7 @@
       "name": "zw",
       "type": "registry:component",
       "title": "Zimbabwe Flag",
-      "description": "A typed Zimbabwe flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+      "description": "A typed Zimbabwe flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
         "@flagcn/flag"
@@ -13584,7 +13890,8 @@
         "formats": [
           "svg",
           "png",
-          "webp"
+          "webp",
+          "jpg"
         ],
         "ratios": [
           "4x3",

@@ -21,7 +21,13 @@ describe("Flag", () => {
     expect(image).toHaveAttribute("width", "48")
     expect(image).toHaveAttribute("height", "48")
     expect(image).toHaveAttribute("fetchpriority", "high")
-    expect(image).toHaveStyle({ aspectRatio: "1 / 1", objectFit: "cover" })
+    expect(image).toHaveStyle({ aspectRatio: "1 / 1", objectFit: "contain", objectPosition: "center" })
+  })
+
+  it("preserves the complete artwork inside a consistent 4:3 SVG frame", () => {
+    render(<Flag code="ch" ratio="4x3" width={80} alt="Switzerland" />)
+    const image = screen.getByRole("img", { name: "Switzerland" })
+    expect(image).toHaveStyle({ aspectRatio: "4 / 3", objectFit: "contain" })
   })
 
   it("hides decorative flags from the accessibility tree", () => {

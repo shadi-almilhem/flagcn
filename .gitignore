@@ -5,3 +5,5 @@ dist
 coverage
 .wrangler
 .tmp-consumer-*
+.playwright-cli
+output

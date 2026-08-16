@@ -59,7 +59,11 @@ export function Flag({
       style={{
         display: "block",
         maxWidth: "100%",
-        ...(aspectRatio ? { aspectRatio, objectFit: "cover" as const } : {}),
+        ...(aspectRatio ? {
+          aspectRatio,
+          objectFit: "contain" as const,
+          objectPosition: "center" as const,
+        } : {}),
         ...style,
       }}
     />

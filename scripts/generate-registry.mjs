@@ -89,7 +89,7 @@ function coreItems(flags) {
       name: "flag",
       type: "registry:ui",
       title: "Flag",
-      description: "An accessible flag image primitive with 4:3, 1:1, and original ratios in SVG, PNG, or WebP.",
+      description: "An accessible no-crop flag image primitive with 4:3, 1:1, and original frames in SVG, PNG, WebP, or JPEG.",
       author: AUTHOR,
       files: [
         { path: "src/components/flags/flag.tsx", type: "registry:ui", target: "@components/flags/flag.tsx" },
@@ -98,7 +98,7 @@ function coreItems(flags) {
       categories: ["flags", "images", "internationalization"],
       docs: "Pass a FlagCDN code and meaningful alt text. Use ratio='1x1' for square UI or ratio='4x3' for consistent cards. Set decorative when nearby text already names the place.",
       meta: {
-        formats: ["svg", "png", "webp"],
+        formats: ["svg", "png", "webp", "jpg"],
         ratios: ["4x3", "1x1", "original"],
         license: "MIT",
         artworkLicense: "Public Domain",
@@ -140,7 +140,7 @@ function countryItem(flag) {
     name: flag.code,
     type: "registry:component",
     title: `${flag.name} Flag`,
-    description: `A typed ${flag.name} flag component with 4:3, 1:1, SVG, PNG, and WebP support.`,
+    description: `A typed ${flag.name} flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.`,
     author: AUTHOR,
     registryDependencies: ["@flagcn/flag"],
     files: [
@@ -155,7 +155,7 @@ function countryItem(flag) {
     meta: {
       code: flag.code,
       country: flag.name,
-      formats: ["svg", "png", "webp"],
+      formats: ["svg", "png", "webp", "jpg"],
       ratios: ["4x3", "1x1", "original"],
       license: "MIT",
       artworkLicense: "Public Domain",

@@ -1,4 +1,3 @@
-import "@fontsource-variable/geist"
 import "./index.css"
 
 import { StrictMode } from "react"

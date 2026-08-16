@@ -2,11 +2,11 @@
 
 [![CI](https://github.com/shadi-almilhem/flagcn/actions/workflows/ci.yml/badge.svg)](https://github.com/shadi-almilhem/flagcn/actions/workflows/ci.yml)
 
-Flagcn is a source-owned shadcn registry for accessible flags. It ships a small React image primitive, a searchable picker, and one installable wrapper for every flag in the catalog. Assets are requested from [Flagpedia's FlagCDN](https://flagpedia.net/download/api) in SVG, PNG, or WebP and can render at 4:3, 1:1, or their original ratio.
+Flagcn is a source-owned shadcn registry for accessible flags. It ships a small React image primitive, a searchable picker, and one installable wrapper for every flag in the catalog. Assets are requested from [Flagpedia's FlagCDN](https://flagpedia.net/download/api) in SVG, PNG, WebP, or JPEG and can render in no-crop 4:3 and 1:1 frames or at their original ratio.
 
 ## What is included
 
-- `@flagcn/flag` — accessible, responsive SVG/PNG/WebP primitive with 4:3 and square presentation.
+- `@flagcn/flag` — accessible, responsive SVG/PNG/WebP/JPEG primitive with no-crop 4:3 and square presentation.
 - `@flagcn/flag-picker` — searchable keyboard-friendly selector.
 - `@flagcn/all` — the core components, picker, catalog, and all 306 named flag wrappers.
 - `@flagcn/<code>` — 306 individually installable country, territory, subdivision, and organization wrappers.
@@ -24,7 +24,7 @@ pnpm install
 pnpm dev
 ```
 
-The app follows the requested shadcn preset: Base UI, Lyra, olive base color, teal theme, Tabler icons, and Geist.
+The app follows shadcn preset `b5dMnNEf2`: Base UI, Lyra, olive base color, teal theme, Tabler icons, and DM Sans. The site is dark-first with zero-radius geometry.
 
 ## Build and verify
 
@@ -82,14 +82,14 @@ export function MarketFlag() {
       ratio="1x1"
       width={40}
       alt="United Arab Emirates"
-      className="rounded-full"
+      className="ring-1 ring-border"
       onLoad={() => console.log("loaded")}
     />
   )
 }
 ```
 
-`Flag` forwards standard React image props such as `className`, `style`, `onLoad`, `fetchPriority`, and `ref`. Its own props are `code`, `format`, `width`, `ratio`, and `decorative`. The default ratio is `4x3`; use `1x1` for square UI or `original` when the flag's official proportions matter.
+`Flag` forwards standard React image props such as `className`, `style`, `onLoad`, `fetchPriority`, and `ref`. Its own props are `code`, `format`, `width`, `ratio`, and `decorative`. Formats are `svg`, `png`, `webp`, and `jpg`. The default ratio is `4x3`; use `1x1` for a square box that preserves the full flag or `original` when the official proportions matter.
 
 `@flagcn/all` also generates a collision-safe barrel, so similarly named entries such as Georgia and the U.S. state of Georgia remain separately typed.
 

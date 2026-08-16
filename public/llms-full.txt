@@ -22,7 +22,7 @@ Resolve relative paths against the origin from which this file was fetched.
 - Searchable picker: @flagcn/flag-picker.
 - Typed wrappers: @flagcn/{lowercase-code}, for example @flagcn/ae and @flagcn/us-ca.
 - Complete install: @flagcn/all.
-- Formats: svg, png, webp.
+- Formats: svg, png, webp, jpg.
 - Ratios: 4x3, 1x1, original.
 - Default format: svg.
 - Default ratio: 4x3.
@@ -89,7 +89,7 @@ export function Market() {
 
 - code: string, required. Lowercase ISO-style code such as ae, jp, gb-eng, or us-ca. Runtime input is trimmed and lowercased.
 - alt: string. Defaults to an uppercase-code description, but context-specific text is recommended.
-- format: "svg" | "png" | "webp". Default: "svg".
+- format: "svg" | "png" | "webp" | "jpg". Default: "svg".
 - width: positive number. Default: 80. Used for rendered width and CDN source selection.
 - ratio: "4x3" | "1x1" | "original". Default: "4x3".
 - decorative: boolean. Default: false. When true, emits alt="" and aria-hidden.
@@ -103,25 +103,25 @@ The component renders a native img and no wrapper element.
 
 ## Formats and ratios
 
-SVG uses a scalable source. PNG and WebP receive responsive srcSet candidates. Pass a custom sizes value when the visual width changes with media queries.
+SVG uses a scalable source. PNG, WebP, and JPEG receive responsive srcSet candidates. Pass a custom sizes value when the visual width changes with media queries.
 
-The 4x3 ratio provides consistent landscape tiles and is the default. The 1x1 ratio crops with object-fit: cover. The original ratio preserves the source artwork's proportions.
+The 4x3 ratio provides consistent landscape tiles and is the default. The 1x1 ratio creates a square image box. Both fixed frames use object-fit: contain so the complete flag remains visible. The original ratio preserves the source artwork's proportions.
 
 Recommended combinations:
 
 - General UI: svg + 4x3.
-- Dense square picker/avatar treatment: webp + 1x1.
+- Dense square picker treatment without clipping: webp + 1x1.
 - Accurate editorial display: svg + original.
-- Raster-only downstream workflow: webp, or png when WebP is unsupported.
+- Raster-only downstream workflow: webp, png, or jpg when JPEG is required.
 
 ## URL utilities
 
 The flag registry item includes typed helpers:
 
 - getFlagUrl(code, { format, width, ratio }): returns one FlagCDN URL.
-- getFlagSrcSet(code, { format, width, ratio }): returns undefined for SVG and a width descriptor list for PNG/WebP.
+- getFlagSrcSet(code, { format, width, ratio }): returns undefined for SVG and a width descriptor list for PNG/WebP/JPEG.
 - normalizeFlagCode(code): trims, lowercases, and validates supported ISO-style syntax.
-- flagFormats: readonly ["svg", "png", "webp"].
+- flagFormats: readonly ["svg", "png", "webp", "jpg"].
 - flagRatios: readonly ["4x3", "1x1", "original"].
 
 ## FlagPicker
@@ -142,7 +142,7 @@ Important props:
 - value: controlled FlagCode.
 - defaultValue: initial uncontrolled FlagCode.
 - onValueChange: callback receiving a FlagCode.
-- format: svg | png | webp. Default: svg.
+- format: svg | png | webp | jpg. Default: svg.
 - ratio: 4x3 | 1x1 | original. Default: 4x3.
 - kinds: array of country, subdivision, or organization.
 - placeholder: trigger/search placeholder.
@@ -178,8 +178,8 @@ A named wrapper fixes the code prop and forwards the rest of FlagProps. Use /r/r
   Armenia
 </span>
 
-// Square market avatar.
-<Flag code="jp" ratio="1x1" alt="Japan flag" className="size-10 rounded-full" />
+// Square market tile that preserves the full flag.
+<Flag code="jp" ratio="1x1" alt="Japan flag" className="size-10 ring-1 ring-border" />
 
 // Responsive raster image.
 <Flag code="br" format="webp" width={160} sizes="(max-width: 640px) 80px, 160px" alt="Brazil flag" />

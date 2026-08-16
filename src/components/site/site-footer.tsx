@@ -4,7 +4,7 @@ import { Logo } from "./logo"
 
 export function SiteFooter() {
   return (
-    <footer className="border-t">
+    <footer className="border-t bg-card/20">
       <div className="site-container grid gap-8 py-10 sm:grid-cols-[1fr_auto] sm:items-end">
         <div>
           <Logo />

@@ -3,7 +3,7 @@
   "name": "bf",
   "title": "Burkina Faso Flag",
   "author": "Shadi Al Milhem",
-  "description": "A typed Burkina Faso flag component with 4:3, 1:1, SVG, PNG, and WebP support.",
+  "description": "A typed Burkina Faso flag component with no-crop 4:3 and 1:1 frames plus SVG, PNG, WebP, and JPEG support.",
   "registryDependencies": [
     "@flagcn/flag"
   ],
@@ -21,7 +21,8 @@
     "formats": [
       "svg",
       "png",
-      "webp"
+      "webp",
+      "jpg"
     ],
     "ratios": [
       "4x3",

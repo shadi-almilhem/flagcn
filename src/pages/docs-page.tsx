@@ -16,7 +16,13 @@ import { Flag } from "@/components/flags/flag"
 import { FlagPicker } from "@/components/flags/flag-picker"
 import { CodeBlock } from "@/components/site/code-block"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { NativeSelect } from "@/components/ui/native-select"
 import { Separator } from "@/components/ui/separator"
@@ -112,7 +118,7 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
       <>
         <DocSection title="What is Flagcn?">
           <p>Flagcn distributes React source through the shadcn CLI. It is not a component package and it does not put a UI abstraction between you and your code. Install a component, then edit it like any other file in your project.</p>
-          <p>Artwork is served by Flagpedia’s FlagCDN, which offers current flag files in SVG, PNG, and WebP. The core component constructs stable CDN URLs, native responsive image attributes, and consistent 4:3 or 1:1 presentation.</p>
+          <p>Artwork is served by Flagpedia’s FlagCDN, which offers current flag files in SVG, PNG, WebP, and JPEG. The core component constructs stable CDN URLs, native responsive image attributes, and no-crop 4:3 or 1:1 presentation.</p>
         </DocSection>
         <DocSection title="Choose an install">
           <div className="not-prose grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -147,23 +153,23 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
           <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/flag" />
         </DocSection>
         <DocSection title="Usage">
-          <CodeBlock code={`import { Flag } from "@/components/flags/flag"\n\nexport function Market() {\n  return (\n    <Flag\n      code="ae"\n      format="webp"\n      ratio="1x1"\n      width={160}\n      alt="United Arab Emirates flag"\n      className="rounded-full"\n    />\n  )\n}`} />
-          <div className="not-prose flag-stage mt-4 grid min-h-44 place-items-center rounded-lg border bg-muted/35">
-            <Flag code="ae" format="webp" ratio="1x1" width={160} alt="United Arab Emirates flag" className="max-h-24 max-w-24 rounded-full shadow-[0_0_0_1px_rgba(0,0,0,.14)]" />
+          <CodeBlock code={`import { Flag } from "@/components/flags/flag"\n\nexport function Market() {\n  return (\n    <Flag\n      code="ae"\n      format="webp"\n      ratio="1x1"\n      width={160}\n      alt="United Arab Emirates flag"\n      className="ring-1 ring-border"\n    />\n  )\n}`} />
+          <div className="not-prose flag-stage mt-4 grid min-h-44 place-items-center border bg-muted/35">
+            <Flag code="ae" format="webp" ratio="1x1" width={160} alt="United Arab Emirates flag" className="size-24 object-contain ring-1 ring-border" />
           </div>
         </DocSection>
         <DocSection title="API">
           <ApiTable rows={[
             ["code", "FlagCode | string", "—", "Lowercase ISO-style code such as ae, jp, gb-eng, or us-ca."],
             ["alt", "string", "Generated", "Accessible image description. Use decorative for presentation-only flags."],
-            ["format", "svg | png | webp", "svg", "Image format requested from FlagCDN."],
+            ["format", "svg | png | webp | jpg", "svg", "Image format requested from FlagCDN."],
             ["width", "number", "80", "Rendered width and closest responsive CDN width."],
             ["ratio", "4x3 | 1x1 | original", "4x3", "Use a consistent landscape or square frame, or preserve official proportions."],
             ["decorative", "boolean", "false", "Sets empty alt text and aria-hidden."],
           ]} />
         </DocSection>
         <DocSection title="Format behavior">
-          <p>SVG uses one scalable source. PNG and WebP add a width-based <code>srcSet</code>, letting the browser select a suitable raster asset. WebP is the best default for a raster-only pipeline; SVG is the best general default.</p>
+          <p>SVG uses one scalable source. PNG, WebP, and JPEG add a width-based <code>srcSet</code>, letting the browser select a suitable raster asset. WebP is the best default for a raster-only pipeline; SVG is the best general default.</p>
           <p>The component forwards standard image props, including <code>className</code>, <code>style</code>, <code>onLoad</code>, <code>fetchPriority</code>, and <code>ref</code>. Ratio styling can still be refined with your own classes.</p>
         </DocSection>
       </>
@@ -190,7 +196,7 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
             ["value", "FlagCode", "—", "Controlled selected code."],
             ["defaultValue", "FlagCode", "—", "Initial code for uncontrolled usage."],
             ["onValueChange", "(code) => void", "—", "Called when the user selects a flag."],
-            ["format", "svg | png | webp", "svg", "Preview format used inside the picker."],
+            ["format", "svg | png | webp | jpg", "svg", "Preview format used inside the picker."],
             ["ratio", "4x3 | 1x1 | original", "4x3", "Preview ratio used in the trigger and results."],
             ["kinds", "FlagKind[]", "all", "Limit results to country, subdivision, or organization."],
             ["name", "string", "—", "Adds a hidden form field carrying the selected code."],
@@ -231,21 +237,22 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
             ["svg", "Vector", "Default", "Sharp at every size and usually the best interface default."],
             ["png", "Raster", "Optional", "Broad tooling support with responsive width candidates."],
             ["webp", "Raster", "Optional", "Smaller raster delivery for pipelines that prefer modern images."],
+            ["jpg", "Raster", "Optional", "Original-proportion JPEG delivery for tools that require it."],
           ]} />
-          <CodeBlock code={`<Flag code="ae" format="svg" alt="United Arab Emirates flag" />\n<Flag code="ae" format="png" alt="United Arab Emirates flag" />\n<Flag code="ae" format="webp" alt="United Arab Emirates flag" />`} />
+          <CodeBlock code={`<Flag code="ae" format="svg" alt="United Arab Emirates flag" />\n<Flag code="ae" format="png" alt="United Arab Emirates flag" />\n<Flag code="ae" format="webp" alt="United Arab Emirates flag" />\n<Flag code="ae" format="jpg" alt="United Arab Emirates flag" />`} />
         </DocSection>
         <DocSection title="Ratios">
-          <p><code>4x3</code> is the default and gives mixed-country interfaces a stable landscape rhythm. <code>1x1</code> crops the artwork into a square frame. <code>original</code> preserves each flag’s official proportions.</p>
+          <p><code>4x3</code> is the default and gives mixed-country interfaces a stable landscape rhythm. <code>1x1</code> creates a square image box without cropping the flag. <code>original</code> preserves each flag’s official proportions.</p>
           <CodeBlock code={`<Flag code="ae" ratio="4x3" alt="United Arab Emirates flag" />\n<Flag code="ae" ratio="1x1" alt="United Arab Emirates flag" />\n<Flag code="ae" ratio="original" alt="United Arab Emirates flag" />`} />
         </DocSection>
         <DocSection title="Responsive raster images">
-          <p>PNG and WebP automatically receive a width-based <code>srcSet</code> and a matching default <code>sizes</code> value. Pass your own <code>sizes</code> when layout width changes across breakpoints.</p>
+          <p>PNG, WebP, and JPEG automatically receive a width-based <code>srcSet</code> and a matching default <code>sizes</code> value. Pass your own <code>sizes</code> when layout width changes across breakpoints.</p>
           <CodeBlock code={`<Flag\n  code="br"\n  format="webp"\n  width={160}\n  sizes="(max-width: 640px) 80px, 160px"\n  alt="Brazil flag"\n/>`} />
         </DocSection>
         <DocSection title="Choosing a combination">
           <ul>
             <li>Use SVG + 4:3 for most application interfaces.</li>
-            <li>Use WebP + 1:1 for dense avatar-like market selectors.</li>
+            <li>Use WebP + 1:1 for dense square market selectors that must preserve the whole flag.</li>
             <li>Use original when accurate national proportions are part of the content.</li>
             <li>Use PNG when a downstream tool cannot consume SVG or WebP.</li>
           </ul>
@@ -260,14 +267,14 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
       <>
         <DocSection title="Class names">
           <p>Pass <code>className</code> directly. Flagcn does not impose a component theme or wrapper element.</p>
-          <CodeBlock code={`<Flag\n  code="jp"\n  ratio="1x1"\n  alt="Japan flag"\n  className="size-10 rounded-full ring-1 ring-border"\n/>`} />
+          <CodeBlock code={`<Flag\n  code="jp"\n  ratio="1x1"\n  alt="Japan flag"\n  className="size-10 ring-1 ring-border"\n/>`} />
         </DocSection>
         <DocSection title="Native image props">
           <p>The component forwards <code>id</code>, <code>style</code>, <code>title</code>, <code>onLoad</code>, <code>onError</code>, <code>fetchPriority</code>, <code>crossOrigin</code>, data attributes, and the ref expected by React image elements.</p>
           <CodeBlock code={`<Flag\n  code="de"\n  alt="Germany flag"\n  fetchPriority="high"\n  onLoad={() => setReady(true)}\n  data-market="eu"\n/>`} />
         </DocSection>
         <DocSection title="Common recipes">
-          <CodeBlock code={`// Compact label\n<span className="inline-flex items-center gap-2">\n  <Flag code="ca" width={24} decorative className="rounded-sm" />\n  Canada\n</span>\n\n// Responsive card artwork\n<Flag\n  code="za"\n  width={320}\n  alt="South Africa flag"\n  className="h-auto w-full rounded-lg object-cover"\n/>`} />
+          <CodeBlock code={`// Compact label\n<span className="inline-flex items-center gap-2">\n  <Flag code="ca" width={24} decorative className="ring-1 ring-border" />\n  Canada\n</span>\n\n// Responsive card artwork\n<Flag\n  code="za"\n  width={320}\n  alt="South Africa flag"\n  className="h-auto w-full object-contain ring-1 ring-border"\n/>`} />
         </DocSection>
         <DocSection title="Loading behavior">
           <p>Images are lazy-loaded and asynchronously decoded by default. Override <code>loading="eager"</code> and <code>fetchPriority="high"</code> only for a flag that is important above the fold.</p>
@@ -372,7 +379,7 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
           <p>Flagpedia says attribution is appreciated, not required. This project keeps a visible backlink in its documentation and footer. Applications using installed components may choose attribution appropriate to their own context.</p>
         </DocSection>
         <DocSection title="Flag Icons comparison">
-          <p>Flag Icons is an established MIT-licensed SVG and CSS collection with 4:3 and 1:1 variants. Flagcn uses the same practical aspect-ratio choices, but does not copy or bundle Flag Icons source or artwork. Flagcn uses Flagpedia’s broader 306-entry CDN catalog and supports SVG, PNG, and WebP.</p>
+          <p>Flag Icons is an established MIT-licensed SVG and CSS collection with 4:3 and 1:1 variants. Flagcn uses the same practical frame choices, but does not copy or bundle Flag Icons source or artwork. Flagcn uses Flagpedia’s broader 306-entry CDN catalog and supports SVG, PNG, WebP, and JPEG.</p>
           <a className="not-prose text-primary inline-flex items-center gap-1.5 text-sm font-medium hover:underline" href="https://flagicons.lipis.dev/" target="_blank" rel="noreferrer">
             Visit Flag Icons <IconExternalLink className="size-4" />
           </a>
@@ -407,7 +414,7 @@ function InstallationContent() {
           ["@flagcn/<code>", "Component", "A typed country or territory wrapper, e.g. @flagcn/ae."],
         ]} compact />
       </DocSection>
-      <div className="not-prose rounded-lg border border-primary/25 bg-primary/5 p-4 text-sm">
+      <div className="not-prose border border-primary/25 bg-primary/5 p-4 text-sm">
         <strong>Registry endpoint:</strong> <code className="ms-1 text-muted-foreground">{getRegistryConfig()}</code>
       </div>
     </>
@@ -417,7 +424,7 @@ function InstallationContent() {
 function DocSection({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section id={headingId(title)} className="scroll-mt-24 border-t pt-9 first:border-0 first:pt-0">
-      <h2 className="text-xl font-semibold tracking-[-0.025em]">{title}</h2>
+      <h2 className="text-2xl font-semibold tracking-[-0.035em]">{title}</h2>
       <div className="prose-doc mt-4 grid gap-4">{children}</div>
     </section>
   )
@@ -430,10 +437,12 @@ function headingId(title: string) {
 function MiniDocCard({ title, text, command }: { title: string; text: string; command: string }) {
   return (
     <Card>
-      <CardContent className="p-4">
-        <code className="font-mono text-xs text-primary">{title}</code>
-        <p className="mt-3 text-sm leading-6 text-muted-foreground">{text}</p>
-        <p className="mt-4 truncate font-mono text-[10px] text-muted-foreground">{command}</p>
+      <CardHeader>
+        <CardTitle className="font-mono text-xs text-primary">{title}</CardTitle>
+        <CardDescription className="leading-6">{text}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="truncate border-t pt-3 font-mono text-[10px] text-muted-foreground">{command}</p>
       </CardContent>
     </Card>
   )
@@ -441,9 +450,9 @@ function MiniDocCard({ title, text, command }: { title: string; text: string; co
 
 function ApiTable({ rows, compact = false }: { rows: string[][]; compact?: boolean }) {
   return (
-    <div className="not-prose overflow-x-auto rounded-lg border">
+    <div className="not-prose overflow-x-auto border">
       <table className="w-full min-w-[560px] text-start text-sm">
-        <thead className="bg-muted/60 text-xs text-muted-foreground">
+        <thead className="bg-muted/40 text-xs text-muted-foreground">
           <tr>
             {compact ? <><th>Item</th><th>Type</th><th>Purpose</th></> : <><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></>}
           </tr>
@@ -474,17 +483,18 @@ export function DocsPage() {
   const currentIndex = docSections.findIndex((section) => section.slug === currentSlug)
   const previous = docSections[currentIndex - 1]
   const next = docSections[currentIndex + 1]
+  const currentGroup = docGroups.find((group) => group.items.some((section) => section.slug === currentSlug))
   const normalizedQuery = query.trim().toLocaleLowerCase()
   const agentPrompt = `Read ${getSiteOrigin()}/llms.txt and ${getSiteOrigin()}/llms-full.txt, then help me use Flagcn. I am currently reading the ${doc.title} guide at ${getSiteOrigin()}/docs/${currentSlug}. Preserve my project's existing shadcn aliases and styling conventions.`
 
   return (
-    <main className="site-container grid min-h-screen lg:grid-cols-[220px_minmax(0,760px)] lg:gap-10 xl:grid-cols-[220px_minmax(0,760px)_180px] xl:gap-12">
-      <aside className="hidden border-e py-10 pe-5 lg:block">
-        <div className="sticky top-22 max-h-[calc(100vh-7rem)] overflow-y-auto pe-1">
-          <p className="mb-3 px-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">Documentation</p>
-          <div className="relative mb-5">
+    <main className="mx-auto grid min-h-screen w-full max-w-[1480px] border-x lg:grid-cols-[240px_minmax(0,820px)] xl:grid-cols-[240px_minmax(0,820px)_220px]">
+      <aside className="hidden border-e bg-card/25 lg:block">
+        <div className="sticky top-14 max-h-[calc(100vh-3.5rem)] overflow-y-auto px-5 py-8">
+          <p className="mb-4 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground">Documentation</p>
+          <div className="relative mb-7">
             <IconSearch className="pointer-events-none absolute start-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
-            <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Filter docs…" aria-label="Filter documentation" className="h-8 ps-8 text-xs" />
+            <Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Filter docs…" aria-label="Filter documentation" className="h-9 bg-background ps-8 text-xs" />
           </div>
           <nav className="grid gap-5" aria-label="Documentation">
             {docGroups.map((group) => {
@@ -492,15 +502,15 @@ export function DocsPage() {
               if (!visibleItems.length) return null
               return (
                 <div key={group.label}>
-                  <p className="mb-1.5 px-2 text-xs font-medium text-foreground">{group.label}</p>
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">{group.label}</p>
                   <div className="grid gap-0.5">
                     {visibleItems.map((section) => (
                       <Link
                         key={section.slug}
                         to={`/docs/${section.slug}`}
                         className={cn(
-                          "rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground",
-                          section.slug === currentSlug && "bg-accent font-medium text-foreground",
+                          "border-s-2 border-transparent px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:border-border hover:bg-accent hover:text-foreground",
+                          section.slug === currentSlug && "border-primary bg-accent font-medium text-foreground",
                         )}
                       >
                         {section.label}
@@ -517,8 +527,8 @@ export function DocsPage() {
         </div>
       </aside>
 
-      <article className="min-w-0 py-10 sm:py-14">
-        <div className="mb-8 lg:hidden">
+      <article className="min-w-0 px-5 py-10 sm:px-10 sm:py-14 lg:px-12">
+        <div className="mb-9 lg:hidden">
           <label htmlFor="doc-section" className="mb-2 block text-xs font-medium text-muted-foreground">Documentation section</label>
           <NativeSelect
             id="doc-section"
@@ -529,22 +539,22 @@ export function DocsPage() {
             {docSections.map((section) => <option key={section.slug} value={section.slug}>{section.label}</option>)}
           </NativeSelect>
         </div>
-        <p className="eyebrow">Docs</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-[-0.045em] sm:text-5xl">{doc.title}</h1>
-        <p className="text-muted-foreground mt-4 max-w-2xl text-lg leading-8">{doc.summary}</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Docs <span className="mx-1.5 text-border">/</span> {currentGroup?.label}</p>
+        <h1 className="mt-4 text-4xl font-semibold tracking-[-0.05em] sm:text-5xl">{doc.title}</h1>
+        <p className="mt-4 max-w-2xl text-lg leading-8 text-muted-foreground">{doc.summary}</p>
         <div className="mt-6 flex flex-wrap gap-2">
           <CopyPageButton title={doc.title} />
           <a href="/llms-full.txt" target="_blank" rel="noreferrer" className={buttonVariants({ variant: "outline", size: "sm" })}>
-            <IconFileText /> Open text
+            <IconFileText data-icon="inline-start" /> Open text
           </a>
           <AskAiButton prompt={agentPrompt} />
         </div>
         <Separator className="my-9" />
-        <div data-doc-content className="grid gap-10">{doc.content}</div>
+        <div data-doc-content className="grid gap-12">{doc.content}</div>
 
         <div className="mt-14 grid gap-3 sm:grid-cols-2">
           {previous ? (
-            <Link to={`/docs/${previous.slug}`} className="flex items-center gap-3 rounded-lg border p-4 transition-colors hover:border-primary/35 hover:bg-accent/50">
+            <Link to={`/docs/${previous.slug}`} className="flex items-center gap-3 border p-4 transition-colors hover:border-primary/35 hover:bg-accent/50">
               <IconArrowLeft className="size-4 text-muted-foreground" />
               <div>
                 <span className="text-xs text-muted-foreground">Previous</span>
@@ -553,7 +563,7 @@ export function DocsPage() {
             </Link>
           ) : <div />}
           {next ? (
-            <Link to={`/docs/${next.slug}`} className="flex items-center justify-end gap-3 rounded-lg border p-4 text-end transition-colors hover:border-primary/35 hover:bg-accent/50">
+            <Link to={`/docs/${next.slug}`} className="flex items-center justify-end gap-3 border p-4 text-end transition-colors hover:border-primary/35 hover:bg-accent/50">
               <div>
                 <span className="text-xs text-muted-foreground">Next</span>
                 <p className="mt-0.5 text-sm font-medium">{next.label}</p>
@@ -565,8 +575,8 @@ export function DocsPage() {
         <p className="mt-8 text-xs text-muted-foreground">Last updated August 16, 2026</p>
       </article>
 
-      <aside className="hidden py-10 xl:block">
-        <div className="sticky top-22">
+      <aside className="hidden border-s bg-card/15 xl:block">
+        <div className="sticky top-14 px-6 py-10">
           <p className="mb-3 text-xs font-medium">On this page</p>
           <nav className="grid gap-2 border-s ps-3" aria-label="On this page">
             {tocBySlug[currentSlug].map((heading) => (
@@ -600,7 +610,7 @@ function CopyPageButton({ title }: { title: string }) {
 
   return (
     <Button variant="outline" size="sm" onClick={copyPage}>
-      {copied ? <IconCheck /> : <IconCopy />}
+      {copied ? <IconCheck data-icon="inline-start" /> : <IconCopy data-icon="inline-start" />}
       {copied ? "Copied" : "Copy Markdown"}
     </Button>
   )
@@ -617,7 +627,7 @@ function AskAiButton({ prompt }: { prompt: string }) {
 
   return (
     <Button variant="outline" size="sm" onClick={copyPrompt}>
-      {copied ? <IconCheck /> : <IconSparkles />}
+      {copied ? <IconCheck data-icon="inline-start" /> : <IconSparkles data-icon="inline-start" />}
       {copied ? "Prompt copied" : "Ask AI"}
     </Button>
   )
