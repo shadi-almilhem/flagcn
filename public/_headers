@@ -21,12 +21,10 @@
 /AGENTS.md
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=3600
+  Content-Type: text/markdown; charset=utf-8
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-https://:project.pages.dev/*
-  X-Robots-Tag: noindex
-
-https://:version.:project.pages.dev/*
+https://:version.flagcn.pages.dev/*
   X-Robots-Tag: noindex
