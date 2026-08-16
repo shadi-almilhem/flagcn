@@ -34,7 +34,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
-import { getRegistryConfig, getSiteOrigin } from "@/config/site"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { getRegistryConfig, getSiteOrigin, packageManagers, type PackageManager } from "@/config/site"
 import { cn } from "@/lib/utils"
 
 type DocSlug =
@@ -96,7 +97,7 @@ const docSections = docGroups.flatMap((group) => group.items)
 
 const tocBySlug: Record<DocSlug, string[]> = {
   introduction: ["What is Flagcn?", "Choose an install", "Principles"],
-  installation: ["1. Add the registry", "2. Add a component", "3. Render a flag", "Available items"],
+  installation: ["1. Add the registry", "2. Add a component", "3. Render a flag", "Available items", "Installation through CLI", "Search and Discovery"],
   flag: ["Install", "Usage", "API", "Format behavior"],
   "flag-picker": ["Install", "Usage", "API"],
   "country-components": ["Install one country", "Usage", "Why wrappers?", "Install every wrapper"],
@@ -126,7 +127,7 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
           <p>SVG artwork is served from the MIT-licensed Flag Icons collection. PNG, WebP, and JPEG artwork comes from Flagpedia’s FlagCDN. The core component constructs stable URLs, native responsive image attributes, and 4:3 or 1:1 presentation.</p>
         </DocSection>
         <DocSection title="Choose an install">
-          <div className="not-prose grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="not-prose grid gap-3 sm:grid-cols-2">
             <MiniDocCard title="flag" text="The small, universal image primitive." command="@flagcn/flag" />
             <MiniDocCard title="flag-picker" text="Searchable, keyboard-friendly selection." command="@flagcn/flag-picker" />
             <MiniDocCard title="ae" text="A typed, country-specific wrapper." command="@flagcn/ae" />
@@ -392,6 +393,42 @@ function InstallationContent() {
           ["@flagcn/<code>", "Component", "A typed country or territory wrapper, e.g. @flagcn/ae."],
         ]} compact />
       </DocSection>
+      <DocSection title="Installation through CLI">
+        <p>Once the <code>@flagcn</code> registry is configured, install an item from your project root. The CLI resolves dependencies and copies editable source into your existing component paths.</p>
+        <div className="not-prose grid gap-4 lg:grid-cols-2">
+          <CliDocCard
+            title="Install one flag"
+            description="Use a lowercase ISO-style code to add one typed wrapper and its small core dependency."
+            command="shadcn@latest add @flagcn/ae"
+          />
+          <CliDocCard
+            title="Install the complete catalog"
+            description="Add the primitive, picker, typed data, exports, and every available flag wrapper."
+            command="shadcn@latest add @flagcn/all"
+          />
+        </div>
+        <p>You can also install directly from the registry endpoint when a tool does not resolve namespaces yet.</p>
+        <CliCommand command={`shadcn@latest add ${origin}/r/ae.json`} />
+      </DocSection>
+      <DocSection title="Search and Discovery">
+        <p>Inspect registry items before installing them. The shadcn CLI can show one item, search names and descriptions, or list the complete Flagcn catalog.</p>
+        <CliDocCard
+          title="View"
+          description="Preview an item’s files, dependencies, and registry metadata."
+          command="shadcn@latest view @flagcn/ae"
+        />
+        <CliDocCard
+          title="Search"
+          description="Find flags and utilities by code, display name, or description."
+          command={'shadcn@latest search @flagcn -q "United Arab Emirates"'}
+        />
+        <CliDocCard
+          title="List"
+          description="Browse every installable item exposed by the Flagcn registry."
+          command="shadcn@latest list @flagcn"
+        />
+        <p>These commands read registry metadata only. Install with <code>add</code> after you have confirmed the item and its dependencies.</p>
+      </DocSection>
       <div className="not-prose border border-primary/25 bg-primary/5 p-4 text-sm">
         <strong>Registry endpoint:</strong> <code className="ms-1 text-muted-foreground">{getRegistryConfig()}</code>
       </div>
@@ -424,6 +461,50 @@ function MiniDocCard({ title, text, command }: { title: string; text: string; co
       </CardContent>
     </Card>
   )
+}
+
+function CliDocCard({ title, description, command }: { title: string; description: string; command: string }) {
+  return (
+    <Card className="not-prose min-w-0">
+      <CardHeader>
+        <CardTitle className="text-base">{title}</CardTitle>
+        <CardDescription className="leading-6">{description}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <CliCommand command={command} />
+      </CardContent>
+    </Card>
+  )
+}
+
+function CliCommand({ command }: { command: string }) {
+  return (
+    <Tabs defaultValue="pnpm" className="min-w-0 flex-col gap-2">
+      <TabsList aria-label="Package manager" className="w-fit">
+        {packageManagers.map((manager) => (
+          <TabsTrigger key={manager} value={manager} className="font-mono text-xs">
+            {manager}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+      {packageManagers.map((manager) => (
+        <TabsContent key={manager} value={manager} className="m-0 min-w-0">
+          <CodeBlock language="bash" code={`${cliPrefix(manager)} ${command}`} />
+        </TabsContent>
+      ))}
+    </Tabs>
+  )
+}
+
+function cliPrefix(packageManager: PackageManager) {
+  const prefixes: Record<PackageManager, string> = {
+    pnpm: "pnpm dlx",
+    npm: "npx",
+    yarn: "yarn dlx",
+    bun: "bunx --bun",
+  }
+
+  return prefixes[packageManager]
 }
 
 function ApiTable({ rows, compact = false }: { rows: string[][]; compact?: boolean }) {

@@ -21,6 +21,14 @@ pnpm dlx shadcn@latest add @flagcn/ae
 pnpm dlx shadcn@latest add @flagcn/all
 ```
 
+## Search and discovery
+
+```bash
+pnpm dlx shadcn@latest view @flagcn/ae
+pnpm dlx shadcn@latest search @flagcn -q "United Arab Emirates"
+pnpm dlx shadcn@latest list @flagcn
+```
+
 ## API summary
 
 `Flag` accepts `code`, `alt`, `format` (`svg | png | webp | jpg`), `width`, `ratio` (`4x3 | 1x1 | original`), `decorative`, `className`, `style`, `ref`, and standard React image props. Defaults are SVG, width 80, ratio 4:3, lazy loading, and async decoding. The 4:3 and 1:1 frames use contain behavior so artwork is never clipped.

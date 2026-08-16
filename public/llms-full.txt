@@ -65,6 +65,18 @@ bunx --bun shadcn@latest add @flagcn/ae
 
 Use one named item when the interface needs a fixed flag. Use @flagcn/flag for dynamic codes. Use @flagcn/flag-picker for selection. Use @flagcn/all only when the complete typed catalog is genuinely needed.
 
+## Search and discovery
+
+Inspect registry metadata before installing an item:
+
+```bash
+pnpm dlx shadcn@latest view @flagcn/ae
+pnpm dlx shadcn@latest search @flagcn -q "United Arab Emirates"
+pnpm dlx shadcn@latest list @flagcn
+```
+
+`view` shows an item and its dependencies, `search` matches registry names and descriptions, and `list` returns the complete Flagcn catalog. These commands do not install files.
+
 ## Universal Flag component
 
 Typical import after installation:
