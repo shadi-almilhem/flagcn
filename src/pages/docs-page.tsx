@@ -301,18 +301,20 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
             ["/llms-full.txt", "Reference", "Complete agent-oriented usage, API, accessibility, and licensing guide."],
             ["/r/registry.json", "Registry", "The full shadcn registry index and every available item name."],
             ["/r/<name>.json", "Registry item", "The exact files and dependencies installed for one item."],
+            ["/openapi.json", "OpenAPI", "The machine-readable registry endpoint contract."],
+            ["/.well-known/api-catalog", "Discovery", "The RFC 9727 API catalog with docs, schema, and health relations."],
           ]} />
         </DocSection>
         <DocSection title="Agent install workflow">
           <ol>
             <li>Read <code>/llms.txt</code>, then open <code>/llms-full.txt</code> for the complete contract.</li>
             <li>Inspect <code>/r/registry.json</code> or the item JSON when exact generated files matter.</li>
-            <li>Add the <code>@flagcn</code> URL to <code>components.json</code> when the namespace is not yet in the shadcn directory.</li>
+            <li>Use the official <code>@flagcn</code> namespace directly. Add its URL only when supporting an older CLI directory snapshot.</li>
             <li>Run the shadcn add command and edit the copied source normally.</li>
           </ol>
         </DocSection>
         <DocSection title="Registry discovery">
-          <CodeBlock language="text" code={`${getSiteOrigin()}/llms.txt\n${getSiteOrigin()}/llms-full.txt\n${getSiteOrigin()}/r/registry.json\n${getSiteOrigin()}/r/ae.json`} />
+          <CodeBlock language="text" code={`${getSiteOrigin()}/llms.txt\n${getSiteOrigin()}/llms-full.txt\n${getSiteOrigin()}/.well-known/api-catalog\n${getSiteOrigin()}/openapi.json\n${getSiteOrigin()}/r/registry.json\n${getSiteOrigin()}/r/ae.json`} />
           <p>Registry responses allow cross-origin reads, so browser-based tools can inspect the catalog directly. Stable item names such as <code>ae</code>, <code>us-ca</code>, <code>flag</code>, and <code>all</code> are preferable to guessing display names.</p>
         </DocSection>
         <DocSection title="Prompt template">
@@ -375,12 +377,13 @@ function InstallationContent() {
   const origin = getSiteOrigin()
   return (
     <>
-      <DocSection title="1. Add the registry">
-        <p>Add this entry to your project’s <code>components.json</code>. The namespace can be changed, but the examples use <code>flagcn</code>.</p>
-        <CodeBlock language="json" code={registryConfigCode(origin)} />
-      </DocSection>
-      <DocSection title="2. Add a component">
+      <DocSection title="1. Add a component">
+        <p>The official shadcn Registry Directory recognizes <code>@flagcn</code>, so current CLI releases need no registry setup.</p>
         <CodeBlock language="bash" code={`pnpm dlx shadcn@latest add @flagcn/flag\n# or\nnpx shadcn@latest add @flagcn/flag`} />
+      </DocSection>
+      <DocSection title="2. Older CLI compatibility">
+        <p>If an older CLI directory snapshot does not recognize <code>@flagcn</code>, add this compatibility entry to <code>components.json</code>.</p>
+        <CodeBlock language="json" code={registryConfigCode(origin)} />
       </DocSection>
       <DocSection title="3. Render a flag">
         <CodeBlock code={`import { Flag } from "@/components/flags/flag"\n\n<Flag code="ae" alt="United Arab Emirates flag" />`} />

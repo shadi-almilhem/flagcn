@@ -7,12 +7,14 @@
 - [Complete agent reference](/llms-full.txt): Full API, installation, accessibility, and licensing contract.
 - [Agent instructions](/AGENTS.md): Safe defaults for coding agents modifying a consumer project.
 - [Registry index](/r/registry.json): Exact shadcn registry items and stable names.
+- [OpenAPI description](/openapi.json): Registry endpoint contract.
+- [API catalog](/.well-known/api-catalog): RFC 9727 service discovery.
 - [Documentation](/docs): Human-readable guides.
 - [Flag catalog](/flags): Search and preview every format and ratio.
 
 ## Install
 
-If the `@flagcn` namespace is not yet globally recognized, configure its URL in `components.json` as `ORIGIN/r/{name}.json`, where ORIGIN is the host serving this file.
+`@flagcn` is listed in the official shadcn Registry Directory, so current shadcn CLI releases resolve it without a local `components.json` registry entry.
 
 ```bash
 pnpm dlx shadcn@latest add @flagcn/flag

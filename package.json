@@ -34,12 +34,13 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
+    "test:agent-discovery": "node scripts/test-agent-discovery.mjs",
     "test:install": "node scripts/test-registry-install.mjs",
     "test:watch": "vitest",
     "registry:generate": "node scripts/generate-registry.mjs",
     "registry:build": "node scripts/generate-registry.mjs && shadcn build",
     "registry:check": "node scripts/check-registry.mjs",
-    "check": "eslint . && vitest run && node scripts/generate-registry.mjs && shadcn build && node scripts/check-registry.mjs && node scripts/test-registry-install.mjs && tsc -b"
+    "check": "eslint . && vitest run && node scripts/test-agent-discovery.mjs && node scripts/generate-registry.mjs && shadcn build && node scripts/check-registry.mjs && node scripts/test-registry-install.mjs && tsc -b"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

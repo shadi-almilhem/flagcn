@@ -1,0 +1,195 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Flagcn Registry API",
+    "version": "1.0.0",
+    "summary": "Machine-readable discovery for the Flagcn shadcn registry.",
+    "description": "Read the complete Flagcn catalog or fetch one shadcn registry item by its stable lowercase name. All endpoints are public and require no authentication.",
+    "license": {
+      "name": "MIT",
+      "identifier": "MIT",
+      "url": "https://flagcn.dev/docs/license"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://flagcn.dev",
+      "description": "Production"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Registry",
+      "description": "shadcn registry discovery and item payloads."
+    },
+    {
+      "name": "Operations",
+      "description": "Public service health."
+    }
+  ],
+  "paths": {
+    "/r/registry.json": {
+      "get": {
+        "operationId": "getRegistryIndex",
+        "summary": "List all Flagcn registry items",
+        "tags": ["Registry"],
+        "responses": {
+          "200": {
+            "description": "The complete shadcn registry index.",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "Registry metadata is publicly readable.",
+                "schema": { "type": "string", "const": "*" }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/RegistryIndex" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/r/{name}.json": {
+      "get": {
+        "operationId": "getRegistryItem",
+        "summary": "Fetch one Flagcn registry item",
+        "description": "Use a stable item name from the registry index, such as flag, flag-picker, ae, us-ca, or all.",
+        "tags": ["Registry"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Lowercase registry item name.",
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "examples": ["ae", "flag", "flag-picker", "all"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A shadcn registry item payload.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/RegistryItem" }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested registry item does not exist.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health.json": {
+      "get": {
+        "operationId": "getHealth",
+        "summary": "Check public registry availability",
+        "tags": ["Operations"],
+        "responses": {
+          "200": {
+            "description": "The static registry origin is available.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Health" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegistryIndex": {
+        "type": "object",
+        "required": ["$schema", "name", "homepage", "items"],
+        "properties": {
+          "$schema": { "type": "string", "format": "uri" },
+          "name": { "type": "string", "const": "flagcn" },
+          "homepage": { "type": "string", "format": "uri" },
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/RegistryItemSummary" }
+          }
+        },
+        "additionalProperties": true
+      },
+      "RegistryItemSummary": {
+        "type": "object",
+        "required": ["name", "type", "title", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "author": { "type": "string" },
+          "registryDependencies": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "categories": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": true
+      },
+      "RegistryItem": {
+        "allOf": [
+          { "$ref": "#/components/schemas/RegistryItemSummary" },
+          {
+            "type": "object",
+            "required": ["files"],
+            "properties": {
+              "$schema": { "type": "string", "format": "uri" },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["path", "type"],
+                  "properties": {
+                    "path": { "type": "string" },
+                    "content": { "type": "string" },
+                    "type": { "type": "string" },
+                    "target": { "type": "string" }
+                  },
+                  "additionalProperties": true
+                }
+              },
+              "meta": { "type": "object", "additionalProperties": true },
+              "docs": { "type": "string" }
+            },
+            "additionalProperties": true
+          }
+        ]
+      },
+      "Health": {
+        "type": "object",
+        "required": ["status", "service", "registry"],
+        "properties": {
+          "status": { "type": "string", "const": "ok" },
+          "service": { "type": "string" },
+          "registry": { "type": "string", "format": "uri" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": ["error", "name"],
+        "properties": {
+          "error": { "type": "string" },
+          "name": { "type": "string" }
+        }
+      }
+    }
+  }
+}

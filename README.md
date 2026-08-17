@@ -14,7 +14,7 @@ Flagcn is a source-owned shadcn registry for accessible flags. It ships a small 
 - `@flagcn/<code>`: 306 individually installable country, territory, subdivision, and organization wrappers.
 - A Vite + React landing page with package-manager install tabs and a complete filterable catalog.
 - Fumadocs-inspired documentation with grouped navigation, page outlines, copy actions, and AI-agent guidance.
-- Machine-readable `/llms.txt`, `/llms-full.txt`, `/AGENTS.md`, and registry JSON endpoints.
+- Machine-readable `/llms.txt`, `/llms-full.txt`, `/AGENTS.md`, an RFC 9727 API catalog, OpenAPI, Markdown content negotiation, and registry JSON endpoints.
 - Registry generation, schema validation, unit tests, and a clean-consumer CLI install test.
 
 ## Local development
@@ -43,7 +43,16 @@ Generated registry payloads live in `public/r`. Do not hand-edit the country wra
 
 ## Use the registry
 
-Until the registry is listed in the official shadcn directory, users add its namespace to `components.json`:
+Flagcn is listed in the official shadcn Registry Directory. Install any item directly:
+
+```bash
+pnpm dlx shadcn@latest add @flagcn/flag
+pnpm dlx shadcn@latest add @flagcn/flag-picker
+pnpm dlx shadcn@latest add @flagcn/ae
+pnpm dlx shadcn@latest add @flagcn/all
+```
+
+Older CLI snapshots can use this compatibility entry in `components.json`:
 
 ```json
 {
@@ -55,22 +64,13 @@ Until the registry is listed in the official shadcn directory, users add its nam
 }
 ```
 
-Then install any item:
-
-```bash
-pnpm dlx shadcn@latest add @flagcn/flag
-pnpm dlx shadcn@latest add @flagcn/flag-picker
-pnpm dlx shadcn@latest add @flagcn/ae
-pnpm dlx shadcn@latest add @flagcn/all
-```
-
-You can also configure the namespace with the CLI:
+You can add the compatibility entry with the CLI:
 
 ```bash
 pnpm dlx shadcn@latest registry add @flagcn=https://flagcn.dev/r/{name}.json
 ```
 
-After the public registry is deployed and accepted into the official shadcn Registry Directory, `@flagcn/*` can work globally without a local registry entry. Directory acceptance is an external review step; publishing this repository alone does not reserve the namespace.
+The canonical directory entry is maintained in [`shadcn-ui/ui`](https://github.com/shadcn-ui/ui/blob/main/apps/v4/registry/directory.json).
 
 ## Component API
 

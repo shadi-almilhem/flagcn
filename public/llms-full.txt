@@ -32,7 +32,9 @@ Resolve relative paths against the origin from which this file was fetched.
 
 ## Connect the registry
 
-Until @flagcn is accepted into the official shadcn Registry Directory, add this to components.json. Replace FLAGCN_ORIGIN with the origin that served this document.
+`@flagcn` is listed in the official shadcn Registry Directory. Current shadcn CLI releases resolve it directly, without a project-local registry entry.
+
+If an older CLI snapshot does not recognize the namespace, use this compatibility fallback. Replace FLAGCN_ORIGIN with the origin that served this document.
 
 ```json
 {
@@ -215,7 +217,7 @@ A named wrapper fixes the code prop and forwards the rest of FlagProps. Use /r/r
 2. Inspect /r/registry.json for exact item names.
 3. Inspect /r/{name}.json if exact installed files or dependencies matter.
 4. Preserve the consumer project's components.json aliases and shadcn style.
-5. Configure @flagcn if the namespace is not yet globally recognized.
+5. Use the official @flagcn namespace directly; configure its URL only as an older-CLI compatibility fallback.
 6. Run the appropriate shadcn CLI command.
 7. Import the copied source through the project's existing alias.
 8. Supply meaningful alt text or explicitly set decorative.
@@ -234,6 +236,6 @@ Public-domain status does not override laws or protocols governing use of nation
 ## Project constraints and truthfulness
 
 - Flagcn depends on remote jsDelivr and FlagCDN availability unless the installed source is modified to self-host artwork.
-- The name @flagcn works without components.json only after acceptance into the shadcn Registry Directory or equivalent global configuration.
+- The name @flagcn is included in the official shadcn Registry Directory and works without a project-local registry entry in current CLI releases.
 - The deployed origin must replace any development or example origin in generated registry payloads.
 - Display names are human labels; registry item codes are the stable identifiers.

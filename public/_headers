@@ -1,9 +1,34 @@
 /*
   Content-Security-Policy: default-src 'self'; img-src 'self' https://flagcdn.com https://cdn.jsdelivr.net blob: data:; script-src 'self' 'sha256-gRMGO7jusE1a0nuNWwj4VPlY+OEGsplLZjZkCbN0bm8=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://flagcdn.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests
+  Content-Signal: ai-train=yes, search=yes, ai-input=yes
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Referrer-Policy: strict-origin-when-cross-origin
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
+
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json", </openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json;version=3.1", </docs>; rel="service-doc"; type="text/html", </llms.txt>; rel="describedby"; type="text/plain"
+  Vary: Accept
+
+/.well-known/api-catalog
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+  Content-Type: application/linkset+json
+
+/openapi.json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+  Content-Type: application/vnd.oai.openapi+json;version=3.1
+
+/health.json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=60
+  Content-Type: application/json; charset=utf-8
+
+/_agent/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+  Content-Type: text/markdown; charset=utf-8
 
 /r/*
   Access-Control-Allow-Origin: *

@@ -1,0 +1,25 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://flagcn.dev/r/",
+      "service-desc": [
+        {
+          "href": "https://flagcn.dev/openapi.json",
+          "type": "application/vnd.oai.openapi+json;version=3.1"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://flagcn.dev/docs",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://flagcn.dev/health.json",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}
