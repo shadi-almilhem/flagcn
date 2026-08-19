@@ -1,12 +1,21 @@
-import { IconBrandGithub, IconMenu2, IconX } from "@tabler/icons-react"
+import { IconBrandGithub, IconMenu2 } from "@tabler/icons-react"
 import * as React from "react"
 import { NavLink } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 
 import { Logo } from "./logo"
+import { SiteCommandMenu } from "./site-command-menu"
 import { ThemeToggle } from "./theme-toggle"
 
 const navItems = [
@@ -35,43 +44,56 @@ export function SiteHeader() {
                 {item.label}
               </NavLink>
             ))}
-            {siteConfig.github ? (
-              <a
-                href={siteConfig.github}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub repository"
-                className="ms-2 grid size-9 place-items-center text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-              >
-                <IconBrandGithub className="size-4" />
-              </a>
-            ) : null}
           </nav>
+          {siteConfig.github ? (
+            <a
+              href={siteConfig.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub repository"
+              className="grid size-10 place-items-center text-muted-foreground outline-none transition-[color,background-color,box-shadow] hover:bg-accent hover:text-foreground focus-visible:ring-1 focus-visible:ring-ring/50 md:ms-1 md:size-9"
+            >
+              <IconBrandGithub className="size-4" />
+            </a>
+          ) : null}
+          <SiteCommandMenu />
           <ThemeToggle />
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            aria-label="Toggle navigation menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <span className="t-icon-swap" data-state={menuOpen ? "b" : "a"} data-icon="inline-start" aria-hidden="true">
-              <span className="t-icon" data-icon="a"><IconMenu2 /></span>
-              <span className="t-icon" data-icon="b"><IconX /></span>
-            </span>
-          </Button>
+          <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+            <SheetTrigger render={
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                aria-label="Open navigation menu"
+              />
+            }>
+              <IconMenu2 />
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[min(21rem,calc(100%-2rem))]">
+              <SheetHeader className="border-b pe-14">
+                <SheetTitle>Navigation</SheetTitle>
+                <SheetDescription>Browse Flagcn components and documentation.</SheetDescription>
+              </SheetHeader>
+              <nav aria-label="Mobile navigation" className="grid gap-1 p-3">
+                {navItems.map((item) => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setMenuOpen(false)}
+                    className={({ isActive }) => cn(
+                      "border-s-2 border-transparent px-3 py-2.5 text-sm font-medium text-muted-foreground outline-none transition-[color,background-color,border-color] hover:border-primary hover:bg-accent hover:text-foreground focus-visible:border-primary focus-visible:ring-1 focus-visible:ring-ring/50",
+                      isActive && "border-primary bg-accent text-foreground",
+                    )}
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
-      {menuOpen ? (
-        <nav aria-label="Primary" data-open={menuOpen} className="site-container grid grid-cols-1 gap-1 border-t py-3 md:hidden">
-          {navItems.map((item) => (
-            <NavLink key={item.to} to={item.to} onClick={() => setMenuOpen(false)} className="border-s-2 border-transparent px-3 py-2 text-sm font-medium hover:border-primary hover:bg-accent">
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-      ) : null}
     </header>
   )
 }

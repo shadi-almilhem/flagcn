@@ -14,6 +14,7 @@ interface SlidingToggleGroupProps<T extends string> {
   options: readonly SlidingToggleOption<T>[]
   label: string
   className?: string
+  itemClassName?: string
 }
 
 export function SlidingToggleGroup<T extends string>({
@@ -22,6 +23,7 @@ export function SlidingToggleGroup<T extends string>({
   options,
   label,
   className,
+  itemClassName,
 }: SlidingToggleGroupProps<T>) {
   const rootRef = React.useRef<HTMLDivElement>(null)
   const pillRef = React.useRef<HTMLSpanElement>(null)
@@ -82,7 +84,7 @@ export function SlidingToggleGroup<T extends string>({
           }}
           value={option.value}
           aria-selected={value === option.value}
-          className="t-tab"
+          className={cn("t-tab", itemClassName)}
         >
           {option.label}
         </ToggleGroupItem>

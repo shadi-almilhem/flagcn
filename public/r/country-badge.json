@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "country-badge",
+  "title": "Country Badge",
+  "author": "Shadi Al Milhem",
+  "description": "A shadcn Badge composed with a flag and country name, ISO code, or calling code.",
+  "registryDependencies": [
+    "badge",
+    "@flagcn/flag",
+    "@flagcn/country-data"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/country-badge.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport type * as React from \"react\"\n\nimport { Badge } from \"@/components/ui/badge\"\nimport { cn } from \"@/lib/utils\"\n\nimport { getCountry } from \"./country-utils\"\nimport type { CountryCode } from \"./data/countries\"\nimport { Flag } from \"./flag\"\n\nexport interface CountryBadgeProps extends Omit<React.ComponentProps<typeof Badge>, \"children\"> {\n  code: CountryCode\n  label?: \"name\" | \"code\" | \"calling-code\" | \"none\"\n}\n\nexport function CountryBadge({ code, label = \"name\", className, ...props }: CountryBadgeProps) {\n  const country = getCountry(code)\n  const text = label === \"code\" ? code.toUpperCase()\n    : label === \"calling-code\" ? country?.callingCodes[0]\n      : label === \"name\" ? country?.name\n        : undefined\n\n  return (\n    <Badge className={cn(\"gap-1.5\", className)} {...props}>\n      <Flag code={code} width={24} ratio=\"4x3\" alt=\"\" decorative className=\"h-3 w-4 object-cover ring-1 ring-black/10 dark:ring-white/15\" />\n      {text ? <span>{text}</span> : null}\n    </Badge>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/country-badge.tsx"
+    }
+  ],
+  "meta": {
+    "license": "MIT"
+  },
+  "docs": "Set label to name, code, calling-code, or none.",
+  "categories": [
+    "countries",
+    "badges",
+    "display"
+  ],
+  "type": "registry:block"
+}

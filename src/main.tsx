@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom"
 import { App } from "./app"
 import { AppErrorBoundary } from "./components/site/app-error-boundary"
 import { ThemeProvider } from "./components/theme-provider"
+import { Toaster } from "./components/ui/sonner"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")!).render(
           <App />
         </AppErrorBoundary>
       </BrowserRouter>
+      <Toaster position="bottom-right" closeButton />
     </ThemeProvider>
   </StrictMode>,
 )

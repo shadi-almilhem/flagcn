@@ -7,10 +7,14 @@
   <url><loc>https://flagcn.dev/docs/installation</loc></url>
   <url><loc>https://flagcn.dev/docs/flag</loc></url>
   <url><loc>https://flagcn.dev/docs/flag-picker</loc></url>
-  <url><loc>https://flagcn.dev/docs/country-components</loc></url>
+  <url><loc>https://flagcn.dev/docs/country-picker</loc></url>
+  <url><loc>https://flagcn.dev/docs/phone-input</loc></url>
+  <url><loc>https://flagcn.dev/docs/country-display</loc></url>
+  <url><loc>https://flagcn.dev/docs/locale-pickers</loc></url>
   <url><loc>https://flagcn.dev/docs/formats-and-ratios</loc></url>
   <url><loc>https://flagcn.dev/docs/styling</loc></url>
   <url><loc>https://flagcn.dev/docs/accessibility</loc></url>
   <url><loc>https://flagcn.dev/docs/ai-agents</loc></url>
+  <url><loc>https://flagcn.dev/docs/data-utilities</loc></url>
   <url><loc>https://flagcn.dev/docs/license</loc></url>
 </urlset>

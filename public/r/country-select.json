@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "country-select",
+  "title": "Country Select",
+  "author": "Shadi Al Milhem",
+  "description": "A lightweight native country select with emoji and optional calling codes.",
+  "registryDependencies": [
+    "native-select",
+    "@flagcn/country-data"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/country-select.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport type * as React from \"react\"\n\nimport { NativeSelect, NativeSelectOption } from \"@/components/ui/native-select\"\n\nimport { countryData, type CountryCode } from \"./data/countries\"\n\nexport interface CountrySelectProps extends Omit<React.ComponentProps<typeof NativeSelect>, \"value\" | \"defaultValue\" | \"onChange\"> {\n  value?: CountryCode\n  defaultValue?: CountryCode\n  onValueChange?: (code: CountryCode) => void\n  countries?: readonly CountryCode[]\n  placeholder?: string\n  showCallingCode?: boolean\n}\n\nexport function CountrySelect({\n  value,\n  defaultValue,\n  onValueChange,\n  countries,\n  placeholder = \"Select a country\",\n  showCallingCode = false,\n  ...props\n}: CountrySelectProps) {\n  const allowed = countries ? new Set(countries) : undefined\n  const options = allowed ? countryData.filter((country) => allowed.has(country.code)) : countryData\n\n  return (\n    <NativeSelect\n      value={value}\n      defaultValue={defaultValue}\n      onChange={(event) => onValueChange?.(event.target.value as CountryCode)}\n      {...props}\n    >\n      <NativeSelectOption value=\"\" disabled>{placeholder}</NativeSelectOption>\n      {options.map((country) => (\n        <NativeSelectOption key={country.code} value={country.code}>\n          {country.emoji} {country.name}{showCallingCode ? ` (${country.callingCodes[0] ?? \"\"})` : \"\"}\n        </NativeSelectOption>\n      ))}\n    </NativeSelect>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/country-select.tsx"
+    }
+  ],
+  "meta": {
+    "license": "MIT",
+    "native": true
+  },
+  "docs": "Use when native select behavior is preferable to a searchable picker.",
+  "categories": [
+    "countries",
+    "forms",
+    "select"
+  ],
+  "type": "registry:block"
+}

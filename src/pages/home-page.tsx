@@ -11,11 +11,13 @@ import { Link } from "react-router-dom"
 
 import { Flag } from "@/components/flags/flag"
 import { flagCount, flagNames, type FlagCode } from "@/components/flags/flag-data"
-import { FlagGallery } from "@/components/site/flag-gallery"
+import { FlagGalleryLoading } from "@/components/site/flag-gallery-loading"
 import { InstallCommand } from "@/components/site/install-command"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+
+const FlagGallery = React.lazy(() => import("@/components/site/flag-gallery").then((module) => ({ default: module.FlagGallery })))
 
 const heroFlags: FlagCode[] = ["ae", "sa", "jp", "br", "za", "ca", "de", "in", "am", "mx", "kr", "gb"]
 const featuredFlags: FlagCode[] = ["ae", "sa", "jp", "br", "za", "ca", "de", "in", "us-ca", "gb-eng", "eu", "un"]
@@ -113,7 +115,9 @@ export function HomePage() {
             </div>
           </div>
 
-          <FlagGallery featuredCodes={featuredFlags} className="mt-10" />
+          <React.Suspense fallback={<FlagGalleryLoading className="mt-10" count={12} />}>
+            <FlagGallery featuredCodes={featuredFlags} className="mt-10" />
+          </React.Suspense>
 
           <div className="mt-6 flex justify-center">
             <Link to="/flags" className={buttonVariants({ variant: "outline" })}>

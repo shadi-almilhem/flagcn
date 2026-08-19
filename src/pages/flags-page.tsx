@@ -1,6 +1,10 @@
+import * as React from "react"
+
 import { flagCount } from "@/components/flags/flag-data"
-import { FlagGallery } from "@/components/site/flag-gallery"
+import { FlagGalleryLoading } from "@/components/site/flag-gallery-loading"
 import { Badge } from "@/components/ui/badge"
+
+const FlagGallery = React.lazy(() => import("@/components/site/flag-gallery").then((module) => ({ default: module.FlagGallery })))
 
 export function FlagsPage() {
   return (
@@ -20,7 +24,9 @@ export function FlagsPage() {
         </div>
       </section>
       <section className="site-container py-10 sm:py-12">
-        <FlagGallery />
+        <React.Suspense fallback={<FlagGalleryLoading count={12} />}>
+          <FlagGallery />
+        </React.Suspense>
       </section>
     </main>
   )

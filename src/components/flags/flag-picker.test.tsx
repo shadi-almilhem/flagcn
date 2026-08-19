@@ -22,4 +22,16 @@ describe("FlagPicker", () => {
     const { container } = render(<FlagPicker defaultValue="ae" name="market" />)
     expect(container.querySelector('input[name="market"]')).toHaveValue("ae")
   })
+
+  it("searches country aliases and respects constrained and disabled codes", () => {
+    const onValueChange = vi.fn()
+    render(<FlagPicker onValueChange={onValueChange} codes={["ae", "sa"]} disabledCodes={["sa"]} />)
+
+    fireEvent.click(screen.getByRole("combobox"))
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "UAE" } })
+    expect(screen.getByRole("option", { name: /United Arab Emirates/i })).toBeEnabled()
+
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "Saudi" } })
+    expect(screen.getByRole("option", { name: /Saudi Arabia/i })).toBeDisabled()
+  })
 })

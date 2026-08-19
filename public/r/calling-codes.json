@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "calling-codes",
+  "title": "Calling Code Utilities",
+  "author": "Shadi Al Milhem",
+  "description": "Typed country calling-code helpers that correctly return every country sharing a calling code.",
+  "registryDependencies": [
+    "@flagcn/country-data"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/country-utils.ts",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport {\n  countryData,\n  phoneCountryCodes,\n  type Country,\n  type CountryCode,\n  type PhoneCountryCode,\n} from \"./data/countries\"\n\nconst byCode = new Map(countryData.map((country) => [country.code, country]))\nconst byAlpha2 = new Map(countryData.map((country) => [country.alpha2.toLowerCase(), country]))\nconst byAlpha3 = new Map(countryData.map((country) => [country.alpha3.toLowerCase(), country]))\nconst phoneCodeSet = new Set<string>(phoneCountryCodes)\n\nexport function normalizeCountrySearch(value: string) {\n  return value.normalize(\"NFKD\").replace(/\\p{Diacritic}/gu, \"\").trim().toLocaleLowerCase()\n}\n\nexport function isCountryCode(value: string): value is CountryCode {\n  return byCode.has(value.toLocaleLowerCase() as CountryCode)\n}\n\nexport function getCountry(code: string) {\n  return byCode.get(code.toLocaleLowerCase() as CountryCode)\n}\n\nexport function getCountryByAlpha2(alpha2: string) {\n  return byAlpha2.get(alpha2.trim().toLocaleLowerCase())\n}\n\nexport function getCountryByAlpha3(alpha3: string) {\n  return byAlpha3.get(alpha3.trim().toLocaleLowerCase())\n}\n\nexport function isPhoneCountryCode(value: string): value is PhoneCountryCode {\n  return phoneCodeSet.has(value.trim().toLocaleLowerCase())\n}\n\nexport function searchCountries(query: string, source: readonly Country[] = countryData) {\n  const normalized = normalizeCountrySearch(query)\n  if (!normalized) return [...source]\n\n  return source.filter((country) => normalizeCountrySearch([\n    country.name,\n    country.nativeName,\n    country.alpha2,\n    country.alpha3,\n    country.numeric,\n    country.capital,\n    ...country.aliases,\n    ...country.callingCodes,\n    ...country.currencies,\n    ...country.languages,\n  ].join(\" \")).includes(normalized))\n}\n\nexport function countryCodeToEmoji(code: string) {\n  const alpha2 = code.trim().toUpperCase()\n  if (!/^[A-Z]{2}$/.test(alpha2)) return undefined\n  return alpha2.replace(/[A-Z]/g, (letter) => String.fromCodePoint(letter.charCodeAt(0) + 127397))\n}\n\nexport function emojiToCountryCode(emoji: string) {\n  const points = [...emoji.trim()].map((character) => character.codePointAt(0))\n  if (points.length !== 2 || points.some((point) => point === undefined || point < 127462 || point > 127487)) return undefined\n  const code = points.map((point) => String.fromCharCode((point ?? 127462) - 127397)).join(\"\").toLocaleLowerCase()\n  return isCountryCode(code) ? code : undefined\n}\n\nexport function getCountryCallingCodes(code: string) {\n  return getCountry(code)?.callingCodes ?? []\n}\n\nexport function getCountriesByCallingCode(callingCode: string) {\n  const digits = callingCode.trim().replace(/^\\+/, \"\").replace(/[\\s()-]/g, \"\")\n  if (!/^\\d{1,3}$/.test(digits)) return []\n  const normalized = `+${digits}`\n  return countryData.filter((country) => country.callingCodes.includes(normalized as never))\n}\n\nexport {\n  countryData,\n  phoneCountryCodes,\n  type Country,\n  type CountryCode,\n  type PhoneCountryCode,\n} from \"./data/countries\"\nexport { countryDataMeta } from \"./data/countries\"\n",
+      "type": "registry:lib",
+      "target": "@components/flags/country-utils.ts"
+    }
+  ],
+  "meta": {
+    "license": "MIT",
+    "sharedCodes": true
+  },
+  "docs": "Use getCountryCallingCodes(code) or getCountriesByCallingCode('+1').",
+  "categories": [
+    "countries",
+    "phone",
+    "utilities"
+  ],
+  "type": "registry:block"
+}

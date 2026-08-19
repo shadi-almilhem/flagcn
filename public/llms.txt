@@ -1,6 +1,6 @@
 # Flagcn
 
-> Flagcn is a shadcn registry for 306 accessible React flag components. It copies editable source into a project and has no Flagcn runtime package.
+> Flagcn is a shadcn registry for 306 accessible React flags plus country, phone, language, and currency components. It copies editable source into a project and has no Flagcn runtime package.
 
 ## Start here
 
@@ -19,6 +19,10 @@
 ```bash
 pnpm dlx shadcn@latest add @flagcn/flag
 pnpm dlx shadcn@latest add @flagcn/flag-picker
+pnpm dlx shadcn@latest add @flagcn/country-picker
+pnpm dlx shadcn@latest add @flagcn/phone-input
+pnpm dlx shadcn@latest add @flagcn/language-picker
+pnpm dlx shadcn@latest add @flagcn/currency-picker
 pnpm dlx shadcn@latest add @flagcn/ae
 pnpm dlx shadcn@latest add @flagcn/all
 ```
@@ -35,9 +39,17 @@ pnpm dlx shadcn@latest list @flagcn
 
 `Flag` accepts `code`, `alt`, `format` (`svg | png | webp | jpg`), `width`, `ratio` (`4x3 | 1x1 | original`), `decorative`, `className`, `style`, `ref`, and standard React image props. Defaults are SVG, width 80, ratio 4:3, lazy loading, and async decoding. The 4:3 and 1:1 frames use contain behavior so artwork is never clipped.
 
-`FlagPicker` supports controlled or uncontrolled selection, search, keyboard operation, `format`, `ratio`, flag-kind filtering, an accessible name through `aria-label`, a hidden form field through `name`, and native styling props.
+`FlagPicker` supports controlled or uncontrolled selection, native/alias/ISO/calling-code search, keyboard operation, `format`, `ratio`, `codes`, `disabledCodes`, flag-kind filtering, optional calling-code labels, an accessible name through `aria-label`, and a hidden form field through `name`.
 
-`@flagcn/<code>` installs one typed wrapper. `@flagcn/all` installs the primitive, picker, typed data, aggregate exports, and all 306 wrappers.
+Country features include `CountryPicker`, native `CountrySelect`, `CountryBadge`, `FlagAvatar`, `PhoneInput`, typed country data, reversible country/emoji helpers, shared calling-code-safe array lookups, and current GCC/EU collections.
+
+Locale features include searchable `LanguagePicker` and `CurrencyPicker`, RTL language metadata, currency metadata, and Intl-backed `CurrencyValue` formatting.
+
+`@flagcn/<code>` installs one typed wrapper. `@flagcn/all` installs every Flagcn component, utility, collection, typed data file, and all 306 wrappers.
+
+## Website behavior
+
+The homepage, catalog shell, and documentation render immediately. Flag galleries and native `img` assets load progressively without replacing the whole page. Catalog cards expose an icon-only install-command copy action in the preview corner, then compact JSX copy, image copy, and fetched-file download actions in the footer. Documentation examples expose their exact JSX through a per-example `View Code` control, and route changes reset the document scroll position unless the destination contains an explicit hash.
 
 ## Rights
 

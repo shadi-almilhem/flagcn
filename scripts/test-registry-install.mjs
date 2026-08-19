@@ -106,8 +106,9 @@ async function verifyInstall(origin, item, expectedFiles) {
   const label = item.slice(item.lastIndexOf("/") + 1)
   const consumerDir = createConsumer(origin, label)
   const cleanEnv = { ...process.env, NODE_USE_ENV_PROXY: "0" }
-  if (origin.startsWith("http://127.0.0.1:")) cleanEnv.REGISTRY_URL = `${origin}/r`
-  else delete cleanEnv.REGISTRY_URL
+  // Keep shadcn's own primitives on the official registry. @flagcn already
+  // resolves through the explicit components.json URL above.
+  delete cleanEnv.REGISTRY_URL
   for (const key of [
     "ALL_PROXY", "all_proxy", "HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy",
     "npm_config_proxy", "npm_config_http_proxy", "npm_config_https_proxy",
@@ -140,6 +141,19 @@ try {
     "src/components/flags/countries/ae.tsx",
   ])
 
+  await verifyInstall(origin, "@flagcn/phone-input", [
+    "src/components/flags/phone-input.tsx",
+    "src/components/flags/country-picker.tsx",
+    "src/components/flags/country-utils.ts",
+    "src/components/flags/data/countries.ts",
+  ])
+
+  await verifyInstall(origin, "@flagcn/language-picker", [
+    "src/components/flags/language-picker.tsx",
+    "src/components/flags/search-picker.tsx",
+    "src/components/flags/data/languages.ts",
+  ])
+
   const allConsumer = await verifyInstall(origin, "@flagcn/all", [
     "src/components/flags/flag.tsx",
     "src/components/flags/flag-picker.tsx",
@@ -154,7 +168,7 @@ try {
     throw new Error(`@flagcn/all installed ${installedCountries.length} country wrappers instead of 306.`)
   }
 
-  console.log("Verified clean shadcn installs of @flagcn/ae and @flagcn/all, including all 306 wrappers.")
+  console.log("Verified clean shadcn installs of @flagcn/ae, @flagcn/phone-input, @flagcn/language-picker, and @flagcn/all, including all 306 wrappers.")
 } finally {
   if (server.listening) await new Promise((resolve) => server.close(resolve))
   for (const consumerDir of consumerDirs) rmSync(consumerDir, { recursive: true, force: true })

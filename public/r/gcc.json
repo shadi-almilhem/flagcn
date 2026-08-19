@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "gcc",
+  "title": "GCC Country Collection",
+  "author": "Shadi Al Milhem",
+  "description": "The six current Gulf Cooperation Council member country codes as a typed collection.",
+  "registryDependencies": [
+    "@flagcn/country-data"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/collections/gcc.ts",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport type { CountryCode } from \"../data/countries\"\n\n/** Current Gulf Cooperation Council member states. */\nexport const gccCountryCodes = [\"ae\", \"bh\", \"sa\", \"om\", \"qa\", \"kw\"] as const satisfies readonly CountryCode[]\nexport type GccCountryCode = (typeof gccCountryCodes)[number]\n\nexport function isGccCountry(code: string): code is GccCountryCode {\n  return (gccCountryCodes as readonly string[]).includes(code.toLocaleLowerCase())\n}\n",
+      "type": "registry:lib",
+      "target": "@components/flags/collections/gcc.ts"
+    }
+  ],
+  "meta": {
+    "license": "MIT",
+    "count": 6,
+    "verified": "2026-08-19"
+  },
+  "docs": "Use gccCountryCodes to constrain CountryPicker or isGccCountry for membership checks.",
+  "categories": [
+    "countries",
+    "collections",
+    "gcc"
+  ],
+  "type": "registry:block"
+}

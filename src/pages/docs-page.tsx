@@ -13,8 +13,8 @@ import type { ReactNode } from "react"
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom"
 
 import { Flag } from "@/components/flags/flag"
-import { FlagPicker } from "@/components/flags/flag-picker"
 import { CodeBlock } from "@/components/site/code-block"
+import { ComponentExample } from "@/components/site/component-example"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -25,25 +25,36 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@/components/ui/empty"
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { countryDataMeta } from "@/config/country-data-meta"
 import { getRegistryConfig, getSiteOrigin, packageManagers, type PackageManager } from "@/config/site"
+import { copyTextToClipboard } from "@/lib/copy-text"
 import { cn } from "@/lib/utils"
+
+const FlagPicker = React.lazy(() => import("@/components/flags/flag-picker").then((module) => ({ default: module.FlagPicker })))
+const CountryBadge = React.lazy(() => import("@/components/flags/country-badge").then((module) => ({ default: module.CountryBadge })))
+const CountryPicker = React.lazy(() => import("@/components/flags/country-picker").then((module) => ({ default: module.CountryPicker })))
+const CountrySelect = React.lazy(() => import("@/components/flags/country-select").then((module) => ({ default: module.CountrySelect })))
+const Currency = React.lazy(() => import("@/components/flags/currency").then((module) => ({ default: module.Currency })))
+const CurrencyValue = React.lazy(() => import("@/components/flags/currency").then((module) => ({ default: module.CurrencyValue })))
+const CurrencyPicker = React.lazy(() => import("@/components/flags/currency-picker").then((module) => ({ default: module.CurrencyPicker })))
+const FlagAvatar = React.lazy(() => import("@/components/flags/flag-avatar").then((module) => ({ default: module.FlagAvatar })))
+const LanguagePicker = React.lazy(() => import("@/components/flags/language-picker").then((module) => ({ default: module.LanguagePicker })))
+const PhoneInput = React.lazy(() => import("@/components/flags/phone-input").then((module) => ({ default: module.PhoneInput })))
 
 type DocSlug =
   | "introduction"
   | "installation"
   | "flag"
   | "flag-picker"
-  | "country-components"
+  | "country-picker"
+  | "phone-input"
+  | "country-display"
+  | "locale-pickers"
+  | "data-utilities"
   | "formats-and-ratios"
   | "styling"
   | "accessibility"
@@ -73,7 +84,10 @@ const docGroups: readonly DocNavGroup[] = [
     items: [
       { slug: "flag", label: "Flag" },
       { slug: "flag-picker", label: "Flag Picker" },
-      { slug: "country-components", label: "Country components" },
+      { slug: "country-picker", label: "Country selection" },
+      { slug: "phone-input", label: "Phone Input" },
+      { slug: "country-display", label: "Badges & avatars" },
+      { slug: "locale-pickers", label: "Language & currency" },
     ],
   },
   {
@@ -83,6 +97,7 @@ const docGroups: readonly DocNavGroup[] = [
       { slug: "styling", label: "Styling" },
       { slug: "accessibility", label: "Accessibility" },
       { slug: "ai-agents", label: "AI agents" },
+      { slug: "data-utilities", label: "Data & utilities" },
     ],
   },
   {
@@ -100,7 +115,11 @@ const tocBySlug: Record<DocSlug, string[]> = {
   installation: ["1. Add the registry", "2. Add a component", "3. Render a flag", "Available items", "Installation through CLI", "Search and Discovery"],
   flag: ["Install", "Usage", "API", "Format behavior"],
   "flag-picker": ["Install", "Usage", "API"],
-  "country-components": ["Install one country", "Usage", "Why wrappers?", "Install every wrapper"],
+  "country-picker": ["CountryPicker", "CountrySelect", "Choosing a control", "API"],
+  "phone-input": ["Install", "Usage", "Behavior", "Sizes", "Preset and international values", "Validation", "Read-only and disabled", "API"],
+  "country-display": ["CountryBadge", "FlagAvatar", "Design-system behavior", "API"],
+  "locale-pickers": ["LanguagePicker", "CurrencyPicker", "Currency display"],
+  "data-utilities": ["Validated sources", "Country data", "Emoji and calling codes", "Phone countries", "GCC and EU collections"],
   "formats-and-ratios": ["Formats", "Ratios", "Responsive raster images", "Choosing a combination"],
   styling: ["Class names", "Native image props", "Common recipes", "Loading behavior"],
   accessibility: ["Meaningful flags", "Decorative flags", "Do not use color alone"],
@@ -159,10 +178,24 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
           <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/flag" />
         </DocSection>
         <DocSection title="Usage">
-          <CodeBlock code={`import { Flag } from "@/components/flags/flag"\n\nexport function Market() {\n  return (\n    <Flag\n      code="ae"\n      format="webp"\n      ratio="1x1"\n      width={160}\n      alt="United Arab Emirates flag"\n      className="ring-1 ring-border"\n    />\n  )\n}`} />
-          <div className="not-prose flag-stage mt-4 grid min-h-44 place-items-center border bg-muted/35">
+          <ComponentExample
+            title="Square WebP flag"
+            description="A no-crop square presentation using a responsive raster source."
+            code={`import { Flag } from "@/components/flags/flag"
+
+<Flag
+  code="ae"
+  format="webp"
+  ratio="1x1"
+  width={160}
+  alt="United Arab Emirates flag"
+  className="outline outline-1 outline-black/10"
+/>`}
+            className="not-prose mt-4"
+            previewClassName="flag-stage bg-muted/35"
+          >
             <Flag code="ae" format="webp" ratio="1x1" width={160} alt="United Arab Emirates flag" className="size-24 object-contain ring-1 ring-border" />
-          </div>
+          </ComponentExample>
         </DocSection>
         <DocSection title="API">
           <ApiTable rows={[
@@ -188,14 +221,26 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
       <>
         <DocSection title="Install">
           <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/flag-picker" />
-          <p>The registry automatically installs <code>flag</code> and <code>flag-data</code>. The picker is icon-neutral, so it does not add an icon package to the consuming app.</p>
+          <p>The registry automatically installs the flag primitive, typed country data, and the project-aligned Tabler icons used by the picker.</p>
         </DocSection>
         <DocSection title="Usage">
-          <CodeBlock code={`import * as React from "react"\nimport { FlagPicker } from "@/components/flags/flag-picker"\nimport type { FlagCode } from "@/components/flags/flag-data"\n\nexport function CountryField() {\n  const [country, setCountry] = React.useState<FlagCode>("ae")\n\n  return (\n    <FlagPicker\n      value={country}\n      onValueChange={setCountry}\n      kinds={["country"]}\n      name="country"\n      aria-label="Market"\n    />\n  )\n}`} />
-          <div className="not-prose mt-4 max-w-md rounded-lg border bg-card p-5">
-            <p className="mb-2 text-xs font-medium text-muted-foreground">Market</p>
-            <FlagPicker defaultValue="ae" kinds={["country"]} aria-label="Market" />
-          </div>
+          <ComponentExample
+            title="Controlled country picker"
+            description="Searches country names and codes while a hidden form field carries the selected value."
+            code={`const [country, setCountry] = React.useState<FlagCode>("ae")
+
+<FlagPicker
+  value={country}
+  onValueChange={setCountry}
+  kinds={["country"]}
+  name="country"
+  aria-label="Market"
+/>`}
+            className="not-prose mt-4"
+            previewClassName="justify-items-stretch"
+          >
+            <Field className="mx-auto max-w-md"><FieldLabel>Market</FieldLabel><FlagPicker defaultValue="ae" kinds={["country"]} aria-label="Market" /></Field>
+          </ComponentExample>
         </DocSection>
         <DocSection title="API">
           <ApiTable rows={[
@@ -205,6 +250,9 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
             ["format", "svg | png | webp | jpg", "svg", "Preview format used inside the picker."],
             ["ratio", "4x3 | 1x1 | original", "4x3", "Preview ratio used in the trigger and results."],
             ["kinds", "FlagKind[]", "all", "Limit results to country, subdivision, or organization."],
+            ["codes", "FlagCode[]", "all", "Constrain results to an explicit set of flags."],
+            ["disabledCodes", "FlagCode[]", "[]", "Keep specific flags visible but unavailable."],
+            ["showCallingCode", "boolean", "false", "Show calling codes for country results."],
             ["name", "string", "Optional", "Adds a hidden form field carrying the selected code."],
             ["aria-label", "string", "placeholder", "Sets the accessible name for the combobox trigger."],
           ]} />
@@ -212,24 +260,316 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
       </>
     ),
   },
-  "country-components": {
-    title: "Country components",
-    summary: "Install a named wrapper when a fixed market is clearer than a dynamic code prop.",
+  "country-picker": {
+    title: "Country selection",
+    summary: "Searchable and native country controls that inherit the shadcn theme already configured in your project.",
     content: (
       <>
-        <DocSection title="Install one country">
-          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/ae" />
-          <p>Each country item depends on the small universal <code>flag</code> item and installs a single typed wrapper into <code>components/flags/countries</code>.</p>
+        <DocSection title="CountryPicker">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/country-picker" />
+          <ComponentExample
+            title="Country picker with calling codes"
+            description="Search by English or native name, ISO code, alias, or calling code."
+            code={`<CountryPicker
+  defaultValue="ae"
+  name="country"
+  showCallingCode
+  aria-label="Billing country"
+/>`}
+            className="not-prose mt-4"
+            previewClassName="justify-items-stretch"
+          >
+            <Field className="mx-auto max-w-md"><FieldLabel>Billing country</FieldLabel><CountryPicker defaultValue="ae" showCallingCode aria-label="Billing country" /></Field>
+          </ComponentExample>
+        </DocSection>
+        <DocSection title="CountrySelect">
+          <p>The native variant is the smallest option and preserves platform selection behavior. It uses the same typed country dataset.</p>
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/country-select" />
+          <ComponentExample
+            title="Native country select"
+            description="Uses the platform picker and includes calling codes in each label."
+            code={`<CountrySelect
+  defaultValue="sa"
+  showCallingCode
+  aria-label="Country"
+  className="w-full"
+/>`}
+            className="not-prose mt-4"
+            previewClassName="justify-items-stretch"
+          >
+            <Field className="mx-auto max-w-sm"><FieldLabel>Country</FieldLabel><CountrySelect defaultValue="sa" showCallingCode aria-label="Country" className="w-full" /></Field>
+          </ComponentExample>
+        </DocSection>
+        <DocSection title="Choosing a control">
+          <ul>
+            <li>Use <code>CountryPicker</code> for searchable forms, long lists, native-name search, and calling-code discovery.</li>
+            <li>Use <code>CountrySelect</code> when native mobile behavior and minimal JavaScript matter most.</li>
+            <li>Constrain either control with a typed <code>countries</code> array such as <code>gccCountryCodes</code>.</li>
+          </ul>
+        </DocSection>
+        <DocSection title="API">
+          <ApiTable rows={[
+            ["value", "CountryCode", "Optional", "Controlled ISO alpha-2 code in lowercase."],
+            ["defaultValue", "CountryCode", "Optional", "Initial value for uncontrolled use."],
+            ["countries", "CountryCode[]", "all", "Typed allow-list used to constrain the options."],
+            ["showCallingCode", "boolean", "false", "Shows the primary calling code next to each country."],
+            ["onValueChange", "(code) => void", "Optional", "Called with the selected typed country code."],
+          ]} />
+        </DocSection>
+      </>
+    ),
+  },
+  "phone-input": {
+    title: "Phone Input",
+    summary: "An integrated international phone field with country search, E.164 output, live metadata, and design-system-native styling.",
+    content: (
+      <>
+        <DocSection title="Install">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/phone-input" />
+          <p>The installed source composes your project’s shadcn Input styling and semantic tokens. There is no Flagcn theme layer to fight.</p>
         </DocSection>
         <DocSection title="Usage">
-          <CodeBlock code={`import { UnitedArabEmiratesFlag } from "@/components/flags/countries/ae"\n\nexport function Header() {\n  return (\n    <UnitedArabEmiratesFlag\n      format="svg"\n      width={32}\n      alt="Available in the UAE"\n    />\n  )\n}`} />
+          <ComponentExample
+            title="Default phone field"
+            description="Formats a national number as the user types and emits E.164 when parseable."
+            code={`<PhoneInput
+  defaultCountry="ae"
+  placeholder="50 123 4567"
+  onValueChange={(value, meta) => {
+    console.log(value, meta.valid, meta.international)
+  }}
+/>`}
+            className="not-prose mt-4"
+            previewClassName="justify-items-stretch"
+          >
+            <Field className="mx-auto max-w-md">
+              <FieldLabel htmlFor="phone-default">Phone number</FieldLabel>
+              <PhoneInput id="phone-default" defaultCountry="ae" placeholder="50 123 4567" aria-describedby="phone-default-description" />
+              <FieldDescription id="phone-default-description">Enter a UAE mobile or landline number.</FieldDescription>
+            </Field>
+          </ComponentExample>
         </DocSection>
-        <DocSection title="Why wrappers?">
-          <p>Wrappers give design systems a descriptive import, lock the country code at compile time, and still preserve every <code>Flag</code> prop except <code>code</code>. Use the generic primitive for dynamic data and a wrapper for fixed interface chrome.</p>
+        <DocSection title="Behavior">
+          <p>The field formats national numbers as you type, normalizes an international <code>00</code> prefix to <code>+</code>, and updates the selected flag when an international number identifies another country. Controlled E.164 values are parsed back into the visible country and local format.</p>
         </DocSection>
-        <DocSection title="Install every wrapper">
-          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/all" />
-          <p>This installs the primitive, picker, typed catalog, aggregate exports, and all 306 named wrappers. The generated barrel disambiguates duplicate place names such as Georgia and the U.S. state of Georgia.</p>
+        <DocSection title="Sizes">
+          <ComponentExample
+            title="Small, default, and large"
+            description="The size prop changes the selector, calling code, input height, padding, and text together."
+            code={`<FieldGroup>
+  <PhoneInput size="sm" defaultCountry="gb" placeholder="Small" />
+  <PhoneInput defaultCountry="gb" placeholder="Default" />
+  <PhoneInput size="lg" defaultCountry="gb" placeholder="Large" />
+</FieldGroup>`}
+            className="not-prose mt-4"
+            previewClassName="justify-items-stretch"
+          >
+            <FieldGroup className="mx-auto max-w-md">
+              <Field><FieldLabel htmlFor="phone-small">Small</FieldLabel><PhoneInput id="phone-small" size="sm" defaultCountry="gb" placeholder="7400 123456" /></Field>
+              <Field><FieldLabel htmlFor="phone-medium">Default</FieldLabel><PhoneInput id="phone-medium" defaultCountry="gb" placeholder="7400 123456" /></Field>
+              <Field><FieldLabel htmlFor="phone-large">Large</FieldLabel><PhoneInput id="phone-large" size="lg" defaultCountry="gb" placeholder="7400 123456" /></Field>
+            </FieldGroup>
+          </ComponentExample>
+        </DocSection>
+        <DocSection title="Preset and international values">
+          <div className="not-prose grid gap-4">
+            <ComponentExample
+              title="Preset E.164 value"
+              description="Infers the UAE country and displays the controlled value nationally."
+              code={`<PhoneInput value="+971501234567" readOnly />`}
+              previewClassName="justify-items-stretch"
+            >
+              <Field><FieldLabel htmlFor="phone-preset">Preset number</FieldLabel><PhoneInput id="phone-preset" value="+971501234567" readOnly /></Field>
+            </ComponentExample>
+            <ComponentExample
+              title="International display"
+              description="Keeps the full international prefix visible in the input."
+              code={`<PhoneInput
+  value="+14155552671"
+  displayFormat="international"
+  readOnly
+/>`}
+              previewClassName="justify-items-stretch"
+            >
+              <Field><FieldLabel htmlFor="phone-international">International number</FieldLabel><PhoneInput id="phone-international" value="+14155552671" displayFormat="international" readOnly /></Field>
+            </ComponentExample>
+          </div>
+        </DocSection>
+        <DocSection title="Validation">
+          <ComponentExample
+            title="Invalid number"
+            description="Set data-invalid on Field, aria-invalid on PhoneInput, and render a real error message."
+            code={`<Field data-invalid>
+  <FieldLabel htmlFor="phone-invalid">Phone number</FieldLabel>
+  <PhoneInput
+    id="phone-invalid"
+    defaultCountry="sa"
+    defaultValue="123"
+    aria-invalid
+    aria-errormessage="phone-invalid-error"
+  />
+  <FieldError id="phone-invalid-error">Enter a valid Saudi phone number.</FieldError>
+</Field>`}
+            className="not-prose mt-4"
+            previewClassName="justify-items-stretch"
+          >
+            <Field data-invalid className="mx-auto max-w-md">
+              <FieldLabel htmlFor="phone-invalid">Phone number</FieldLabel>
+              <PhoneInput id="phone-invalid" defaultCountry="sa" defaultValue="123" aria-invalid aria-errormessage="phone-invalid-error" />
+              <FieldError id="phone-invalid-error">Enter a valid Saudi phone number.</FieldError>
+            </Field>
+          </ComponentExample>
+        </DocSection>
+        <DocSection title="Read-only and disabled">
+          <div className="not-prose grid gap-4">
+            <ComponentExample
+              title="Read-only"
+              description="The value remains selectable while editing and country changes are prevented."
+              code={`<PhoneInput value="+14155552671" readOnly />`}
+              previewClassName="justify-items-stretch"
+            >
+              <Field><FieldLabel htmlFor="phone-readonly">Account phone</FieldLabel><PhoneInput id="phone-readonly" value="+14155552671" readOnly /></Field>
+            </ComponentExample>
+            <ComponentExample
+              title="Disabled"
+              description="Both the country selector and phone field are unavailable."
+              code={`<Field data-disabled>
+  <FieldLabel htmlFor="phone-disabled">Phone number</FieldLabel>
+  <PhoneInput id="phone-disabled" defaultCountry="de" disabled />
+</Field>`}
+              previewClassName="justify-items-stretch"
+            >
+              <Field data-disabled><FieldLabel htmlFor="phone-disabled">Phone number</FieldLabel><PhoneInput id="phone-disabled" defaultCountry="de" disabled /></Field>
+            </ComponentExample>
+          </div>
+        </DocSection>
+        <DocSection title="API">
+          <ApiTable rows={[
+            ["value", "string", "Optional", "Controlled national, international, or E.164 value."],
+            ["country", "PhoneCountryCode", "Inferred", "Controlled selected country supported by phone metadata."],
+            ["countries", "PhoneCountryCode[]", String(countryDataMeta.phoneCountryCount), "Countries supported by libphonenumber metadata."],
+            ["displayFormat", "national | international", "national", "Visible format for parseable controlled values."],
+            ["size", "sm | default | lg", "default", "Matches common shadcn field sizing."],
+            ["onValueChange", "(value, meta) => void", "Optional", "Returns E.164 when parseable plus validation and formatting metadata."],
+          ]} />
+        </DocSection>
+      </>
+    ),
+  },
+  "country-display": {
+    title: "Country badges & avatars",
+    summary: "Compact country identity components composed from the Badge and Avatar primitives already in your shadcn project.",
+    content: (
+      <>
+        <DocSection title="CountryBadge">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/country-badge" />
+          <ComponentExample
+            title="Badge labels and variants"
+            description="Choose a country name, ISO code, calling code, or flag-only label. Badge variants come from your project."
+            code={`<CountryBadge code="ae" />
+<CountryBadge code="sa" label="code" variant="outline" />
+<CountryBadge code="qa" label="calling-code" variant="secondary" />
+<CountryBadge code="kw" label="none" aria-label="Kuwait" />`}
+            className="not-prose mt-4"
+            previewClassName="flex min-h-32 flex-wrap content-center gap-2"
+          >
+            <CountryBadge code="ae" />
+            <CountryBadge code="sa" label="code" variant="outline" />
+            <CountryBadge code="qa" label="calling-code" variant="secondary" />
+            <CountryBadge code="kw" label="none" aria-label="Kuwait" />
+          </ComponentExample>
+        </DocSection>
+        <DocSection title="FlagAvatar">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/flag-avatar" />
+          <ComponentExample
+            title="Avatar sizes"
+            description="Small, default, and large sizes are inherited from the installed shadcn Avatar primitive."
+            code={`<FlagAvatar code="ae" size="sm" />
+<FlagAvatar code="jp" />
+<FlagAvatar code="br" size="lg" />`}
+            className="not-prose mt-4"
+            previewClassName="flex min-h-32 items-center gap-3"
+          >
+            <FlagAvatar code="ae" size="sm" />
+            <FlagAvatar code="jp" />
+            <FlagAvatar code="br" size="lg" />
+          </ComponentExample>
+        </DocSection>
+        <DocSection title="Design-system behavior">
+          <p>Both components use semantic shadcn variants, borders, radius, foreground colors, and focus behavior. After installation, changing your project theme changes these components with it.</p>
+        </DocSection>
+        <DocSection title="API">
+          <ApiTable rows={[
+            ["code", "CountryCode | FlagCode", "Required", "Country or supported flag shown by the component."],
+            ["label", "name | code | calling-code | none", "name", "CountryBadge text treatment."],
+            ["variant", "Badge variant", "secondary", "Uses the Badge variants defined in your project."],
+            ["alt", "string", "Generated", "Accessible image name for FlagAvatar."],
+          ]} />
+        </DocSection>
+      </>
+    ),
+  },
+  "locale-pickers": {
+    title: "Language & currency",
+    summary: "Searchable locale controls with native labels, RTL awareness, symbols, and typed values.",
+    content: (
+      <>
+        <DocSection title="LanguagePicker">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/language-picker" />
+          <ComponentExample title="Language with native label" description="Searches English and native names and exposes RTL metadata." code={`<LanguagePicker defaultValue="ar" aria-label="Language" />`} className="not-prose mt-4" previewClassName="justify-items-stretch">
+            <Field className="mx-auto max-w-md"><FieldLabel>Language</FieldLabel><LanguagePicker defaultValue="ar" aria-label="Language" /></Field>
+          </ComponentExample>
+        </DocSection>
+        <DocSection title="CurrencyPicker">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/currency-picker" />
+          <ComponentExample title="Currency picker" description="Searches ISO codes, currency names, and native symbols." code={`<CurrencyPicker defaultValue="AED" aria-label="Currency" />`} className="not-prose mt-4" previewClassName="justify-items-stretch">
+            <Field className="mx-auto max-w-md"><FieldLabel>Currency</FieldLabel><CurrencyPicker defaultValue="AED" aria-label="Currency" /></Field>
+          </ComponentExample>
+        </DocSection>
+        <DocSection title="Currency display">
+          <ComponentExample title="Metadata and formatted value" description="CurrencyValue delegates locale-sensitive formatting to Intl.NumberFormat." code={`<Currency code="AED" display="name" />
+<CurrencyValue amount={2499} currency="AED" locale="en-AE" />`} className="not-prose mt-4" previewClassName="flex min-h-28 items-center gap-3 text-sm">
+            <Currency code="AED" display="name" /><Separator orientation="vertical" className="h-4" /><CurrencyValue amount={2499} currency="AED" locale="en-AE" />
+          </ComponentExample>
+        </DocSection>
+      </>
+    ),
+  },
+  "data-utilities": {
+    title: "Data & utilities",
+    summary: "Validated country metadata, reversible emoji conversion, phone-aware subsets, shared calling codes, and maintained regional collections.",
+    content: (
+      <>
+        <DocSection title="Validated sources">
+          <p>The generated dataset currently contains <strong>{countryDataMeta.countryCount} flag-backed country and territory records</strong>. ISO alpha-2, alpha-3, and numeric identifiers come from <code>{countryDataMeta.sources.iso}</code>; names, native names, capitals, currencies, and languages come from <code>{countryDataMeta.sources.countries}</code>; phone support and calling codes come from <code>{countryDataMeta.sources.phone}</code>.</p>
+          <p>Generation fails on duplicate identifiers, broken emoji round-trips, unknown language or currency references, or calling-code disagreements with the phone metadata. The generated <code>countryDataMeta</code> object exposes source versions and validation status.</p>
+        </DocSection>
+        <DocSection title="Country data">
+          <CodeBlock language="bash" code="pnpm dlx shadcn@latest add @flagcn/country-data" />
+          <CodeBlock code={`import { getCountry, searchCountries } from "@/components/flags/country-utils"
+
+getCountry("ae")?.alpha3 // "ARE"
+getCountryByAlpha2("AE")?.name // "United Arab Emirates"
+searchCountries("dirham") // countries using AED`} />
+        </DocSection>
+        <DocSection title="Emoji and calling codes">
+          <CodeBlock code={`countryCodeToEmoji("AE") // "🇦🇪"
+emojiToCountryCode("🇦🇪") // "ae"
+getCountriesByCallingCode("+1") // returns every matching country`} />
+          <p>Calling-code lookups return arrays because codes such as <code>+1</code> and <code>+7</code> are shared.</p>
+        </DocSection>
+        <DocSection title="Phone countries">
+          <p><code>phoneCountryCodes</code> contains the {countryDataMeta.phoneCountryCount} countries and territories supported by the installed libphonenumber metadata. <code>PhoneInput</code> uses this narrower list by default so every selectable option can be parsed and validated.</p>
+          <CodeBlock code={`import { isPhoneCountryCode, phoneCountryCodes } from "@/components/flags/country-utils"
+
+isPhoneCountryCode("ae") // true
+<CountryPicker countries={phoneCountryCodes} />`} />
+        </DocSection>
+        <DocSection title="GCC and EU collections">
+          <CodeBlock language="bash" code={`pnpm dlx shadcn@latest add @flagcn/gcc
+pnpm dlx shadcn@latest add @flagcn/eu-collection`} />
+          <CodeBlock code={`<CountryPicker countries={gccCountryCodes} />
+isEuCountry("de") // true`} />
         </DocSection>
       </>
     ),
@@ -250,7 +590,8 @@ const docs: Record<DocSlug, { title: string; summary: string; content: ReactNode
           <p>The catalog’s copy action uses the selected source format when the browser clipboard supports it. Browsers that cannot write WebP or JPEG clipboard items receive a PNG bitmap rendered from the selected source.</p>
         </DocSection>
         <DocSection title="Ratios">
-          <p><code>4x3</code> is the default and gives mixed-country interfaces a stable landscape rhythm. <code>1x1</code> creates a square image box without cropping the flag. <code>original</code> preserves each flag’s official proportions.</p>
+          <p><code>4x3</code> is the default and gives mixed-country interfaces a stable landscape rhythm. <code>1x1</code> creates a square image box without cropping the flag. <code>original</code> preserves each flag’s source proportions.</p>
+          <p><strong>Original does not mean raster.</strong> With <code>format="svg"</code>, Flagcn requests the original-proportion SVG from FlagCDN. Format and proportions remain independent controls.</p>
           <CodeBlock code={`<Flag code="ae" ratio="4x3" alt="United Arab Emirates flag" />\n<Flag code="ae" ratio="1x1" alt="United Arab Emirates flag" />\n<Flag code="ae" ratio="original" alt="United Arab Emirates flag" />`} />
         </DocSection>
         <DocSection title="Responsive raster images">
@@ -392,7 +733,12 @@ function InstallationContent() {
         <ApiTable rows={[
           ["@flagcn/flag", "Primitive", "Format-aware image component plus URL helpers."],
           ["@flagcn/flag-picker", "Block", "Searchable picker and the complete typed catalog."],
-          ["@flagcn/all", "Block", "Primitive, picker, data, and all 306 named wrappers."],
+          ["@flagcn/country-picker", "Block", "Country-only search with aliases, ISO-3, native names, and calling codes."],
+          ["@flagcn/phone-input", "Block", "Country-aware phone entry with E.164 and validity metadata."],
+          ["@flagcn/language-picker", "Block", "Searchable language selection with RTL metadata."],
+          ["@flagcn/currency-picker", "Block", "Searchable ISO currency selection with native symbols."],
+          ["@flagcn/country-data", "Library", "Typed countries plus emoji, search, and calling-code utilities."],
+          ["@flagcn/all", "Block", "Every primitive, locale component, utility, collection, and all 306 flag wrappers."],
           ["@flagcn/<code>", "Component", "A typed country or territory wrapper, e.g. @flagcn/ae."],
         ]} compact />
       </DocSection>
@@ -433,7 +779,7 @@ function InstallationContent() {
         <p>These commands read registry metadata only. Install with <code>add</code> after you have confirmed the item and its dependencies.</p>
       </DocSection>
       <div className="not-prose border border-primary/25 bg-primary/5 p-4 text-sm">
-        <strong>Registry endpoint:</strong> <code className="ms-1 text-muted-foreground">{getRegistryConfig()}</code>
+        <strong>Registry endpoint:</strong> <code className="ms-1 break-all text-muted-foreground">{getRegistryConfig()}</code>
       </div>
     </>
   )
@@ -456,7 +802,7 @@ function MiniDocCard({ title, text, command }: { title: string; text: string; co
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-mono text-xs text-primary">{title}</CardTitle>
+        <CardTitle className="font-mono text-xs font-medium text-foreground">{title}</CardTitle>
         <CardDescription className="leading-6">{text}</CardDescription>
       </CardHeader>
       <CardContent>
@@ -533,7 +879,7 @@ function ApiTable({ rows, compact = false }: { rows: string[][]; compact?: boole
         <tbody className="divide-y">
           {rows.map((row) => (
             <tr key={row[0]}>
-              <td className="font-mono text-xs text-primary">{row[0]}</td>
+              <td className="font-mono text-xs font-medium text-foreground">{row[0]}</td>
               <td>{row[1]}</td>
               <td>{row[2]}</td>
               {compact ? null : <td>{row[3]}</td>}
@@ -604,22 +950,16 @@ export function DocsPage() {
       <article className="min-w-0 px-5 py-10 sm:px-10 sm:py-14 lg:px-12">
         <div className="mb-9 lg:hidden">
           <p className="mb-2 text-xs font-medium text-muted-foreground">Documentation section</p>
-          <Select
-            items={docSections.map((section) => ({ label: section.label, value: section.slug }))}
+          <NativeSelect
             value={currentSlug}
-            onValueChange={(value) => navigate(`/docs/${value}`)}
+            onChange={(event) => navigate(`/docs/${event.target.value}`)}
+            aria-label="Documentation section"
+            className="w-full"
           >
-            <SelectTrigger aria-label="Documentation section" className="w-full">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent alignItemWithTrigger={false}>
-              <SelectGroup>
-                {docSections.map((section) => (
-                  <SelectItem key={section.slug} value={section.slug}>{section.label}</SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+            {docSections.map((section) => (
+              <NativeSelectOption key={section.slug} value={section.slug}>{section.label}</NativeSelectOption>
+            ))}
+          </NativeSelect>
         </div>
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Docs <span className="mx-1.5 text-border">/</span> {currentGroup?.label}</p>
         <h1 className="mt-4 text-4xl font-semibold tracking-[-0.05em] sm:text-5xl">{doc.title}</h1>
@@ -654,7 +994,7 @@ export function DocsPage() {
             </Link>
           ) : null}
         </div>
-        <p className="mt-8 text-xs text-muted-foreground">Last updated August 16, 2026</p>
+        <p className="mt-8 text-xs text-muted-foreground">Last updated August 19, 2026</p>
       </article>
 
       <aside className="hidden border-s bg-card/15 xl:block">
@@ -685,7 +1025,7 @@ function CopyPageButton({ title }: { title: string }) {
 
   async function copyPage() {
     const content = document.querySelector<HTMLElement>("[data-doc-content]")?.innerText ?? ""
-    await navigator.clipboard.writeText(`# ${title}\n\n${content}\n\nSource: ${window.location.href}`)
+    await copyTextToClipboard(`# ${title}\n\n${content}\n\nSource: ${window.location.href}`)
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1600)
   }
@@ -702,7 +1042,7 @@ function AskAiButton({ prompt }: { prompt: string }) {
   const [copied, setCopied] = React.useState(false)
 
   async function copyPrompt() {
-    await navigator.clipboard.writeText(prompt)
+    await copyTextToClipboard(prompt)
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1600)
   }

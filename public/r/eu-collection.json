@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "eu-collection",
+  "title": "EU Country Collection",
+  "author": "Shadi Al Milhem",
+  "description": "The 27 current European Union member country codes as a typed collection.",
+  "registryDependencies": [
+    "@flagcn/country-data"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/collections/eu.ts",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport type { CountryCode } from \"../data/countries\"\n\n/** Current European Union member states. */\nexport const euCountryCodes = [\n  \"at\", \"be\", \"bg\", \"hr\", \"cy\", \"cz\", \"dk\", \"ee\", \"fi\", \"fr\", \"de\", \"gr\", \"hu\", \"ie\",\n  \"it\", \"lv\", \"lt\", \"lu\", \"mt\", \"nl\", \"pl\", \"pt\", \"ro\", \"sk\", \"si\", \"es\", \"se\",\n] as const satisfies readonly CountryCode[]\nexport type EuCountryCode = (typeof euCountryCodes)[number]\n\nexport function isEuCountry(code: string): code is EuCountryCode {\n  return (euCountryCodes as readonly string[]).includes(code.toLocaleLowerCase())\n}\n",
+      "type": "registry:lib",
+      "target": "@components/flags/collections/eu.ts"
+    }
+  ],
+  "meta": {
+    "license": "MIT",
+    "count": 27,
+    "verified": "2026-08-19"
+  },
+  "docs": "Use euCountryCodes to constrain CountryPicker or isEuCountry for membership checks.",
+  "categories": [
+    "countries",
+    "collections",
+    "eu"
+  ],
+  "type": "registry:block"
+}

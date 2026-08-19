@@ -1,11 +1,11 @@
 {
   "/": {
     "title": "Flagcn: Accessible Flag Components for shadcn/ui",
-    "description": "Install 306 accessible, source-owned React flag components with the shadcn CLI. Use SVG, PNG, WebP, or JPEG in 4:3, square, or original frames."
+    "description": "Install 306 accessible React flags plus country, phone, language, and currency components with the shadcn CLI. Source-owned and ready to customize."
   },
   "/flags": {
     "title": "Browse 306 React Flag Components | Flagcn",
-    "description": "Search and preview every Flagcn component. Switch between SVG, PNG, WebP, and JPEG, choose 4:3, square, or original frames, then copy or install."
+    "description": "Search flags by name, ISO code, native name, calling code, currency, or language. Preview formats and ratios, copy JSX, install, or download."
   },
   "/docs": {
     "title": "Flagcn Documentation: shadcn Flag Registry",
@@ -27,9 +27,21 @@
     "title": "Accessible FlagPicker Component | Flagcn",
     "description": "Add a searchable, keyboard-ready React flag picker with controlled state, hidden form fields, format and ratio options, and accessible labels."
   },
-  "/docs/country-components": {
-    "title": "Country Flag Components | Flagcn",
-    "description": "Install typed React wrappers for individual countries, territories, organizations, and supported subdivisions from the Flagcn shadcn registry."
+  "/docs/country-picker": {
+    "title": "CountryPicker and CountrySelect for shadcn | Flagcn",
+    "description": "Build searchable or native country controls with typed ISO values, calling codes, native names, and theme-native shadcn styling."
+  },
+  "/docs/phone-input": {
+    "title": "International Phone Input for shadcn | Flagcn",
+    "description": "Add an international PhoneInput with searchable flags, national formatting, E.164 output, country inference, validation metadata, and shadcn styling."
+  },
+  "/docs/country-display": {
+    "title": "Country Badges and Flag Avatars for shadcn | Flagcn",
+    "description": "Use compact CountryBadge and FlagAvatar components that inherit your project's shadcn Badge, Avatar, colors, radius, and typography."
+  },
+  "/docs/locale-pickers": {
+    "title": "Language and Currency Pickers for shadcn | Flagcn",
+    "description": "Add searchable LanguagePicker and CurrencyPicker controls with native labels, RTL metadata, ISO codes, symbols, and locale-aware currency values."
   },
   "/docs/formats-and-ratios": {
     "title": "Flag Formats and Ratios | Flagcn",
@@ -46,6 +58,10 @@
   "/docs/ai-agents": {
     "title": "Flagcn Registry for AI Coding Agents",
     "description": "Give AI coding agents exact Flagcn registry routes, component contracts, safe defaults, accessibility guidance, and machine-readable llms.txt instructions."
+  },
+  "/docs/data-utilities": {
+    "title": "Country Data, Calling Codes, Emoji and Collections | Flagcn",
+    "description": "Use typed country metadata, reversible flag emoji helpers, shared calling-code lookups, and current GCC and EU country collections."
   },
   "/docs/license": {
     "title": "Flagcn License and Artwork Sources",

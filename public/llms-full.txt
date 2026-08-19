@@ -20,6 +20,11 @@ Resolve relative paths against the origin from which this file was fetched.
 - Countries, territories, organizations, and selected subdivisions.
 - Universal primitive: @flagcn/flag.
 - Searchable picker: @flagcn/flag-picker.
+- Country foundation: @flagcn/country-data and @flagcn/calling-codes.
+- Country controls: @flagcn/country-picker, @flagcn/country-select, @flagcn/country-badge, @flagcn/flag-avatar.
+- International phone input: @flagcn/phone-input.
+- Locale controls: @flagcn/language-picker, @flagcn/currency-picker, @flagcn/currency.
+- Regional collections: @flagcn/gcc and @flagcn/eu-collection.
 - Typed wrappers: @flagcn/{lowercase-code}, for example @flagcn/ae and @flagcn/us-ca.
 - Complete install: @flagcn/all.
 - Formats: svg, png, webp, jpg.
@@ -53,6 +58,10 @@ After directory acceptance, the same namespaced commands can work without projec
 ```bash
 pnpm dlx shadcn@latest add @flagcn/flag
 pnpm dlx shadcn@latest add @flagcn/flag-picker
+pnpm dlx shadcn@latest add @flagcn/country-picker
+pnpm dlx shadcn@latest add @flagcn/phone-input
+pnpm dlx shadcn@latest add @flagcn/language-picker
+pnpm dlx shadcn@latest add @flagcn/currency-picker
 pnpm dlx shadcn@latest add @flagcn/ae
 pnpm dlx shadcn@latest add @flagcn/all
 ```
@@ -65,7 +74,7 @@ yarn dlx shadcn@latest add @flagcn/ae
 bunx --bun shadcn@latest add @flagcn/ae
 ```
 
-Use one named item when the interface needs a fixed flag. Use @flagcn/flag for dynamic codes. Use @flagcn/flag-picker for selection. Use @flagcn/all only when the complete typed catalog is genuinely needed.
+Use one named item when the interface needs a fixed flag. Use @flagcn/flag for dynamic codes, @flagcn/country-picker for country selection, and the focused phone/language/currency items for locale forms. Use @flagcn/all only when the complete typed catalog is genuinely needed.
 
 ## Search and discovery
 
@@ -160,12 +169,50 @@ Important props:
 - format: svg | png | webp | jpg. Default: svg.
 - ratio: 4x3 | 1x1 | original. Default: 4x3.
 - kinds: array of country, subdivision, or organization.
+- codes: explicit FlagCode array used to constrain results.
+- disabledCodes: visible but unavailable FlagCode array.
+- showCode and showCallingCode: control trailing metadata.
 - placeholder: trigger/search placeholder.
 - aria-label: accessible name for the combobox trigger. Defaults to the placeholder and selected flag name.
 - name: adds a hidden form input carrying the selected code.
 - disabled and className are supported.
 
-The picker is searchable and keyboard operable. It is icon-neutral and does not add an icon library to a consuming project.
+The picker is searchable and keyboard operable. Country records match English/native names, aliases, ISO-2, ISO-3, and calling codes. It uses the consuming project's shadcn Tabler icon convention.
+
+## Country data and utilities
+
+`@flagcn/country-data` installs generated typed country records and helpers. Records include lowercase code, ISO alpha-2/alpha-3/numeric values, English and native names, aliases, emoji, calling codes, continent, capital, currencies, and languages.
+
+Important helpers:
+
+- `getCountry(code)` and `getCountryByAlpha3(alpha3)`.
+- `searchCountries(query)` across names, aliases, codes, capitals, calling codes, currencies, and languages.
+- `countryCodeToEmoji(code)` and `emojiToCountryCode(emoji)`.
+- `getCountryCallingCodes(code)`.
+- `getCountriesByCallingCode(code)`, which intentionally returns an array because calling codes can be shared.
+
+The data is generated from `countries-list`, `i18n-iso-countries`, and `libphonenumber-js`; the generated source is copied into the consumer project. Generation validates unique ISO identifiers, emoji round-trips, language and currency references, and phone calling codes. `countryDataMeta` exposes the pinned source versions and validation state. `phoneCountryCodes` is the narrower set supported by libphonenumber metadata.
+
+## Country components
+
+- `CountryPicker`: country-only FlagPicker with typed CountryCode values and optional country constraints.
+- `CountrySelect`: native shadcn select with emoji and optional calling-code labels.
+- `CountryBadge`: shadcn Badge plus a flag and name, ISO code, calling code, or no label.
+- `FlagAvatar`: shadcn Avatar with a 1:1 flag source and typed fallback.
+- `gccCountryCodes` / `isGccCountry`: six current GCC members.
+- `euCountryCodes` / `isEuCountry`: 27 current EU members.
+
+## PhoneInput
+
+`@flagcn/phone-input` composes CountryPicker with the consumer project's shadcn Input tokens and declares `libphonenumber-js`. It renders one integrated control with a compact flag/calling-code trigger, supports `sm`, `default`, and `lg` sizes, formats as the user types, normalizes an international `00` prefix, and infers the flag from international or controlled E.164 values. `onValueChange(value, meta)` returns E.164 as `value` when parseable, plus `country`, `formatted`, optional `e164`, `nationalNumber`, `countryCallingCode`, `international`, `possible`, and `valid` metadata. Use `phoneCountryCodes` or `countries` to constrain available country codes.
+
+Give `PhoneInput` a visible label with `id`/`htmlFor` or an `aria-label`. Associate help text with `aria-describedby`; when `aria-invalid` is true, point `aria-errormessage` at the rendered error element's `id`.
+
+## Language and currency
+
+`LanguagePicker` searches English/native language names and exposes RTL metadata. Do not use a country flag as the only language label.
+
+`CurrencyPicker` searches ISO code, English/native name, and symbols. `Currency` renders a typed code/name/symbol label. `CurrencyValue` delegates locale-aware amount formatting to `Intl.NumberFormat`.
 
 ## Named wrappers
 
@@ -201,11 +248,24 @@ A named wrapper fixes the code prop and forwards the rest of FlagProps. Use /r/r
 <Flag code="br" format="webp" width={160} sizes="(max-width: 640px) 80px, 160px" alt="Brazil flag" />
 ```
 
+## Website catalog and documentation behavior
+
+The public homepage, flag-catalog shell, and documentation content render without a page-level loading state. The gallery module and native flag images load progressively; `Flag` defaults to `loading="lazy"` and `decoding="async"` unless a caller overrides those native image props.
+
+Each visual-catalog card keeps the install-command copy action in the top corner of the preview. Its footer groups the JSX and selected-image copy actions at the start, keeps download visually separate at the end, and explains every icon or compact action with a tooltip. Real one-pixel card boundaries use a stronger semantic token than the internal stage and footer dividers, so action rows remain visibly attached to the card above them. Every outer edge is card-owned, including the first card in each responsive row across one-, two-, three-, and four-column layouts. The preview and hero grids are centered, evenly cropped, and intentionally light. Every flag sits on an opaque semantic muted frame, so unused image space never reveals the decorative grid. Flag previews remain still on hover. Downloads fetch the remote asset as a blob and save it with a format-appropriate filename instead of navigating the browser to the CDN URL.
+
+Interactive documentation examples expose their exact source through `View Code`. PhoneInput documentation demonstrates genuinely distinct `sm`, `default`, and `lg` controls; preset national display, international display, validation, read-only, and disabled behavior are presented as full-width individual rows. Navigation to a different route resets scroll to the top, while explicit hash links retain anchor behavior.
+
+The persistent header includes an accessible site command menu on desktop and mobile. Open it with the search button or `Ctrl+K` / `Cmd+K`, then search flags, components, documentation, or the GitHub repository. Mobile navigation uses a labeled modal sheet, and copy failures are announced both inline and through a toast notification.
+
 ## Registry response behavior
 
 - /r/registry.json lists every item.
 - /r/flag.json is the universal primitive payload.
 - /r/flag-picker.json is the picker payload.
+- /r/country-data.json is the typed country foundation.
+- /r/phone-input.json is the international phone input.
+- /r/language-picker.json and /r/currency-picker.json are locale controls.
 - /r/ae.json is an example named wrapper payload.
 - /r/all.json is the complete catalog payload.
 - Registry responses allow cross-origin GET, HEAD, and OPTIONS.

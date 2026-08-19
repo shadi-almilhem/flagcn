@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Flagcn Registry API",
-    "version": "1.0.0",
-    "summary": "Machine-readable discovery for the Flagcn shadcn registry.",
+    "version": "1.1.0",
+    "summary": "Machine-readable discovery for Flagcn flags, country data, phone input, and locale components.",
     "description": "Read the complete Flagcn catalog or fetch one shadcn registry item by its stable lowercase name. All endpoints are public and require no authentication.",
     "license": {
       "name": "MIT",
@@ -55,7 +55,7 @@
       "get": {
         "operationId": "getRegistryItem",
         "summary": "Fetch one Flagcn registry item",
-        "description": "Use a stable item name from the registry index, such as flag, flag-picker, ae, us-ca, or all.",
+        "description": "Use a stable item name from the registry index, such as flag, country-picker, phone-input, language-picker, ae, or all.",
         "tags": ["Registry"],
         "parameters": [
           {
@@ -66,7 +66,7 @@
             "schema": {
               "type": "string",
               "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-              "examples": ["ae", "flag", "flag-picker", "all"]
+              "examples": ["ae", "flag", "country-picker", "phone-input", "currency-picker", "all"]
             }
           }
         ],

@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
 
+import { IconCheck, IconChevronDown, IconSearch } from "@tabler/icons-react"
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
 import { Flag } from "./flag"
+import { getCountry, normalizeCountrySearch } from "./country-utils"
 import { flagNames, flags, type FlagCode, type FlagKind } from "./flag-data"
 import type { FlagFormat, FlagRatio } from "./flag-utils"
 
@@ -18,8 +20,15 @@ export interface FlagPickerProps {
   searchPlaceholder?: string
   emptyMessage?: string
   kinds?: FlagKind[]
+  codes?: readonly FlagCode[]
+  disabledCodes?: readonly FlagCode[]
+  showCode?: boolean
+  showCallingCode?: boolean
   disabled?: boolean
   className?: string
+  triggerClassName?: string
+  contentClassName?: string
+  triggerDisplay?: "name" | "code" | "calling-code" | "flag"
   name?: string
   "aria-label"?: string
 }
@@ -34,40 +43,64 @@ export function FlagPicker({
   searchPlaceholder = "Search by name or code…",
   emptyMessage = "No flags found.",
   kinds,
+  codes,
+  disabledCodes = [],
+  showCode = true,
+  showCallingCode = false,
   disabled = false,
   className,
+  triggerClassName,
+  contentClassName,
+  triggerDisplay = "name",
   name,
   "aria-label": ariaLabel,
 }: FlagPickerProps) {
   const [internalValue, setInternalValue] = React.useState<FlagCode | undefined>(defaultValue)
-  const [open, setOpen] = React.useState(false)
+  const [phase, setPhase] = React.useState<"closed" | "open" | "closing">("closed")
   const [query, setQuery] = React.useState("")
   const [activeIndex, setActiveIndex] = React.useState(0)
   const rootRef = React.useRef<HTMLDivElement>(null)
   const triggerRef = React.useRef<HTMLButtonElement>(null)
   const searchRef = React.useRef<HTMLInputElement>(null)
+  const closeTimerRef = React.useRef<number | undefined>(undefined)
   const listId = React.useId()
   const currentValue = value ?? internalValue
+  const currentCountry = currentValue ? getCountry(currentValue) : undefined
+  const open = phase === "open"
+  const allowedCodes = React.useMemo(() => codes ? new Set(codes) : undefined, [codes])
+  const disabledCodeSet = React.useMemo(() => new Set(disabledCodes), [disabledCodes])
 
   const filteredFlags = React.useMemo(() => {
-    const normalizedQuery = query.trim().toLocaleLowerCase()
+    const normalizedQuery = normalizeCountrySearch(query)
     return flags.filter((flag) => {
       const inKind = !kinds?.length || kinds.includes(flag.kind)
-      const matches = !normalizedQuery
-        || flag.name.toLocaleLowerCase().includes(normalizedQuery)
-        || flag.code.includes(normalizedQuery)
-      return inKind && matches
+      const country = getCountry(flag.code)
+      const searchValue = country
+        ? [flag.name, flag.code, country.alpha2, country.alpha3, country.nativeName, ...country.aliases, ...country.callingCodes].join(" ")
+        : `${flag.name} ${flag.code}`
+      return inKind && (!allowedCodes || allowedCodes.has(flag.code)) && (!normalizedQuery || normalizeCountrySearch(searchValue).includes(normalizedQuery))
     })
-  }, [kinds, query])
+  }, [allowedCodes, kinds, query])
+
+  const closePicker = React.useCallback((restoreFocus = false) => {
+    window.clearTimeout(closeTimerRef.current)
+    setPhase((current) => current === "closed" ? current : "closing")
+    closeTimerRef.current = window.setTimeout(() => {
+      setPhase("closed")
+      if (restoreFocus) triggerRef.current?.focus()
+    }, 150)
+  }, [])
+
+  React.useEffect(() => () => window.clearTimeout(closeTimerRef.current), [])
 
   React.useEffect(() => {
     if (!open) return
     const onPointerDown = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false)
+      if (!rootRef.current?.contains(event.target as Node)) closePicker()
     }
     document.addEventListener("pointerdown", onPointerDown)
     return () => document.removeEventListener("pointerdown", onPointerDown)
-  }, [open])
+  }, [closePicker, open])
 
   React.useEffect(() => {
     if (!open) return
@@ -75,17 +108,16 @@ export function FlagPicker({
   }, [open])
 
   function selectFlag(code: FlagCode) {
+    if (disabledCodeSet.has(code)) return
     if (value === undefined) setInternalValue(code)
     onValueChange?.(code)
     setQuery("")
-    setOpen(false)
-    requestAnimationFrame(() => triggerRef.current?.focus())
+    closePicker(true)
   }
 
   function handleKeyDown(event: React.KeyboardEvent) {
     if (event.key === "Escape") {
-      setOpen(false)
-      requestAnimationFrame(() => triggerRef.current?.focus())
+      closePicker(true)
       return
     }
     if (event.key === "ArrowDown") {
@@ -103,9 +135,12 @@ export function FlagPicker({
   }
 
   function toggleOpen() {
-    const nextOpen = !open
-    if (nextOpen) setActiveIndex(0)
-    setOpen(nextOpen)
+    if (open) closePicker()
+    else {
+      window.clearTimeout(closeTimerRef.current)
+      setActiveIndex(0)
+      setPhase("open")
+    }
   }
 
   return (
@@ -121,16 +156,18 @@ export function FlagPicker({
         aria-label={ariaLabel ?? (currentValue ? `${placeholder}: ${flagNames[currentValue]}` : placeholder)}
         disabled={disabled}
         className={cn(
-          "border-input bg-background ring-offset-background flex h-9 w-full items-center justify-between rounded-md border px-3 text-sm shadow-xs outline-none transition-[color,box-shadow]",
+          "border-input bg-background ring-offset-background flex h-10 w-full items-center justify-between rounded-md border px-3 text-sm shadow-xs outline-none transition-[color,box-shadow] sm:h-9",
           "focus-visible:border-ring focus-visible:ring-ring/30 focus-visible:ring-[3px]",
           "disabled:cursor-not-allowed disabled:opacity-50",
+          triggerClassName,
         )}
         onClick={toggleOpen}
         onKeyDown={(event) => {
           if (!open && (event.key === "ArrowDown" || event.key === "Enter" || event.key === " ")) {
             event.preventDefault()
             setActiveIndex(0)
-            setOpen(true)
+            window.clearTimeout(closeTimerRef.current)
+            setPhase("open")
           }
         }}
       >
@@ -143,22 +180,37 @@ export function FlagPicker({
               ratio={ratio}
               alt=""
               decorative
-              className="size-5 object-contain ring-1 ring-border"
+              className="size-5 object-contain outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/15"
             />
           ) : null}
-          <span className="truncate">{currentValue ? flagNames[currentValue] : placeholder}</span>
+          {triggerDisplay !== "flag" ? (
+            <span className="truncate">
+              {currentValue
+                ? triggerDisplay === "code"
+                  ? currentValue.toUpperCase()
+                  : triggerDisplay === "calling-code"
+                    ? currentCountry?.callingCodes[0] ?? currentValue.toUpperCase()
+                    : flagNames[currentValue]
+                : placeholder}
+            </span>
+          ) : null}
         </span>
-        <ChevronDownIcon aria-hidden="true" className="text-muted-foreground size-4 shrink-0" />
+        <IconChevronDown aria-hidden="true" className="text-muted-foreground size-4 shrink-0" />
       </button>
 
-      {open ? (
+      {phase !== "closed" ? (
         <div
-          className="bg-popover text-popover-foreground absolute z-50 mt-1 w-full min-w-64 overflow-hidden rounded-md border shadow-md"
+          data-origin="top"
+          className={cn(
+            "t-dropdown bg-popover text-popover-foreground absolute z-50 mt-1 w-full min-w-64 overflow-hidden rounded-md border shadow-md",
+            phase === "open" ? "is-open" : "is-closing",
+            contentClassName,
+          )}
           onKeyDown={handleKeyDown}
         >
           <div className="border-b p-2">
             <div className="relative">
-              <SearchIcon
+              <IconSearch
                 aria-hidden="true"
                 className="text-muted-foreground pointer-events-none absolute start-2.5 top-1/2 size-4 -translate-y-1/2"
               />
@@ -171,6 +223,8 @@ export function FlagPicker({
                 }}
                 placeholder={searchPlaceholder}
                 aria-label={searchPlaceholder}
+                aria-controls={listId}
+                aria-activedescendant={filteredFlags[activeIndex] ? `${listId}-${filteredFlags[activeIndex].code}` : undefined}
                 className="placeholder:text-muted-foreground h-9 w-full rounded-sm bg-transparent ps-8 pe-3 text-sm focus-visible:ring-ring/30 focus-visible:ring-[3px]"
               />
             </div>
@@ -179,11 +233,13 @@ export function FlagPicker({
             {filteredFlags.length ? filteredFlags.map((flag, index) => (
               <button
                 key={flag.code}
+                id={`${listId}-${flag.code}`}
                 type="button"
                 role="option"
                 aria-selected={currentValue === flag.code}
+                disabled={disabledCodeSet.has(flag.code)}
                 data-active={index === activeIndex || undefined}
-                className="data-[active]:bg-accent data-[active]:text-accent-foreground flex w-full items-center gap-2 rounded-sm px-2 py-2 text-start text-sm hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring/30 focus-visible:ring-[3px]"
+                className="data-[active]:bg-accent data-[active]:text-accent-foreground flex min-h-10 w-full items-center gap-2 rounded-sm px-2 py-2 text-start text-sm hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring/30 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-40 sm:min-h-9"
                 onPointerMove={() => setActiveIndex(index)}
                 onClick={() => selectFlag(flag.code)}
               >
@@ -194,11 +250,15 @@ export function FlagPicker({
                   ratio={ratio}
                   alt=""
                   decorative
-                  className="h-[15px] w-5 shrink-0 object-contain ring-1 ring-border"
+                  className="h-[15px] w-5 shrink-0 object-contain outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/15"
                 />
                 <span className="min-w-0 flex-1 truncate">{flag.name}</span>
-                <span className="text-muted-foreground font-mono text-[11px] uppercase">{flag.code}</span>
-                <CheckIcon
+                {showCallingCode && getCountry(flag.code)?.callingCodes[0] ? (
+                  <span className="text-muted-foreground font-mono text-[11px]">{getCountry(flag.code)?.callingCodes[0]}</span>
+                ) : showCode ? (
+                  <span className="text-muted-foreground font-mono text-[11px] uppercase">{flag.code}</span>
+                ) : null}
+                <IconCheck
                   aria-hidden="true"
                   className={cn("size-4", currentValue === flag.code ? "opacity-100" : "opacity-0")}
                 />
@@ -210,30 +270,5 @@ export function FlagPicker({
         </div>
       ) : null}
     </div>
-  )
-}
-
-function ChevronDownIcon(props: React.ComponentProps<"svg">) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  )
-}
-
-function SearchIcon(props: React.ComponentProps<"svg">) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.35-4.35" />
-    </svg>
-  )
-}
-
-function CheckIcon(props: React.ComponentProps<"svg">) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="m5 12 4 4L19 6" />
-    </svg>
   )
 }

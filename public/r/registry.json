@@ -52,7 +52,11 @@
       "description": "A searchable, keyboard-accessible flag combobox with typed country codes.",
       "author": "Shadi Al Milhem",
       "registryDependencies": [
-        "@flagcn/flag"
+        "@flagcn/flag",
+        "@flagcn/country-data"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
       ],
       "files": [
         {
@@ -86,6 +90,17 @@
       "title": "All Flagcn Components",
       "description": "The flag primitive, picker, typed catalog, and all 306 individually named flag components.",
       "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "button",
+        "input",
+        "badge",
+        "avatar",
+        "native-select"
+      ],
+      "dependencies": [
+        "@tabler/icons-react",
+        "libphonenumber-js"
+      ],
       "files": [
         {
           "path": "src/components/flags/flag.tsx",
@@ -116,6 +131,96 @@
           "path": "src/components/flags/countries/index.ts",
           "type": "registry:component",
           "target": "@components/flags/countries/index.ts"
+        },
+        {
+          "path": "src/components/flags/data/countries.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/data/countries.ts"
+        },
+        {
+          "path": "src/components/flags/data/languages.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/data/languages.ts"
+        },
+        {
+          "path": "src/components/flags/data/currencies.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/data/currencies.ts"
+        },
+        {
+          "path": "src/components/flags/country-utils.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/country-utils.ts"
+        },
+        {
+          "path": "src/components/flags/language-utils.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/language-utils.ts"
+        },
+        {
+          "path": "src/components/flags/currency-utils.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/currency-utils.ts"
+        },
+        {
+          "path": "src/components/flags/search-picker.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/search-picker.tsx"
+        },
+        {
+          "path": "src/components/flags/country-picker.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/country-picker.tsx"
+        },
+        {
+          "path": "src/components/flags/country-select.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/country-select.tsx"
+        },
+        {
+          "path": "src/components/flags/country-badge.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/country-badge.tsx"
+        },
+        {
+          "path": "src/components/flags/flag-avatar.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/flag-avatar.tsx"
+        },
+        {
+          "path": "src/components/flags/phone-input.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/phone-input.tsx"
+        },
+        {
+          "path": "src/components/flags/language-picker.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/language-picker.tsx"
+        },
+        {
+          "path": "src/components/flags/currency-picker.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/currency-picker.tsx"
+        },
+        {
+          "path": "src/components/flags/currency.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/currency.tsx"
+        },
+        {
+          "path": "src/components/flags/collections/gcc.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/collections/gcc.ts"
+        },
+        {
+          "path": "src/components/flags/collections/eu.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/collections/eu.ts"
+        },
+        {
+          "path": "src/components/flags/collections/index.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/collections/index.ts"
         },
         {
           "path": "src/components/flags/countries/ad.tsx",
@@ -1660,6 +1765,397 @@
         "includesAllFlags": true,
         "license": "MIT",
         "artworkLicense": "Public Domain"
+      }
+    },
+    {
+      "name": "country-data",
+      "type": "registry:block",
+      "title": "Country Data",
+      "description": "A generated and validated typed country dataset with ISO identifiers, native names, aliases, emoji, calling codes, currencies, and languages.",
+      "author": "Shadi Al Milhem",
+      "files": [
+        {
+          "path": "src/components/flags/data/countries.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/data/countries.ts"
+        },
+        {
+          "path": "src/components/flags/country-utils.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/country-utils.ts"
+        }
+      ],
+      "categories": [
+        "countries",
+        "data",
+        "internationalization"
+      ],
+      "docs": "Use getCountry, searchCountries, countryCodeToEmoji, emojiToCountryCode, and the shared-calling-code-safe lookup helpers.",
+      "meta": {
+        "license": "MIT",
+        "count": 250,
+        "phoneCountryCount": 243,
+        "generated": true,
+        "validated": true,
+        "callingCodeLookupReturnsArrays": true
+      }
+    },
+    {
+      "name": "calling-codes",
+      "type": "registry:block",
+      "title": "Calling Code Utilities",
+      "description": "Typed country calling-code helpers that correctly return every country sharing a calling code.",
+      "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "@flagcn/country-data"
+      ],
+      "files": [
+        {
+          "path": "src/components/flags/country-utils.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/country-utils.ts"
+        }
+      ],
+      "categories": [
+        "countries",
+        "phone",
+        "utilities"
+      ],
+      "docs": "Use getCountryCallingCodes(code) or getCountriesByCallingCode('+1').",
+      "meta": {
+        "license": "MIT",
+        "sharedCodes": true
+      }
+    },
+    {
+      "name": "country-picker",
+      "type": "registry:block",
+      "title": "Country Picker",
+      "description": "A searchable country-only picker with flags, aliases, native names, ISO-3 codes, and calling-code search.",
+      "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "@flagcn/flag-picker",
+        "@flagcn/country-data"
+      ],
+      "files": [
+        {
+          "path": "src/components/flags/country-picker.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/country-picker.tsx"
+        }
+      ],
+      "categories": [
+        "countries",
+        "forms",
+        "combobox"
+      ],
+      "docs": "Use countries to constrain the list and value/onValueChange for controlled state.",
+      "meta": {
+        "license": "MIT",
+        "keyboard": true,
+        "searchable": true
+      }
+    },
+    {
+      "name": "country-select",
+      "type": "registry:block",
+      "title": "Country Select",
+      "description": "A lightweight native country select with emoji and optional calling codes.",
+      "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "native-select",
+        "@flagcn/country-data"
+      ],
+      "files": [
+        {
+          "path": "src/components/flags/country-select.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/country-select.tsx"
+        }
+      ],
+      "categories": [
+        "countries",
+        "forms",
+        "select"
+      ],
+      "docs": "Use when native select behavior is preferable to a searchable picker.",
+      "meta": {
+        "license": "MIT",
+        "native": true
+      }
+    },
+    {
+      "name": "country-badge",
+      "type": "registry:block",
+      "title": "Country Badge",
+      "description": "A shadcn Badge composed with a flag and country name, ISO code, or calling code.",
+      "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "badge",
+        "@flagcn/flag",
+        "@flagcn/country-data"
+      ],
+      "files": [
+        {
+          "path": "src/components/flags/country-badge.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/country-badge.tsx"
+        }
+      ],
+      "categories": [
+        "countries",
+        "badges",
+        "display"
+      ],
+      "docs": "Set label to name, code, calling-code, or none.",
+      "meta": {
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "flag-avatar",
+      "type": "registry:block",
+      "title": "Flag Avatar",
+      "description": "A shadcn Avatar that renders a circular, resilient flag image with a typed fallback.",
+      "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "avatar",
+        "@flagcn/flag"
+      ],
+      "files": [
+        {
+          "path": "src/components/flags/flag-avatar.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/flag-avatar.tsx"
+        },
+        {
+          "path": "src/components/flags/flag-data.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/flag-data.ts"
+        }
+      ],
+      "categories": [
+        "flags",
+        "avatars",
+        "display"
+      ],
+      "docs": "Pass any FlagCode and an optional accessible alt label.",
+      "meta": {
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "phone-input",
+      "type": "registry:block",
+      "title": "Phone Input",
+      "description": "A design-system-native international phone input with compact country search, inferred flags, as-you-type formatting, E.164 output, and validity metadata.",
+      "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "input",
+        "@flagcn/country-picker"
+      ],
+      "dependencies": [
+        "libphonenumber-js"
+      ],
+      "files": [
+        {
+          "path": "src/components/flags/phone-input.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/phone-input.tsx"
+        }
+      ],
+      "categories": [
+        "countries",
+        "phone",
+        "forms"
+      ],
+      "docs": "onValueChange receives E.164 when parseable plus formatted, possible, valid, calling-code, and international metadata. Controlled E.164 values infer their country.",
+      "meta": {
+        "license": "MIT",
+        "e164": true,
+        "asYouType": true,
+        "countryInference": true,
+        "sizeVariants": [
+          "sm",
+          "default",
+          "lg"
+        ]
+      }
+    },
+    {
+      "name": "language-picker",
+      "type": "registry:block",
+      "title": "Language Picker",
+      "description": "A searchable language picker with native names and RTL metadata.",
+      "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "button",
+        "input",
+        "badge"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/flags/language-picker.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/language-picker.tsx"
+        },
+        {
+          "path": "src/components/flags/search-picker.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/search-picker.tsx"
+        },
+        {
+          "path": "src/components/flags/data/languages.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/data/languages.ts"
+        }
+      ],
+      "categories": [
+        "languages",
+        "forms",
+        "combobox"
+      ],
+      "docs": "Constrain the picker with languages and inspect RTL direction through language-utils.",
+      "meta": {
+        "license": "MIT",
+        "count": 185,
+        "searchable": true,
+        "rtlAware": true
+      }
+    },
+    {
+      "name": "currency-picker",
+      "type": "registry:block",
+      "title": "Currency Picker",
+      "description": "A searchable currency picker with ISO codes, localized names, and native symbols.",
+      "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "button",
+        "input",
+        "badge"
+      ],
+      "dependencies": [
+        "@tabler/icons-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/flags/currency-picker.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/currency-picker.tsx"
+        },
+        {
+          "path": "src/components/flags/search-picker.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/search-picker.tsx"
+        },
+        {
+          "path": "src/components/flags/data/currencies.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/data/currencies.ts"
+        }
+      ],
+      "categories": [
+        "currencies",
+        "forms",
+        "combobox"
+      ],
+      "docs": "Use value/onValueChange with typed ISO currency codes.",
+      "meta": {
+        "license": "MIT",
+        "count": 181,
+        "searchable": true
+      }
+    },
+    {
+      "name": "currency",
+      "type": "registry:block",
+      "title": "Currency Components",
+      "description": "Typed currency labels and Intl.NumberFormat-backed currency values.",
+      "author": "Shadi Al Milhem",
+      "files": [
+        {
+          "path": "src/components/flags/currency.tsx",
+          "type": "registry:component",
+          "target": "@components/flags/currency.tsx"
+        },
+        {
+          "path": "src/components/flags/currency-utils.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/currency-utils.ts"
+        },
+        {
+          "path": "src/components/flags/data/currencies.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/data/currencies.ts"
+        }
+      ],
+      "categories": [
+        "currencies",
+        "display",
+        "utilities"
+      ],
+      "docs": "Use Currency for metadata labels and CurrencyValue for locale-aware amount formatting.",
+      "meta": {
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "gcc",
+      "type": "registry:block",
+      "title": "GCC Country Collection",
+      "description": "The six current Gulf Cooperation Council member country codes as a typed collection.",
+      "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "@flagcn/country-data"
+      ],
+      "files": [
+        {
+          "path": "src/components/flags/collections/gcc.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/collections/gcc.ts"
+        }
+      ],
+      "categories": [
+        "countries",
+        "collections",
+        "gcc"
+      ],
+      "docs": "Use gccCountryCodes to constrain CountryPicker or isGccCountry for membership checks.",
+      "meta": {
+        "license": "MIT",
+        "count": 6,
+        "verified": "2026-08-19"
+      }
+    },
+    {
+      "name": "eu-collection",
+      "type": "registry:block",
+      "title": "EU Country Collection",
+      "description": "The 27 current European Union member country codes as a typed collection.",
+      "author": "Shadi Al Milhem",
+      "registryDependencies": [
+        "@flagcn/country-data"
+      ],
+      "files": [
+        {
+          "path": "src/components/flags/collections/eu.ts",
+          "type": "registry:lib",
+          "target": "@components/flags/collections/eu.ts"
+        }
+      ],
+      "categories": [
+        "countries",
+        "collections",
+        "eu"
+      ],
+      "docs": "Use euCountryCodes to constrain CountryPicker or isEuCountry for membership checks.",
+      "meta": {
+        "license": "MIT",
+        "count": 27,
+        "verified": "2026-08-19"
       }
     },
     {

@@ -17,6 +17,30 @@ export interface FlagUrlOptions {
   ratio?: FlagRatio
 }
 
+export interface FlagAssetInfo {
+  provider: "Flag Icons" | "FlagCDN"
+  kind: "vector" | "raster"
+  sourceProportions: boolean
+  label: string
+}
+
+export function getFlagAssetInfo(code: string, options: FlagUrlOptions = {}): FlagAssetInfo {
+  const normalizedCode = normalizeFlagCode(code)
+  const format = options.format ?? "svg"
+  const ratio = options.ratio ?? "4x3"
+  const usesFlagIcons = format === "svg" && ratio !== "original" && !normalizedCode.startsWith("us-")
+  const provider = usesFlagIcons ? "Flag Icons" : "FlagCDN"
+  const kind = format === "svg" ? "vector" : "raster"
+  const sourceProportions = !usesFlagIcons
+
+  return {
+    provider,
+    kind,
+    sourceProportions,
+    label: `${provider} · ${format.toUpperCase()}${ratio === "original" ? " · source proportions" : ""}`,
+  }
+}
+
 export function normalizeFlagCode(code: string) {
   const normalizedCode = code.trim().toLowerCase()
   if (!/^[a-z]{2}(?:-[a-z0-9]{2,3})?$/.test(normalizedCode)) {

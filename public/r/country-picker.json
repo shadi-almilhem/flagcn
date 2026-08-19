@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "country-picker",
+  "title": "Country Picker",
+  "author": "Shadi Al Milhem",
+  "description": "A searchable country-only picker with flags, aliases, native names, ISO-3 codes, and calling-code search.",
+  "registryDependencies": [
+    "@flagcn/flag-picker",
+    "@flagcn/country-data"
+  ],
+  "files": [
+    {
+      "path": "src/components/flags/country-picker.tsx",
+      "content": "// SPDX-License-Identifier: MIT\n\nimport type { ComponentProps } from \"react\"\n\nimport { countryData, type CountryCode } from \"./data/countries\"\nimport { FlagPicker } from \"./flag-picker\"\n\nexport interface CountryPickerProps extends Omit<ComponentProps<typeof FlagPicker>, \"value\" | \"defaultValue\" | \"onValueChange\" | \"codes\" | \"kinds\"> {\n  value?: CountryCode\n  defaultValue?: CountryCode\n  onValueChange?: (code: CountryCode) => void\n  countries?: readonly CountryCode[]\n}\n\nexport function CountryPicker({ countries = countryData.map((country) => country.code), onValueChange, ...props }: CountryPickerProps) {\n  return (\n    <FlagPicker\n      kinds={[\"country\"]}\n      codes={countries}\n      placeholder=\"Select a country\"\n      searchPlaceholder=\"Search country, ISO, or calling code…\"\n      emptyMessage=\"No countries found.\"\n      onValueChange={(code) => onValueChange?.(code as CountryCode)}\n      {...props}\n    />\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/flags/country-picker.tsx"
+    }
+  ],
+  "meta": {
+    "license": "MIT",
+    "keyboard": true,
+    "searchable": true
+  },
+  "docs": "Use countries to constrain the list and value/onValueChange for controlled state.",
+  "categories": [
+    "countries",
+    "forms",
+    "combobox"
+  ],
+  "type": "registry:block"
+}

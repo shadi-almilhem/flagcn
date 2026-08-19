@@ -27,7 +27,7 @@ export class AppErrorBoundary extends React.Component<React.PropsWithChildren, A
     return (
       <main className="site-container grid min-h-screen place-items-center py-20 text-center">
         <div className="max-w-md border bg-card p-8">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-primary">Render error</p>
+            <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-foreground">Render error</p>
           <h1 className="mt-4 text-3xl font-semibold tracking-[-0.04em]">Flagcn hit an unexpected problem.</h1>
           <p className="mt-3 text-sm leading-6 text-muted-foreground">
             Reload the page to retry. If it keeps happening, report the route and browser in GitHub Issues.
